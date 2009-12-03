@@ -11,9 +11,9 @@ db.dbname=storytlr
 security.cookie = dasuoidasud
 
 ;Caching
-cache.content = 1
-cache.metadata = 1
-cache.path = /tmp/cache/
+;cache.content = 1
+;cache.metadata = 1
+;cache.path = /tmp/cache/
 
 ;Web deployment settings
 web.host=storytlr.com
@@ -22,13 +22,13 @@ web.redirect = 1
 web.timezone=Europe/Brussels
 
 ;Global application settings
-app.closed=0							; Set to 1 to disable registration
+app.closed=1							; Set to 0 to enable registration
 app.from_email=support@noreply.net
 app.admin_email=admin@noreply.net
-;app.user=johndoe						; Uncomment and set to a username for single install
+app.user=default						; Comment this to switch to multi-user setup
 
 ;Debug settings
-debug 	= 1
+debug 	= 0
 profile = 0
 
 
