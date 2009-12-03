@@ -1,0 +1,54 @@
+div#storytlr {
+	margin:0;
+	padding: 10px;
+	color:#333333;
+	font: 11px Arial;
+	text-align: left;
+	background: transparent;
+}
+
+div#storytlr div.bar {
+	width: 100%;
+	text-align: right;	
+}
+
+div#storytlr h1 {
+	font-size: 13px;
+	margin: 0 0 5px 0;	
+}
+
+div#storytlr h2 {
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: normal;
+	margin: 0 0 5px 0;	
+}
+
+div#storytlr table {
+	border: collapse;
+	padding: 0;
+	margin: 0;
+}
+
+div#storytlr table td.icon{
+	width: 20px;
+	padding: 0 0 5px 0;
+	margin: 0;
+}
+
+div#storytlr table td.title{
+	padding: 0 0 5px 0;
+	margin: 0;
+}
+
+div#storytlr a {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+div#storytlr img {
+	border: none;	
+}
+
+
+

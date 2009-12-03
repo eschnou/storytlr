@@ -1,0 +1,80 @@
+<h1>Tell a story</h1>
+<p>
+Using the content of your lifestream to easily tell a story. Just enter the start and end date,
+select the sources to include in your story, add a title, and you are good to go!<br/><br/>
+<strong>Please note! For technical reasons your story will not update automatically once created.</strong>
+</p>
+<?php if ($this->nosource) : ?>
+
+<div class='error'>
+You don't have any data source that can provide data to this feature. 
+First go into the <a href='admin/services'>Import</a> section to add some data and then come back here.
+</div>
+
+<?php else : ?>
+
+<img id = 'wait' src='images/wait30.gif' style='display:none;' />
+<div id = 'status_errors' class='errors'></div>
+<div id = 'status_notify' class='status'></div>
+
+<form id="<?= $this->escape($this->form->getName()) ?>"" action="<?= $this->escape($this->form->getAction()) ?>" method="<?= $this->escape($this->form->getMethod()) ?>">
+	<table>
+		<tbody>
+			<tr>
+				<td class='label'>
+					Title:
+				</td>
+				<td class='element'>
+					<?= $this->form->title ?>
+				</td>
+			</tr>
+			<tr>
+			<td class='label'>
+					Subtitle:
+				</td>
+				<td class='element'>
+					<?= $this->form->subtitle ?>
+				</td>
+			</tr>				
+			<tr>
+				<td class='label'>
+					From:
+				</td>
+				<td class='element'>
+					<div id='date_simple'>	
+						<?= $this->form->date_from ?>
+						<button type="button" onfocus="this.blur();" class="calendar" onClick="new CalendarDateSelect($('date_from'), {popup:'force'});"/>													
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class='label'>
+					To:
+				</td>
+				<td class='element'>
+					<div id='date_simple'>	
+						<?= $this->form->date_to ?>		
+						<button type="button" onfocus="this.blur();" class="calendar" onClick="new CalendarDateSelect($('date_to'), {popup:'force'});"/>																														
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class='label'>
+					Sources:
+				</td>
+				<td class='element'>
+						<?= $this->form->sources ?>													
+				</td>
+			</tr>			
+			<tr>
+				<td class='label'>
+				</td>
+				<td class='element'>
+					<?= $this->form->post ?>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+</form>
+
+<?php endif ?>

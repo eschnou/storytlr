@@ -1,0 +1,270 @@
+/* navigation menu */
+
+div#issue {
+	color: #fff;
+	float: right;
+	margin: 9px 20px 0 0;
+	text-transform: uppercase;
+	font-size: 15px;
+	font-weight: bold;	
+}
+
+div.incorrect {
+	text-align: center;
+	width: 100%;
+	color: white;
+	}
+	
+div.incorrect a {
+	color: #a9dafd;
+	}
+
+#navigationMenu{
+	background: transparent url('assets/navigationbg.gif') repeat-x; 
+	height: 44px;
+	font-size: 14px;
+	position: relative;
+	line-height: 90%;
+}
+
+#navigationMenu ul{
+	margin:0 0 0 220px;
+	padding:0;
+	list-style-type:none;
+	font-weight: normal;
+}
+
+div#contentwrapper {
+	background-color:white;
+}
+
+/* Begin Typography & Colors */
+body {
+	font-size: 62.5%; /* Resets 1em to 10px */
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	color: #333;
+	margin: 0;
+	padding: 0;
+	background:#e1e1e1 url('assets/bg.gif') center repeat-y;
+}
+	
+html, body, #wrapper {
+	margin: 0;
+	padding: 0;
+	border: none;
+	text-align: center;
+}
+
+#pagewrapper{
+	background-color: #ffffff;
+	margin: 0 auto;
+	text-align: left;
+	width: 900px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+#header {
+	padding: 0; 
+	height: 100px; 
+	width: 900px;
+	background: transparent url('assets/header.png') no-repeat;
+	font-size: 12px;
+}
+
+.narrowcolumn {
+	padding: 5px;
+	margin: 0 15px 15px 15px;
+	color: 	#555;
+	line-height: 150%;
+	font-size: 1.4em;
+}
+
+.narrowcolumn #left{
+	width: 600px;
+	text-align: justify;
+}
+
+h1 {
+	font-family: Tahoma, Arial, Helvetica, Sans-Serif;
+	letter-spacing: 0px;
+	font-size: 23px;
+	margin-bottom: 25px;
+	margin-top: 10px;
+}
+
+h2 {
+	font-family: Tahoma, Arial, Helvetica, Sans-Serif;
+	font-size: 18px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+h3 {
+	font-family: Tahoma, Arial, Helvetica, Sans-Serif;
+	font-size: 14px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+small {
+	font-family: Arial, Helvetica, Sans-Serif;
+	font-size: 0.9em;
+	line-height: 1.5em;
+	}
+
+code {
+	font: 1.1em 'Courier New', Courier, Fixed;
+	}
+
+acronym, abbr, span.caps
+{
+	font-size: 0.9em;
+	letter-spacing: .07em;
+	}
+
+a {
+	color: #2a89c5;
+	text-decoration: none;
+	}
+
+a:hover {
+	color: #2a89c5;
+	text-decoration: underline;
+	}
+
+/* End Typography & Colors */
+
+/* navigation menu */
+#copyright {
+	padding: 0;
+	margin: 0 auto;
+	width: 820px;
+	clear: both;
+	height: 45px;
+	}
+
+#copyright  p {
+	margin: 0;
+	padding: 10px 0;
+	text-align: center;
+	color: #555;
+	}
+
+/* End Structure */
+
+/* Begin Form Elements */
+form div {
+	margin-bottom: 10px;
+	}
+
+fieldset {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 15px;
+	padding-top: 5px;
+	border-color: #bbb;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	}
+
+textarea {
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	font-size: 1em;
+	}
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+	margin-top: 10px;
+}
+
+.error {
+	color: red;
+	}
+
+/* End Form Elements */
+
+
+/* Begin Sidebar */
+#sidebar
+{
+	width: 200px;
+	padding: 0px;
+	float: right;
+	margin: 10px 10px 40px 15px;
+	font-size: 14px;
+	line-height: 150%;
+	}
+
+#sidebar h2 {
+	margin-top: 0;
+	}
+	
+#sidebar ul li {
+	padding-left: 10px;
+}
+	
+/* End Sidebar */
+
+
+/* Begin Various Tags & Classes */
+acronym, abbr, span.caps {
+	cursor: help;
+	}
+
+acronym, abbr {
+	border-bottom: 1px dashed #999;
+	}
+
+blockquote {
+	margin: 15px 30px 0 10px;
+	padding-left: 20px;
+	border-left: 5px solid #ddd;
+	}
+
+blockquote cite {
+	margin: 5px 0 0;
+	display: block;
+	}
+
+.center {
+	text-align: center;
+	}
+
+hr {
+	display: none;
+	}
+
+a img {
+	border: none;
+	}
+
+/* Blog */
+
+div.feed {
+	float: right;
+	font-size: 11px;
+	padding-right: 4px;
+	}
+
+img.icon {
+	vertical-align:middle;
+	margin: 0 5px 5px 0;
+}
+
+ul li {
+	list-style-type: square;
+	list-style-image: none;
+	padding: 0 0 10px 15px;
+	margin: 0 0 0 20px;
+}
+
+ul li strong {
+	color: #409eda;
+}
+
+ul {
+	padding: 0;
+}

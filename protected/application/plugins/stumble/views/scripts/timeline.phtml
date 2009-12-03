@@ -1,0 +1,8 @@
+<?php $item = $this->item->toArray(); ?>
+
+<div class="stumble">
+	<div  class="title">Stumbled upon <a href="<?= $item['link'] ?>" target="_blank"><?= $item['title'] ?></a></div>
+	<?php if ($item['note']) : ?>
+		<div  class="content-wrapper"><div  class="note"><?= strip_tags($item['note']); ?></div></div>
+	<?php endif ?>	
+</div>

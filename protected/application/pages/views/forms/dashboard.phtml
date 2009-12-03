@@ -1,0 +1,37 @@
+<form id="<?= $this->form->getName() ?>" action="<?= $this->form->getAction() ?>" method="<?= $this->form->getMethod() ?>">
+	<table>
+		<tbody>
+			<tr>
+				<td class='label'>
+					Title:
+				</td>
+				<td class='element'>
+					<?= $this->form->title ?>
+				</td>
+			</tr>
+			<tr id='row_customize_sources'>
+				<td class='label'>
+
+				</td>
+				<td class='element'>					
+					The items of the following type are included in this page: <br />
+					<div id="types_list">
+						<?= $this->form->types ?>
+					</div>
+				</td>
+			</tr>	
+			<tr>
+				<td class='label'>
+				</td>
+				<td class='element'>
+					<?= $this->form->save ?>
+					<?= $this->form->cancel ?>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+
+	<?= $this->form->sources_filter ?>
+	<?= $this->form->id ?>
+	<?= $this->form->type ?>
+</form>

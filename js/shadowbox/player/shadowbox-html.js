@@ -1,0 +1,1 @@
+(function(){var A=Shadowbox;var B=A.lib;Shadowbox.html=function(D,C){this.id=D;this.obj=C;this.height=this.obj.height?parseInt(this.obj.height,10):300;this.width=this.obj.width?parseInt(this.obj.width,10):500};Shadowbox.html.prototype={markup:function(C){return{tag:"div",id:this.id,cls:"html",html:this.obj.content}},remove:function(){var C=B.get(this.id);if(C){B.remove(C)}}}})();

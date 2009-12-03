@@ -1,0 +1,25 @@
+<div class="qik">
+	
+	<div id="container_qik_<?= $this->item->getID(); ?>" class="video">
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+   				codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+				width="240" height="180" id="flash_player_<?= $this->count; ?>" align="middle">
+		<param name="movie" value="flash/mediaplayer.swf" />
+		<param name="wmode" value="transparent" />
+		<param name="allowfullscreen" value="true" />
+		<param name="flashvars" value="file=<?= $this->item->getVideoUrl('flv');?>&width=240&height=180" />
+		<embed src="flash/mediaplayer.swf" 
+				width="240"
+   				height="180" 
+   				name="flash_player_<?= $this->count; ?>" 
+   				align="middle" 
+   				allowfullscreen="true"
+   				wmode="transparent"
+   				flashvars="file=<?= $this->item->getVideoUrl('flv');?>&width=240&height=180"
+			   	type="application/x-shockwave-flash" 
+			   	pluginspage="http://www.adobe.com/go/getflashplayer" 
+				/>
+		</object>		
+	</div>
+	
+</div>

@@ -1,0 +1,33 @@
+<form id="<?= $this->form->getName() ?>" action="<?= $this->form->getAction() ?>" method="<?= $this->form->getMethod() ?>">
+	<table>
+		<tbody>
+			<tr>
+				<td class='label'>
+					Title:
+				</td>
+				<td class='element'>
+					<?= $this->form->title ?>
+				</td>
+			</tr>
+			<tr>
+				<td class='label'>
+					Content:
+				</td>
+				<td class='element'>
+					<?= $this->form->body ?>
+				</td>
+			</tr>
+			<tr>
+				<td class='label'>
+				</td>
+				<td class='element'>
+					<?= $this->form->save ?>
+					<?= $this->form->cancel ?>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+
+	<?= $this->form->id ?>
+	<?= $this->form->type ?>
+</form>

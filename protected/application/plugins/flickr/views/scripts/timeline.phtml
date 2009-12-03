@@ -1,0 +1,9 @@
+<div class="flickr">
+	<div  class="title"><a href="<?= $this->item->getLink(); ?>"><?= $this->item->getTitle(); ?></a></div>
+	<div  class="content"><a href="<?= $this->item->getLink(); ?>" title="<?= $this->item->getTitle(); ?>" target="_blank"><img src="<?= $this->item->getImageURL('medium'); ?>" width="350" /></a></div>
+	<?php if ($this->item->getDescription()) : ?>
+		<div class="note">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	<?php endif ?>
+</div>

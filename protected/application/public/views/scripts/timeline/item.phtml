@@ -1,0 +1,75 @@
+<?php $id = $this->item->getSource() . "_" . $this->item->getID(); ?>
+
+<div class='item_wrapper' id='item_wrapper_<?= $id ?>'>
+	
+	<div class='<?php if($this->item->isHidden()) : ?> hidden <?php else : ?> item <?php endif ?>' id='item_<?= $id ?>'>
+		<div class='item_left'>
+			<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>">
+				<img class="icon" src="images/<?= $this->item->getPrefix();?>.png" width='16' height='16' />
+			</a>
+			<span id='item_time_<?= $id ?>' class='time' <?php if ($this->admin): ?> onclick='onEditDate(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>, <?= $this->item->getTimestamp() ?>);'<?php endif ?>>
+				<?= date("H:i", $this->item->getTimestamp()); ?>
+			</span>		
+			<div class="waiter" id='item_wait_<?= $id ?>' style='display:none'></div>
+		</div>
+		<div class='item_right'>
+			<div class='item_content'>
+				
+				<div class='item_actions'>
+	
+					<?php if($this->admin) : ?>
+						<?php if($this->item->getPrefix() == 'stuffpress') : ?>
+							<a href='javascript:delete_item(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>);' title="Delete"><img src="images/01.png" /></a>
+						<?php endif ?>
+						<a href="admin/post/edit/source/<?= $this->item->getSource() ?>/item/<?= $this->item->getID() ?>" title="Edit"><img src="images/18.png" /></a>
+						<a id="toggle_show_item_a_<?= $id ?>" href='javascript:toggle_show_item(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>);' title="<?php if($this->item->isHidden()) echo "Make public"; else echo "Make private"; ?>"><img id="toggle_show_item_img_<?= $id ?>" src="images/<?php if($this->item->isHidden()) echo "lock_open"; else echo "lock"; ?>.gif" /></a>
+					<?php endif ?>
+						
+					<?php if ($this->googlefc) : ?>
+					<a class="comment" href='javascript:location.href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>";' class="item_add_comment" title="Add comment"><img src="images/28.png" /></a>
+					<?php elseif ($this->disqus) : ?>
+					
+					<?php else : ?>
+					<a class="comment" href='javascript:toggle_add_comment(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>);' class="item_add_comment" title="Add comment"><img src="images/28.png" /></a>
+					<?php endif ?>
+					
+					<!-- AddThis Button BEGIN -->
+					<a class="addthis" href="javascript:onAddthisClick('<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>', '<?= $this->escape(str_replace("'", "\"", $this->item->getTitle())); ?>');" title="Share and bookmark">
+						<img src="images/addthis.gif" width="16" height="16" border="0" alt="" class="addthis"/>
+					</a>
+					<!-- AddThis Button END -->
+				
+				</div>
+				
+				<?= $this->partial("timeline.phtml", $this->item->getPrefix(), array('item' => $this->item, 'model' => $this->model)); ?>
+
+
+				<div class="footnote">		
+					<span class="author">
+						Author: <a href="<?=$this->model->getServiceURL(); ?>"><?= $this->model->getAccountName() ?></a>&nbsp;
+						<?php if ($this->item->getTagCount() > 0) : ?>
+							|&nbsp;
+						<?php endif ?>
+					</span>										
+					<?php if ($this->item->getTagCount() > 0) : 
+								$tags = $this->item->getTags();
+	
+								$strings = array();
+								foreach($tags as $tag) {
+									$strings[] = "<a href='tag/" . urlencode($tag['symbol']) . "' rel='tag'>{$tag['tag']}</a>";
+								}
+					?>
+	
+					Tags: <?= implode(", ", $strings); ?>
+					<?php endif ?>
+				</div>
+				
+				<?php if ($this->disqus) : ?>
+					<div class='footnote'>
+						<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>#disqus_thread">View Comments</a>	
+					</div>
+				<?php endif ?>	
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+<?php $item = $this->item->toArray(); ?>
+
+<div class="tumblr">
+<?php if ($item['type'] == 'regular') :?>
+<div class="regular">
+	<div  class="title"><?= $this->item->getTitle(); ?></div>
+	<div  class="content"><?= $item['regular_body'] ?></div>
+</div>
+<?php elseif ($item['type'] == 'quote') :?>
+<div class="quote">
+	<div  class="title"><?= $this->item->getTitle(); ?></div>
+	<div  class="content"><?= $item['quote_source'] ?></div>
+</div>
+<?php elseif ($item['type'] == 'link') :?>
+<div class="link">
+	<div  class="title">Shared the link <a href="<?= $item['link_url'] ?>"><?= $this->item->getTitle(); ?></a></div>
+	<?php if ($item['link_description']) : ?>
+		<div  class="note"><?= $item['link_description'] ?></div>
+	<?php endif ?>
+</div>
+<?php elseif ($item['type'] == 'conversation') :?>
+<div class="conversation">
+	<div  class="title"><?= $this->item->getTitle(); ?></div>
+	<div  class="content"><?= $item['conversation_text'] ?></div>
+</div>
+<?php elseif ($item['type'] == 'photo') :?>
+<div class="photo">
+	<div  class="title"><?= $this->item->getTitle(); ?></div>
+	<div  class="content"><a href="<?= $item['photo_url']; ?>" title="<?= $this->item->getTitle(); ?>" rel="lightbox[set]" ><img src='<?= $item['photo_url'] ?>'  width='350'></a></div>
+	<?php if ($item['photo_note']) : ?>
+		<div  class="note"><?= $item['photo_note'] ?></div>
+	<?php endif ?>
+</div>					
+<?php elseif ($item['type'] == 'video') :?>
+<div class="video">
+	<?= $this->item->getVideoPlayer(640, 480); ?>
+</div>	
+<?php elseif ($item['type'] == 'audio') :?>
+<div class="audio">
+	<div  class="title"><?= $this->item->getTitle(); ?></div>
+	<div  class="content"><?= $this->item->getAudioPlayer(200); ?></div>
+	<?php if ($item['audio_note']) : ?>
+		<div  class="description"><?= $item['audio_note'] ?></div>
+	<?php endif ?>	
+</div>	
+<?php endif ?>		
+</div>									

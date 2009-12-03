@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<base href="<?= $this->base()->thisUrl(); ?>/" />
+	<link href="style/toolbar.css" media="screen, projection" rel="stylesheet" type="text/css" />	
+	<link href="style/embed_page.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<?= $this->headLink() ?>	
+	<?= $this->headScript() ?>
+	<?= $this->headStyle() ?>
+</head>
+	
+<body>
+
+<div class="<?= $this->section ?>" id="page">
+	
+	<div id="left-column">
+
+		<div id="content">
+			<?= $this->layout()->content ?>
+		</div>
+		
+		<div class="bottom_nav">
+			<div class="pagination">
+					<?php if ($this->hasprevious) : ?>
+						<a class="section_links" rel="prev" href="<?= $this->base()->thisUrl()?>?embed=page&count=<?= $this->count ?>&page=<?= ($this->page - 1); ?>">&lt; Newer</a>
+					 <?php endif ?>
+					 <?php if ($this->hasnext) : ?>
+						<a class="section_links" rel="next" href="<?= $this->base()->thisUrl()?>?embed=page&count=<?= $this->count ?>&page=<?= ($this->page + 1) ?>">Older &gt;</a>
+					 <?php endif ?>
+			</div>
+		</div>
+		
+	</div>
+	
+	<br class="fix"/>
+	
+	<div id="footer-wrapper">
+		<div id="footer">
+		</div>
+	</div>
+	
+</div>
+
+</body>
+</html>

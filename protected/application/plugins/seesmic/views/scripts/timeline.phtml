@@ -1,0 +1,24 @@
+<?php $item = $this->item->toArray(); ?>
+
+<div class="seesmic">
+	<div  class="title"><?= $item['title'] ?></div>
+
+	<div id="container_seesmic_<?= $item['id']; ?>" class="video">
+
+	<object width='350' height='262'>
+		<param name='movie' value='http://seesmic.com/embeds/wrapper.swf'/>
+		<param name='bgcolor' value='#666666'/>
+		<param name='allowFullScreen' value='true'/>
+		<param name='allowScriptAccess' value='always'/>
+		<param name='flashVars' value='video=<?= $item['video_id'] ?>&amp;version=threadedplayer'/>
+		<embed src='http://seesmic.com/embeds/wrapper.swf' type='application/x-shockwave-flash' flashVars='video=<?= $item['video_id'] ?>&amp;version=threadedplayer' allowFullScreen='true' bgcolor='#666666' allowScriptAccess='always' width='350' height='262'></embed>
+	</object>
+		
+	</div>
+	
+	<?php if ($this->item->getDescription()) : ?>
+		<div class="note">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	<?php endif ?>
+</div>

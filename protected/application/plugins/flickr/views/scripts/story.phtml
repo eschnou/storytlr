@@ -1,0 +1,14 @@
+<div class="flickr">
+
+	<?php if ($this->item->getTitle()) : ?>
+		<div class="titlewrapper">
+			<div  class="title" id="title_<?= $this->count ?>"><?= $this->item->getTitle(); ?></div>
+		</div>
+	<?php elseif (!($this->item->getTitle()) && $this->edit) : ?>
+		<div class="titlewrapper">
+			<div  class="title" id="title_<?= $this->count ?>">[Click to add text]</div>
+		</div>
+	<?php endif ?>
+	<div  class="content"><a href="<?= $this->item->getImageURL('medium'); ?>" title="<?= $this->item->getTitle(); ?>" rel="lightbox[set]" ><img src="<?= $this->item->getImageURL('small'); ?>" /></a></div>
+
+</div>

@@ -1,0 +1,49 @@
+<?php $id = $this->item->getSource() . "_" . $this->item->getID(); ?>
+
+<div class='item_wrapper' id='item_wrapper_<?= $id ?>'>
+
+	<div class='<?php if($this->item->isHidden()) : ?> hidden <?php else : ?> item <?php endif ?>' id='item_<?= $id ?>'>
+		
+			<div class='item_content'>
+					
+				<?= $this->partial("story.phtml", $this->item->getPrefix(), array('item'=>$this->item, 'count' =>$this->count, 'edit' => $this->edit)); ?>
+				
+				<div class='item_status_wrapper' id='item_wait_<?= $id ?>' style="display:none;">
+					<div class='item_status'>
+						<img class="wait" src="images/ajax-loader.gif" /> Saving...
+					</div>
+				</div>
+				
+				<div class='item_status_wrapper' id='item_done_<?= $id ?>' style="display:none;">
+					<div class='item_status'>
+						&nbsp; Done !
+					</div>
+				</div>				
+				
+				<div class='item_actions'>
+					<?php if($this->edit) : ?>
+						<a id="toggle_show_item_a_<?= $id ?>" href='javascript:toggle_show_item(<?= $this->story_id ?>, <?= $this->item->getSource() ?>, <?= $this->item->getID() ?>);' title="<?php if($this->item->isHidden()) echo "Show in story"; else echo "Hide from story"; ?>" onfocus="this.blur();"><img id="toggle_show_item_img_<?= $id ?>" src="images/<?php if($this->item->isHidden()) echo "44"; else echo "31"; ?>.png" /></a>
+						<?php if ($this->item->getType() == SourceItem::IMAGE_TYPE) : ?>
+							<a id="set_cover_picture_a" href='javascript:set_cover_picture(<?= $this->story_id ?>, <?= $this->item->getSource() ?>, <?= $this->item->getID() ?>);' title="Set this picture as cover" onfocus="this.blur();"><img id="set_cover_picture_img" src="images/16.png" /></a>
+						<?php endif ?>
+					<?php endif ?>
+				</div>
+				
+				<div class='item_left_wide'>
+					<img class="icon" src="images/<?= $this->item->getPrefix();?>.png" width='16' height='16' />
+					<?= date("j M y | H:i", $this->item->getTimestamp()); ?>
+				</div>
+				
+				<?php if ($this->edit) : ?>
+					<?php if ($this->item->getType() == SourceItem::IMAGE_TYPE) : ?>
+						<script>
+							new Ajax.InPlaceEditor('title_<?= $this->count ?>' , 'timeline/settitle/source/<?= $this->item->getSource() ?>/item/<?= $this->item->getID() ?>', {submitOnBlur: false, okText: '', cancelText: '', highlightcolor: 'transparent', highlightendcolor: 'transparent'});
+						</script>
+					<?php endif ?>
+				<?php endif ?>
+				
+			</div>
+		
+	</div>
+	
+</div>

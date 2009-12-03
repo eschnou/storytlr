@@ -1,0 +1,9 @@
+<div class="picasa">
+	<div  class="title"><a href="<?= $this->item->getLink(); ?>"><?= $this->item->getTitle(); ?></a></div>
+	<div  class="content"><a href="<?= $this->item->getImageUrl('medium'); ?>" target="_blank" title="<?= $this->item->getTitle(); ?>" rel="lightbox[set]" ><img src="<?= $this->item->getImageUrl('medium'); ?>" width="350" /></a></div>
+	<?php if ($this->item->getDescription()) : ?>
+		<div class="note">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	<?php endif ?>
+</div>

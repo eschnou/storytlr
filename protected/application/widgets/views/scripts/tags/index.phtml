@@ -1,0 +1,19 @@
+<?php if ($this->tags && count($this->tags) > 0) : ?>
+<div class="widget tags">
+	<h2 class="title"><?= $this->title ?></h2>
+	<div class="widget-content">
+		<?php 
+		$max = $this->max;
+		$min = $this->min;
+		$range = $max - $min;
+		$range = $range > 0 ? $range : 1;
+		
+		foreach($this->tags as $tag) {
+			$size = round((($tag['count'] - $min) / $range) * 80 + 70);
+			echo "<a href='/tag/{$tag['symbol']}' style='font-size: $size%'>{$tag['tag']}</a> ";
+		}
+		?>
+	</div>
+	<div class="clear"></div>
+</div>
+<?php endif ?>

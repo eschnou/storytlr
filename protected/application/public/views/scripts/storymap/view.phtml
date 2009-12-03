@@ -1,0 +1,121 @@
+<div id="left-column">
+
+	<table class="top_nav"><tr>
+		<td>
+			<?php if (!$this->embed) : ?>
+			<a href="/" onfocus="this.blur()">Back to home</a>
+			<?php endif ?>
+		</td>
+		<td class="center">
+			<?php if ($this->edit) : ?>
+			You're in Edit mode (<a href="story/view/id/<?= $this->story_id ?>/page/<?= $this->page ?>">Go to View mode</a>)<br>
+			<?php elseif ($this->owner) : ?>
+			You're in View mode (<a href="story/edit/id/<?= $this->story_id ?>/page/<?= $this->page ?>"">Go to Edit mode</a>)<br>
+			<?php endif ?>
+			
+			<?php if ($this->owner && $this->is_private) : ?>
+				Story is private (<a href="admin/story/setPublic/story/<?= $this->story_id ?>/page/<?= $this->page ?><?php if ($this->edit) echo "/mode/edit"; ?>">Make public</a>)
+			<?php elseif ($this->owner) : ?>
+				Story is public (<a href="admin/story/setPrivate/story/<?= $this->story_id ?>/page/<?= $this->page ?><?php if ($this->edit) echo "/mode/edit"; ?>">Make private</a>)
+			<?php endif ?>
+		</td>
+		<td class="right">
+			<?php if ($this->page != 'cover') : ?>
+				<span class="title">
+					<?= $this->story_title ?> 
+				</span>
+				<span class="subtitle">
+					<?= $this->story_subtitle ?>
+				</span><br/>
+				<?php if ($this->embed) : ?>
+				<?php else : ?>				
+				<script type="text/javascript">addthis_pub  = 'alardw'; addthis_options = 'delicious, digg, email, favorites, facebook, google, live, myspace, twitter'</script>
+				<a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '<?= $this->base()->thisUrl(); ?>/story/view/id/<?= $this->story_id?>', '<?= $this->story_title?>')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s7.addthis.com/button0-share.gif" width="83" height="16" border="0" class="addthis" alt="" /></a><script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>
+				<!-- AddThis Button END -->
+				<?php endif ?>
+			<?php else : ?>
+				<?php if ($this->embed) : ?>
+					<a href="http://www.storytlr.com" target="_blank"><img src="images/powered2.png" /></a>
+				<?php else : ?>		
+				<script type="text/javascript">addthis_pub  = 'alardw'; addthis_options = 'delicious, digg, email, favorites, facebook, google, live, myspace, twitter'</script>
+				<a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '<?= $this->base()->thisUrl(); ?>/story/view/id/<?= $this->story_id?>', '<?= $this->story_title?>')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s7.addthis.com/button0-share.gif" width="83" height="16" border="0" alt="" /></a><script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>
+				<!-- AddThis Button END -->
+				<?php endif ?>				
+			<?php endif ?>
+		</td>
+	</tr>
+</table>
+	
+<div id="content">
+<?php if ($this->page == 'cover') : ?>
+<div class="coverwrapper">
+	<div class="cover">
+	<?php if ($this->image) : ?>
+		<img src="file/view/key/<?= $this->image ?>" class="cover" />
+	<?php endif ?>
+	</div>
+	<?php if ($this->page == 'cover') : ?>
+		<div class="titles">
+			<span class="title" id="story_title"><?= $this->story_title ?></span>
+			<span class="subtitle" id="story_subtitle"><?= $this->story_subtitle ?></span>
+			<?php if ($this->edit) : ?>
+				<script>
+					new Ajax.InPlaceEditor('story_title' , 'admin/story/setTitle/story/<?= $this->story_id ?>', {submitOnBlur: false, okText: '', cancelText: '', highlightcolor: 'transparent', highlightendcolor: 'transparent'});
+					new Ajax.InPlaceEditor('story_subtitle' , 'admin/story/setSubTitle/story/<?= $this->story_id ?>', {submitOnBlur: false, okText: '', cancelText: '', highlightcolor: 'transparent', highlightendcolor: 'transparent'});
+				</script>
+			<?php endif ?>
+		</div>
+	<?php endif ?>
+</div>
+<?php else :
+$date = "";
+for($count=0; $count < count($this->items); $count++) {
+	$item = $this->items[$count]; 
+
+	echo "<div class='fullitem_wrapper'>";
+	
+	$item_date = date("F j, Y", $item->getTimestamp());
+	
+	if ($date != $item_date) {
+		$date = $item_date;
+		echo "<div class='datestart' id='date_label_$count'>$date</div>";
+	} else {
+		echo "<div class='date' id='date_label_$count'>&nbsp;</div>";
+	}
+	
+?>
+
+	<?= $this->partial('story/item.phtml', array('story_id' => $this->story_id, 'item' => $item, 'edit' => $this->edit, 'count' => $count)); ?>
+	
+	<? echo "</div>" ?>
+			
+<?php }	?>
+
+<br class="fix" />
+
+<?php endif ?>
+</div>
+	
+</div>
+	
+<br class="fix"/>
+
+<table class="bottom_nav">
+	<tr>
+		<td>
+			<?php if (isset($this->previous)) : ?>
+				<a class="previous" rel="prev" href="<?= $this->previous ?>">Previous</a> 
+			<?php endif ?>
+		</td>
+		<td class="center">
+		<?php if ($this->page != 'cover') : ?>
+			page <?= $this->page + 1 ?> of <?= $this->pages ?>
+		<?php endif ?>
+		</td>
+		<td class="right">
+			<?php if (isset($this->next)) : ?>
+					<a class="next" rel="next" href="<?= $this->next ?>">Next</a>
+			<?php endif ?>
+		</td>
+	</tr>
+</table>

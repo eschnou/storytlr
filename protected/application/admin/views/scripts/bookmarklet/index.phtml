@@ -1,0 +1,13 @@
+<h1>Tools</h1>
+<?= $this->partial("partials/toolmenu.phtml", array('tab' => 'bookmarklet'));?>
+
+<h3>Bookmarklet for your browser</h3>
+<p>
+Post an item to your stream in just one click using our bookmarklet. Just drag the following button to your bookmarks
+and you are good to go.
+</p>
+<div class='bookmarklet'>
+<a 	title='Share on My Stroytlr!' href='javascript:var%20txt;if%20(window.getSelection)%20{txt%20=%20window.getSelection();}%20else%20if%20(document.getSelection)%20{txt%20=%20document.getSelection();}%20else%20if%20(document.selection)%20{txt%20=%20document.selection.createRange().text;}%20else%20{txt%20=%20%27%27;}window.open(%22http://<?= $this->base()->myDomain(true) ?>/admin/post/?bookmarklet=true&v=1&s=%22+encodeURIComponent(txt)+%22&u=%22+encodeURIComponent(location.href)+%22&t=%22+encodeURIComponent(document.title),%22storytlr%22,%22toolbar=no,resizable=no,status=no,location=no,directories=no,width=640,height=600%22);void(0);'>	
+	Share on My Storytlr!
+</a>
+</div>

@@ -1,0 +1,433 @@
+/*  
+	Storytlr Pixeled theme
+	---------------------------------------
+	Please note! The lifestream and stories contents are in a separate stylesheet
+*/
+
+/*  Original Wordpress theme info
+
+	Theme Name: Pixeled
+	Theme URI: http://samk.ca/freebies/free-wordpress-theme-pixeled/
+	Description: Dark WP theme with 2-3 column layout, dropdown categories menu, multiple widget-ready placement and feedburner email form integrated, easy to customize. Created by <a href="http://samk.ca/">samk</a>. Enjoy! (Other color schemes available soon!)
+	Author: sam
+	Author URI: http://samk.ca/
+	Version: 1.5
+	Tags: black, blue, 3 columns, 2 columns, clean, transparent, right sidebar, fixed width, valid xhtml, valid css, feedburner, adsense ready, 1024, dropdown categories, widgets, footer navigation, drop down
+	.
+	Released under the <a href="http://www.opensource.org/licenses/gpl-license.php">GPL</a>.
+	.
+
+*/
+
+@import "../../style/public.css";
+
+/*  Overwrite classes in public.css
+	---------------------------------------
+*/
+
+div.item div.content img {
+	max-width: 465px;  	
+}
+
+div.item div.note img {
+	max-width: 400px; 	
+}
+
+table.tabMenu td a {
+	background: none;
+	color:#6598b8;
+	display:block;
+	padding:2px 15px 2px 0;
+	text-decoration:none;	
+}
+
+table.tabMenu td a:hover {
+	background:none;
+	color:#6598b8;
+	text-decoration:underline;	
+}
+
+table.tabMenu td {
+	border:none;
+	padding: 0;
+	margin: 0;
+	white-space: nowrap;
+	text-align: left;
+}
+
+table.tabMenu td.arrow {
+	background-color: transparent;
+	vertical-align: middle;
+	padding:0px;
+	border: none;
+}
+
+table.tabMenu td.arrow div a {
+	height: 16px;
+	padding: 2px 2px;
+	background-color: transparent;	
+}
+
+table.tabMenu td.arrow div div {
+	border: 1px solid #ccc;	
+}
+	
+table.tabMenu td.unselected {
+	background-color: transparent;
+	border-bottom:none;
+}
+
+table.tabMenu td.spacer {
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom:none;	
+}
+
+table.tabMenu td.last  {
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom:none;
+	width: 100%;	
+}
+
+table.tabMenu td.active a {
+	background: none;
+	color:#fff;
+	font-weight: bold;
+}
+
+table.tabMenu td.active a:hover {
+	background: none;
+	color:#fff;
+	text-decoration:none;
+}
+
+table.tabMenu td.active {
+	border-bottom:none;
+	background-color: transparent;
+}
+
+table.tabMenu td.inactive {
+	border-bottom:none;
+	background-color: transparent;
+}
+
+div.tabMenu table.tabMenu {
+	width: 0%;
+	position: absolute;
+}
+
+div.tabMenu {
+	margin: 0;
+	text-align: left;
+	width: 520px;
+	position: relative;
+	height: 40px;
+}
+
+#content .date {
+	background: url(images/bg-trans.png) repeat;
+	font-size:14px;
+	padding:5px;
+	color: #fff;
+}
+
+#content .stories .date {
+	background: none;
+}
+
+#content {
+	font-size: 14px;
+	color: #fff;
+}
+
+div.item  div.note {
+	margin: 15px 0;
+	padding: 10px 10px 16px 50px;
+	border-left: 5px solid #0e323d;
+	background: #6ba4b7 url(images/quote.png) no-repeat;
+	background-position: 10px 10px;
+	color: #e1eef1;
+}
+
+div.item  div.note a {
+	color: #205b79;
+}
+
+div.item_add_comment form {
+	background: transparent url(images/bg-trans2.png) repeat;
+	border:1px dotted #688d96;
+	color:#9bc9d9;
+	margin:0 0 0 75px;
+	padding:10px 20px;
+}
+
+div.comment {
+	background: transparent url(images/bg-trans2.png) repeat;
+	color:#9bc9d9;
+	border:1px dotted #688d96;
+	margin:10px 0;
+	padding:10px 8px 7px 10px;
+	text-align:justify;
+}
+
+div.story_embed {
+	background: transparent url(images/bg-trans2.png) repeat;
+}
+
+div#storytlr_embed span#story_title {
+	color: #333;
+}
+
+div.comment_top {
+	color:#b4bdbc;
+	font-size:0.9em;
+	margin-bottom:10px;
+}
+
+div.waiter {
+	background: transparent url('images/ajax-loader.gif');
+	height: 32px;
+	width: 32px;	
+}
+
+div.stories #content div.item_wrapper {
+	width:  520px;
+	margin: 10px;
+	clear: both;
+	height: 60px;
+}
+
+div#breadcrumb {
+	color: white;	
+}
+
+
+/*  General declarations
+	---------------------------------------
+*/
+
+body {
+	text-align: center;
+	margin: 0;
+	padding: 0 0 15px 0;
+	font-family: trebuchet ms, arial, helvetica, sans-serif;
+	background-color: black;
+}
+
+a {
+	color:#6598b8;
+	text-decoration:none;
+}
+a:link {
+	text-decoration:none;
+}
+a:visited {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+a img {
+	border-width:0;
+}
+
+/*  Main layout
+	---------------------------------------
+*/
+
+#pagewrapper {
+  	background: #000 url(images/bgbody.jpg) top center no-repeat;
+}
+
+#page {
+  	margin: 0 auto;
+  	width: 960px;
+  	text-align: left;
+  	padding: 0;
+ }
+
+#left-column {
+	float:	left;
+	width:  520px;
+	margin-bottom: 20px;
+	background-color: transparent;
+	margin: 30px 0 0 15px;
+}
+
+div#login div {
+	float: right;
+	padding:20px 0 0 20px;
+}
+
+/*  Header
+	---------------------------------------
+*/
+
+#header-wrapper {
+	background: transparent	 url('images/header3.jpg') no-repeat;
+	height: 75px;
+}
+
+#header {
+	padding-top: 3px;	
+}
+
+#header h1 {
+	font: 17pt Verdana;
+	font-weight: bold;
+	color:#fff;
+	margin: 24px 0 4px 0;
+	float: left;
+}
+
+#header .description {
+	color:#111111;
+	font-size:11pt;
+	padding:0;
+	float: left;
+	margin: 34px 0 0 10px;
+}
+
+/*  Sidebar
+	-------------------------------
+*/
+
+#right_column {
+	float:right;
+	overflow:hidden;
+	padding:0em 0.5em;
+	width:340px;
+	margin: 70px 15px 0 0 ;
+}
+
+.sidebar * {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar {
+  margin: 15px 0 0 0;
+  width: 340px;
+  color: #eee;
+  font-size:12pt;	
+}
+
+.sidebar h2 {
+	color:#FFFFFF;
+	font-size:14pt;
+	font-weight:normal;
+	letter-spacing:-1px;
+	padding:0 0 3px 0;	
+}
+
+.sidebar ul {
+	list-style:none;
+	margin:0 0 0;
+	padding:0 0 0;
+}
+
+.sidebar li {
+	margin:0;
+	padding-top:0;
+	padding-right:0;
+	padding-bottom:.25em;
+	padding-left:15px;
+	text-indent:-15px;
+	line-height:1.5em;
+}
+
+.sidebar .widget {
+	background: transparent url(images/bg-trans.png) repeat;
+  	padding: 15px 15px;
+  	margin-bottom: 20px;
+}
+
+.widget #formSearch {
+	margin: 0;
+}
+
+.widget #formSearch input#search{
+	width: 100px;
+}
+
+.widget #formSearch input#searchsubmit{
+	width: 40px;
+}
+
+#profile {
+	position: relative;
+}
+
+#profile #avatar{
+}
+
+#profile #avatar img{
+	margin-right: 10px;
+}
+
+#profile img{
+	float: left;
+}
+
+#profile #alias {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#profile #bio {
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+}
+
+#profile #location {
+	font-weight: bold;
+}
+
+br.fix {
+	clear: both;
+}
+
+/*  Accordion
+	-------------------------------
+*/
+
+.accordion_toggle {
+	background:#333;
+	border-bottom:1px solid #555;
+	cursor:pointer;
+	display:block;
+	font-size:15px;
+	font-weight:normal;
+	height:20px;
+	line-height:20px;
+	margin:0;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+	padding:0 5px;
+	text-decoration:none;
+	color: #ccc;	
+}
+
+.accordion_toggle_active {
+	background:#6598B8;
+	color:#FFFFFF;
+	border-bottom: none;
+}
+
+.accordion_content {
+	background:#fff;
+	color:#B4BDBC;
+	overflow:hidden;
+	font-size: 15px;
+	padding: 5px 5px 0px 5px;
+}
+
+#accordion_archive {
+	margin-bottom: 5px;
+	width: 165px;
+}

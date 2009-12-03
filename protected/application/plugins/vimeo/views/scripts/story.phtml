@@ -1,0 +1,13 @@
+<?php $item = $this->item->toArray(); ?>
+<div class="vimeo">
+	<div  class="video" id="vimeo_video_<?= $item['id'] ?>">
+		<object width="240" height="180">
+			<param name="allowfullscreen" value="true" />
+			<param name="allowscriptaccess" value="always" />
+			<param value="transparent" name="wmode"/>
+			<param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=<?= $item['clip_id']?>&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" />
+			<embed src="http://vimeo.com/moogaloop.swf?clip_id=<?= $item['clip_id']?>&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" wmode="transparent" width="240" height="180">
+			</embed>
+		</object>
+	</div>
+</div>

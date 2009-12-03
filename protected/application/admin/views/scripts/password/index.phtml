@@ -1,0 +1,13 @@
+<h1>Configure</h1>
+<p>
+You can configure your homepage below.
+</p>
+
+<?= $this->partial("partials/tabmenu.phtml", array('tab' => 'password'));?>
+
+
+<img id = 'wait' src='images/wait30.gif' style='display:none;' />
+<div id = 'status_errors' class='errors'></div>
+<div id = 'status_notify' class='status'></div>
+
+<?= $this->form ?>

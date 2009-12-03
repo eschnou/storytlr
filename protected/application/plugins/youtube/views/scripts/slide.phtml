@@ -1,0 +1,18 @@
+<?php $item = $this->item->toArray(); ?>
+
+<div class="youtube">
+	<div class="video">
+		<object width="640" height="480">
+			<param name="movie" value="http://www.youtube-nocookie.com/v/<?= $item['video_id'] ?>&fs=1&autoplay=1&rel=0&showinfo=0"></param>
+			<param name="allowFullScreen" value="true"></param>
+			<param name="allowscriptaccess" value="always"></param>
+			<embed 	src="http://www.youtube-nocookie.com/v/<?= $item['video_id'] ?>&fs=1&autoplay=1&rel=0&showinfo=0" 
+					type="application/x-shockwave-flash" 
+					allowscriptaccess="always" 
+					allowfullscreen="true" 
+					width="640" 
+					height="480">
+			</embed>
+		</object>
+	</div>
+</div>

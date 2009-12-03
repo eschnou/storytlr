@@ -1,0 +1,24 @@
+<?php 
+	$item = $this->item->toArray(); 
+	$title = "{$this->item->getTitle()}";
+	$jsid = "youtube_video_{$this->item->getId()}";
+?>
+<div class="youtube">
+	<!--  <div  class="title"><?= $title ?></div>-->
+	<div  class="video" id="<?= $jsid ?>">
+	
+		<object width="240" height="180">
+			<param name="movie" value="http://www.youtube-nocookie.com/v/<?= $item['video_id'] ?>&fs=1"></param>
+			<param name="allowFullScreen" value="true"></param>
+			<param name="allowscriptaccess" value="always"></param>
+			<embed 	src="http://www.youtube-nocookie.com/v/<?= $item['video_id'] ?>&fs=1" 
+					type="application/x-shockwave-flash" 
+					allowscriptaccess="always" 
+					allowfullscreen="true" 
+					width="240" 
+					height="180">
+			</embed>
+		</object>
+
+	</div>
+</div>

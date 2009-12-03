@@ -1,0 +1,33 @@
+<?php $item = $this->item->toArray(); ?>
+
+<?php 
+	if ($item['type'] == 'favorite') {
+		$title = "Liked the video - <a href='{$item['link']}'>{$item['title']}</a>";
+	} else {
+		$title = "{$item['title']}";
+	}
+	
+	$jsid = "youtube_video_{$item['id']}";
+?>
+<div class="youtube">
+	<div  class="title"><?= $title ?></div>
+	<div  class="video" id="<?= $jsid ?>">
+		<object width="350" height="250">
+			<param name="movie" value="http://www.youtube-nocookie.com/v/<?= $item['video_id'] ?>&fs=1&rel=0&showinfo=0"></param>
+			<param name="allowFullScreen" value="true"></param>
+			<param name="allowscriptaccess" value="always"></param>
+			<embed 	src="http://www.youtube-nocookie.com/v/<?= $item['video_id'] ?>&fs=1&rel=0&showinfo=0" 
+					type="application/x-shockwave-flash" 
+					allowscriptaccess="always" 
+					allowfullscreen="true" 
+					width="350" 
+					height="250">
+			</embed>
+		</object>
+	</div>		
+	<?php if (strlen(trim($this->item->getDescription())) > 0) : ?>
+		<div class="note">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	<?php endif ?>
+</div>

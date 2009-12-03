@@ -1,0 +1,9 @@
+<h1>Recover your storytlr password</h1>
+<?php if ($this->failedRecovery) : ?>
+<div class="error">We could not find an account for this email. If problems persist, please
+contact us directly at support@storytlr.com</div>
+<?php endif ?>
+Enter your e-mail below and we will send you a brand new password.
+<div class="form_wrapper">
+<?= $this->form ?>
+</div>

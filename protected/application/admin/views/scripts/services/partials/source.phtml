@@ -1,0 +1,6 @@
+<tr id="source_<?= $this->id ?>">
+	<td><img src="images/<?= $this->service ?>.png"> <?= $this->name?></td>
+	<td><?= $this->name ?> <?php if ($this->account) echo "({$this->account})" ?></td>
+	<td><a href="admin/services/edit/id/<?= $this->id ?>">Edit</a></td>
+	<td><a href="javascript:onRemove(<?= $this->id ?>, '<?= $this->name?>');">Remove</a></td> 
+</tr>

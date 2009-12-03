@@ -1,0 +1,277 @@
+/*  
+	Storytlr Tap theme
+	---------------------------------------
+	Please note! The lifestream and stories contents are in a separate stylesheet
+*/
+
+@import "../../style/public.css"; 
+
+/*  Overwrite classes in public.css
+	---------------------------------------
+*/
+
+div.item div.content img {
+	max-width: 370px;  	
+}
+
+div.item div.note img {
+	max-width: 305px; 	
+}
+
+div.stories #content div.item_wrapper {
+	width:  435px;
+	margin: 10px;
+	clear: both;
+	height: 60px;
+}
+
+/*  General declarations
+	---------------------------------------
+*/
+
+body {
+	background: fixed;
+	background-image: url('images/pattern_074.gif');
+	margin:0;
+	padding: 0;
+	color:#333333;
+	font-size:x-small;
+	font-size/* */:/**/small;
+	font-size: /**/small;
+	text-align: center;
+}
+
+h2 {
+	color:#000000;
+	font-family:'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif;
+	font-size:78%;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	letter-spacing:0.2em;
+	line-height:1.4em;
+	margin:1.5em 0pt 0.75em;
+	text-transform:uppercase;
+}
+
+a {
+	color:#00aaff;
+	text-decoration:none;
+}
+a:link {
+	text-decoration:none;
+}
+a:visited {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+a img {
+	border-width:0;
+}
+
+/*  Main layout
+	---------------------------------------
+*/
+
+#page {
+	background: #ffffff url('images/background.jpg') no-repeat top right;
+	width: 802px;
+	margin:0 auto;
+	padding: 0;
+	text-align:left;
+	font: normal normal 100% 'Trebuchet MS', Serif;
+	background-color: white;
+}
+
+#left-column {
+	float:	left;
+	width:  450px;
+	margin-bottom: 20px;
+	background-color: transparent;
+	padding: 15px;
+}
+
+/*  Header
+	---------------------------------------
+*/
+
+#header-wrapper {
+	background-position: 20px 20px;
+	height: 250px;
+}
+
+
+#header .titlewrapper {
+	display: none;	
+}
+	
+#header h1 {
+	padding: 110px 0 0 30px;
+	letter-spacing:.2em;
+	font: normal normal 200% Georgia, Serif;
+	margin: 0;
+	color:#fff;
+}
+
+#header .description {
+	padding:160px 0 0 385px;
+	text-transform:uppercase;
+	letter-spacing:.2em;
+	font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+	color: #000000;
+	width: 100px;
+	text-align: center;
+}
+
+div#login div {
+	padding: 10px 10px 0 0;
+	float: right;
+}
+
+/*  Footer
+	---------------------------------------
+*/
+
+div#footer-wrapper {
+	background: transparent url('images/footer2.jpg') no-repeat;
+	height: 300px;
+	margin: 0 auto;
+	width: 802px;
+}
+
+/*  Sidebar
+	-------------------------------
+*/
+
+#right_column {
+	background-color: transparent;
+	float:right;
+	overflow:hidden;
+	padding:0em 0.5em;
+	width:200px;
+	margin: 280px 15px 0 0 ;
+	text-align: right;
+}
+
+.sidebar {
+	color: #555555;
+	line-height: 1.5em;
+}
+
+.sidebar ul {
+	list-style:none;
+	margin:0 0 0;
+	padding:0 0 0;
+}
+
+.sidebar li {
+	margin:0;
+	padding-top:0;
+	padding-right:0;
+	padding-bottom:.25em;
+	padding-left:15px;
+	text-indent:-15px;
+	line-height:1.5em;
+}
+
+.sidebar .widget {
+	margin:0 0 1em;
+	padding:0 0 0.5em;
+	color: #999;
+}
+
+.widget h2 {
+	font-weight: bold;
+	font-size: 11px;	
+}
+
+.widget #formSearch {
+	margin: 0;
+}
+
+.widget #formSearch input#search{
+	width: 100px;
+}
+
+.widget #formSearch input#searchsubmit{
+	width: 40px;
+}
+
+#profile {
+	position: relative;
+}
+
+#profile #avatar{
+}
+
+#profile #avatar img{
+	margin: 0 0 10px 125px;
+}
+
+#profile img{
+	float: left;
+}
+
+#profile #alias {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#profile #bio {
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+}
+
+#profile #name {
+	font-weight: bold;
+}
+
+br.fix {
+	clear: both;
+}
+
+/*  Accordion
+	-------------------------------
+*/
+
+.accordion_toggle {
+	background:#EEE;
+	border-bottom:1px solid #DDD;
+	cursor:pointer;
+	display:block;
+	font-size:12px;
+	font-weight:normal;
+	height:20px;
+	line-height:20px;
+	margin:0;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+	padding:0 5px;
+	text-decoration:none;
+	text-align: left;	
+}
+
+.accordion_toggle_active {
+	background:#444;
+	color:#FFFFFF;
+}
+
+.accordion_content {
+	background-color:#FFFFFF;
+	color:#444444;
+	overflow:hidden;
+	font-size: 12px;
+	padding: 5px 5px 0px 5px;
+	text-align: left;
+}
+
+#accordion_archive {
+	margin-bottom: 5px;
+	width: 200px;
+}

@@ -1,0 +1,159 @@
+<?php if ($this->service) : ?>
+<h1>Edit a <?= $this->service ?> entry</h1>
+<?php elseif (!$this->edit) : ?>
+<h1>Post an MP3</h1>
+<?php else : ?>
+<h1>Edit an audio post</h1>
+<?php endif ?>
+
+<?= $this->partial('post/nav.phtml', array('tab' => 'audio', 'bookmarklet' => $this->bookmarklet, 'url' => $this->url, 'title' => $this->title, 'selection' => $this->selection)) ?>
+
+<?php if (!$this->bookmarklet) : ?>
+<p>
+You can upload an audio file, such as a podcast, to your page. Your file must be encoded in the
+mp3 format and should not be larger than 12Mb. 
+</p>
+<?php endif ?>
+
+<script type="text/javascript">
+function onSelectUrl() {
+	$('share_file').hide();
+	$('file').value = '';	
+	$('share_url').show();
+}
+
+function onSelectFile() {
+	$('share_url').hide();
+	$('url').value = '';	
+	$('share_file').show();
+}
+</script>
+
+<form id="formPost" action="<?= $this->escape($this->form->getAction()) ?>" enctype="multipart/form-data" method="<?= $this->escape($this->form->getMethod()) ?>">
+	<table>
+		<tbody>
+			<tr>
+				<td class='label'>
+					Title:
+				</td>
+				<td class='element'>
+					<?= $this->form->title ?>
+				</td>
+			</tr>		
+			<?php if (!$this->edit) : ?>
+			<tr id="share_file" <?php if ($this->bookmarklet) : ?>style="display:none;"<?php endif ?>>
+				<td class='label'>
+					Upload an mp3 file:
+				</td>
+				<td class='element'>
+					<?= $this->form->file ?>
+						<br />
+						You can also <a href="#" onClick="onSelectUrl(); return false;">link to a mp3 hosted elsewhere</a>
+				</td>
+			</tr>
+			<tr id="share_url" <?php if (!$this->bookmarklet) : ?>style="display:none;"<?php endif ?>>
+				<td class='label'>
+					Audio URL:
+				</td>
+				<td class='element'>
+					<?= $this->form->url ?>
+					<?php if (!$this->bookmarklet) : ?>
+						<br />
+						You can also <a href="#" onClick="onSelectFile(); return false;">upload a mp3</a>
+					<?php endif ?>		
+				</td>
+			</tr>			
+			<?php endif ?>
+			<tr>
+			<td class='label'>
+					Note:
+				</td>
+				<td class='element'>
+					<?= $this->form->text ?>
+				</td>
+			</tr>				
+			<tr>
+				<td class='label'>
+					Tags:
+				</td>
+				<td class='element'>
+					<?= $this->form->tags ?>
+					<p class="hint">A comma separated list of tags</p>
+				</td>
+			</tr>	
+			<tr>
+				<td class='label'>
+					Date:
+				</td>
+				<td class='element'>
+					<div id='date_simple'>	
+						<span id='date_text'><?= $this->date_text ?></span> (<a href="javascript:onDateChange();">change</a>)
+						<?= $this->form->date_type ?>
+						<?= $this->form->date ?>													
+					</div>
+				</td>
+			</tr>
+
+			<?php if ($this->gmap_key) :?>
+			<tr>
+				<td class='label'>
+					Location:
+				</td>
+				<td class='element'>
+					<div id='location_summary'>
+						<?php if (!$this->edit) : ?>
+							No location set
+						<?php else : ?>
+							<?= $this->location ?>
+						<?php endif ?>
+						(<a href="javascript:onLocationChange();">change</a>)
+					</div>
+					<div id='location_selector' style='display:none'>		
+						<div class="map_wrapper">
+							<div id="map_search">Search location: <input type="text" id="address_input" name="address" /> <input type="button" onclick="showAddress($('address_input').value); return false" value="Search"/></div>
+							<div id="map_canvas"></div>
+							<div id="map_marker" <?php if ($this->has_location == 0) : ?>style="display: none" <?php endif ?>>
+								<input type="button" onclick="clearlocation(); return false" value="Clear location"/>
+								Drag marker to refine position
+							</div>
+						</div>
+						<script src="http://maps.google.com/maps?file=api&v=2&key=<?= $this->gmap_key?>&sensor=false" type="text/javascript"></script>
+					    <?= $this->form->latitude ?>
+						<?= $this->form->longitude ?>
+						<script type="text/javascript">	  	
+						  	initMaps();
+						  	<?php if ($this->location) : ?>
+						  	initMarker();
+						  	<?php endif?>
+					    </script>											    
+					</div>
+				</td>
+			</tr>
+			<?php endif ?>
+			
+			<?php if(isset($this->form->twitter_notify)) : ?>
+			<tr>
+				<td class='label'>
+					Twitter:
+				</td>
+				<td class='element'>
+					<?= $this->form->twitter_notify ?>Post a tweet on my behalf about this update
+				</td>
+			</tr>	
+			<?php endif ?>				
+			<tr>
+				<td class='label'>
+				</td>
+				<td class='element'>
+					<?= $this->form->post ?>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+	
+	<?= $this->form->mode ?>
+	<?= $this->form->source ?>
+	<?= $this->form->item ?>
+	<?= $this->form->type ?>
+	<?= $this->form->bookmarklet ?>	
+</form>

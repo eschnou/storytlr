@@ -1,0 +1,21 @@
+<?php if (!$this->items || count($this->items) == 0) : ?>
+	We are sorry, <?= $this->username?> has not posted or shared any picture yet.
+<?php else : ?>
+
+<div class="picturecontrols">
+	<a href="" rel="shadowbox[set];options={slideshowDelay:4}">Start slideshow</a>
+</div>
+
+<div class="thumbcontainer">
+	<?php foreach($this->items as $item) : ?>
+		<div class="imagethumb">
+			<a href="<?= $item->getImageUrl('large'); ?>" rel="shadowbox[set];options={slideshowDelay:4,paused:true,handleUnsupported:'img'};title=<?= $item->getTitle(); ?>" title="<?= $item->getTitle(); ?>"><img src="<?= $item->getImageUrl('thumbnail'); ?>" width="75" height="75" /></a>
+		</div>
+	<?php endforeach ?>
+	<br class="fix"/>
+</div>
+
+<?php endif ?>
+
+<!-- thumb overview, resizable?, play slideshow, filter on tag, handwritten (sifr or other) -->
+

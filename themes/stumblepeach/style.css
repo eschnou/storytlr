@@ -1,0 +1,410 @@
+/*  
+	Storytlr Plain White
+	---------------------------------------
+	Please note! The lifestream and stories contents are in a separate stylesheet
+	
+	Author: Stumblepeach
+	
+*/
+
+@import "../../style/public.css";
+
+
+/*  Overwrite classes in public.css
+	---------------------------------------
+*/
+
+div.item div.content img {
+	max-width: 465px;  	
+}
+
+div.item div.note img {
+	max-width: 400px; 	
+}
+
+div.stories #content div.item_wrapper {
+	width:  520px;
+	margin: 20px 0;
+	clear: both;
+	height: 60px;
+}
+
+div.item_comments {
+	margin: 0 0 25px 25px;
+}
+
+table.tabMenu td a {
+	background: transparent none repeat scroll 0 0;
+	color:#777;
+	display:block;
+	padding:2px 0px;
+	text-decoration:none;
+	border: none;
+	font-weight: normal;
+}
+
+table.tabMenu td a:hover {
+	color:black;
+	text-decoration:none;
+	font-weight: normal;
+	background-color: transparent;	
+}
+
+table.tabMenu td.arrow {
+	background-color: transparent;
+	vertical-align: middle;
+	padding:0px;
+	border: none;
+}
+
+table.tabMenu td.arrow div a {
+	height: 16px;
+	padding: 2px 2px;
+	background-color: transparent;	
+}
+
+table.tabMenu td.arrow div div {
+	border: 1px solid #ccc;	
+}
+	
+table.tabMenu td.unselected {
+	background-color: transparent;
+	border-bottom:none;
+}
+
+table.tabMenu td.inactive {
+	background-color: transparent;
+	width: auto;
+}
+
+table.tabMenu td.active {
+	width: auto;
+}
+
+table.tabMenu td.spacer {
+	border: none;
+	padding: 0 10px 0 0;	
+}
+
+table.tabMenu td.last  {
+	border: none;
+	width: 0px;
+}
+
+table.tabMenu td.active a {
+	background: transparent;
+	color:black;
+	font-weight: bold;
+}
+
+table.tabMenu td.active a:hover {
+	color:black;
+	font-weight: bold;
+}
+
+table.tabMenu td.active {
+	border: none;
+	border-bottom: 3px solid black;	
+}
+
+table.tabMenu td {
+	border: none;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+table.tabMenu td.spacer {
+	border: none;
+}
+
+div.tabMenu table.tabMenu {
+	width: 0%;
+	position: absolute;
+	left: -13px;
+	top: -150px;
+}
+
+div.tabMenu {
+	margin: 0;
+	font-size: 12px;
+	text-transform: uppercase;
+	text-align: left;
+	width: 525px;
+	position: relative;
+}
+
+#content .date{
+	font-size: 20px;
+	padding: 5px;
+	background-color: transparent;
+	border-bottom: #cccccc 1px solid;
+	color: #000000;
+	margin: 15px 0;
+}
+
+div.item_left .time {
+	display: none;
+}
+
+div.item_right {
+	margin: 25px 0 20px 25px;
+	padding:2px;
+}
+
+div.item_left {
+	float:left;
+	margin-top:2px;
+	width:15px;
+}
+
+#content {
+	margin-top: 0px;	
+}
+
+div.stories #content div.date {
+	border-bottom: none;
+}
+
+div.item_add_comment form {
+	margin-left: 25px;
+	background-color: white;
+	padding-left: 0px;
+}
+
+div.item_add_comment form td button {
+	font-size: 1em;
+}
+
+div.item_add_comment form td textarea#comment {
+	width: 413px;
+}
+
+div.story_embed {
+	background-color: white;
+	padding-left: 0px;	
+}
+
+/*  General declarations
+	---------------------------------------
+*/
+
+body {
+	background:#fff; 
+	margin:0;
+	padding: 0;
+	color:#b9b9b9; 
+	font-family:Helvetica,Tahoma,Arial,sans-serif;
+	font-size: 16px;
+	text-align: center;
+}
+
+h2 {
+	color:#000000;
+	font-family: Helvetica, Sans-serif;
+	font-size: 15px;
+	font-weight:bold;
+    letter-spacing:0.05em;
+    text-transform: uppercase;
+}
+
+a {
+	background-color:inherit; 
+	color:#53abd5; 
+	font-weight:bold; 
+	text-decoration:none;
+}
+
+a:hover {
+	background-color:inherit; 
+	color:#53abd5; 
+	font-weight:bold; 
+	text-decoration:underline;
+}
+
+a img {
+	border:0;
+}
+
+/*  Main layout
+	---------------------------------------
+*/
+
+#pagewrapper {
+	margin: 20px 0;
+}
+
+#page {
+	color:#333; 
+	width:760px;
+	margin:0 auto;
+	padding: 0 0 15px 0;
+	text-align:left;
+	background: url('images/background.png');
+}
+
+#left-column {
+	float:	left;
+	width:  525px;
+	margin: 20px 0 20px;
+	background-color: transparent;
+	padding: 15px;
+}
+
+/*  Header
+	---------------------------------------
+*/
+
+#header-wrapper {
+	height: 120px;
+	margin-top: 10px;
+}
+
+#header {
+	position: relative;
+}
+
+#header h1 {
+	color:#555; 
+	position: absolute;
+	letter-spacing:-1px; 
+	width:350px;
+	top: 60px;
+}
+
+#header h1.title{ 
+	color: #cccccc; 
+	padding-left: 15px; 
+	font-face: helvetica; 
+	font-size: 32px; 
+	text-transform:uppercase;
+}
+
+
+#header .description {
+	background-color:inherit; 
+	color:#777; 
+	font-size:1.1em; 
+	font-weight:bold; 
+	line-height:1.3em; 
+	margin:0px 3px 0 18px; 
+	width:300px;
+	display: none;
+}
+
+div#login div {
+	padding: 10px 10px 0 0px;
+	float: right;
+}
+
+/*  Sidebar
+	-------------------------------
+*/
+
+#right_column {
+	float:right; 
+	line-height:1.4em; 
+	margin:35px 10px 5px; 
+	padding:0; 
+	width:160px;
+}
+
+.sidebar li {
+	line-height:1.2em; 
+	list-style:none; 
+	margin:0 0 6px;
+}
+
+.sidebar ul {
+	margin:0;
+	padding: 0;
+}
+
+.sidebar .widget {
+	border-bottom:1px dotted #cccccc;
+	margin:0 0 1em;
+	padding:0 0 0.5em;
+}
+
+.widget #formSearch {
+	margin: 0;
+}
+
+.widget #formSearch input#search{
+	width: 100px;
+}
+
+.widget #formSearch input#searchsubmit{
+	width: 40px;
+}
+
+#profile {
+	position: relative;
+}
+
+#profile #avatar{
+}
+
+#profile #avatar img{
+	margin-right: 10px;
+}
+
+#profile img{
+	float: left;
+}
+
+#profile #alias {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#profile #bio {
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.85em;
+}
+
+#profile #location {
+	font-weight: bold;
+}
+
+br.fix {
+	clear: both;
+}
+
+/*  Accordion
+	-------------------------------
+*/
+
+.accordion_toggle {
+	background:#EEE;
+	border-bottom:1px solid #DDD;
+	cursor:pointer;
+	display:block;
+	font-size:12px;
+	font-weight:normal;
+	height:20px;
+	line-height:20px;
+	margin:0;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+	padding:0 5px;
+	text-decoration:none;	
+}
+
+.accordion_toggle_active {
+	background:#444;
+	color:#FFFFFF;
+}
+
+.accordion_content {
+	background-color:#FFFFFF;
+	color:#444444;
+	overflow:hidden;
+	font-size: 12px;
+	padding: 5px 5px 0px 5px;
+}
+
+#accordion_archive {
+	margin-bottom: 5px;
+}

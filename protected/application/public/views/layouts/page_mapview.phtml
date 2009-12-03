@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<?= $this->headTitle() ?>
+	<base href="<?= $this->base()->thisUrl(); ?>/" />
+	<link href="style/story.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<?= $this->headLink() ?>	
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script src="/js/jquery-plugins/jquery.scrollable-1.0.2.js"></script>
+	
+	<script src="http://maps.google.com/maps?file=api&v=2&key=<?= $this->gmap_key ?>&sensor=false" type="text/javascript"></script>
+	<script type="text/javascript">
+		
+		function initialize() {
+	      	if (GBrowserIsCompatible()) {
+		        
+		        // the storyoverview
+				// We define the function first
+				function storyoverviewControl() {
+				}
+				
+				// To "subclass" the GControl, we set the prototype object to
+				// an instance of the GControl object
+				storyoverviewControl.prototype = new GControl();
+				
+				// Creates a one DIV for each of the buttons and places them in a container
+				// DIV which is returned as our control element. We add the control to
+				// to the map container and return the element for the map class to
+				// position properly.
+				storyoverviewControl.prototype.initialize = function(map) {
+				  	var container = document.createElement("div");
+					
+					container.style.right = "0";
+					var storyoverviewElement = document.getElementById("pagecontrols"); 
+				    
+				  	container.appendChild(storyoverviewElement);
+				  	
+					map.getContainer().appendChild(container);
+				  	return container;
+				}
+				
+				// By default, the control will appear in the top left corner of the
+				// map with 7 pixels of padding.
+				storyoverviewControl.prototype.getDefaultPosition = function() {
+				  return new GControlPosition(G_ANCHOR_BOTTOM_LEFT, new GSize(0, 0));
+				}
+		        
+		        var map = new GMap2(document.getElementById("map_canvas"));
+		        map.setCenter(new GLatLng(0,0),0);
+		        var bounds = new GLatLngBounds();
+		        			  	
+			  	// add title and storyoverview
+		        map.addControl(new storyoverviewControl());
+		        
+		        map.setUIToDefault();
+		        map.setMapType(G_PHYSICAL_MAP );
+		        
+		        // marker icons
+		        // create first, rest will be based on this
+		        var deliciousIcon = new GIcon(G_DEFAULT_ICON);
+		        deliciousIcon.image = "images/delicious_m.png";
+		    	deliciousIcon.shadow = 'images/marker_s.png';
+		    	deliciousIcon.iconSize = new GSize(38, 38);
+		    	deliciousIcon.shadowSize = new GSize(57,38);
+		    	deliciousIcon.iconAnchor = new GPoint(19,38);
+		    	deliciousIcon.infoWindowAnchor = new GPoint(0,100);
+		    	deliciousIcon.imageMap = [20,0,22,1,24,2,25,3,26,4,27,5,28,6,28,7,29,8,30,9,30,10,30,11,30,12,30,13,31,14,31,15,30,16,30,17,30,18,30,19,30,20,29,21,29,22,28,23,27,24,26,25,25,26,24,27,22,28,20,29,19,30,18,31,18,32,18,33,17,34,17,35,17,36,17,37,14,37,14,36,14,35,14,34,13,33,13,32,13,31,12,30,11,29,9,28,7,27,6,26,5,25,4,24,3,23,3,22,2,21,2,20,1,19,1,18,1,17,1,16,1,15,1,14,1,13,1,12,1,11,1,10,2,9,2,8,3,7,4,6,4,5,5,4,6,3,7,2,9,1,12,0];
+		    	
+			  	var diggIcon = new GIcon(deliciousIcon);
+		  		var facebookIcon = new GIcon(deliciousIcon);
+		  		var flickrIcon = new GIcon(deliciousIcon);
+		  		var googlereaderIcon = new GIcon(deliciousIcon);
+		  		var laconicaIcon = new GIcon(deliciousIcon);
+		  		var lastfmIcon = new GIcon(deliciousIcon);
+		  		var picasaIcon = new GIcon(deliciousIcon);
+		  		var qikIcon = new GIcon(deliciousIcon);
+		  		var rssIcon = new GIcon(deliciousIcon);
+		  		var seesmicIcon = new GIcon(deliciousIcon);
+		  		var stuffpressIcon = new GIcon(deliciousIcon);
+		  		var tumblrIcon = new GIcon(deliciousIcon);
+		  		var twitterIcon = new GIcon(deliciousIcon);
+		  		var twitpicIcon = new GIcon(deliciousIcon);
+		  		var vimeoIcon = new GIcon(deliciousIcon);
+		  		var youtubeIcon = new GIcon(deliciousIcon);
+		    	
+	    		diggIcon.image = "images/digg_m.png";
+		    	facebookIcon.image = "images/facebook_m.png";
+		  		flickrIcon.image = "images/flickr_m.png";
+		  		googlereaderIcon.image = "images/googlereader_m.png";
+		  		laconicaIcon.image = "images/delicious_m.png";
+		  		lastfmIcon.image = "images/lastfm_m.png";
+		  		picasaIcon.image = "images/picasa_m.png";
+		  		qikIcon.image = "images/qik_m.png";
+		  		rssIcon.image = "images/rss_m.png";
+		  		seesmicIcon.image = "images/seesmic_m.png";
+		  		stuffpressIcon.image = "images/storytlr_m.png";
+		  		tumblrIcon.image = "images/tumblr_m.png";
+		  		twitterIcon.image = "images/twitter_m.png";
+		  		twitpicIcon.image = "images/twitpic_m.png";
+		  		vimeoIcon.image = "images/vimeo_m.png";
+		  		youtubeIcon.image = "images/youtube_m.png";
+		  		
+		    	var domnodes = [];
+		  		var points = [];
+		  		var i = 0;
+		  		var map;
+		  		var route;
+		  		var count = 0;
+		  		var currentselection = 0;
+		  		var isplaying = false;
+		  		
+		  		// the controlbox layer
+				var scrollbox;
+		  		
+		  		// the data from the story items 
+		        <?php 
+		        	$entries = array();
+		        	for($count=0; $count < count($this->items); $count++) {
+						$item = $this->items[$count];
+						if ($item->getLongitude()) {
+		        			$entries[] = "{'lat':'{$item->getLatitude()}','lng':'{$item->getLongitude()}','type':'{$item->getPrefix()}','domnode':'item_wrapper_{$item->getSource()}_{$item->getID()}'}";
+						}
+					}
+				?>
+				
+				var data = [<?= implode(',', $entries) ?>];
+				
+				function build () {
+					
+					// create and add markers
+					for (var i=0; i<data.length; i++) {
+				    	
+				    	points[i] = new GLatLng(data[i].lat, data[i].lng);
+				    	var marker = createMarker(points[i], data[i].type, data[i].domnode);
+				      	
+				      	map.addOverlay(marker);
+				      	
+				      	// add items to control
+				      	var div = $("<div><img src='images/" + data[i].type + ".png' /></div>").attr('id', i); 
+					    
+					    div.appendTo("div.scrollable div.items");
+					    
+					}
+					
+					// make scrollable
+					scrollbox = $("div.scrollable").scrollable({
+			           	size: 5,
+			            next: 'div.less', 
+	    				prev: 'div.more'
+	    			});
+	    			
+	    			// add click event here (not at marker creation) to ensure current behavior 
+	    			$("div.scrollable div.items div").click(function() { 
+     
+				       	var id = $(this).attr('id');
+		     			showMarker(id);
+		     			
+				    }); 
+					
+					// add story control functions
+					$("div.forward").click(function() {
+						forward();
+					});
+					
+					// add story control functions
+					$("div.rewind").click(function() {
+						rewind();
+					});
+					
+					// add story control functions
+					$("div.play").click(function() {
+						if (isplaying == false) {
+							count = currentselection;
+							isplaying = true;
+							route = setInterval(function () {start();}, 6000);
+							$('div.play img').replaceWith('<img src="images/pause2.png" title="pause"/>');
+						} else {
+							stop();
+						}
+					});
+					
+					// draw the route between points
+					drawRoute();
+					
+					// set the zoomlevel 
+					var zoomlevel = map.getBoundsZoomLevel(bounds);
+					if (zoomlevel > 10) zoomlevel = 10;
+					map.setZoom(zoomlevel);
+					map.setCenter(bounds.getCenter());
+					
+					// show first marker
+					//showMarker(0);
+					$('div.items div:eq(0)').click();
+				}
+				
+				function createMarker(point, type, domnode) {
+		        	var marker = new GMarker(point, { icon:eval(type + 'Icon') });
+					
+					bounds.extend(point);
+				
+				    GEvent.addListener(marker, "click", function() {
+				      	
+				      	var domElement = document.getElementById(domnode); 
+				      	
+				      	map.openInfoWindow(point, domElement.cloneNode(true));
+				    });
+				    
+				    GEvent.addListener(marker, 'dragend', function(position) {
+					        // position is a GLatLng containing the position of
+					        // of where the marker was dropped
+					        //points[i] = position;
+					        
+					        alert (marker);
+					}); 
+				    
+				    // save the info we need to use later for the side_bar
+				   domnodes[i] = domnode;
+				   
+				    i++;
+				    return marker;
+				}
+				
+				function drawRoute() {
+		        	
+		        	if (route != undefined) map.removeOverlay(route);
+		        	
+		        	// Draw polylines between marker points
+					route= new GPolyline(points, "#003355", 3, .5);
+					map.addOverlay(route);
+				   	
+				}
+				
+				function showMarker(id) {
+		        	
+		        	currentselection = id;
+     				var domElement = document.getElementById(domnodes[id]); 
+				    map.openInfoWindow(points[id], domElement.cloneNode(true));
+				   	
+				}
+				
+				function forward() {
+		        	
+		        	if (currentselection < data.length - 1) { 
+		        		currentselection++;
+     					$('div.items div:eq(' + currentselection + ')').click();
+     				}
+				   	
+				}
+				
+				function rewind() {
+		        	
+		        	if (currentselection > 0) { 
+		        		currentselection--;
+     					$('div.items div:eq(' + currentselection + ')').click();
+     				}
+				   	
+				}
+				
+				function start() {
+				
+					count++;
+				 	
+				 	if(count < data.length) {
+				 		// Use counter as array index
+				 		$('div.items div:eq(' + count + ')').click();
+				 	}
+				 	else {
+				 		stop();
+				 	}
+				}
+				
+				function stop() {
+				
+					isplaying = false;
+					clearInterval(route);
+					route = null;
+					$('div.play img').replaceWith('<img src="images/play.png" title="play"/>');
+				
+				}
+
+			  	build();
+		        
+			 }
+		}
+	  
+
+    </script>
+	
+</head>
+	
+<body onload="initialize()" onunload="GUnload()" style="overflow:hidden; height: 100%; width=100%;">
+
+<div id="map_canvas" style="position: absolute;top:0; bottom:0; height: 100%;width:100%;right:0;left:0;">
+</div>
+
+<div id="content" style="display:none;">
+<?php
+$date = "";
+for($count=0; $count < count($this->items); $count++) {
+	$item = $this->items[$count]; 
+
+	if (!$item->getLongitude()) continue;
+	
+	echo "<div class='fullitem_wrapper'>";
+	
+	$item_date = date("F j, Y", $item->getTimestamp());
+	
+	if ($date != $item_date) {
+		$date = $item_date;
+		echo "<div class='datestart' id='date_label_$count'>$date</div>";
+	} else {
+		echo "<div class='date' id='date_label_$count'>&nbsp;</div>";
+	}
+	
+	echo $this->partial('storymap/item.phtml', array('story_id' => $this->story_id, 'item' => $item, 'edit' => $this->edit, 'count' => $count));
+	
+	echo "</div>";
+}
+?>
+
+<br class="fix" />
+</div>
+
+<div style="display: none;">
+	<div id="pagecontrols">
+		<div>
+			<div class="storyoverview">
+			
+				<!-- prev page --> 
+				<a class="prevPage"></a> 
+				 
+				<!-- root element for scrollable --> 
+				<div class="scrollable"> 
+				 
+				    <!-- root element for the items --> 
+				    <div class="items"> 
+				       
+				    </div> 
+				     
+				</div> 
+				
+				<!-- next page --> 
+				<a class="nextPage"></a> 
+				 
+				<!-- power tag: let rest of the page layout normally --> 
+				<br clear="all" />
+		
+			</div>
+		</div>
+		<div>
+			<div class="storyplayer">
+				<div class="controls">
+					<div class="rewind"><img src="images/rewind.png" title="previous"/></div>
+					<div class="play"><img src="images/play.png" title="play"/></div>
+					<div class="forward"><img src="images/forward.png" title="next"/></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="togglewrapper">
+		<div class="toggle">
+			<div class="togglecontainer">
+				<div title="Switch to storyboard view"><img src="images/storyboard.png" /></div>
+				<div title="This is the map view" class="active"><img src="images/mapview.png" /></div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<?php if ($this->footer) echo $this->footer; ?>
+
+</body>
+</html>

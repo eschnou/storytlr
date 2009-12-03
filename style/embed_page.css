@@ -1,0 +1,198 @@
+/*  The lifestream and stories contents are in a separate stylesheet
+	---------------------------------------
+*/
+
+@import "../../style/public.css"; 
+
+/*  General declarations
+	---------------------------------------
+*/
+
+body {
+	background: #ffffff;
+	margin:0;
+	padding: 0;
+	color:#333333;
+	font:x-small Georgia Serif;
+	font-size/* */:/**/small;
+	font-size: /**/small;
+	text-align: center;
+}
+
+h2 {
+	color:#000000;
+	font-family:'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif;
+	font-size:78%;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	letter-spacing:0.2em;
+	line-height:1.4em;
+	margin:1.5em 0pt 0.75em;
+	text-transform:uppercase;
+}
+
+a {
+	color:#00aaff;
+	text-decoration:none;
+}
+a:link {
+	text-decoration:none;
+}
+a:visited {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+a img {
+	border-width:0;
+}
+
+/*  Main layout
+	---------------------------------------
+*/
+
+#page {
+	width: 820px;
+	margin:0 auto;
+	padding: 0 0 15px 0;
+	text-align:left;
+	font: normal normal 100% Georgia, Serif;
+	background-color: white;
+}
+
+#left-column {
+	float:	left;
+	width:  545px;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 15px;
+}
+
+/*  Lifestream & stories contents container
+	---------------------------------------
+*/
+
+div.stories #content div.item_wrapper {
+	width:  530px;
+	margin: 10px;
+	clear: both;
+	height: 60px;
+}
+
+/*  Header
+	---------------------------------------
+*/
+
+#header-wrapper {
+	background: #ffffff url('images/header3.jpg') no-repeat;
+	height: 200px;
+}
+
+#header h1 {
+	padding: 110px 0 0 30px;
+	letter-spacing:.2em;
+	font: normal normal 200% Georgia, Serif;
+	margin: 0;
+	color:#fff;
+}
+
+#header .description {
+	padding:0 0 0 30px;
+	text-transform:uppercase;
+	letter-spacing:.2em;
+	line-height: 1.4em;
+	font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+	color: #000000;
+}
+
+div#login div {
+	padding: 20px 0 0 20px;
+	position: absolute;
+}
+
+/*  Sidebar
+	-------------------------------
+*/
+
+#right_column {
+	background-color:#bedbe0;
+	float:right;
+	overflow:hidden;
+	padding:0em 0.5em;
+	width:200px;
+	border: 1px solid #50a7d0;
+	margin: 25px 15px 0 0 ;
+}
+
+.sidebar {
+	color: #555555;
+	line-height: 1.5em;
+}
+
+.sidebar ul {
+	list-style:none;
+	margin:0 0 0;
+	padding:0 0 0;
+}
+
+.sidebar li {
+	margin:0;
+	padding-top:0;
+	padding-right:0;
+	padding-bottom:.25em;
+	padding-left:15px;
+	text-indent:-15px;
+	line-height:1.5em;
+}
+
+.sidebar .widget {
+	border-bottom:1px dotted #cccccc;
+	margin:0 0 1em;
+	padding:0 0 0.5em;
+}
+
+.widget #formSearch {
+	margin: 0;
+}
+
+.widget #formSearch input#search{
+	width: 100px;
+}
+
+.widget #formSearch input#searchsubmit{
+	width: 40px;
+}
+
+#profile {
+	position: relative;
+}
+
+#profile #avatar{
+}
+
+#profile #avatar img{
+	margin-right: 10px;
+}
+
+#profile img{
+	float: left;
+}
+
+#profile #alias {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#profile #bio {
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+}
+
+#profile #location {
+	font-weight: bold;
+}

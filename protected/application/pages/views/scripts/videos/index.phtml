@@ -1,0 +1,17 @@
+<?php if (!$this->items || count($this->items) == 0) : ?>
+	We are sorry, <?= $this->username?> has not posted or shared any video yet.
+<?php else : ?>
+
+<div class="thumbcontainer">
+	<?php foreach($this->items as $item) : ?>
+		<div class="imagethumb">
+			<a href="/slide/<?= $item->getSource() ?>/<?= $item->getID(); ?>/index.html" rel="shadowbox[set];width=640;height=480;title=<?= $item->getTitle(); ?>" title="<?= $item->getTitle(); ?>"><img src="<?= $item->getImageUrl('thumbnail'); ?>" width="75" height="75" /></a>
+		</div>
+	<?php endforeach ?>
+	<br class="fix" />
+</div>
+
+<?php endif ?>
+
+<!-- thumb overview, resizable?, play slideshow, filter on tag, handwritten (sifr or other) -->
+

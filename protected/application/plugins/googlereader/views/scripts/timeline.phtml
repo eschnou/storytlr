@@ -1,0 +1,8 @@
+<?php $item = $this->item->toArray(); ?>
+
+<div class="googlereader">
+	<div class="title">Shared the story <a href="<?= $item['link'] ?>"><?= $item['title'] ?></a></div>
+	<?php if ($item['note']) : ?>
+		<div class="note"><?= $item['note'] ?></div>
+	<?php endif ?>
+</div>
