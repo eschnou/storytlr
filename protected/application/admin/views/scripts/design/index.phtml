@@ -1,0 +1,197 @@
+<h1>Configure</h1>
+<p>
+You can configure your homepage below.
+</p>
+
+<script type="text/javascript">
+function onDesignLoad() {
+	cp_title 			= new Control.ColorPicker("color_title", 		  { IMAGE_BASE : "/images/colorpicker/" });
+	cp_subtitle 		= new Control.ColorPicker("color_subtitle", 	  { IMAGE_BASE : "/images/colorpicker/" });
+	cp_sidebar_border 	= new Control.ColorPicker("color_sidebar_border", { IMAGE_BASE : "/images/colorpicker/" });
+	cp_background 		= new Control.ColorPicker("color_background", 	  { IMAGE_BASE : "/images/colorpicker/" });
+	cp_link 			= new Control.ColorPicker("color_link", 		  { IMAGE_BASE : "/images/colorpicker/" });
+	cp_sidebar_text 	= new Control.ColorPicker("color_sidebar_text",   { IMAGE_BASE : "/images/colorpicker/" });
+	cp_sidebar_header 	= new Control.ColorPicker("color_sidebar_header", { IMAGE_BASE : "/images/colorpicker/" });
+
+	current_theme = "<?= $this->theme ?>";
+	<?php if ($this->has_colors) : ?>
+	setColors(colors);
+	<?php else : ?>
+	setColors(themes.<?= $this->theme ?>);
+		<?php if ($this->theme == 'xcustom') : ?>
+		$('colors_panel').hide();
+		<?php endif ?>
+	<?php endif ?>
+}
+</script>
+
+<script type='text/javascript'>
+var themes = new Object();
+<?php foreach ($this->themes as $t) : ?>
+	themes.<?= $t['name'] ?> = new Object();
+	<?php if (isset($t['color_title'])) : ?>			
+		themes.<?= $t['name'] ?>.title 			= "<?= $t['color_title'] ?>";
+	<?php endif ?>
+	<?php if (isset($t['color_subtitle'])) : ?>			
+		themes.<?= $t['name'] ?>.subtitle 		= "<?= $t['color_subtitle'] ?>";
+	<?php endif ?>
+	<?php if (isset($t['color_sidebar_border'])) : ?>	
+		themes.<?= $t['name'] ?>.sidebar_border = "<?= $t['color_sidebar_border'] ?>";
+	<?php endif ?>
+	<?php if (isset($t['color_background'])) : ?>		
+		themes.<?= $t['name'] ?>.background 	= "<?= $t['color_background'] ?>";
+	<?php endif ?>
+	<?php if (isset($t['color_link'])) : ?>				
+		themes.<?= $t['name'] ?>.link 			= "<?= $t['color_link'] ?>";
+	<?php endif ?>
+	<?php if (isset($t['color_sidebar_text'])) : ?>		
+		themes.<?= $t['name'] ?>.sidebar_text 	= "<?= $t['color_sidebar_text'] ?>";
+	<?php endif ?>
+	<?php if (isset($t['color_sidebar_header'])) : ?>		
+		themes.<?= $t['name'] ?>.sidebar_header = "<?= $t['color_sidebar_header'] ?>";
+	<?php endif ?>
+<?php endforeach ?>
+
+var colors = new Object();
+<?php if (isset($this->colors['color_title'])) : ?>				
+	colors.title 			= "<?= $this->colors['color_title'] ?>";
+<?php endif ?>
+<?php if (isset($this->colors['color_subtitle'])) : ?>			
+	colors.subtitle 		= "<?= $this->colors['color_subtitle'] ?>";
+<?php endif ?>
+<?php if (isset($this->colors['color_sidebar_border'])) : ?>	
+	colors.sidebar_border 	= "<?= $this->colors['color_sidebar_border'] ?>";
+<?php endif ?>
+<?php if (isset($this->colors['color_background'])) : ?>		
+	colors.background 		= "<?= $this->colors['color_background'] ?>";
+<?php endif ?>
+<?php if (isset($this->colors['color_link'])) : ?>				
+	colors.link 			= "<?= $this->colors['color_link'] ?>";
+<?php endif ?>
+<?php if (isset($this->colors['color_sidebar_text'])) : ?>		
+	colors.sidebar_text 	= "<?= $this->colors['color_sidebar_text'] ?>";
+<?php endif ?>
+<?php if (isset($this->colors['color_sidebar_header'])) : ?>		
+	colors.sidebar_header 	= "<?= $this->colors['color_sidebar_header'] ?>";
+<?php endif ?>
+
+</script>
+
+<?= $this->partial("partials/tabmenu.phtml", array('tab' => 'design'));?>
+
+<img id = 'wait' src='images/wait30.gif' style='display:none;' />
+<div id = 'status_errors' class='errors' style='display:none;'></div>
+<div id = 'status_notify' class='status' style='display:none;'></div>
+
+<!--  This is the form was global properties such as title and subtile -->
+<?= $this->form ?>
+
+<table>
+	<tr>
+		<td class="label"><label class="optional" for="link_color">Current theme</label></td>
+		<td width="200">
+			<img id="theme_selected" class="themeSelected" src="themes/<?= $this->theme ?>/screenshot.png"/>
+		</td>
+		<td>	
+			<div id='colors_panel'>
+				Pick custom theme colors
+				<form id="formColors" action="" method="<?= $this->escape($this->formtheme->getMethod()) ?>">
+					<?= $this->formtheme->color_title ?>
+					<?= $this->formtheme->color_subtitle ?>
+					<?= $this->formtheme->color_sidebar_border ?>
+					<?= $this->formtheme->color_background ?>
+					<?= $this->formtheme->color_link ?>
+					<?= $this->formtheme->color_sidebar_text ?>
+					<?= $this->formtheme->color_sidebar_header ?>
+					<br />
+					<?= $this->formtheme->save ?>
+					<?= $this->formtheme->reset ?>
+				</form>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+			Click picture to select another theme<br/>
+			<?php if (count($this->themes) > 1) : ?>
+				<div id="theme_chooser">
+					<?php foreach ($this->themes as $theme) {
+						echo $this->partial('design/theme.phtml', $theme); 
+					} ?>
+				</div>
+			<?php endif ?>
+		    
+		</td>
+	</tr>
+</table>
+
+
+<table>
+	<tr>
+		<td class="label"><label class="optional" for="link_color">Custom images</label></td>
+		<td>
+
+			<strong>Background image</strong>
+			<form enctype="multipart/form-data" action="admin/design/uploadimage" method="post">
+			<!-- MAX_FILE_SIZE must precede the file input field -->
+				<input type="hidden" name="MAX_FILE_SIZE" value="2000000" 	 style="display:none"/>
+				<input type="hidden" name="image" 		  value="background" style="display:none"/>
+				<?php if ($this->background_image) : ?>
+				<div id ='form_design_background_image' class="background_image">
+					Current:<br />
+					<img src="thumbnail/<?= $this->background_image ?>" alt="Your background image" width="75" height="75"/>
+					(<a href="javascript:onRemoveBackground();">Remove this background image</a>)
+				</div>
+				<?php endif ?>
+				<!-- Name of input element determines name in $_FILES array -->
+				<input name="file" type="file" /><input type="submit" value="Upload file"/><br />
+				You can replace the theme background image. Maximum size is 2MB, only GIF, JPG and PNG are supported.
+			</form>
+			
+			<strong>Header image</strong><br />
+			<form enctype="multipart/form-data" action="admin/design/uploadimage" method="post">
+			<!-- MAX_FILE_SIZE must precede the file input field -->
+				<input type="hidden" name="MAX_FILE_SIZE" value="2000000" style="display:none"/>
+				<input type="hidden" name="image" 		  value="header"  style="display:none"/>
+				<?php if ($this->header_image) : ?>
+				<div id ='form_design_header_image' class="header_image">
+					Current:<br />
+					<img src="thumbnail/<?= $this->header_image ?>" alt="Your header image" width="75" height="75"/>
+					(<a href="javascript:onRemoveHeader();">Remove this header image</a>)
+				</div>
+				<?php endif ?>
+				<!-- Name of input element determines name in $_FILES array -->
+				<input name="file" type="file" /><input type="submit" value="Upload file"/><br />
+				You can replace the theme header image. Maximum size is 2MB, only GIF, JPG and PNG are supported.
+		
+			</form>
+		</td>
+	</tr>
+</table>
+
+
+<table>
+	<tr>
+		<td class="label"><label class="optional" for="link_color">Custom CSS</label></td>
+		<td>						
+			With a custom Cascading Style Sheet (CSS) you can tweak the current theme (it is not that hard) or completely overhaul everything (use the Full control theme). Learn more about <a href="page/css">styling storytlr with CSS</a>.<br/>
+			<form id="formCss" action="" method="POST">
+				<input id="css_enabled" value="1" name="css_enabled" type="checkbox" class="css" onclick="toggleCss();" <?php if ($this->css_enabled) echo 'checked="yes"'; ?>/> Customize using CSS<br/>
+				<div id="css_div" class="css" <?php if (!$this->css_enabled) echo 'style="display:none"'; ?>>This stylesheet will be loaded after the original theme stylesheet. You can use <strong>tabs</strong> for indentation.
+<textarea id="css_content" name="css_content" onkeydown="return insertTab(event,this);" onkeyup="return insertTab(event,this);" onkeypress="return insertTab(event,this);">
+<?php if ($this->css_content) {echo $this->css_content;} else { ?>
+<?php } ?>
+</textarea>
+				<br/>
+				<br/>
+				<button onclick="submitFormCss();" value="Save" type="button" id="save" name="save">Save</button>
+				<button onclick="clearCss();" value="Clear" type="button" id="clear" name="save">Clear</button>
+				<br/>
+				</div>
+				
+			</form>	 
+		</td>
+	</tr>
+</table>
+

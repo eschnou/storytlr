@@ -1,0 +1,53 @@
+<h1>Manage your data sources</h1>
+
+<?php if ($this->suspended) : ?>
+	<div class="error">
+	The updates have been suspended for your account. You should have received an email with some detailed
+	explanations. This is usually due to a very high number of entries being generated, probably because 
+	of a feedback loop between sources. Please contact us at <a href="mailto:support@storytlr.com">support@storytlr.com</a> to solve this issue.
+	</div>
+<?php endif ?>
+
+<div id="confirm_delete" class="confirm" style="display: none; height 1%">
+	<form>
+		<div id="confirm_question"></div>
+		<input type="button" value="Delete" onClick="onConfirmDelete();" />
+		<input type="button" value="Cancel" onClick="onCancelDelete();" />
+	</form>
+</div>
+
+<div style="height: 1%;">
+	<div class="left40">
+		<p>
+		You can import data from the following services:
+		</p>
+		
+		<div id="connectors">
+			<table>
+				<?= $this->partialLoop('services/partials/service.phtml', $this->services) ?>
+			</table>
+		</div>					
+	</div> 
+	
+	<div id="user_sources" class="left60">
+		<?php if (count($this->sources) > 0) : ?>
+		<p>
+		You are importing data from <span id="sources_count"><?= count($this->sources) ?></span> sources.
+		</p>
+		
+		<div id="sources">
+			<table>
+				<?= $this->partialLoop('services/partials/source.phtml', $this->sources); ?>
+			</table>
+		</div>
+		
+		<?php else : ?>
+		<p>
+		You don't have any data source configured yet. Pick a service to start
+		importing your data now into storytlr.
+		</p>
+		<?php endif ?>
+	</div> 
+</div>
+
+<br class="fix" />

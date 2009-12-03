@@ -1,0 +1,18 @@
+<?php if (count($this->comments) > 0) : ?>
+<div class="widget comments">
+	<h2 class="title"><?= $this->title ?></h2>
+	<div class="widget-content">
+		<ul>
+		<?php foreach ($this->comments as $comment) : ?>
+			<li>
+				<b><?= $comment['name'] ?> :</b>
+				<a href="entry/<?= $comment['item']->getSlug(); ?>#comment_<?= $comment['id']?>">
+					<?= $comment['comment'] ?>
+				</a>
+			</li>
+		<?php endforeach ?>
+		</ul>
+	</div>
+	<div class="clear"></div>
+</div>
+<?php endif ?>

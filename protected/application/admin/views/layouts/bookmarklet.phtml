@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<base href="<?= $this->base()->thisUrl() ?>/"/>
+	<title>storytlr | your life online</title>
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />	
+	<link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />
+	<?= $this->headLink() ?>	
+	<?= $this->headScript() ?>
+	<?= $this->headStyle() ?>
+</head>
+
+<body onload="<?= $this->onload?>" id="bookmarklet" >
+
+<div class="bookmarklet">
+	<div id="pagewrapper">
+				
+		<div id="contentwrapper">
+			
+			<div id="page">
+			
+				<div id="status_messages">
+					<?php if ($this->status_messages) : ?>
+					<ul>
+						<?php foreach ($this->status_messages as $message) echo "<li>$message</li>\r\n" ?>
+					</ul>
+					<?php endif ?>
+				</div>
+				
+				<div id="error_messages">
+					<?php if ($this->error_messages) : ?>
+					<ul>
+						<?php foreach ($this->error_messages as $message) echo "<li>$message</li>\r\n" ?>
+					</ul>
+					<?php endif ?>
+				</div>
+			
+				<div id="content" class="narrowcolumn">
+					<?= $this->layout()->content ?>
+				</div>
+			
+			</div>
+			
+		</div>
+		
+		<br class="fix" />
+		
+		<div id="footer">
+					
+			<br class="fix" />
+			
+			<div id="copyright">
+			<p>
+				Web site powered by <a href="http://storytlr.googlecode.com">storytlr</a>, version <?php echo STORYTLR_VERSION ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+			</p>
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+</body>
+
+</html>		
+	

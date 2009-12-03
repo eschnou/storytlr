@@ -1,0 +1,21 @@
+<?php $item = $this->item->toArray(); ?>
+
+<?php 
+	if ($item['type'] == 'favorite') {
+		$title = "Liked the video - <a href='{$item['url']}' target='_blank'>{$item['title']}</a>";
+	} else {
+		$title = "{$item['title']}";
+	}
+?>
+<div class="vimeo">
+	<div  class="content-wrapper">
+		<div  class="content">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	</div>
+	<div  class="video">
+		If you don't see the video, watch it <a href="<?= $this->item->getLink(); ?>">here</a>.	
+		<embed src="http://vimeo.com/moogaloop.swf?clip_id=<?= $item['clip_id']?>&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300">
+		</embed>
+	</div>
+</div>

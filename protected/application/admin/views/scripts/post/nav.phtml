@@ -1,0 +1,27 @@
+<?php 
+	$url = "admin/post/%s";
+	
+	if ($this->bookmarklet) {
+		$url = $url . "?bookmarklet=true&s={$this->selection}&t={$this->title}&u={$this->url}";
+	}
+?>
+
+<div class="tabMenu">
+	<table class="tabMenu" cellspacing="0">
+		<tr>
+			<td class="spacer">&nbsp;</td>
+			<td <? if ($this->tab == 'status') 	echo 'class="active"' ?> ><a href="<?= sprintf($url, 'status');?>">Status</a></td>
+			<td class="spacer">&nbsp;</td>
+			<td <? if ($this->tab == 'blog')  	echo 'class="active"' ?> ><a href="<?= sprintf($url, 'blog');?>">Blog</a></td>
+			<td class="spacer">&nbsp;</td>
+			<td <? if ($this->tab == 'link')  	echo 'class="active"' ?> ><a href="<?= sprintf($url, 'link');?>">Link</a></td>
+			<td class="spacer">&nbsp;</td>
+			<td <? if ($this->tab == 'image') 	echo 'class="active"' ?> ><a href="<?= sprintf($url, 'image');?>">Picture</a></td>
+			<td class="spacer">&nbsp;</td>
+			<td <? if ($this->tab == 'audio')   echo 'class="active"' ?> ><a href="<?= sprintf($url, 'audio');?>">Audio</a></td>
+			<td class="spacer">&nbsp;</td>
+			<td <? if ($this->tab == 'video')   echo 'class="active"' ?> ><a href="<?= sprintf($url, 'video');?>">Video</a></td>
+			<td class="last">&nbsp;</td>
+		</tr>
+	</table>
+</div>

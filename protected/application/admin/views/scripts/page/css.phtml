@@ -1,0 +1,42 @@
+<h1>Create your own style</h1>
+<h2>Introduction</h2>
+<p>
+There are many different approaches to define html and Cascading Style Sheets or CSS. Our choices have often been based on achieving consistent behaviour across the following browsers: Internet Explorer 5.5 / 6.0, Internet Explorer 7.0, Firefox 2, Firefox 3 and Safari.
+In some cases we have reverted to 'old techniques' (like using tables for tabs instead of list items) to avoid the use of many CSS hacks and get good font scaling behavior. We hope you can achieve what you want with our design choices. If not, please let us know. 
+</p>
+<h2>Storytlr uses different stylesheets</h2>
+We have created two different stylesheets for the contents of the pages and the theme itelf. This way you can easily modify the theme without having to deal with the content part (this is a more tedious job). Each theme uses a content stylesheet that you can import in the Full control theme (see below).<br/><br>
+<strong>Please note!</strong> The stories have a separate stylesheet that is currently <strong>not</strong> customisable.
+
+<h2>How to achieve certain goals</h2>
+If you are not a CSS guru yet, maybe these tips can help to get you started with a few basic customisations. If you want to learn more we suggest you have a look at the <a href="http://www.webmonkey.com/tutorial/Mulders_Stylesheets_Tutorial" target="_blank">CSS tutorial of Web Monkey</a>.
+<h3>Hide the title</h3>
+<code>h1.title {
+	display: none;
+}
+</code>
+
+<h3>Hide the description</h3>
+<code>div.description { display: none; }
+</code>
+<h3>Hide header image</h3>
+<code>div#header-wrapper { background-image: none; }
+</code>
+<h3>Change the width of the page content container</h3>
+Use your desired width in pixels.<br/>
+<code>div#page #left-column { width: 530px; }
+</code>
+<h3>Change the width of the tab menu</h3>
+Use your desired width in pixels. Please note that the number of displayed tabs is determined by the theme, the rest will be available in a popup. The Full Control theme displays 8 tabs.<br/>
+<code>
+// The width of the complete menu<br/>
+div.tabMenu, div.tabMenu table.tabMenu{ width: 500px; }<br/>
+<br/>
+// The width of the menu-items, if text does not fit it will become bigger<br/>
+table.tabMenu td.inactive, table.tabMenu td.active { width: 70px; }
+</code>
+<h3>Use default content container stylesheet</h3>
+This is only relevant in case you use the Full control theme.
+<code>@import "../../style/public.css"; 
+</code>
+<br/>

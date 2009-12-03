@@ -1,0 +1,23 @@
+<h1>Tools</h1>
+<?= $this->partial("partials/toolmenu.phtml", array('tab' => 'backup'));?>
+
+<h3>Backup your data</h3>
+<?php if (count($this->sources) > 0) : ?>
+<p>
+You are importing data from <?= count($this->sources) ?> sources. You can backup all items
+on your system using the links below. At this stage, you can only download the text data, but in the future
+we will enable you to also download binary files suchs as your Youtube videos or Flickr photos.
+</p>
+
+<div id="sources">
+	<table>
+		<?= $this->partialLoop('backup/partials/source.phtml', $this->sources); ?>
+	</table>
+</div>
+
+<?php else : ?>
+<p>
+You don't have any data source configured yet. As soon as you will start <a href="services/">importing</a>
+your data into storytlr, you will be able to back it up from here.
+</p>
+<?php endif ?>

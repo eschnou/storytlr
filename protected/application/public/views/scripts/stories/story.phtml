@@ -1,0 +1,47 @@
+<?php $id = $this->item['id']; ?>
+
+<div class='item_wrapper' id='item_wrapper_<?= $id ?>'>
+	<div class='item_actions'>		
+				<span id='share_actions_<?= $id ?>' <?php if($this->item['is_hidden']) : ?>style='display:none'<?php endif ?>>
+					<a class="addthis" href="javascript:onAddthisClick('<?= $this->base()->thisUrl()?>/story/<?= $this->item["permalink"]?>', '<?= $this->item["title"]?>')">
+						<img src="images/addthis.gif" width="16" height="16" border="0" alt="" class="addthis"/>
+					</a>
+					<a class="embed" id="toggle_show_embed_a_<?= $id ?>" href='javascript:toggle_show_embed(<?= $id ?>);' title="Embed and permalink"><img id="toggle_show_embed_img_<?= $id ?>" src="images/39.png" /></a>
+				</span>
+			<?php if($this->admin) : ?>
+				<a id="toggle_show_item_a_<?= $id ?>" href='javascript:toggle_show_item(<?= $id ?>);' title="<?php if($this->item['is_hidden']) echo "Make public"; else echo "Make private"; ?>"><img id="toggle_show_item_img_<?= $id ?>" src="images/<?php if($this->item['is_hidden']) echo "lock_open"; else echo "lock"; ?>.png" /></a>
+				<a href='javascript:delete_item(<?= $id ?>);' title="Delete"><img src="images/01.png" /></a>
+				<a href="story/edit/id/<?= $this->item['id']?>" title="Edit"><img src="images/18.png" /></a>
+			<?php endif ?>
+	</div>
+	
+	<div class='<?php if($this->item['is_hidden']) : ?> hidden <?php else : ?> item <?php endif ?>' id='item_<?= $id ?>'>
+		<div class='item_content'>
+			
+			<div class='thumbnail'>
+				<?php if ($this->item['thumbnail']) : ?>
+					<img src="thumbnail/<?= $this->item['thumbnail'] ?>">
+				<?php else : ?>
+					<img src="images/book50.jpg">
+				<?php endif ?>
+			</div>
+			<div class='title'>
+				<a href="story/<?= $this->item["permalink"]?>"><?= $this->item['title'] ?></a>
+			</div>
+			<div class='subtitle'>
+				<?= $this->item['subtitle'] ?>
+			</div>
+			<div class='date'>
+				 <?php $date_from = date("F j, Y", $this->item['date_from']);
+					  $date_to 	 = date("F j, Y", $this->item['date_to']); ?>
+				<?= $date_from ?> to <?= $date_to ?>
+			</div>
+	
+		</div>
+	</div>
+</div>
+
+<div class="story_embed" id="story_embed_<?= $id ?>" style="display:none">
+	<div class="label">Permalink:</div><div class="field"><input type="text" id='permalink_<?= $id ?>' value="<?= $this->base()->thisUrl()?>/story/<?= $this->item["permalink"]?>" /></div><br/>
+	<div class="label">Embed on your blog or any webpage:</div><div class="field"><input type="text" id='embed_<?= $id ?>' value="&lt;script src='<?= $this->base()->thisUrl()?>/embed/story.js?id=<?= $id ?>' type='text/javascript' /&gt;&lt;/script&gt" /></div>
+</div>

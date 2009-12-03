@@ -1,0 +1,158 @@
+<?php if (isset($this->items_blog) && count($this->items_blog) >0) : $item = $this->items_blog[0]; ?>
+<div class="homewidget" id="hw-posts">
+	<h2>Latest post</h2>
+	<div class="homewidgetcontent">
+		<h3><a href="<?= $this->base()->thisUrl()?>/entry/<?= $item->getSlug() ?>">
+			<?= $item->getTitle() ?>
+		</a></h3>
+		<div class="homewidgetdate"><?= date("F j, Y", $item->getTimestamp()) ?></div>
+		<div class="content">		
+		<?php
+			$body = strip_tags($item->getContent());
+		
+			if (strlen($body) > 500) {
+				$link = $this->base()->thisUrl() . "/entry/" . $item->getSlug();
+				$end  = "... <a href='$link'>read more</a>";
+				$body = mb_substr($body, 0, 500) . $end;
+			}
+			
+			echo $body;
+		?>
+		</div>
+	</div>
+	<div class="more">
+		<a href="/blog">All posts &raquo;</a>
+	</div>
+</div>
+<?php endif ?>
+
+<?php if (isset($this->items_image) && count($this->items_image) >0) :?>
+<div class="homewidget" id="hw-pictures">
+	<h2>Latest pictures</h2>
+	<div class="homewidgetcontent">
+	<div class="thumbcontainer">
+		<?php foreach($this->items_image as $item) : ?>
+		<div class="imagethumb">
+			<a title="<?= $this->escape($item->getTitle()); ?>" href="<?= $this->base()->thisUrl()?>/entry/<?= $item->getSlug() ?>"><img height="75" width="75" src="<?= $item->getImageUrl('thumbnail'); ?>"/></a>
+		</div>
+		<?php endforeach ?>
+		<br class="fix"/>
+	</div>
+	</div>
+	<div class="more">
+		<a href="/pictures">All pictures &raquo;</a>
+	</div>
+</div>
+<?php endif ?>
+
+<?php if (isset($this->items_video) && count($this->items_video) >0) :?>
+<div class="homewidget" id="hw-videos">
+	<h2>Latest videos</h2>
+	<div class="homewidgetcontent">
+		<div class="thumbcontainer">
+			<?php foreach($this->items_video as $item) : ?>		
+			<div class="imagethumb">
+				<a title="<?= $this->escape($item->getTitle()); ?>" href="<?= $this->base()->thisUrl()?>/entry/<?= $item->getSlug() ?>"><img height="75" width="75" src="<?= $item->getImageUrl('thumbnail'); ?>"/></a>
+			</div>
+			<?php endforeach ?>
+			<br class="fix"/>
+		</div>
+	</div>
+	<div class="more">
+		<a href="/videos">All videos &raquo;</a>
+	</div>
+</div>
+<?php endif ?>
+
+
+<?php if (isset($this->items_audio) && count($this->items_audio) >0) : ?>
+<div class="homewidget" id="hw-audio">
+	<h2>All my audio</h2>
+	<div class="homewidgetcontent">
+		<object height="200" width="200" data="flash/player_mp3_multi.swf" type="application/x-shockwave-flash">
+		     <param value="flash/player_mp3_multi.swf" name="movie"/>
+		     <param value="transparent" name="wmode"/>
+		     <param name="FlashVars" value="playlistrss=<?= $this->base()->thisUrl()?>/rss/types/audio/nopre/1/feed.xml&currentmp3color=a3c6fa&showvolume=1&buttonovercolor=eeeeee&height=200&width=200&sliderovercolor=EEEEEE&loadingcolor=a3c6fa" />
+		</object>
+	</div>
+</div>
+<?php endif ?>
+
+<?php if (isset($this->items_story) && count($this->items_story) >0) : $story = $this->items_story[0]; ?>
+<div class="homewidget" id="hw-stories">
+	<h2>Latest story</h2>
+	<div class="homewidgetcontent">	
+		<script src='embed/story.js?id=<?= $story['id']; ?>' type='text/javascript' /></script>
+	</div>
+	<div class="more">
+	<a href="/stories">All stories &raquo;</a>
+	</div>
+</div>
+<?php endif ?>
+
+<?php if (isset($this->items_status) && count($this->items_status) >0) : ?>
+<div class="homewidget" id="hw-status">
+	<h2>Latest status updates</h2>
+	<div class="homewidgetcontent">
+		<table>
+			<tbody>
+				<?php foreach($this->items_status as $item) : ?>		
+				<tr>
+					<td class="icon">
+						<a href="<?= $this->base()->thisUrl()?>/entry/<?= $item->getSlug() ?>">
+							<img src="images/<?= $item->getPrefix();?>.png"  width='16' height='16'/>
+						</a>
+					</td>
+					<td class="title">
+					<?php
+						$status  = strip_tags($item->getStatus());
+						$status	 = ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" target="_blank">\\1</a>',$status); // turn any URL’s into links
+						$status	 = ereg_replace("@([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'@<a href="http://twitter.com/\\1" target="_blank">\\1</a>\\2',$status); // add “@username” links
+						$status	 = ereg_replace("#([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'#<a href="/tag/\\1">\\1</a>\\2',$status); // add tag links	
+						echo $status;
+						?>
+					
+					</td>
+				</tr>
+				<?php endforeach ?>
+			</tbody>
+		</table>	
+	</div>
+	<div class="more">
+		<a href="/status">All updates &raquo;</a>
+	</div>
+</div>
+<?php endif ?>
+
+<?php if (isset($this->items_link) && count($this->items_link ) >0) : ?>
+<div class="homewidget" id="hw-links">
+	<h2>Latest links</h2>
+	<div class="homewidgetcontent">
+		<table>
+			<tbody>
+				<?php foreach($this->items_link as $item) : ?>
+				<tr>
+					<td class="icon">
+						<a href="<?= $this->base()->thisUrl()?>/entry/<?= $item->getSlug() ?>">
+							<img src="images/<?= $item->getPrefix();?>.png"  width='16' height='16'/>
+						</a>
+					</td>
+					<td class="title">
+						<a href="<?= $this->base()->thisUrl()?>/entry/<?= $item->getSlug() ?>">
+							<?= $item->getTitle(); ?>
+						</a>
+					</td>
+				</tr>
+				<?php endforeach ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="more">
+		<a href="/links">All links &raquo;</a>
+	</div>
+</div>
+<?php endif ?>
+
+
+
+<br class="fix" />

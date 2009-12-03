@@ -1,0 +1,18 @@
+<h1>Tools</h1>
+<?= $this->partial("partials/toolmenu.phtml", array('tab' => 'postemail'));?>
+
+<h3>Post by email</h3>
+<p>
+You can post to storytlr by email. Just configure your personal email below and anything you send to this address
+will be posted. Attachements such as images or mp3 are supported, <b>however they must be below 5MB in size</b>.
+</p>
+<img id = 'wait' src='images/wait30.gif' style='display:none;' />
+
+<div id='secret' <?php if (!$this->secret): ?>style="display:none"<?php endif ?>>
+You personal submit email is the following: <?= $this->username ?>.<?= $this->secret ?>@submit.storytlr.com
+(<a href="#" onClick="$('change_secret').show();$('secret').hide();return false">change</a>)
+</div>
+
+<div id='change_secret' <?php if ($this->secret): ?>style="display:none"<?php endif ?>>
+<?= $this->form ?>
+</div>

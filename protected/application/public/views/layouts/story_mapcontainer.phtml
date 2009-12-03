@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<?= $this->headTitle() ?>
+	<base href="<?= $this->base()->thisUrl(); ?>/" />
+	<?= $this->headLink() ?>	
+	<?= $this->headScript() ?>
+	<?= $this->headStyle() ?>
+	<style type="text/css" media="screen">
+		html, body, div, iframe { margin:0; padding:0; height:100%; width:100%;}
+   		iframe { height:100%; width:100%; border:none;}
+	</style>
+</head>
+	
+<body>
+<iframe width="100%" height="100%" scrolling="no" src="<?= $this->base()->serviceUrl(); ?>/storymap/view/id/<?= $this->story_id ?>?user=<?= $this->username ?>" frameborder=0></iframe>
+
+</body>
+</html>

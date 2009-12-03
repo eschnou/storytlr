@@ -1,0 +1,35 @@
+<?php if (count($this->stories) == 0) : ?>
+	<?php if ($this->admin) : ?>
+		<p>
+			No story yet ? Just <a href="admin/story">create</a> one now ! 
+		</p>
+	<?php else : ?>
+		<p>
+			We are sorry, <?= $this->username?> has not created any story yet.
+		</p>
+	<?php endif ?>
+<?php else : ?>
+
+	<div class="stories">
+		<?php foreach($this->stories as $story) : ?>
+			<?= $this->partial('stories/story.phtml', array('item' => $story, 'admin' => $this->admin)); ?>
+		<?php endforeach ?>
+	</div>
+	
+	<div class="bottom_nav">
+		<div class="pagination">
+			<?php if ($this->hasprevious) : ?>
+				<a class="section_links" rel="prev" href="<?= $this->base()->thisUrl()?>?page=<?= ($this->page - 1); ?>">&lt; Newer</a>
+			 <?php endif ?>
+			 <?php if ($this->hasnext) : ?>
+				<a class="section_links" rel="next" href="<?= $this->base()->thisUrl()?>?page=<?= ($this->page + 1) ?>">Older &gt;</a>
+			 <?php endif ?>
+		</div>
+	</div>
+	<?php if ($this->admin) : ?>
+		<p>
+			<a href="admin/story">Tell a new story</a>! 
+		</p>
+	<?php endif ?>
+
+<?php endif ?>

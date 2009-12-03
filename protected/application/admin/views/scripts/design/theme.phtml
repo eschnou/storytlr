@@ -1,0 +1,10 @@
+<div class='theme_preview'>
+	<b><?php if ($this->title) { echo $this->title; } else {echo $this->name;} ?></b>
+	<img id='theme_<?= $this->name ?>' class="theme" src="themes/<?= $this->name ?>/screenshot.png" onclick="onSelectTheme('<?= $this->name ?>');" />
+	<?php if ($this->author) : ?>
+		<div class="theme_author">by <?= $this->author ?></div>
+	<?php endif ?>
+	<?php if ($this->description) : ?>
+		<div class="theme_description"><?= $this->description ?></div>
+	<?php endif ?>	
+</div>

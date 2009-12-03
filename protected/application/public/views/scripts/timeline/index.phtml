@@ -1,0 +1,75 @@
+<?php if ($this->archive) : ?>
+	<div id="breadcrumb">
+		Lifestream archive for <?= $this->month ?> <?= $this->year ?>
+	</div>
+<?php elseif ($this->search) : ?>
+	<div id="breadcrumb">
+		Search results for <em><?= $this->search ?></em>
+	</div>
+<?php elseif ($this->selection) : ?>
+	<div id="breadcrumb">
+		Recently updated items
+	</div>
+<?php elseif ($this->tag) : ?>
+	<div id="breadcrumb">
+		Search result for tag <em><?= $this->tag ?></em>
+	</div>
+<?php elseif ($this->type) : ?>
+	<div id="breadcrumb">
+		All <?= $this->type ?>
+	</div>	
+<?php endif ?>	
+
+<?php if (count($this->items) == 0) : ?>
+	<?php if ($this->archive) : ?>
+	<?= ucfirst($this->username); ?> did not post any data on these dates.
+	<?php elseif ($this->search) : ?>
+	Did not find any match for the search <em><?= $this->search?></em>.
+	<?php elseif ($this->selection) : ?>
+	Ooops, something went wrong. We don't have any items to show for this update.	
+	<?php else : ?>
+	We are sorry, <?= $this->username?> has not yet any data to display on his lifestream.
+	<?php endif ?>
+<?php else :
+$date = "";
+foreach($this->items as $item) { 
+
+	$item_date = date("F j, Y", $item->getTimestamp());
+	
+	if ($date != $item_date) {
+		$date = $item_date;
+		echo "<div class='date' id='".date("YMj", $item->getTimestamp())."'>$date</div>";
+	}
+?>
+
+	<?= $this->partial('timeline/item.phtml', array('item' => $item, 'admin' => $this->admin, 'model' => $this->models[$item->getSource()], 'disqus' => $this->disqus, 'googlefc' => $this->googlefc)); ?>
+		
+<?php if (!$this->disqus && !$this->googlefc) : ?>
+	<div class='item_comments' id='comments_<?= $item->getSource() . '_' . $item->getID() ?>' 	<?php if ($item->getCommentCount() == 0) : ?>style='display:none'<?php endif ?>>
+	<?php if ($item->getCommentCount() > 0) : ?>
+		<?= $this->action('index', 'comments', 'default', array('source' => $item->getSource(), 'item' => $item->getID())); ?>
+	<?php endif ?>	
+	</div>	
+	<div class='item_add_comment' id='add_comment_<?= $item->getSource() . '_' . $item->getID() ?>' style='display: none;'>
+	</div>
+<?php endif ?>
+		
+<?php }	?>
+
+<?php if($this->disqus) : ?>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script type="text/javascript" src="http://disqus.com/forums/<?= $this->disqus ?>/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+<?php endif ?>
+<?php endif ?>

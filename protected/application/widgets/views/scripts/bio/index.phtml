@@ -1,0 +1,18 @@
+<div class="widget bio">
+	<h2 class="title"><?= $this->title ?></h2>
+	<div class="widget-content">
+		<div id="profile">
+			<div id="avatar">
+				<?php if ($this->avatar) : ?>
+				<img src="thumbnail/<?= $this->avatar ?>" alt="<?= $this->username ?>" width="72" height="72" />
+				<?php endif ?>
+				<div id="name"><?= $this->first_name?> <?= $this->last_name?></div>
+				<div id="location"><?= $this->location ?></div>
+			</div>
+			<div id="details">
+				<div id="bio"><?= $this->bio ?></div>
+			</div>
+			<br class="fix" />
+		</div>
+	</div>
+</div>

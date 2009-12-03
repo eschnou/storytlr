@@ -1,0 +1,33 @@
+<?php $item = $this->item->toArray(); ?>
+
+<div class="seesmic">
+	<div  class="title"><?= $item['title'] ?></div>
+	<div id="container_seesmic_<?= $item['id']; ?>" class="video">
+		If you don't see the video, watch it <a href="<?= $this->item->getLink(); ?>">here</a>.
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+   				codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+				width="300" height="250" id="flash_player_<?= $item['id']; ?>" align="middle">
+		<param name="movie" value="flash/mediaplayer.swf" />
+		<param name="wmode" value="transparent" />
+		<param name="allowfullscreen" value="true" />
+		<param name="flashvars" value="file=<?= $item['url_flv']; ?>&width=300&height=250" />
+		<embed src="flash/mediaplayer.swf" 
+				width="300"
+   				height="250" 
+   				name="flash_player_<?= $item['id']; ?>" 
+   				align="middle" 
+   				allowfullscreen="true"
+   				wmode="transparent"
+   				flashvars="file=<?= $item['url_flv'];?>&width=300&height=250"
+			   	type="application/x-shockwave-flash" 
+			   	pluginspage="http://www.adobe.com/go/getflashplayer" 
+				/>
+		</object>		
+	</div>
+	
+	<div  class="content-wrapper">
+		<div  class="content">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	</div>
+</div>

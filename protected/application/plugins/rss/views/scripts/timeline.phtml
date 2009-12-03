@@ -1,0 +1,13 @@
+<?php $item = $this->item->toArray(); 
+	  $hide_content = $this->model->getProperty('hide_content');
+?>
+
+<div class="rss">
+	<?php if ($item['content']) : ?>
+		<?php if ($hide_content) : ?><img  class='toggle_button' src='images/button_show.png' title="Show post" onClick="toggle_button(this, 'rss_<?= $item['id'] ?>', 'Hide post', 'Show post');" /><?php endif ?>
+	<?php endif ?>
+	<div  class="title"><a href="<?= $item['link'] ?>" target="_blank"><?= $item['title'] ?></a></div>
+	<?php if ($item['content']) : ?>	
+		<div  class="content" id="rss_<?= $item['id'] ?>" <?php if ($hide_content) {echo "style='display: none;'";}?> ><?= $item['content'] ?></div>
+	<?php endif ?>
+</div>

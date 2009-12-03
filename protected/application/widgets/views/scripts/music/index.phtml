@@ -1,0 +1,13 @@
+<div class="widget music">
+	<h2 class="title"><?= $this->title ?></h2>
+	<div class="widget-content">
+		<div id="profile">
+				<object height="200" width="200" data="flash/player_mp3_multi.swf" type="application/x-shockwave-flash">
+				     <param value="flash/player_mp3_multi.swf" name="movie"/>
+				     <param value="transparent" name="wmode"/>
+				     <param name="FlashVars" value="playlistrss=<?= $this->base()->thisUrl()?>/rss/types/audio/nopre/1/feed.xml&currentmp3color=a3c6fa&showvolume=1&buttonovercolor=eeeeee&height=200&width=200&sliderovercolor=EEEEEE&loadingcolor=a3c6fa" />
+				</object>
+			<br class="fix" />
+		</div>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+<?php $item = $this->item->toArray(); ?>
+
+<div class="tumblr">
+<?php if ($item['type'] == 'regular') :?>
+<div class="regular">
+	<div  class="title"><?= $item['regular_title'] ?></div>
+	<div  class="content"><?= $item['regular_body'] ?></div>
+</div>
+<?php elseif ($item['type'] == 'quote') :?>
+<div class="quote">
+	<div  class="title"><?= $item['quote_text'] ?></div>
+	<div  class="content"><?= $item['quote_source'] ?></div>
+</div>
+<?php elseif ($item['type'] == 'link') :?>
+<div class="tumblr_link">
+	<div  class="title"><a href="<?= $item['link_url'] ?>"><?= strip_tags($item['link_text']); ?></a></div>
+	<div  class="content"><?= $item['link_description'] ?></div>
+</div>
+<?php elseif ($item['type'] == 'conversation') :?>
+<div class="conversation">
+	<div  class="title"><?= $item['conversation_title'] ?></div>
+	<div  class="content"><?= $item['conversation_text'] ?></div>
+</div>
+<?php elseif ($item['type'] == 'photo') :?>
+<div class="photo">
+	<div  class="description"><?= $item['photo_note'] ?></div>
+	<div  class="content"><a href="<?= $item['photo_url']; ?>" title="<?= strip_tags($item['photo_caption']); ?>" rel="lightbox[set]" ><img src='<?= $item['photo_url'] ?>'></a></div>
+</div>					
+<?php elseif ($item['type'] == 'video') :?>
+<div class="video">
+	<div  class="title"><?= strip_tags($item['video_caption']); ?></div>
+	<div  class="content"><?= $item['video_player'] ?></div>
+	<div  class="description"><?= $item['video_note'] ?></div>
+</div>	
+<?php elseif ($item['type'] == 'audio') :?>
+<div class="audio">
+	<div  class="title"><?= strip_tags($item['audio_caption']); ?></div>
+	<div  class="content"><?= $item['audio_player'] ?></div>
+	<div  class="description"><?= $item['audio_note'] ?></div>	
+</div>	
+<?php endif ?>		
+</div>									

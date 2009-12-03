@@ -1,0 +1,303 @@
+/*  
+	Storytlr Clouds theme
+	---------------------------------------
+	Please note! The lifestream and stories contents are in a separate stylesheet
+*/
+
+@import "../../style/public.css"; 
+
+/*  Overwrite classes in public.css
+	---------------------------------------
+*/
+
+div.item div.content img {
+	max-width: 620px;  	
+}
+
+div.item div.note img {
+	max-width: 550px; 	
+}
+
+div.tabMenu {
+	margin: 20px 0px;
+	width: 700px;	
+}
+
+div.tabMenu table.tabMenu{
+	width: 700px;	
+}
+
+div#content {
+	margin: 0;	
+}
+
+div.stories #content div.item_wrapper {
+	width:  690px;
+	margin: 10px;
+	clear: both;
+	height: 60px;
+}
+
+/*  General declarations
+	---------------------------------------
+*/
+
+body {
+	background: transparent url(images/background.gif) center repeat-y; 
+	margin:0;
+	padding: 0;
+	color:#333333;
+	font:x-small Verdana;
+	font-size/* */:/**/small;
+	font-size: /**/small;
+	text-align: center;
+	background-color: #f4f7fb;
+}
+
+h2 {
+	color:#000000;
+	font-family:Verdana;
+	font-size:78%;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	letter-spacing:0.2em;
+	line-height:1.4em;
+	margin:1.5em 0pt 0.75em;
+	text-transform:uppercase;
+}
+
+a {
+	color:#00aaff;
+	text-decoration:none;
+}
+a:link {
+	text-decoration:none;
+}
+a:visited {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+a img {
+	border-width:0;
+}
+
+/*  Main layout
+	---------------------------------------
+*/
+
+#pagewrapper {
+	margin: 0;
+	padding: 0;
+	background: transparent url(images/bg_body3.gif) repeat-x;
+	background-position: 0px -55px;
+}
+
+#page {
+	width: 970px;
+	margin: 0px auto;
+	padding: 0;
+	text-align:left;
+	font: normal normal 100% Verdana, Serif;
+	background: transparent url(images/bg_page.gif) no-repeat;
+	background-position: 0px 20px;
+	position: relative;
+}
+
+#left-column {
+	margin: 0 10px 20px 10px;
+	padding: 0;
+}
+
+#left-column-wrapper {
+	float:	left;
+	width:  722px;
+	margin: 0 0 0 13px;
+	padding: 0;
+	background-color: white;
+}
+
+/*  Header
+	---------------------------------------
+*/
+
+#header-wrapper {
+	height: 260px;
+	background: url(images/banner.jpg) no-repeat;
+	background-position: 23px 120px;
+	width: 725px;
+	position: relative;
+}
+
+#header div.titlewrapper {
+	margin: 10px 0 0 0;
+}
+
+#header {
+	padding-top: 30px;	
+}
+
+#header h1 {
+	font-family:Georgia,"Times New Roman",Times,serif;
+	font-size:2.5em;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	letter-spacing:-1px;
+	line-height:normal;
+	padding: 5px 25px;
+	margin: 0;
+	color:#000;
+}
+
+#header .description {
+	margin:0 0 0 25px;
+	text-transform:uppercase;
+	letter-spacing:.2em;
+	line-height: 1.4em;
+	font: 12px 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+	color: #000000;
+}
+
+div#login div {
+	padding: 15px 5px 0 0px;
+	float: right;
+}
+
+/*  Sidebar
+	-------------------------------
+*/
+
+#right_column {
+	float:right;
+	overflow:hidden;
+	padding:0em 0.5em;
+	width:200px;
+	margin: 45px 15px 0 0;
+	position: absolute;
+	top: 120px;
+	left: 750px;
+	background-color: transparent;
+	z-index: 100; 
+}
+
+.sidebar {
+	color: #555555;
+	line-height: 1.5em;
+}
+
+.sidebar ul {
+	list-style:none;
+	margin:0 0 0;
+	padding:0 0 0;
+}
+
+.sidebar li {
+	margin:0;
+	padding-top:0;
+	padding-right:0;
+	padding-bottom:.25em;
+	padding-left:15px;
+	text-indent:-15px;
+	line-height:1.5em;
+}
+
+.sidebar .widget {
+	margin:0 0 1em;
+	padding:0 0 0.5em;
+}
+
+.widget h2 {
+	color: #26374f;
+}
+
+.widget #formSearch {
+	margin: 0;
+}
+
+.widget #formSearch input#search{
+	width: 100px;
+}
+
+.widget #formSearch input#searchsubmit{
+	width: 40px;
+}
+
+#profile {
+	position: relative;
+	clear: both;
+}
+
+#profile #avatar{
+}
+
+#profile #avatar img{
+	margin-right: 10px;
+}
+
+#profile img{
+	float: left;
+}
+
+#profile #alias {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#profile #bio {
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+}
+
+#profile #location {
+	font-weight: bold;
+}
+
+br.fix {
+	clear: both;
+}
+
+/*  Accordion
+	-------------------------------
+*/
+
+.accordion_toggle {
+	background:#EEE;
+	border-bottom:1px solid #DDD;
+	cursor:pointer;
+	display:block;
+	font-size:12px;
+	font-weight:normal;
+	height:20px;
+	line-height:20px;
+	margin:0;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+	padding:0 5px;
+	text-decoration:none;	
+}
+
+.accordion_toggle_active {
+	background:#444;
+	color:#FFFFFF;
+}
+
+.accordion_content {
+	background-color:#FFFFFF;
+	color:#444444;
+	overflow:hidden;
+	font-size: 12px;
+	padding: 5px 5px 0px 5px;
+}
+
+#accordion_archive {
+	margin-bottom: 5px;
+	width: 165px;
+}

@@ -1,0 +1,66 @@
+<h1>Configure</h1>
+<p>
+You can configure your homepage below.
+</p>
+
+<?= $this->partial("partials/tabmenu.phtml", array('tab' => 'sns'));?>
+
+<img id = 'wait' src='images/wait30.gif' style='display:none;' />
+
+<h3>Twitter integration</h3>
+<p>
+Storytlr can update your Twitter status when new items appear on your stream, or when you post
+something directly to Storytlr.
+</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td class='label'>
+				Account
+			</td>
+			<td class='element'>
+				<?php if (!$this->twitter_auth) :?>
+					You must first login into Twitter.
+					<div id='twitter_login_form'>
+						<form id="<?= $this->escape($this->twitter_login_form->getName()) ?>"" action="<?= $this->escape($this->twitter_login_form->getAction()) ?>" method="<?= $this->escape($this->twitter_login_form->getMethod()) ?>">
+							<table>
+								<tr><td>Username:</td><td><?= $this->twitter_login_form->username ?></td></tr>
+								<tr><td>Password:</td><td><?= $this->twitter_login_form->password ?></td></tr>
+								<tr><td></td><td><?= $this->twitter_login_form->login ?></td></tr>
+							</table>
+						</form>
+					</div>
+				<?php else : ?>
+					<div id='twitter_account'>
+						You are logged in as <a href="http://twitter.com/<?= $this->twitter_user ?>"><?= $this->twitter_user ?></a> on Twitter (<a href="/admin/sns/logout/service/twitter">logout</a>)
+				<?php endif ?>
+			</td>
+		</tr>	
+	<tbody>
+</table>		
+		
+<?php if ($this->twitter_auth) : ?>
+<form id="<?= $this->escape($this->twitter_config_form->getName()) ?>"" action="<?= $this->escape($this->twitter_config_form->getAction()) ?>" method="<?= $this->escape($this->twitter_config_form->getMethod()) ?>">
+	<table>
+		<tbody>
+			<tr>
+				<td class='label'>
+					Services
+				</td>
+				<td>
+					Post entries from the following services:<br />
+					<?= $this->twitter_config_form->twitter_services ?>
+				</td>
+			</tr>
+			<tr>
+			<td class='label'>
+				</td>
+				<td class='element'>
+					<?= $this->twitter_config_form->save ?>
+				</td>
+			</tr>			
+		</tbody>
+	</table>
+</form>
+<?php endif ?>		

@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>	
+	<?= $this->headMeta() ?>
+	<base href="<?= $this->base()->thisUrl(); ?>/" />	
+	<?= $this->headTitle() ?>
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />		
+	<?= $this->headLink() ?>	
+	<?= $this->headStyle() ?>
+	
+	<?php if ($this->has_colors) : ?>
+	<style> 
+    <!--
+		/* title */
+		<?php if($this->colors['color_title']) : ?>
+			#header h1.title{ color: #<?= $this->colors['color_title'] ?>; }
+		<?php endif ?>
+		
+		/* subtitle */
+		<?php if($this->colors['color_subtitle']) : ?>
+			#header div.description { color: #<?= $this->colors['color_subtitle'] ?>; }
+		<?php endif ?>
+				
+		/* sidebar border */
+		<?php if($this->colors['color_sidebar_border']) : ?>
+			div#right_column { border: 1px solid #<?= $this->colors['color_sidebar_border'] ?>; }
+		<?php endif ?>
+				
+		/* sidebar background */
+		<?php if($this->colors['color_background']) : ?>
+			div#right_column { background-color: #<?= $this->colors['color_background'] ?>; }
+			.sidebar .widget { border: none; background-color: #<?= $this->colors['color_background'] ?>}
+		<?php endif ?>
+				
+		/* link */
+		<?php if($this->colors['color_link']) : ?>
+			a { color: #<?= $this->colors['color_link'] ?>; }
+		<?php endif ?>
+				
+		/* sidebar text */
+		<?php if($this->colors['color_sidebar_text']) : ?>
+			div#right_column li { color: #<?= $this->colors['color_sidebar_text'] ?>;}
+			div#right_column { color: #<?= $this->colors['color_sidebar_text'] ?>;}
+		<?php endif ?>
+		
+		/* sidebar header */
+		<?php if($this->colors['color_sidebar_header']) : ?>
+			div#right_column h2.title { color: #<?= $this->colors['color_sidebar_header'] ?>; }
+		<?php endif ?>				
+	-->
+   </style>
+   <?php endif ?>	
+   		
+   <?php if ($this->css_enabled) : ?>
+   <style>
+   		<?= $this->css_content ?>
+   </style>
+   <?php endif ?>
+	<style>
+	<?php if($this->background_image) :?>
+			body {
+				background-image: url(image/original/<?= $this->background_image ?>);
+			}
+	<?php endif ?>
+	<?php if($this->header_image) :?>
+			#header-wrapper {
+				background-image: url(image/original/<?= $this->header_image ?>);
+			}
+	<?php endif ?>
+	</style>
+</head>
+	
+<body>
+
+<?php if($this->admin) : ?>
+<div id="adminbar">
+	<div id="loginStatus">
+			<span class="signedin">Signed in as <strong><?= $this->application()->username() ?></strong></span> <a href='admin/auth/logout?target=<?= urlencode($this->base()->thisUrl())?>' 	title='Sign out' 	onfocus='this.blur()' <?php if ($this->section == "logout") {?> class="current" <?php }?>>Sign out</a>	
+	</div>
+	<div id="navigationMenu">
+		<ul>				
+			<li><a href='<?= $this->base()->serviceUrl() ?>/admin/post/' 		title='Post'		onfocus='this.blur()' <?php if ($this->section == "post") {?> class="current" <?php }?>>Post</a></li>							
+			<li><a href='<?= $this->base()->serviceUrl() ?>/admin/services/' 	title='Import'	 	onfocus='this.blur()' <?php if ($this->section == "services") {?> class="current" <?php }?>>Sources</a></li>
+			<li><a href='<?= $this->base()->serviceUrl() ?>/admin/story/' 		title='Storytell'	onfocus='this.blur()' <?php if ($this->section == "mashup") {?> class="current" <?php }?>>Storytell</a></li>
+			<li><a href='<?= $this->base()->serviceUrl() ?>/admin/share/' 		title='Tools'	 	onfocus='this.blur()' <?php if ($this->section == "share") {?> class="current" <?php }?>>Tools</a></li>
+			<li><a href='<?= $this->base()->serviceUrl() ?>/admin/design/' 		title='Configure' 	onfocus='this.blur()' <?php if ($this->section == "design") {?> class="current" <?php }?>>Configure</a></li>										
+		</ul>
+	</div>
+</div>
+<?php elseif ($this->application()->authenticated()) : ?>
+<div id="adminbar">
+	<div id="loginStatus">
+			<span class="signedin">Signed in as <strong><?= $this->application()->username() ?></strong></span> <a href='admin/auth/logout?target=<?= urlencode($this->base()->thisUrl()) ?>' 	title='Sign out' 	onfocus='this.blur()' <?php if ($this->section == "logout") {?> class="current" <?php }?>>Sign out</a>	
+	</div>
+	<div id="navigationMenu">
+		<ul>
+			<li><a href='http://<?= $this->application()->username() ?>.<?= $this->base()->host() ?>' 	title='My Lifestream'	 	onfocus='this.blur()'>My Lifestream</a></li>												
+		</ul>
+	</div>
+</div>
+<?php else : ?>
+<div id="adminbar" style="display:none;">
+	<div>
+	<form id="formLogin" enctype="application/x-www-form-urlencoded" action="<?= $this->base()->serviceUrl() ?>/admin/auth/login" method="post">
+	Username: <input id="username" name="username" size="17" maxlength="16" tabindex="101" /> 
+	Password: <input id="password" name="password" size="17" maxlength="16" type="password" tabindex="102" />
+	<input type="checkbox" id="remember" name="remember" class="remember" /> Remember me 
+	<input type="hidden" name="target" value="user_page" id="target" />
+	<input type="submit" name="login" id="login" value="Sign in" />
+	</form>
+	</div>
+</div>
+<?php endif ?>
+
+<div id="pagewrapper">
+	<div class="<?= $this->page_class ?>" id="page">
+	
+	<div class='overlay_frame_wrapper' id='overlay_frame_wrapper' style="display:none;">
+		<div class='overlay_frame_content'>
+			<iframe id='overlay_frame' width=400 height=400></iframe>
+		</div>
+	</div>
+		
+	<div id="header-wrapper">
+		<div id="header">
+			<?php if ($this->application()->hasRole('guest')) : ?>
+			<div id="login">
+				<div>
+					<a href="javascript://" onclick="onLoginClick(); return false;" title="Owner login">
+						<img src="images/33.png" />
+					</a>
+				</div>
+			</div>
+			<?php endif ?>
+			<div class="titlewrapper">
+				<h1 class="title">
+				<?= $this->title ?>
+				</h1>
+			</div>
+			<div class="descriptionwrapper">
+				<div class="description"><?= $this->subtitle ?></div>
+			</div>
+		</div>
+	</div>
+		
+	<?php if (count($this->widgets) > 0) : ?> 
+	<div id="right_column">
+		<div class='sidebar'>
+		<?php foreach ($this->widgets as $widget) {
+			echo $this->action('index', $widget['prefix'], 'widgets', array('id' => $widget['id']));
+		} ?>
+		</div>
+	</div>
+	<?php endif ?>
+	
+	<div id="left-column-wrapper">
+		<div id="left-column">
+	
+		<?php if(count($this->pages)>1) : ?>
+		<div class="tabMenu">
+			<table class="tabMenu" cellspacing="0">
+				<tr>
+
+					<?php for ($i=0; $i < min($this->theme_data['tabs'], count($this->pages)); $i++) {
+						$page = $this->pages[$i];
+					?>
+						<td class="spacer">&nbsp;</td>
+						<td <? if ($this->page_id == $page['id']) {echo 'class="active"';} else {echo 'class="inactive"';} ?> onClick="document.location='/home?tab=<?= $i ?>';return false;"><a href="/home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></td>
+					<?php } ?>
+					<?php if (count($this->pages) > $this->theme_data['tabs']) {
+					?>
+						<td class="spacer">&nbsp;</td>
+						<td class="arrow"><a href="#" onClick="$('popuptab').toggle();$('popuptab').toggleClassName('unselected');return false;" onfocus="this.blur()"><img src="images/arrow.png" /></a>
+							<div id='popuptab' style="display:none;">
+								<div><ul>
+									<?php for ($i= $this->theme_data['tabs']; $i<count($this->pages); $i++) {
+										$page = $this->pages[$i];
+									?>
+										<li><a href="/home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></li>
+									<?php } ?>
+								</ul></div>
+							</div>
+						</td>
+					<?php } ?>
+					<td class="last">&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<?php endif ?>
+		
+		<div id="status_messages">
+			<?php if ($this->status_messages) : ?>
+			<ul>
+				<?php foreach ($this->status_messages as $message) echo "<li>$message</li>\r\n" ?>
+			</ul>
+			<?php endif ?>
+		</div>
+		
+		<div id="error_messages">
+			<?php if ($this->error_messages) : ?>
+			<ul>
+				<?php foreach ($this->error_messages as $message) echo "<li>$message</li>\r\n" ?>
+			</ul>
+			<?php endif ?>
+		</div>		
+
+		<div id="content">
+		
+			<?php if ($this->tab >= $this->theme_data['tabs']) : ?>
+				<div id="breadcrumb">
+					<em><?= $this->page_title ?></em>
+				</div>
+			<?php endif ?>
+		
+			<?= $this->layout()->content ?>
+		</div>
+		
+		<div class="bottom_nav">
+			<div class="pagination">
+					<?php if ($this->hasprevious) : ?>
+						<a class="section_links" rel="prev" href="<?= $this->base()->thisUrl()?>/<?= $this->previouslink ?>">&lt; Previous</a>
+					 <?php endif ?>
+					 <?php if ($this->hasnext) : ?>
+						<a class="section_links" rel="next" href="<?= $this->base()->thisUrl()?>/<?= $this->nextlink ?>">Next &gt;</a>
+					 <?php endif ?>
+			</div>
+		</div>
+		
+		</div>
+	</div>
+	
+	<br class="fix"/>
+	
+</div>
+
+<div id="footer-wrapper">
+	<div id="footer">
+	</div>
+</div>
+
+<br class="fix" />
+		
+<div id="copyright">
+<p>
+	Web site powered by <a href="http://storytlr.googlecode.com">storytlr</a>, version <?php echo STORYTLR_VERSION ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+</p>	
+</div>
+	
+</div>
+
+<?php if ($this->footer) echo $this->footer; ?>
+
+<!-- Include required javascript -->
+<?= $this->headScript() ?>
+<!-- End include required javascript -->
+
+<?php if ($this->googlefc) : ?>
+<!-- Include the Google Friend Connect javascript library. -->
+<script type="text/javascript" src="http://www.google.com/friendconnect/script/friendconnect.js"></script>
+<!-- Define the div tag where the gadget will be inserted. -->
+<?php $id = md5(time()); ?>
+<div id="div-<?= $id ?>"></div>
+<!-- Render the gadget into a div. -->
+<script type="text/javascript">
+var skin = {};
+skin['BORDER_COLOR'] = '#cccccc';
+skin['ENDCAP_BG_COLOR'] = '#e0ecff';
+skin['ENDCAP_TEXT_COLOR'] = '#333333';
+skin['ENDCAP_LINK_COLOR'] = '#0000cc';
+skin['ALTERNATE_BG_COLOR'] = '#ffffff';
+skin['CONTENT_BG_COLOR'] = '#ffffff';
+skin['CONTENT_LINK_COLOR'] = '#0000cc';
+skin['CONTENT_TEXT_COLOR'] = '#333333';
+skin['CONTENT_SECONDARY_LINK_COLOR'] = '#7777cc';
+skin['CONTENT_SECONDARY_TEXT_COLOR'] = '#666666';
+skin['CONTENT_HEADLINE_COLOR'] = '#333333';
+skin['POSITION'] = 'bottom';
+skin['DEFAULT_COMMENT_TEXT'] = '- add your comment here -';
+skin['HEADER_TEXT'] = 'Comments';
+google.friendconnect.container.setParentUrl('/' /* location of rpc_relay.html and canvas.html */);
+google.friendconnect.container.renderSocialBar(
+ { id: 'div-<?= $id ?>',
+   site: '<?= $this->googlefc ?>',
+   'view-params':{"scope":"SITE","allowAnonymousPost":"true","showWall":"true"}
+ },
+  skin);
+</script>
+<?php endif ?>
+
+</body>
+</html>

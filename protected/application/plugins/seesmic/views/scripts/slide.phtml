@@ -1,0 +1,12 @@
+<div class="seesmic">
+	<div class="video">
+		<object width='640' height='480'>
+			<param name='movie' value='http://seesmic.com/embeds/wrapper.swf'/>
+			<param name='bgcolor' value='#666666'/>
+			<param name='allowFullScreen' value='true'/>
+			<param name='allowScriptAccess' value='always'/>
+			<param name='flashVars' value='video=<?= $this->item->getVideoID(); ?>&version=threadedplayer&startVideo=true'/>
+			<embed src='http://seesmic.com/embeds/wrapper.swf' type='application/x-shockwave-flash' flashVars='video=<?= $this->item->getVideoID(); ?>&version=threadedplayer&startVideo=true' allowFullScreen='true' bgcolor='#666666' allowScriptAccess='always' width='640' height='480'></embed>
+		</object>
+	</div>
+</div>

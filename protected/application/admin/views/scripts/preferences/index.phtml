@@ -1,0 +1,51 @@
+<h1>Configure</h1>
+<p>
+You can configure your homepage below.
+</p>
+
+<?= $this->partial("partials/tabmenu.phtml", array('tab' => 'preferences'));?>
+
+<img id = 'wait' src='images/wait30.gif' style='display:none;' />
+
+<form id="<?= $this->escape($this->form->getName()) ?>"" action="<?= $this->escape($this->form->getAction()) ?>" method="<?= $this->escape($this->form->getMethod()) ?>">
+	<table>
+		<tbody>
+			<tr>
+				<td class='label'>
+					Timezone
+				</td>
+				<td class='element'>
+					<?= $this->form->timezoneid ?>
+				</td>
+			</tr>
+			<tr>
+			<td class='label'>
+					Notifications
+				</td>
+				<td class='element'>
+					<?= $this->form->alerts ?>
+				</td>
+			</tr>				
+			<tr>
+				<td class='label'>
+					Privacy
+				</td>
+				<td class='element'>
+					<?= $this->form->privacy ?>
+				</td>
+			</tr>
+			<tr>
+				<td class='label'>
+				</td>
+				<td class='element'>
+					<?= $this->form->save ?>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+</form>
+
+
+<script>
+	var timezone = <?= $this->timezone ?>;
+</script>

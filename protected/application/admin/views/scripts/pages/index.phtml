@@ -1,0 +1,44 @@
+<h1>Configure</h1>
+<p>
+You can configure your homepage below.
+</p>
+
+<?= $this->partial("partials/tabmenu.phtml", array('tab' => 'pages'));?>
+
+Pages appear as tabs on your homepage. There are different page types that can be highly customised.
+
+<div class='left half'>
+<h2>Available pages</h2>
+Select a page and click add.
+<ul id="available_pages" class='boxedlist'>
+<?php if (count($this->pages) > 0) : ?>
+	<?php foreach($this->pages as $p) : ?>
+		<li id="page_<?= $p['prefix'] ?>">
+			<div style="float:right;">
+				<a href="/admin/pages/add/type/<?= $p['prefix'] ?>">Add</a>
+			</div>
+			<img src="images/i-<?= $p['prefix'] ?>.png"/> <span id="page_<?= $p['prefix'] ?>_desc"><?= $p['name'] ?></span><br/>
+			<p><?= $p['description'] ?></p>
+		</li>
+	<?php endforeach ?>
+<?php else : ?>
+It seems you don't have any pages installed on your system. 
+<?php endif ?>	
+</ul>	
+</div>
+
+<div class='right half'>
+<h2>Selected pages</h2>
+You can drag and drop to change the sequence.
+<ul id="user_pages" class='boxedlist movable'>
+<?php if (count($this->user_pages) > 0) : ?>
+	<?= $this->partialLoop('pages/partials/box.phtml', $this->user_pages) ?>
+<?php else : ?>
+You have not added any pages yet. 
+<?php endif ?>	
+</ul>
+<script type="text/javascript">
+	Sortable.create("user_pages", {onUpdate:onListOrderChange});
+</script>	
+</div>
+<br class="fix" />

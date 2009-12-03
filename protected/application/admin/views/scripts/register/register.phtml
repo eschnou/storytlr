@@ -1,0 +1,12 @@
+<h1>Sign up to storytlr</h1>
+<?php if ($this->wrongCode) : ?>
+<div class="error">Sorry, this invite code is not valid, or has already been used.</div>
+<?php elseif ($this->failedRegistration) : ?>
+<div class="error">We could not sign you up, please verify your input and try again.</div>
+<?php endif ?>
+
+Fill your details below to sign up.
+
+<div class="form_wrapper">
+<?= $this->form ?>
+</div>

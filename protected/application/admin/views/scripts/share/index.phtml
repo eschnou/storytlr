@@ -1,0 +1,32 @@
+<h1>Tools</h1>
+<?= $this->partial("partials/toolmenu.phtml", array('tab' => 'share'));?>
+
+<h3>Widgets for your blog or webpage</h3>
+
+<table class="embed"><tr><td class="embed_script">
+<strong>Lifestream widget</strong><br/><br/>
+Show your latest activity on Storytlr by copying and pasting the code below.<br/><br/>
+<textarea class="embed"><?php echo htmlentities('<script src="http://' . $this->base()->myDomain(true) . '/embed/widget.js" type="text/javascript" /></script>'); ?></textarea>
+<br/><br/>
+</td>
+<td>
+<div class="widgetwrapper">
+<script src="http://<?= $this->base()->myDomain(true) ?>/embed/widget.js" type="text/javascript"></script>
+</div>
+</td>
+</tr></table>
+				
+<br/>
+<table class="embed"><tr><td class="embed_script">
+<strong>Stories widget</strong><br/><br/>
+Show your latest stories on Storytlr by copying and pasting the code below.<br/><br/>
+<textarea class="embed"><?php echo htmlentities('<script src="http://' . $this->base()->myDomain(true) . '/embed/stories.js" type="text/javascript" /></script>');?></textarea>
+<br/><br/>
+</td>
+<td>
+<div class="widgetwrapper">
+<script src="http://<?= $this->base()->myDomain(true) ?>/embed/stories.js" type="text/javascript"></script>
+</div>
+</td>
+</tr></table>
+<br/>

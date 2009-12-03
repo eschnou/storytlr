@@ -1,0 +1,124 @@
+/*  Admin top bar
+	-------------------------------
+*/
+
+body {
+	margin: 0;
+	padding: 0;	
+}
+
+#adminbar {
+	height: 31px; 
+	width: 100%;
+	color: #ffffff;
+	background: black url('../images/admin-logo.gif') no-repeat;
+	font-size: 12px;
+	background-position: 0 4px;
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	border-bottom: 1px solid #888;
+}
+
+#adminbar div {
+	padding: 4px;
+	height: 23px;
+}
+
+#adminbar .signedin{
+	color: #ffffff;
+}
+
+#adminbar .signedin strong{
+	color: #ffffff;
+}
+
+
+#adminbar div#loginStatus a, #adminbar div#loginStatus a:visited{
+	color: #6bbff4;
+	text-decoration: none;
+	}
+
+#adminbar div#loginStatus a:hover {
+	color: #6bbff4;
+	text-decoration: underline;
+	}
+	
+#adminbar div#loginStatus {
+	float: right;
+	padding-right: 15px;
+	padding-top: 7px;
+	color: white;
+	clear: both;
+}
+
+#adminbar div#loginStatus strong {
+	color: #aaa;
+	padding-right: 15px;
+}
+
+#adminbar div#loginStatus a,  div#loginStatus a:visited{
+	color: #6bbff4;
+	text-decoration: none;
+	}
+
+#adminbar div#loginStatus a:hover {
+	color: #6bbff4;
+	text-decoration: underline;
+	}
+
+/* Navigation menu */
+
+#adminbar #navigationMenu{
+}
+
+#adminbar #navigationMenu ul{
+	margin:0 0 0 100px;
+	padding:0;
+	list-style-type:none;
+	font-weight: normal;
+}
+
+#adminbar #navigationMenu ul li{
+	display:block;float:left;
+}
+
+#adminbar #navigationMenu ul li a{
+	display:block;float:left;
+	padding:3px 5px 0;
+	color: #6bbff4;
+	text-decoration: none;
+}
+
+#adminbar #navigationMenu ul li a:hover {
+	text-decoration: underline;
+	border: none;
+}
+
+#adminbar #navigationMenu ul li a.current {
+	color: #fff;
+	text-decoration: none;
+	border: none;
+}
+
+#adminbar form#formLogin {
+	margin: 0;
+	padding: 0 0 0 90px;
+	text-align: left;
+}
+
+#adminbar form#formLogin input{
+	width: 75px;
+	vertical-align: middle;
+}
+
+#adminbar form#formLogin input.remember{
+	width: 16px;
+	margin-top: 0;
+}
+
+#adminbar form#formLogin input#username, form#formLogin input#password {
+	background-color: #666;
+	color: white;
+	border: 1px solid #aaa;
+	padding: 3px;
+	margin-right: 5px;	
+}

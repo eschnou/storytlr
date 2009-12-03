@@ -1,0 +1,19 @@
+<li id="widget_<?= $this->id ?>">
+	<div>
+		<div style="float:right;">
+			<a href="#" onClick="onRemoveWidget(<?= $this->id ?>);return false;">Remove</a>
+			<?php if ($this->edit) : ?>
+			| 	
+			<a href="#" id='button_edit_widget_<?= $this->id ?>' onClick="onEditWidget('<?= $this->id ?>');return false;">Edit</a>
+			<?php endif ?>
+		</div>
+		<span id="widget_<?= $this->prefix ?>_desc"><?= $this->desc ?></span>
+		<?php if ($this->edit) : ?>
+		<div id='widget_edit_<?= $this->id ?>' class='edit' style='display:none;'>
+			<div id='widget_edit_errors_<?= $this->id ?>'></div>
+			<div id='widget_edit_status_<?= $this->id ?>'></div>
+			<?=$this->action('form', $this->prefix, 'widgets' , array('id' => $this->id)); ?>
+		</div>
+		<?php endif ?>
+	</div>
+</li>

@@ -1,0 +1,48 @@
+<?php if ($this->item->getType() == SourceItem::IMAGE_TYPE) : ?>
+<div class="tumblr_image">
+	<?php if ($this->item->getTitle()) : ?>
+		<div class="titlewrapper">
+			<div  class="title" id="title_<?= $this->count ?>"><?= $this->item->getTitle(); ?></div>
+		</div>
+	<?php elseif (!($this->item->getTitle()) && $this->edit) : ?>
+		<div class="titlewrapper">
+			<div  class="title" id="title_<?= $this->count ?>">[Click to add text]</div>
+		</div>
+	<?php endif ?>
+	<div  class="content"><a href="<?= $this->item->getImageURL('medium'); ?>" title="<?= $this->item->getTitle(); ?>" rel="lightbox[set]" ><img src="<?= $this->item->getImageURL('small'); ?>" /></a></div>
+</div>
+<?php elseif ($this->item->getType() == SourceItem::LINK_TYPE) : ?>
+<div class="tumblr_link">
+	<table cellspacing=0>
+		<tr>
+			<td style="background: url('../images/bg-storytlrlink.jpg') no-repeat">
+				<div class="title"><span class="label">Bookmarked the link:</span><br/>  <a href="<?= $this->item->getLink() ?>" target="_blank"><?= $this->item->getTitle() ?></a></div>	
+			</td>
+		</tr>
+	</table>
+</div>
+<?php elseif ($this->item->getType() == SourceItem::BLOG_TYPE) : ?>
+<div class="tumblr_blog">
+	<table cellspacing=0>
+		<tr>
+			<td style="background: url('../images/bg-storytlrblog.jpg') no-repeat">
+				<div class="title"><span class="label">Blogged about:</span><br/><a href="<?= $this->item->getLink() ?>" target="_blank"><?= $this->item->getTitle() ?></a></div>	
+			</td>
+		</tr>
+	</table>
+</div>
+<?php elseif ($this->item->getType() == SourceItem::AUDIO_TYPE) : ?>
+<div class="tumblr_audio">	
+	<table cellspacing=0>
+		<tr>
+			<td style="background: url('../images/bg-storytlraudio.jpg') no-repeat">
+				<div class="content"><?= $this->item->getAudioPlayer(); ?></div>	
+			</td>
+		</tr>
+	</table>
+</div>
+<?php elseif ($this->item->getType() == SourceItem::VIDEO_TYPE) : ?>
+<div class="tumblr_video">
+	<div class="content"><?= $this->item->getVideoPlayer(240, 180); ?></div>
+</div>
+<?php endif ?>

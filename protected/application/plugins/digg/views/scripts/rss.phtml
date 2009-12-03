@@ -1,0 +1,18 @@
+<?php $item = $this->item->toArray(); 
+	  $link = $item['link'] ? $item['link'] : $item['href'];
+?>
+
+<div class="digg">
+	<div  class="title">Dugg the story <a href="<?= $link ?>" target="_blank"><?= $item['title'] ?></a></div>
+	<?php if ($item['description']) : ?>
+	<div  class="content-wrapper">
+		<div  class="content">
+			<?= strip_tags($item['description']); ?>
+		</div>
+	</div>
+	<?php endif ?>	
+	<div  class="footnote">
+ 	<a href="http://digg.com/<?= $item['container'] ?>" target="_blank"><?= $item['container'] ?></a>
+  - <a href="http://digg.com/<?= $item['topic'] ?>" target="_blank"><?= $item['topic'] ?></a>
+	</div>
+</div>

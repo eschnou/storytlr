@@ -1,0 +1,66 @@
+[general]
+
+;Database connection settings
+db.adapter=PDO_MYSQL
+db.host=localhost
+db.username=storytlr
+db.password=password
+db.dbname=storytlr
+
+;Security
+security.cookie = dasuoidasud
+
+;Caching
+cache.content = 1
+cache.metadata = 1
+cache.path = /tmp/cache/
+
+;Web deployment settings
+web.host=storytlr.com
+web.path=/
+web.redirect = 1
+web.timezone=Europe/Brussels
+
+;Global application settings
+app.closed=0							; Set to 1 to disable registration
+app.from_email=support@noreply.net
+app.admin_email=admin@noreply.net
+;app.user=johndoe						; Uncomment and set to a username for single install
+
+;Debug settings
+debug 	= 1
+profile = 0
+
+
+;; RSS settings
+rss.default.hide_content=1
+
+;; Flickr settings
+;;flickr.api_key=
+
+;; Twitter settings
+;;twitter.username=
+;;twitter.password=
+;;twitter.default.hide_replies=1
+
+;; Seesmic settings
+seesmic.default.hide_replies=1
+
+;; Laconica settings
+laconica.default.hide_replies=1
+
+;; Youtube settings
+;youtube.client_id=
+;youtube.developer_key=
+
+;; Google map
+;gmap.key=
+
+;Default values for user settings
+default.theme=classic
+default.timezone=Europe/Brussels
+default.timezoneid=397
+default.on_comment=1
+default.on_news=1
+default.title=My Homepage
+default.subtitle=I'm still busy setting this page

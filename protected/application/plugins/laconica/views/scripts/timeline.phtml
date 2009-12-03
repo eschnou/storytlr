@@ -1,0 +1,12 @@
+<?php 
+	$tweet = $this->item->getStatus();
+	$tweet	= ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" rel="nofollow" target="_blank">\\1</a>',$tweet); // turn any URL’s into links
+	$tweet	= ereg_replace("@([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'@<a href="http://identi.ca/\\1" target="_blank">\\1</a>\\2',$tweet); // add “@username” links
+?>
+
+<div class="laconica">
+	<div class="title"><?= $tweet ?></div>
+	<?php if ($this->item->getType() == SourceItem::IMAGE_TYPE) :?>
+	<a href="<?= $this->item->getLink()?>" target="_blank"><img src='<?= $this->item->getImageUrl(ImageItem::SIZE_LARGE) ?>' width='350'/></a>
+	<?php endif ?>
+</div>

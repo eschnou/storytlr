@@ -1,0 +1,21 @@
+<?php $comment = ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" rel="nofollow">\\1</a>', $this->comment);  ?>
+<div class='comment' id='comment_<?= $this->id ?>'>
+	<div class='comment_actions'>
+	<?php if ($this->delete) : ?>
+		<a class='delete' href='javascript:delete_comment(<?= $this->id ?>, <?= $this->source_id ?>, <?= $this->item_id ?>);' title="Delete comment"><img src="images/01.png" /></a>
+	<?php endif ?>
+	</div>
+	<div class='comment_top'>
+	<?php if (strlen($this->website)>0) : ?>
+	Comment by <a href="<?= $this->website ?>" rel="nofollow"><?= $this->name; ?></a> 
+	<?php else : ?>
+	Comment by <?= $this->name; ?> 
+	<?php endif ?>		
+	
+	<?= Stuffpress_Date::ago($this->when, "j M y \\a\\t G:i T"); ?>					
+	
+	</div>
+	<div class='comment_content'>
+	<?= $comment ?>
+	</div>
+</div>

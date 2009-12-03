@@ -1,0 +1,8 @@
+<div class="lastfm">
+	<div class="title">Liked the song <a href="<?= $this->item->getLink() ?>" target="_blank"><?= $this->item->getTitle() ?></a></div>
+	<?php if ($this->item->getDescription()) : ?>
+		<div class="note">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	<?php endif ?>
+</div>

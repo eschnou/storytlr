@@ -1,0 +1,25 @@
+<?php if ($this->archives && count($this->archives) > 0) : ?>
+<div class="widget archives">
+	<h2 class="title"><?= $this->title ?></h2>
+	<div class="widget-content">
+		<div id="accordion_archive">
+			<?php 
+			$year  = 0;
+			$months = array('', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+			foreach($this->archives as $month) {
+				if ($year != $month['year']) {
+					if ($year != 0) echo "</ul></div>";
+					$year = $month['year'];
+					echo "<h3 class='accordion_toggle'><b>$year</b></h3>";
+					echo "<div class='accordion_content'><ul>";
+				}
+				echo "<li><a href='/archives/{$month['year']}/{$month['month']}'>{$months[$month['month']]}</a> ({$month['c']})</li>";
+			}
+			echo "</ul></div>";
+			?>
+		</div>
+	</div>
+	<div class="clear"></div>
+	
+</div>	
+<?php endif ?>

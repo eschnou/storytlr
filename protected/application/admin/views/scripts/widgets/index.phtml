@@ -1,0 +1,43 @@
+<h1>Configure</h1>
+<p>
+You can configure your homepage below.
+</p>
+
+<?= $this->partial("partials/tabmenu.phtml", array('tab' => 'widgets'));?>
+
+Widgets are little blocks of information displayed on the side of your homepage.
+
+<div class='left half'>
+<h2>Available widgets</h2>
+Select a widget and click add.
+<ul id="available_widgets" class='boxedlist'>
+<?php if (count($this->widgets) > 0) : ?>
+	<?php foreach($this->widgets as $w) : ?>
+		<li id="widget_<?= $w['prefix'] ?>">
+			<div style="float:right;">
+				<a href="#" onClick="onAddWidget('<?= $w['prefix'] ?>');return false;">Add</a>
+			</div>
+			<span id="widget_<?= $w['prefix'] ?>_desc"><?= $w['desc'] ?></span>
+		</li>
+	<?php endforeach ?>
+<?php else : ?>
+It seems you don't have any widgets installed on your system. 
+<?php endif ?>	
+</ul>	
+</div>
+
+<div class='right half'>
+<h2>Selected widgets</h2>
+You can drag and drop to change the sequence.
+<ul id="user_widgets" class='boxedlist movable'>
+<?php if (count($this->user_widgets) > 0) : ?>
+	<?= $this->partialLoop('widgets/partials/box.phtml', $this->user_widgets) ?>
+<?php else : ?>
+You have not added any widgets yet. 
+<?php endif ?>	
+</ul>
+<script type="text/javascript">
+	Sortable.create("user_widgets", {onUpdate:onListOrderChange});
+</script>	
+</div>
+<br class="fix" />

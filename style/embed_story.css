@@ -1,0 +1,175 @@
+.storytlr_container {
+	position: absolute;
+	z-index: 201;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display:none;
+	overflow: hidden;
+	position:fixed;
+}
+
+#storytlr_page {
+	position: absolute; 
+	margin-left: -525px;
+	margin-top: -350px;
+	width: 1050px;
+	height: 620px;
+    left: 50%; 
+    top: 50%;	
+}
+
+#storytlr_control {
+	position: relative;
+	left: 25px;
+	top: 60px;
+	z-index: 205;
+	width: 100px;
+}
+
+#storytlr_control img {
+	border: 0px;
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+}
+
+#storytlr_control a {
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+}
+
+.storytlr_mask {
+	z-index: 201;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: .4;
+	filter: alpha(opacity=20);
+	background-color: #333333;
+	display:none;
+	position:fixed;
+}
+
+.storytlr_mask:hover {
+	cursor: pointer;
+}
+
+div#storytlr_embed {
+	font:76% Verdana,Tahoma,Arial,sans-serif;
+	max-width: 100%;
+	width: 290px;
+	height: 200px;
+	border: 1px solid #ccc;
+	margin: 10px 0 3px 0;
+	position: relative;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+div#storytlr_embed:hover {
+	cursor: pointer;
+}
+
+div#storytlr_embed div.cover {
+	position: absolute;
+	top: 35px;
+	width: 100%;
+	height: 120px;
+	min-height: 130px;
+	overflow: hidden;
+}
+
+div#storytlr_embed div.titles {
+	position: absolute;
+	top: 170px;
+	left: 5px;
+	width: 100%;
+	text-transform: uppercase;
+}
+
+div#storytlr_embed span.title {
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	margin-right: 5px;
+}
+
+div#storytlr_embed span.subtitle {
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	color: #aaa;
+}
+
+div#storytlr_embed img {
+	border: none;
+	padding: 0;
+	margin: 0;
+	float: none;
+}
+
+div#storytlr_embed img.cover {
+	position: absolute;
+	width: 100%;
+	border: none;
+	padding: 0;
+	margin: 0;
+	max-width: 100%;
+}
+
+div#storytlr_embed div.logo {
+	position: absolute;
+	z-index: 100;
+}
+
+div#storytlr_embed a {
+	text-decoration: none;
+	color: #53b0f8;
+	text-transform: uppercase;
+}
+
+div#storytlr_embed a:hover {
+	text-decoration: underline;
+}
+
+div.popoutwrapper {
+	width: 290px;
+	text-align: right;
+	max-width: 100%;
+}
+
+div.popoutwrapper img {
+	border: none;
+	margin: 0;
+	padding: 0;
+	float: none;
+}
+
+div.popout a{
+	font-size: 11px;
+	text-decoration: none;
+}
+
+div.popout a:hover {
+	text-decoration: none;
+}
+
+div#storytlr_logo {
+	width: 420px;
+	text-align: right;
+	margin: 0 0 10px 0;
+	padding: 0;
+	background-color: transparent;	
+}
+
+div#storytlr_logo img {
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	float: none;	
+}
+

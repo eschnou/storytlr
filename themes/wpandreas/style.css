@@ -1,0 +1,246 @@
+/*  
+	Storytlr wpandreas theme
+	---------------------------------------
+	Please note! The lifestream and stories contents are in a separate stylesheet
+*/
+
+@import "../../style/public.css"; 
+
+/*  Overwrite classes in public.css
+	---------------------------------------
+*/
+
+div.item div.content img {
+	max-width: 465px;  	
+}
+
+div.item div.note img {
+	max-width: 400px; 	
+}
+
+div.stories #content div.item_wrapper {
+	width:  530px;
+	margin: 10px;
+	clear: both;
+	height: 60px;
+}
+
+/*  General declarations
+	---------------------------------------
+*/
+
+body {
+	background:#f4f4f4 url(images/background.gif) top center repeat-y fixed; 
+	margin:0;
+	padding: 0;
+	color:#303030; 
+	font:76% Verdana,Tahoma,Arial,sans-serif;
+	font-size/* */:/**/small;
+	font-size: /**/small;
+	text-align: center;
+}
+
+h2 {
+	color:#000000;
+	font-family:'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif;
+	font-size:78%;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	letter-spacing:0.2em;
+	line-height:1.4em;
+	margin:1.5em 0pt 0.75em;
+	text-transform:uppercase;
+}
+
+a {
+	background-color:inherit; 
+	color:#286ea0; 
+	font-weight:bold; 
+	text-decoration:none;
+}
+
+a:hover {
+	background-color:inherit; 
+	color:#286ea0; 
+	font-weight:bold; 
+	text-decoration:underline;
+}
+
+a img {
+	border:0;
+}
+
+/*  Main layout
+	---------------------------------------
+*/
+
+#page {
+	color:#333; 
+	width:760px;
+	margin:0 auto;
+	padding: 0 0 15px 0;
+	text-align:left;
+	background-color: white;
+}
+
+#left-column {
+	float:	left;
+	width:  545px;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 15px;
+}
+
+/*  Header
+	---------------------------------------
+*/
+
+#header-wrapper {
+	background: #ffffff url('images/front.jpg') no-repeat 0px 40px;
+	height: 220px;
+	margin-top: 10px;
+}
+
+#header h1 {
+	color:#555; 
+	float:left; 
+	font-size:2em; 
+	letter-spacing:-1px; 
+	margin:0 0 10px; 
+	width:350px;
+}
+
+#header .description {
+	background-color:inherit; 
+	color:#777; 
+	float:right; 
+	font-size:1.1em; 
+	font-weight:bold; 
+	line-height:1.3em; 
+	margin:8px 3px 0 0; 
+	text-align:right; 
+	width:300px;
+}
+
+div#login div {
+	left:260px;
+	top: 200px;
+	position: absolute;
+}
+
+/*  Sidebar
+	-------------------------------
+*/
+
+#right_column {
+	float:right; 
+	line-height:1.4em; 
+	margin:40px 10px 5px; 
+	padding:0; 
+	width:160px;
+}
+
+.sidebar li {
+	line-height:1.2em; 
+	list-style:none; 
+	margin:0 0 6px;
+}
+
+.sidebar ul {
+	margin:0;
+	padding: 0;
+}
+
+.sidebar .widget {
+	border-bottom:1px dotted #cccccc;
+	margin:0 0 1em;
+	padding:0 0 0.5em;
+}
+
+.widget #formSearch {
+	margin: 0;
+}
+
+.widget #formSearch input#search{
+	width: 100px;
+}
+
+.widget #formSearch input#searchsubmit{
+	width: 40px;
+}
+
+#profile {
+	position: relative;
+}
+
+#profile #avatar{
+}
+
+#profile #avatar img{
+	margin-right: 10px;
+}
+
+#profile img{
+	float: left;
+}
+
+#profile #alias {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#profile #bio {
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.85em;
+}
+
+#profile #location {
+	font-weight: bold;
+}
+
+br.fix {
+	clear: both;
+}
+
+/*  Accordion
+	-------------------------------
+*/
+
+.accordion_toggle {
+	background:#EEE;
+	border-bottom:1px solid #DDD;
+	cursor:pointer;
+	display:block;
+	font-size:12px;
+	font-weight:normal;
+	height:20px;
+	line-height:20px;
+	margin:0;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+	padding:0 5px;
+	text-decoration:none;	
+}
+
+.accordion_toggle_active {
+	background:#444;
+	color:#FFFFFF;
+}
+
+.accordion_content {
+	background-color:#FFFFFF;
+	color:#444444;
+	overflow:hidden;
+	font-size: 12px;
+	padding: 5px 5px 0px 5px;
+}
+
+#accordion_archive {
+	margin-bottom: 5px;
+}
+

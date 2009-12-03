@@ -1,0 +1,266 @@
+/*  
+	Storytlr Flowers theme
+	---------------------------------------
+	Please note! The lifestream and stories contents are in a separate stylesheet
+*/
+
+@import "../../style/public.css"; 
+
+/*  Overwrite classes in public.css
+	---------------------------------------
+*/
+
+div.item div.content img {
+	max-width: 445px;  	
+}
+
+div.item div.note img {
+	max-width: 380px; 	
+}
+
+#content .date {
+	background-color: #fbf1f2;
+	font-size:14px;
+	padding:5px;
+	color: #631d28;
+	margin: 10px 0;
+}
+
+#content .stories .date {
+	background: none;
+	border-left: none;
+}
+
+div.hidden a {
+	color: #ca7c8d;
+}
+
+div.stories #content div.item_wrapper {
+	width:  510px;
+	margin: 10px;
+	clear: both;
+	height: 60px;
+}
+
+/*  General declarations
+	---------------------------------------
+*/
+
+body {
+	background:#f4f4f4 url(images/background.gif) top center repeat-y fixed; 
+	margin:0;
+	padding: 0;
+	color:#303030; 
+	font:90% Georgia,serif;
+	text-align: center;
+}
+
+h2 {
+	color:#762d38;
+	font:0.8em Georgia, serif;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	letter-spacing:0.2em;
+	line-height:1.4em;
+	margin:0.7em 0pt 0.75em;
+	text-transform:uppercase;
+}
+
+a {
+	background-color:inherit; 
+	color:#e51e48; 
+	text-decoration:none;
+}
+
+a:hover {
+	background-color:inherit; 
+	color:#e51e48; 
+	text-decoration:underline;
+}
+
+a img {
+	border:0;
+}
+
+/*  Main layout
+	---------------------------------------
+*/
+
+#page {
+	color:#333; 
+	width:752px;
+	margin:0 auto;
+	text-align:left;
+	background-color: white;
+	padding: 10px 15px;
+}
+
+#pagewrapper {
+	background: transparent url('images/background2.jpg') no-repeat;
+	background-position: top center;
+	padding: 0;
+}
+
+#left-column {
+	float:	left;
+	width:  525px;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 15px;
+}
+
+/*  Header
+	---------------------------------------
+*/
+
+#header-wrapper {
+	background: #ffffff url('images/front.jpg') no-repeat 0px 40px;
+	height: 220px;
+}
+
+#header h1 {
+	color:#631d28; 
+	float:left; 
+	font-size:1.7em; 
+	letter-spacing:-1px; 
+	margin:0 0 10px; 
+	width:350px;
+	font-family: Georgia;
+}
+
+#header .description {
+	background-color:inherit; 
+	color:#e51e48; 
+	float:right; 
+	font-size:1.1em; 
+	font-weight:bold; 
+	line-height:1.3em; 
+	margin:8px 3px 0 0; 
+	text-align:right; 
+	width:300px;
+	font-family: Georgia;
+}
+
+div#login div {
+	left:260px;
+	top: 200px;
+	position: absolute;
+}
+
+/*  Sidebar
+	-------------------------------
+*/
+
+#right_column {
+	float:right; 
+	line-height:1.4em; 
+	margin:40px 0px 5px; 
+	padding:0; 
+	width:180px;
+	font-family: Georgia;
+	font-size: 90%;
+}
+
+.sidebar li {
+	line-height:1.2em; 
+	list-style:none; 
+	margin:0 0 6px;
+}
+
+.sidebar ul {
+	margin:0;
+	padding: 0;
+}
+
+.sidebar .widget {
+	margin:0 0 1em;
+	padding: 3px 10px 8px 10px;
+	background-color: #fceaeb;
+}
+
+.widget #formSearch {
+	margin: 0;
+}
+
+.widget #formSearch input#search{
+	width: 100px;
+}
+
+.widget #formSearch input#searchsubmit{
+	width: 40px;
+}
+
+#profile {
+	position: relative;
+}
+
+#profile #avatar{
+}
+
+#profile #avatar img{
+	margin-right: 10px;
+}
+
+#profile img{
+	float: left;
+}
+
+#profile #alias {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#profile #bio {
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.85em;
+}
+
+#profile #location {
+	font-weight: bold;
+}
+
+br.fix {
+	clear: both;
+}
+
+/*  Accordion
+	-------------------------------
+*/
+
+.accordion_toggle {
+	background:#EEE;
+	border-bottom:1px solid #DDD;
+	cursor:pointer;
+	display:block;
+	font-size:12px;
+	font-weight:normal;
+	height:20px;
+	line-height:20px;
+	margin:0;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+	padding:0 5px;
+	text-decoration:none;	
+}
+
+.accordion_toggle_active {
+	background:#762D38;
+	color:#FFFFFF;
+}
+
+.accordion_content {
+	background-color:#FFFFFF;
+	color:#444444;
+	overflow:hidden;
+	font-size: 12px;
+	padding: 5px 5px 0px 5px;
+}
+
+#accordion_archive {
+	margin-bottom: 5px;
+}

@@ -1,0 +1,68 @@
+<?php $type = $this->item->getType(); ?>
+
+<?php if($type == 'image') : ?>
+<div class="storytlr_image">
+	<div  class="description">
+		<?= $this->item->getDescription(); ?>
+	</div>
+	<div class="content">
+		<a href="<?= $this->item->getImageUrl('large'); ?>" title="<?= $this->item->getTitle(); ?>" target="_blank"><img src="<?= $this->item->getImageUrl('medium'); ?>"></a>
+	</div>
+</div>
+<?php elseif($type == 'audio') : ?>
+<div class="storytlr_audio">
+	<div  class="title">
+		<?= $this->item->getTitle(); ?>
+	</div>
+	<div class="content">
+		<object type="application/x-shockwave-flash" data="http://storytlr.com/flash/player_mp3.swf" width="200" height="20">
+		     <param name="movie" value="flash/player_mp3.swf" />
+		     <param name="FlashVars" value="mp3=<?= $this->item->getAudioUrl(); ?>" />
+		</object>
+	</div>
+	<div  class="description">
+		<?= $this->item->getDescription(); ?>
+	</div>
+</div>
+<?php elseif($type == 'blog') : ?>
+<div class="storytlr_blog">
+	<div  class="title">
+		<b><?= $this->item->getTitle(); ?></b> 
+	</div>
+	<div  class="content">
+		<?= $this->item->getContent(); ?>
+	</div>
+</div>
+<?php elseif($type == 'status') : ?>	
+<div class="storytlr_status">
+	<div  class="title">
+		<?php 
+			$title = 	ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
+			echo $title;
+		?>
+	</div>
+</div>	
+<?php elseif($type == 'link') : ?>	
+<div class="storytlr_link">
+	<div  class="title">
+		<a href="<?= $this->item->getLink(); ?>"><?= $this->item->getTitle(); ?></a>
+	</div>
+	<div  class="content">
+		<?= $this->item->getDescription(); ?>
+	</div>
+</div>
+<?php elseif($type == 'video') : ?>
+<div class="storytlr_video">
+	<div  class="title">
+		<?= $this->item->getTitle(); ?>
+	</div>
+	<div class="content">
+		<?= $this->item->getVideoPlayer(350, 250); ?>
+		<?php if ($this->item->getDescription()) : ?>
+			<div class="note">
+				<?= $this->item->getDescription(); ?>
+			</div>
+		<?php endif ?>
+	</div>
+</div>
+<?php endif ?>

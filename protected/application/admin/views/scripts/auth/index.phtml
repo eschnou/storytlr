@@ -1,0 +1,55 @@
+<h1>Sign in to storytlr</h1>
+<?php if ($this->unverified) : ?>
+<div class="error">Your have not verified your account yet. Please click on the link that was provided
+in the verification email. If you didn't receive such email, <a href="#">request</a> it again or contact us at support@storytlr.com</div>
+<?php elseif ($this->failedAuthentication) : ?>
+<div class="error">We could not log you in, please verify your input and try again.</div>
+<?php endif ?>
+<div class="form_wrapper">
+
+<form id="formLoginMain" enctype="application/x-www-form-urlencoded" action="admin/auth/login" method="post">
+	<table>
+		<tr>
+			<td class="label">
+				<label for="username" class="required">Username:</label>
+			</td>
+			<td class="element">
+				<?= $this->form->username ?>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="label">
+				<label for="password" class="required">Password:</label>
+			</td>
+			<td class="element">
+				<?= $this->form->password ?>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="label">
+				<label for="remember" class="required"></label>
+			</td>
+			<td class="element">
+				<?= $this->form->remember ?> Remember me		
+			</td>
+		</tr>
+		
+		<tr>
+			<td></td>
+			<td><?= $this->form->login ?></td>
+		</tr>
+				
+	</table>
+	
+	<?= $this->form->target ?>	
+	<?= $this->form->bookmarklet ?>
+	
+</form>
+
+<strong>No account yet?</strong> <a href="admin/register/" <?php if ($this->bookmarklet) echo 'target="_blank"'; ?>>Sign up now</a><br />
+<strong>Forgot your password?</strong> <a href="admin/recover"  <?php if ($this->bookmarklet) echo 'target="_blank"'; ?>>Request new password</a>
+</div>
+<br/>
+<br class="fix"/>

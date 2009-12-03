@@ -1,0 +1,20 @@
+<?php $item = $this->item->toArray(); ?>
+
+<?php 
+	if ($item['type'] == 'favorite') {
+		$title = "Liked the video - <a href='{$item['link']}'>{$item['title']}</a>";
+	} else {
+		$title = "{$item['title']}";
+	}
+?>
+<div class="youtube">
+	<div  class="content-wrapper">
+		<div  class="content">
+			<?= $this->item->getDescription(); ?>
+		</div>
+	</div>
+	<div  class="video">
+		If you don't see the video, watch it <a href="<?= $this->item->getLink(); ?>">here</a>.	
+		<embed src="http://www.youtube.com/v/<?= $item['video_id'] ?>" type="application/x-shockwave-flash" wmode="transparent" width="300" height="250"></embed>
+	</div>
+</div>

@@ -1,0 +1,806 @@
+@CHARSET "UTF-8";
+
+div.item_left, img.icon, div.titlewrapper, div.item_actions img { behavior: url(../js/pngfix/iepngfix.htc) }
+
+html {height: 100%; width:100%;}
+
+body {
+	height: 100%;
+	background: black;
+	font:76% Verdana,Tahoma,Arial,sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	border: none;
+}
+
+div.pagewrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	overflow: hidden;
+}
+
+div#page {
+	background: white;
+	width: 1050px;
+	height: 620px;
+	margin-left: -525px;
+	margin-top: -310px;
+	position: absolute; 
+    left: 50%; 
+    top: 50%;	
+}
+
+div#content {
+	position: absolute;
+	top: 80px;
+	left: 20px;
+}
+	
+a {
+	text-decoration: none;
+	color: #53b0f8;
+	text-transform: uppercase;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+div.fullitem_wrapper {
+	float: left;
+	position: relative;
+	width: 250px;
+	}
+
+div.date {
+	clear: both;
+	background-color: #f4f4f4;
+	margin: 10px 0px;
+	padding: 3px;
+	text-transform: uppercase;
+	font: 12px "Arial";
+	letter-spacing: -1px;
+	color: #888;
+	}
+	
+div.datestart {
+	clear: both;
+	background-color: #f4f4f4;
+	margin: 10px 0px;
+	padding: 3px;
+	text-transform: uppercase;
+	font: 12px "Arial";
+	letter-spacing: -1px;
+	border-left: 9px solid white;
+	color: #888;
+	}
+	
+div#date_label_4 {
+	clear: both;
+	background-color: #f4f4f4;
+	margin: 10px 0px;
+	padding: 3px;
+	text-transform: uppercase;
+	font: 12px "Arial";
+	letter-spacing: -1px;
+	border-left: 9px solid white;
+	color: #888;
+	}
+
+div.item_wrapper {
+	height: 180px;
+	width: 240px;
+	background: #ccc;
+	overflow: hidden;
+	margin: 0 0 0 10px;
+	}
+	
+div#map_canvas div.item_wrapper {
+	margin: 0px;
+	}
+	
+div.item_content {
+	position: relative;
+	}
+	
+div.item_content div.title a {
+	text-transform: none;
+	}
+
+div.item_content div.item_left {
+	position: absolute;
+	top: 0;
+	background: transparent url('../images/story_roundedbg.png') no-repeat;
+	margin: 3px 0 0 2px;
+	padding: 1px 3px 3px 0;
+	font-size: 11px;
+	width: 80px; 
+	color: black;
+	font-family: Verdana, Arial, sans-serif;
+}
+
+div.item_content div.item_left_wide {
+	position: absolute;
+	top: 0;
+	background: transparent url('../images/story_roundedbg_wide.png') no-repeat;
+	margin: 3px 0 0 2px;
+	padding: 1px 3px 3px 0;
+	font-size: 11px;
+	width: 150px; 
+	color: black;
+	font-family: Verdana, Arial, sans-serif;
+	text-align: left;
+}
+
+div.item_content div.item_left img {
+	vertical-align: top;
+	margin: 0 5px 0 9px;
+}
+
+div.item_content div.item_left_wide img {
+	vertical-align: top;
+	margin: 0 5px 0 9px;
+}
+
+div.item_actions {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 3px; 
+}
+
+div.flickr, div.picasa, div.tumblr_image, div.storytlr_image, div.twitter_image {
+	position: absolute;
+	top: 0;
+	width: 240px;
+	height: 180px;
+	overflow: hidden;
+}
+
+div.flickr img, div.picasa img, div.tumblr_image img, div.storytlr_image img, div.twitter_image img {
+	width: 240px;
+}
+
+div.flickr div.titlewrapper, div.picasa div.titlewrapper, div.tumblr_image div.titlewrapper, div.storytlr_image div.titlewrapper, div.twitter_image div.titlewrapper {
+	position: absolute;
+	bottom: 0;
+	background: transparent url('../images/story_blackbg.png');
+	width: 240px;
+	font-size: 10px;
+	color: white;
+}
+
+div.flickr div.title, div.picasa div.title, div.tumblr_image div.title, div.storytlr_image div.title, div.twitter_image div.title {
+	position: relative;
+	margin: 3px 6px;
+	word-wrap: break-word;
+}
+
+div.twitter table, div.storytlr_status table, div.facebook table {
+	border: none;
+}
+
+div.twitter td, div.storytlr_status td, div.facebook td {
+	background: #d6f8fd;
+	height: 180px;
+	width: 240px;
+	vertical-align: middle;
+	padding: 10px 20px 0px 20px;
+	text-align: center;
+	font-weight: bold;
+	font-family: Georgia;
+	font-size: 12px;
+	border: none;
+	word-wrap: break-word;
+	width: 200px;
+}
+
+div.twitter div.title, div.storytlr_status div.title, div.facebook div.title {
+	background-color: white;
+	padding: 12px 10px;
+}
+
+div.twitter div.triangle, div.storytlr_status div.triangle, div.facebook div.triangle {
+	background: url('../images/speechbubble.gif') bottom transparent;
+	width: 32px;
+	height: 20px;
+	float: right;
+	margin-right: 16px;
+}
+
+div.twitter a, div.storytlr_status a, , div.facebook a {
+	text-transform: none;
+	word-wrap: break-word;
+	}
+
+div.twitter span.quote, div.storytlr_status span.quote, div.facebook span.quote {
+	color: #999;
+}
+
+div.delicious table, div.storytlr_link table, div.stumble table, div.digg table, div.tumblr_link table {
+	border: none;
+}
+
+div.delicious td, div.storytlr_link td, div.stumble td, div.digg td, div.tumblr_link td {
+	background: #d6f8fd;
+	height: 180px;
+	width: 240px;
+	vertical-align: middle;
+	padding: 10px 20px 0px 20px;
+	text-align: center;
+	font-weight: bold;
+	font-family: Georgia;
+	font-size: 12px;
+	border: none;
+	word-wrap: break-word;
+	width: 200px;
+}
+
+div.delicious div.title, div.storytlr_link div.title, div.stumble div.title, div.digg div.title, div.tumblr_link div.title {
+	background: white;
+	padding: 12px 10px;
+}
+
+div.delicious span.label, div.storytlr_link span.label, div.stumble span.label, div.digg span.label, div.tumblr_link span.label {
+	font-size: 80%;
+	line-height: 200%;
+}
+
+div.delicious a, div.storytlr_link a, div.stumble a, div.digg a, div.tumblr_link a {
+	text-transform: none;
+	word-wrap: break-word;
+	}
+
+div.delicious span.quote, div.storytlr_link span.quote, div.stumble span.quote, div.digg span.quote, div.tumblr_link span.quote {
+	color: #999;
+}
+
+div.storytlr_blog table, div.googlereader table, div.rss table, div.tumblr_blog table {
+	border: none;
+}
+
+div.storytlr_blog td, div.googlereader td, div.rss td, div.tumblr_blog td {
+	background: #d6f8fd;
+	height: 180px;
+	width: 240px;
+	vertical-align: middle;
+	padding: 10px 20px 0px 20px;
+	text-align: center;
+	font-weight: bold;
+	font-family: Georgia;
+	font-size: 12px;
+	border: none;
+	word-wrap: break-word;
+	width: 200px;
+}
+
+div.storytlr_blog div.title, div.googlereader div.title, div.rss div.title, div.tumblr_blog div.title {
+	background: white;
+	padding: 12px 10px;
+}
+
+div.storytlr_blog span.label, div.googlereader span.label, div.rss span.label, div.tumblr_blog span.label {
+	font-size: 80%;
+	line-height: 200%;
+}
+
+div.storytlr_blog a, ddiv.googlereader a, div.rss a, div.tumblr_blog a {
+	text-transform: none;
+	word-wrap: break-word;
+	}
+
+div.storytlr_blog span.quote, div.googlereader span.quote, div.rss span.quote, div.tumblr_blog span.quote {
+	color: #999;
+}
+
+div.lastfm table {
+	border: none;
+}
+
+div.lastfm table td {
+	background: #d6f8fd;
+	height: 180px;
+	width: 240px;
+	vertical-align: bottom;
+	padding: 10px 20px 5px 20px;
+	text-align: center;
+	font-weight: bold;
+	font-family: Georgia;
+	font-size: 12px;
+	border: none;
+	word-wrap: break-word;
+	width: 200px;
+}
+
+div.lastfm table td div.title {
+	padding: 12px 10px;
+}
+
+div.lastfm table td div.title span.label {
+	font-size: 80%;
+	line-height: 200%;
+}
+
+div.lastfm a {
+	text-transform: none;
+	word-wrap: break-word;
+	}
+
+div.lastfm table td span.quote {
+	color: #999;
+}
+
+div.tumblr_audio table, div.storytlr_audio table {
+	border: none;
+}
+
+div.tumblr_audio td, div.storytlr_audio td {
+	background: #d6f8fd;
+	height: 180px;
+	width: 240px;
+	vertical-align: middle;
+	padding: 5px 20px 15px 20px;
+	text-align: center;
+	font-weight: bold;
+	font-family: Arial;
+	font-size: 11px;
+	border: none;
+	word-wrap: break-word;
+	width: 200px;
+}
+
+div.div.tumblr_audio div.title, div.storytlr_audio div.title {
+	background: white;
+	padding: 8px;
+}
+
+div.div.tumblr_audio span.label, div.storytlr_audio span.label {
+	font-size: 80%;
+	line-height: 200%;
+}
+
+div.div.tumblr_audio a, div.storytlr_audio a {
+	text-transform: none;
+	word-wrap: break-word;
+}
+
+div.div.tumblr_audio span.quote, div.storytlr_audio span.quote {
+	color: #999;
+}
+
+br.fix {
+	clear: both;
+	height: 1px;
+}
+
+table.bottom_nav {
+	position: absolute;
+	bottom: 0;
+	width: 1000px;
+	margin-bottom: 20px;
+	margin-left: 25px;
+}
+
+table.top_nav {
+	position: absolute;
+	top: 0;
+	width: 1000px;
+	margin-bottom: 20px;
+	margin-left: 25px;
+	margin-top: 15px;
+}
+
+table.top_nav span.title {
+	font-weight: bold;
+}
+
+table.bottom_nav td {
+	width: 33%;
+	text-transform: uppercase;
+	color: #777;
+	font-size: 12px;
+	}
+	
+table.top_nav td {
+	width: 33%;
+	text-transform: uppercase;
+	color: #333;
+	vertical-align: top;
+	font-size: 12px;
+	}
+
+table.bottom_nav td.right, table.top_nav td.right {
+	text-align: right;
+}
+
+table.bottom_nav td.center, table.top_nav td.center {
+	text-align: center;
+}
+
+div#back {
+	margin-left: 10px;
+}
+
+div.hidden {
+	/*filter:alpha(opacity=30);-moz-opacity:.30;opacity:.30;*/
+	color: #999;
+}
+
+div.hidden div.twitter td{
+	filter:alpha(opacity=30);-moz-opacity:.30;opacity:.30;
+}
+
+div.hidden div.picasa img, div.hidden div.flickr img {
+	filter:alpha(opacity=30);-moz-opacity:.30;opacity:.30;
+}
+
+div.hidden div.picasa img:hover, div.hidden div.flickr img:hover {
+	cursor: pointer;
+}
+
+div.hidden div.video {
+	filter:alpha(opacity=30);-moz-opacity:.30;opacity:.30;
+}
+
+img.cover {
+	position: absolute;
+	width: 100%;
+	top: -156px;
+}
+
+div.coverwrapper {
+	position: absolute;
+	top: 10px;
+	margin-left: 10px;
+}
+
+div.cover {
+	position: absolute;
+	width: 990px;
+	height: 430px;
+	overflow: hidden;
+}
+
+div.coverwrapper div.titles {
+	position: absolute;
+	top: 440px;
+	width: 990px;
+}
+
+div.coverwrapper span.title {
+	font-size: 30px;
+	font-weight: bold;
+	letter-spacing: -2px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+}
+
+div.coverwrapper span.subtitle {
+	font-size: 30px;
+	font-weight: bold;
+	letter-spacing: -2px;
+	color: #CCC;
+	display: block;
+	float: left;
+}
+
+form.inplaceeditor-form { /* The form */
+}
+
+form.inplaceeditor-form input[type="text"] { /* Input box */
+	width: 193px;
+	float: left;
+	background: transparent;
+	border: none;
+	color: white;
+	padding: 3px;
+}
+
+div.titles form.inplaceeditor-form input[type="text"] { /* Input box */
+	width: 400px;
+	float: left;
+	background: transparent;
+	border: none;
+	color: black;
+	padding: 3px;
+	border: 2px dotted #ccc;
+	font-size: 30px;
+	font-weight: bold;
+	letter-spacing: -2px;
+	font-family: Verdana;
+}
+
+form.inplaceeditor-form textarea { /* Textarea, if multiple columns */
+}
+
+form.inplaceeditor-form input[type="submit"] { /* The submit button */
+  width: 16px;
+  height: 16px;
+  background: transparent url('../images/02.png'); 
+  display: block;
+  float: left;
+  margin: 1px 0 0 3px;
+  border: none;
+  cursor: pointer;
+}
+
+form.inplaceeditor-form a { /* The cancel link */
+  width: 16px;
+  height: 16px;
+  background: transparent url('../images/01.png'); 
+  display: block;
+  float: left;
+  margin: 2px 0 0 3px;
+}
+
+img.addthis {
+	margin: 7px 0px 0px 0px;
+}
+
+div.item_status_wrapper {
+	position: absolute;
+	margin: 80px 80px 0 80px;
+	font-size: 0.9em;
+	color: black;
+	z-index: 100;
+	width: 80px;
+	background:transparent url(../images/story_roundedbg.png) no-repeat scroll center;
+	height: 20px;	
+}
+
+div.item_status {
+	margin: 1px 0px 0 0px;
+	height: 20px;
+	line-height: 160%;
+	font-size: 10px;
+	text-align: center;	
+}
+
+div.item_status img {
+	vertical-align: bottom;
+}
+
+div.maptitles {
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	padding: 8px 0px 8px 80px;
+	background: url('../images/story_blackbg.png');
+	width: 100%;
+}
+
+div#storycontrols {
+	margin: 8px 0px 8px 200px;
+}
+
+div#pagecontrols {
+	margin: 8px 0px 120px 8px;
+	height: 1px;
+}
+
+div#pagecontrols div {
+	float: left;
+}
+
+div#storycontrols div {
+	float: left;
+}
+
+div.storyoverview {
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	width: 320px;
+	z-index: 0;
+	margin: 8px 10px 8px 0px;
+	background-color: #ccc;
+	padding: 5px 0px;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #777;
+}
+
+div.storyplayer {
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	z-index: 0;
+	margin: 8px 10px 8px 0px;
+	background-color: #ccc;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #777;
+	height: 42px;
+	width: 115px;
+	padding: 5px;
+}
+
+div.storypowered {
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	z-index: 0;
+	margin: 8px 10px 8px 0px;
+	background-color: #000;
+	padding: 5px 0px;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #000;
+	height: 42px;
+}
+
+div.storypowered img {
+	margin-top: 5px;
+}
+
+div.storyplayer div.controls {
+	margin: 7px;	
+}
+
+div.storyplayer div.controls div {
+	margin: 0px 2px;	
+}
+
+div.storyplayer div div:hover {
+	cursor: pointer;
+}
+
+div.storyplayer img {
+	margin: 0 1px 0 0;
+}
+
+div#maptitlewrapper {
+	overflow-x: hidden;
+}
+
+div.maptitles span.subtitle{
+	color: #ccc;
+}
+
+/* 
+	root element for the scrollable. 
+	when scrolling occurs this element stays still. 
+*/
+div.scrollable {
+	
+	/* required settings */
+	position:relative;
+	overflow:hidden;	 	
+	width:240px;
+	height:30px;	
+	
+	/* custom decorations */
+	padding:5px 0;	
+	border:1px solid #aaa;
+	background-color: #bbb;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;			
+}
+
+/* 
+	root element for scrollable items. Must be absolutely positioned
+	and it should have a super large width to accomodate scrollable items.
+	it's enough that you set width and height for the root element and
+	not for this element.
+*/
+div.scrollable div.items {	
+	/* this cannot be too large */
+	width:20000em;	
+	position:absolute;
+	clear:both;		
+	
+	/* decoration */
+	margin-left:5px;
+}
+
+/* single scrollable item */
+div.scrollable div.items div {
+	float:left;
+	
+	/* custom decoration */
+	text-align:center;
+	width:40px;
+	padding:5px 0px;
+	font-size:15px;
+	font-family: 'bitstream vera sans';
+	border:1px solid #aaa;
+	background-color: #ddd;
+	margin-right: 5px;	
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	color: black;
+}
+
+div.scrollable div.items div {
+	cursor: pointer;
+}
+
+/* active item */
+div.scrollable div.items div.active {
+	background-color:#a2dafa;
+}
+
+/* this makes it possible to add next button beside scrollable */
+div.scrollable {
+ 	float:left;
+}
+
+/* prev, next, prevPage and nextPage buttons */
+a.prev, a.next, a.prevPage, a.nextPage {
+ 	display:block;
+ 	width:18px;
+	height:18px;
+ 	background:url(../images/left.png) no-repeat;
+ 	float:left;
+ 	margin:10px 10px;
+ 	cursor:pointer;
+}
+
+/* mouseover state */
+a.prev:hover, a.next:hover, a.prevPage:hover, a.nextPage:hover {
+ 	cursor: pointer;
+}
+
+/* disabled navigational button */
+a.disabled {
+ 	visibility:hidden !important;
+}
+
+/* next button uses another background image */
+a.next, a.nextPage {
+ 	background-image:url(../images/right.png);
+ 	clear:right;
+}
+
+div#togglenavigation {
+	position: absolute;
+	z-index: 100;
+	right: 0;	
+}
+
+div.toggle {
+	background-color: #ccc;
+	border: 1px solid #777;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	margin: 50px 10px 0 0;
+	padding: 4px;
+}
+
+div.togglecontainer{
+	padding:2px 4px;	
+	border:1px solid #aaa;
+	background-color: #bbb;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+}
+
+div.togglecontainer div:hover{
+	cursor: pointer;
+}
+
+div.togglecontainer div{
+	padding:5px;
+	border:1px solid #aaa;
+	background-color: #ddd;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	text-align: center;
+	margin: 3px 0;
+}
+
+div.togglecontainer div.active{
+	background-color:#a2dafa;
+	cursor: default;
+}

@@ -1,0 +1,37 @@
+<h1>Configure</h1>
+<p>
+You can configure your homepage below.
+</p>
+
+<?= $this->partial("partials/tabmenu.phtml", array('tab' => 'profile'));?>
+
+<img id = 'wait' src='images/wait30.gif' style='display:none;' />
+
+<h3>Detail your profile</h3>
+<p>
+These profile details will be used to fill the profile widget.
+</p>
+<table>
+	<tr>
+		<?php if ($this->avatar) : ?>	
+		<td class="label"><label class="optional" for="link_color">Your avatar</label></td>
+		<td>
+				<img class="avatar" src="thumbnail/<?= $this->avatar ?>"/>
+				(<a href="admin/profile/noavatar">Delete</a>)
+		</td>
+		<?php else : ?>	
+		<td class="label"><label class="optional" for="link_color">Upload an avatar</label></td>
+		<td>
+		<form id='formAvatar' enctype="multipart/form-data" action="admin/profile/uploadimage" method="post">
+			<!-- MAX_FILE_SIZE must precede the file input field -->
+				<input type="hidden" name="MAX_FILE_SIZE" value="2000000" 	style="display:none"/>
+				<input type="hidden" name="image" 		  value="avatar" 	style="display:none"/>
+				<!-- Name of input element determines name in $_FILES array -->
+				<input name="file" type="file" /><input type="submit" value="Upload file"/><br />
+				Image will be resized to 75x75 pixels. Maximum size is 2MB, only GIF, JPG and PNG are supported.
+		</form>
+		</td>
+		<?php endif ?>
+	</tr>
+</table>
+<?= $this->form ?>
