@@ -509,10 +509,6 @@ class Bootstrap
 				$application->user = $user;
 				$application->role = 'member';
 			}
-
-			if ($user->username == 'eschnou' || $user->username == 'alardw') {
-				$application->role = 'admin';
-			}
 		}
 	}
 
