@@ -13,14 +13,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *  
- *  JAVASCRIPT FOR SUBMITTING PROFILE
+ *  JAVASCRIPT DISAPPEAR EFFECT
  */
- 
- function submitFormProfile() {
-        form = new ValidateForm($('formProfile'),"admin/profile/submit");
-        form.errorElem 		= $('error_messages');
-        form.successElem 	= $('status_messages');
-        form.waitElem 		= $('wait');
-        form.successMessage = 'Your changes have been saved';
-        return form.submit();
-}
+
+Effect.Disapear = function(element) {
+  element = $(element);
+  var oldOpacity = element.getInlineOpacity();
+  var options = Object.extend({
+    from: element.getOpacity() || 1.0,
+    to:   0.0,
+    afterFinishInternal: function(effect) { 
+      if (effect.options.to!=0) return;
+      effect.element.remove();
+    }
+  }, arguments[1] || { });
+  return new Effect.Opacity(element,options);
+};

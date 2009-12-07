@@ -1,5 +1,22 @@
-// javascript:var%20txt;if%20(window.getSelection)%20{txt%20=%20window.getSelection();}%20else%20if%20(document.getSelection)%20{txt%20=%20document.getSelection();}%20else%20if%20(document.selection)%20{txt%20=%20document.selection.createRange().text;}%20else%20{txt%20=%20%27%27;}window.open(%22http://storytlr.com/admin/post/?bookmarklet=true&v=1&s=%22+encodeURIComponent(txt)+%22&u=%22+encodeURIComponent(location.href)+%22&t=%22+encodeURIComponent(document.title),%22storytlr%22,%22toolbar=no,resizable=no,status=no,location=no,directories=no,width=640,height=600%22);void(0);
-var txt;
+/*
+ *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *  
+ *  JAVASCRIPT FOR BOOKMARKLET
+ */
+ 
+ var txt;
  
 if (window.getSelection) {
 	txt = window.getSelection();

@@ -60,7 +60,7 @@ class Admin_ServicesController extends Admin_BaseController
 		
 		// Add common stuff
 		$this->common();		
-		$this->view->headScript()->appendFile('js/stuffpress/effects.js');
+		$this->view->headScript()->appendFile('js/storytlr/effects.js');
 		$this->view->headScript()->appendFile('js/controllers/services.js');
 	}
 	
@@ -93,8 +93,8 @@ class Admin_ServicesController extends Admin_BaseController
 		
 		// Commn view stuff
 		$this->common();
-		$this->view->headScript()->appendFile('js/stuffpress/effects.js');
-		$this->view->headScript()->appendFile('js/stuffpress/focus.js');
+		$this->view->headScript()->appendFile('js/storytlr/effects.js');
+		$this->view->headScript()->appendFile('js/storytlr/focus.js');
 		$this->view->headScript()->appendFile('js/controllers/services.js');
 	}
 	
@@ -114,8 +114,8 @@ class Admin_ServicesController extends Admin_BaseController
 
 		// Common view stuff
 		$this->common();
-		$this->view->headScript()->appendFile('js/stuffpress/effects.js');
-		$this->view->headScript()->appendFile('js/stuffpress/focus.js');
+		$this->view->headScript()->appendFile('js/storytlr/effects.js');
+		$this->view->headScript()->appendFile('js/storytlr/focus.js');
 		$this->view->headScript()->appendFile('js/controllers/services.js');
 	}
 	

@@ -147,12 +147,6 @@ class StorymapController extends BaseController
 		$user_footer					= $properties->getProperty('footer');
 		$this->view->user_footer 		= $user_footer;
 		
-		// Javascript
-		// $this->view->headScript()->appendFile('js/prototype/prototype.js');
-		// $this->view->headScript()->appendFile('js/scriptaculous/scriptaculous.js');	
-		// $this->view->headScript()->appendFile('js/stuffpress/validateForm.js');
-		// $this->view->headScript()->appendFile('js/controllers/story.js');
-		
 		// Page title
 		$this->view->headTitle($story->title . " | " .$story->subtitle);
 		

@@ -90,7 +90,7 @@ class Admin_AdvancedController extends Admin_BaseController
 		$e = $form->createElement('text', 'cname',  array('size' => 37, 'label' => 'Own domain', 'decorators' => $form->elementDecorators));
         $e->setRequired(false);
         $e->addFilter('StringToLower');
-        $e->setDescription("Fill-in your domain name (e.g. www.johndoe.com) and add a CNAME entry towards storytlr.com (<a href='page/faq#1c'>help</a>)");
+        $e->setDescription("Fill-in your domain name (e.g. www.johndoe.com) and add a CNAME entry towards this domain (<a href='page/faq#1c'>help</a>)");
         $form->addElement($e);
 
         // Disqus
@@ -107,7 +107,7 @@ class Admin_AdvancedController extends Admin_BaseController
         // Friend connect
 		$e = $form->createElement('text', 'friendconnect',  array('size' => 37, 'label' => 'Friend connect key', 'decorators' => $form->elementDecorators));
         $e->setRequired(false);
-        $e->setDescription("Add Google Friend Connect to your site an d make it social !(<a href='page/faq#1g'>help</a>)");
+        $e->setDescription("Add Google Friend Connect to your site and make it social");
         $form->addElement($e);
     
         

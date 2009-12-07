@@ -27,7 +27,7 @@ class Admin_PagesController extends Admin_BaseController
 		
 		// Prepare view
 		$this->common();
-		$this->view->headScript()->appendFile('js/stuffpress/effects.js');
+		$this->view->headScript()->appendFile('js/storytlr/effects.js');
 		$this->view->headScript()->appendFile('js/controllers/pages.js');	
 	}
 	
@@ -44,7 +44,7 @@ class Admin_PagesController extends Admin_BaseController
 		
 		// Prepare the view
 		$this->common();
-		$this->view->headScript()->appendFile('js/stuffpress/effects.js');
+		$this->view->headScript()->appendFile('js/storytlr/effects.js');
 		$this->view->headScript()->appendFile('js/controllers/pages.js');
 		$this->view->name		 = $model->getName();
 		$this->view->description = $model->getDescription();
@@ -90,7 +90,7 @@ class Admin_PagesController extends Admin_BaseController
 		
 		// Prepare the view
 		$this->common();
-		$this->view->headScript()->appendFile('js/stuffpress/effects.js');
+		$this->view->headScript()->appendFile('js/storytlr/effects.js');
 		$this->view->headScript()->appendFile('js/controllers/pages.js');	
 		$this->view->name		 = $model->getName();
 		$this->view->edit		 = 'true';

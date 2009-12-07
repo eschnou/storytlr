@@ -1,6 +1,27 @@
 @CHARSET "UTF-8";
+/*
+ *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *  
+ *  STYLESHEET FOR STORIES
+ */
+
+/* The PNG hack for IE */
 
 div.item_left, img.icon, div.titlewrapper, div.item_actions img { behavior: url(../js/pngfix/iepngfix.htc) }
+
+/* General */
 
 html {height: 100%; width:100%;}
 
@@ -15,6 +36,18 @@ body {
 img {
 	border: none;
 }
+	
+a {
+	text-decoration: none;
+	color: #53b0f8;
+	text-transform: uppercase;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* Main layout */
 
 div.pagewrapper {
 	position: absolute;
@@ -41,16 +74,8 @@ div#content {
 	top: 80px;
 	left: 20px;
 }
-	
-a {
-	text-decoration: none;
-	color: #53b0f8;
-	text-transform: uppercase;
-}
 
-a:hover {
-	text-decoration: underline;
-}
+/* Items */
 
 div.fullitem_wrapper {
 	float: left;
@@ -379,6 +404,8 @@ br.fix {
 	height: 1px;
 }
 
+/* Story navigation */
+
 table.bottom_nav {
 	position: absolute;
 	bottom: 0;
@@ -448,6 +475,8 @@ div.hidden div.video {
 	filter:alpha(opacity=30);-moz-opacity:.30;opacity:.30;
 }
 
+/* Story cover */
+
 img.cover {
 	position: absolute;
 	width: 100%;
@@ -490,6 +519,8 @@ div.coverwrapper span.subtitle {
 	display: block;
 	float: left;
 }
+
+/* Form element for editing directly in stories */
 
 form.inplaceeditor-form { /* The form */
 }
@@ -576,6 +607,8 @@ div.maptitles {
 	background: url('../images/story_blackbg.png');
 	width: 100%;
 }
+
+/* Story navigation in map view */
 
 div#storycontrols {
 	margin: 8px 0px 8px 200px;
