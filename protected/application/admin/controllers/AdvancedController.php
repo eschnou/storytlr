@@ -90,7 +90,7 @@ class Admin_AdvancedController extends Admin_BaseController
 		$e = $form->createElement('text', 'cname',  array('size' => 37, 'label' => 'Own domain', 'decorators' => $form->elementDecorators));
         $e->setRequired(false);
         $e->addFilter('StringToLower');
-        $e->setDescription("Fill-in your domain name (e.g. www.johndoe.com) and add a CNAME entry towards this domain (<a href='page/faq#1c'>help</a>)");
+        $e->setDescription("Fill-in your domain name (e.g. www.johndoe.com) and add a CNAME entry towards this domain (<a href='http://code.google.com/p/storytlr/wiki/CName'>help</a>)");
         $form->addElement($e);
 
         // Disqus
@@ -100,7 +100,7 @@ class Admin_AdvancedController extends Admin_BaseController
 		$e = $form->createElement('text', 'disqus',  array('size' => 37, 'label' => 'Disqus commenting', 'decorators' => $form->elementDecorators));
         $e->setRequired(false);
         $e->addFilter('StringToLower');
-        $e->setDescription("Create a disqus web site for the url $url and fill-in its short-name (<a href='page/faq#1f'>help</a>)");
+        $e->setDescription("Create a disqus web site for the url $url and fill-in its short-name (<a href='http://code.google.com/p/storytlr/wiki/FAQ'>help</a>)");
         $form->addElement($e);
 
         
