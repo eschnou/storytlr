@@ -1,10 +1,4 @@
-/*  
-	Storytlr Pixeled theme
-	---------------------------------------
-	Please note! The lifestream and stories contents are in a separate stylesheet
-*/
-
-/*  Original Wordpress theme info
+/*  This is a theme that is based on the original Wordpress theme below: 
 
 	Theme Name: Pixeled
 	Theme URI: http://samk.ca/freebies/free-wordpress-theme-pixeled/
@@ -16,7 +10,6 @@
 	.
 	Released under the <a href="http://www.opensource.org/licenses/gpl-license.php">GPL</a>.
 	.
-
 */
 
 @import "../../style/public.css";

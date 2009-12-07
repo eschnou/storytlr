@@ -39,7 +39,7 @@ class Sources extends Stuffpress_Db_Table
 		if (is_dir($dir)) {
 			if ($dh = opendir($dir)) {
 				while (($file = readdir($dh)) !== false) {
-					if ($file != "." && $file != ".." && $file != "CVS" && $file != "SVN") {
+					if ($file != "." && $file != ".." && $file != "CVS" && $file != "SVN" && $file != '.svn') {
 						$plugins[] = basename($file);
 					}
 				}

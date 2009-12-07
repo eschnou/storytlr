@@ -102,8 +102,8 @@ abstract class BaseController extends Stuffpress_Controller_Action
 		$this->view->headScript()->appendFile('js/scriptaculous/slider.js');
 		$this->view->headScript()->appendFile('js/scriptaculous/sound.js');
 
-		$this->view->headScript()->appendFile('js/stuffpress/validateForm.js');
-		$this->view->headScript()->appendFile('js/stuffpress/common.js');
+		$this->view->headScript()->appendFile('js/storytlr/validateForm.js');
+		$this->view->headScript()->appendFile('js/storytlr/common.js');
 		$this->view->headScript()->appendFile('js/controllers/adminbar.js');
 		$this->view->headScript()->appendFile('js/accordion/accordion.js');
 		

@@ -27,7 +27,7 @@ class Admin_WidgetsController extends Admin_BaseController
 
 		// Prepare view
 		$this->common();
-		$this->view->headScript()->appendFile('js/stuffpress/effects.js');
+		$this->view->headScript()->appendFile('js/storytlr/effects.js');
 		$this->view->headScript()->appendFile('js/controllers/widgets.js');	
 	}
 	

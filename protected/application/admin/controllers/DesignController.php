@@ -74,7 +74,7 @@ class Admin_DesignController extends Admin_BaseController
 		$this->view->headScript()->appendFile('js/colorpicker/colorpicker.js');
 		$this->view->headScript()->appendFile('js/controllers/design.js');
 		
-		// Specific CS
+		// Specific CSS
 		$this->view->headLink()->appendStylesheet('style/colorpicker.css');
 	}
 

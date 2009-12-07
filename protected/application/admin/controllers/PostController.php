@@ -906,7 +906,7 @@ class Admin_PostController extends Admin_BaseController
 		
 		// Add required javascript files
 		$this->view->headScript()->appendFile('js/calendar_date_select/calendar_date_select.js');				
-		$this->view->headScript()->appendFile('js/stuffpress/validateForm.js');
+		$this->view->headScript()->appendFile('js/storytlr/validateForm.js');
 		$this->view->headScript()->appendFile('js/controllers/post.js');
 		
 		// Add required css files

@@ -45,7 +45,7 @@ class Admin_PreferencesController extends Admin_BaseController
 		
 		// Common stuff
 		$this->common();
-		$this->view->headScript()->appendFile('js/stuffpress/timezone.js');
+		$this->view->headScript()->appendFile('js/storytlr/timezone.js');
 		$this->view->headScript()->appendFile('js/controllers/preferences.js');
 	}
 

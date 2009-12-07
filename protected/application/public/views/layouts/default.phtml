@@ -74,6 +74,9 @@
 
 <?php if($this->admin) : ?>
 <div id="adminbar">
+	<div id="logo">
+			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="../images/admin-logo.gif" title="To the administration environment"/></a>
+	</div>
 	<div id="loginStatus">
 			<span class="signedin">Signed in as <strong><?= $this->application()->username() ?></strong></span> <a href='admin/auth/logout?target=<?= urlencode($this->base()->thisUrl())?>' 	title='Sign out' 	onfocus='this.blur()' <?php if ($this->section == "logout") {?> class="current" <?php }?>>Sign out</a>	
 	</div>
@@ -89,6 +92,9 @@
 </div>
 <?php elseif ($this->application()->authenticated()) : ?>
 <div id="adminbar">
+	<div id="logo">
+			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="../images/admin-logo.gif" title="To the administration environment"/></a>
+	</div>
 	<div id="loginStatus">
 			<span class="signedin">Signed in as <strong><?= $this->application()->username() ?></strong></span> <a href='admin/auth/logout?target=<?= urlencode($this->base()->thisUrl()) ?>' 	title='Sign out' 	onfocus='this.blur()' <?php if ($this->section == "logout") {?> class="current" <?php }?>>Sign out</a>	
 	</div>
@@ -100,7 +106,10 @@
 </div>
 <?php else : ?>
 <div id="adminbar" style="display:none;">
-	<div>
+	<div id="logo">
+			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="../images/admin-logo.gif" title="To the administration environment"/></a>
+	</div>
+	<div id="login">
 	<form id="formLogin" enctype="application/x-www-form-urlencoded" action="<?= $this->base()->serviceUrl() ?>/admin/auth/login" method="post">
 	Username: <input id="username" name="username" size="17" maxlength="16" tabindex="101" /> 
 	Password: <input id="password" name="password" size="17" maxlength="16" type="password" tabindex="102" />
@@ -226,25 +235,16 @@
 			</div>
 		</div>
 		
+		<div id="footer-wrapper">
+			<div id="footer">
+				Web site powered by <a href="http://storytlr.googlecode.com">storytlr</a>, version <?php echo STORYTLR_VERSION ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+			</div>
+		</div>
+		
 		</div>
 	</div>
 	
 	<br class="fix"/>
-	
-</div>
-
-<div id="footer-wrapper">
-	<div id="footer">
-	</div>
-</div>
-
-<br class="fix" />
-		
-<div id="copyright">
-<p>
-	Web site powered by <a href="http://storytlr.googlecode.com">storytlr</a>, version <?php echo STORYTLR_VERSION ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
-</p>	
-</div>
 	
 </div>
 

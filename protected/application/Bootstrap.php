@@ -477,7 +477,7 @@ class Bootstrap
 		if (is_dir($dir)) {
 			if ($dh = opendir($dir)) {
 				while (($file = readdir($dh)) !== false) {
-					if ($file != "." && $file != ".." && $file != "CVS" && $file != "SVN") {
+					if ($file != "." && $file != ".." && $file != "CVS" && $file != "SVN" && $file != ".svn") {
 						set_include_path($dir . basename($file) . '/models/' . PATH_SEPARATOR . get_include_path());
 					}
 				}

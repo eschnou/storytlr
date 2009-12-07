@@ -176,7 +176,7 @@ class StoryController extends BaseController
 		// Javascript
 		$this->view->headScript()->appendFile('js/prototype/prototype.js');
 		$this->view->headScript()->appendFile('js/scriptaculous/scriptaculous.js');	
-		$this->view->headScript()->appendFile('js/stuffpress/validateForm.js');
+		$this->view->headScript()->appendFile('js/storytlr/validateForm.js');
 		$this->view->headScript()->appendFile('js/controllers/story.js');
 		
 		// Page title

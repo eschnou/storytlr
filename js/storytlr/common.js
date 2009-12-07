@@ -13,14 +13,26 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *  
- *  JAVASCRIPT FOR SUBMITTING PROFILE
+ *  JAVASCRIPT DIALOGS
  */
- 
- function submitFormProfile() {
-        form = new ValidateForm($('formProfile'),"admin/profile/submit");
-        form.errorElem 		= $('error_messages');
-        form.successElem 	= $('status_messages');
-        form.waitElem 		= $('wait');
-        form.successMessage = 'Your changes have been saved';
-        return form.submit();
+
+function clipboard(element) {
+	var area = $(element);
+	area.focus()
+    area.select()
+	var range = area.createTextRange();
+	range.execCommand("Copy");
+}
+
+function showDialog(name) {
+	var wrapper   = $('overlay_frame_wrapper');
+	var frame     = $('overlay_frame');
+	
+	if (!wrapper.visible()) {
+		wrapper.show();
+	    frame.src = '/dialogs/' + name + '/';
+	}
+	else {
+		wrapper.hide();
+	}
 }
