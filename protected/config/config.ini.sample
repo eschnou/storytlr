@@ -25,7 +25,7 @@ web.timezone=Europe/Brussels
 app.closed=1							; Set to 0 to enable registration
 app.from_email=support@noreply.net
 app.admin_email=admin@noreply.net
-app.user=default						; Comment this to switch to multi-user setup
+app.user=admin						; Comment this to switch to multi-user setup
 
 ;Debug settings
 debug 	= 0

@@ -411,7 +411,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `properties` WRITE;
 /*!40000 ALTER TABLE `properties` DISABLE KEYS */;
-INSERT INTO `properties` VALUES (1,'theme','clouds'),(1,'title','Default'),(1,'subtitle','my life online'),(1,'stuffpress_source','1');
+INSERT INTO `properties` VALUES (1,'theme','clouds'),(1,'title','Welcome'),(1,'subtitle','to the online me'),(1,'stuffpress_source','1');
 /*!40000 ALTER TABLE `properties` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -827,7 +827,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'default','c4fe8a7d3e2d022232df5317767b7122','',1,'GaGepfkrnzTSwboO6FX9HXXi200um6Ij','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00',0,'0000-00-00 00:00:00',NULL,0,'0000-00-00 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `users` VALUES (1,'admin','c4fe8a7d3e2d022232df5317767b7122','',1,'GaGepfkrnzTSwboO6FX9HXXi200um6Ij','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00',0,'0000-00-00 00:00:00',NULL,0,'0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
