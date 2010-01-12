@@ -50,10 +50,12 @@ class ErrorController extends Zend_Controller_Action
 		}
 
 		// Log the error
+		$config = Zend_Registry::get("configuration");
+		$path   = isset($config->path->logs) ? $config->path->logs : Zend_Registry::get("root") .'/logs/';
 		$root	= Zend_Registry::get("root");
 		$uri	= Zend_Registry::isRegistered("uri") ? Zend_Registry::get("uri") : '';
 		$host 	= Zend_Registry::isRegistered("host") ? Zend_Registry::get("host") : '';
-		$log 	= new Zend_Log(new Zend_Log_Writer_Stream($root.'/logs/applicationException.log'));
+		$log 	= new Zend_Log(new Zend_Log_Writer_Stream($path. '/applicationException.log'));
 		$log->debug("Exception for request http://$host/$uri\n" . $exception->getMessage() . "\n" .  $exception->getTraceAsString() . "\n----------------------------\n\n");
 
 		// Are we in debug mode ?

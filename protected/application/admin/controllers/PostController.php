@@ -446,7 +446,7 @@ class Admin_PostController extends Admin_BaseController
 		// Redirect to the timeline
 		$username	= $this->_application->user->username;
 		$url	= $this->getUrl($username, "/entry/" . $item->getSlug());
-		
+
 		// If a bookmarklet, we show the 'done screen'
 		if ($this->_bookmarklet) {
 			$this->view->user_url = $url;
@@ -676,13 +676,19 @@ class Admin_PostController extends Admin_BaseController
 		$form = $this->getFormCommon($source_id, $item_id, 'image', $date, $edit,$tags,$lat,$lon);
 		$form->setAttrib('enctype', 'multipart/form-data');
 
+		if (isset($this->_config->path->temp)) {
+			$path = $this->_config->path->temp;
+		} else {
+			$path = $this->_root . '/temp';
+		}
+		
 		// Create and configure title element:
 		if (!$edit) {
 			$element = new Zend_Form_Element_File('file');
 			$element->setLabel('Upload an image:')
 					->setRequired(false)
 					->setDecorators(array(array('File'), array('Errors'))) 
-			        ->setDestination($this->_root . '/temp')
+			        ->setDestination($path)
 			        ->addValidator('Count', false, 1)     // ensure only 1 file
 			        ->addValidator('Size', false, 4000000) // limit to 2M
 			        ->addValidator('Extension', false, 'jpg,png,gif'); // only JPEG, PNG, and GIFs
@@ -728,13 +734,19 @@ class Admin_PostController extends Admin_BaseController
 		$form = $this->getFormCommon($source_id, $item_id, 'audio', $date, $edit,$tags,$lat,$lon);
 		$form->setAttrib('enctype', 'multipart/form-data');
 
+		if (isset($this->_config->path->temp)) {
+			$path = $this->_config->path->temp;
+		} else {
+			$path = $this->_root . '/temp';
+		}
+		
 		// Create and configure title element:
 		if (!$edit) {
 			$element = new Zend_Form_Element_File('file');
 			$element->setLabel('Upload an mp3 file:')
 					->setDecorators(array(array('File'), array('Errors'))) 
 					->setRequired(false)
-			        ->setDestination($this->_root . '/temp')
+			        ->setDestination($path)
 			        ->addValidator('Count', false, 1)     // ensure only 1 file
 			        ->addValidator('Size', false, 12000000) // limit to 2M
 			        ->addValidator('Extension', false, 'mp3'); // only JPEG, PNG, and GIFs

@@ -66,10 +66,18 @@ class FileController extends Stuffpress_Controller_Action
 		}
 		
 		$root = Zend_Registry::get("root");
-	    $path = $root . "/upload{$folder}{$file->key}";
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$upload = $config->path->upload ;
+		} else {
+			$upload = $root . "/upload/";
+		}
+		
+	    $path = $upload . "/{$folder}{$file->key}";
 	    
 	    if ($folder != '/' && ! file_exists($path)) {
-	    	$path = $root . "/upload/{$file->key}";
+	    	$path = $upload . "/{$file->key}";
 	    }
 	    
 	    // Dump the file

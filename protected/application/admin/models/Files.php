@@ -61,12 +61,19 @@ class Files extends Stuffpress_Db_Table
 		$name 	= $file->name;
 		$ext 	= substr($name, strrpos($name, '.') + 1);
 		$root 	= Zend_Registry::get("root");
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$path = $config->path->upload;
+		} else {
+			$path = $root . "/upload";
+		}
 
-		@unlink($root . "/upload/{$file->key}");
-		@unlink($root . "/upload/thumbnails/{$file->key}");
-		@unlink($root . "/upload/small/{$file->key}");
-		@unlink($root . "/upload/medium/{$file->key}");
-		@unlink($root . "/upload/large/{$file->key}");
+		@unlink($path . "/{$file->key}");
+		@unlink($path . "/thumbnails/{$file->key}");
+		@unlink($path . "/small/{$file->key}");
+		@unlink($path . "/medium/{$file->key}");
+		@unlink($path . "/large/{$file->key}");
 
 		// Remove the pointer from the database
 		$where = $this->getAdapter()->quoteInto('id = ?', $file->id);
@@ -75,7 +82,13 @@ class Files extends Stuffpress_Db_Table
 
 	public function fitSquare($id, $size=50, $folder='thumbnails') {
 		$root 		= Zend_Registry::get("root");
-		$path 		= $root . "/upload";
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$path = $config->path->upload;
+		} else {
+			$path = $root . "/upload";
+		}
 
 		$file		= $this->getFile($id);
 		$file_type	= $file->type;
@@ -122,7 +135,13 @@ class Files extends Stuffpress_Db_Table
 
 	public function fitWidth($id, $width=500, $folder='medium') {
 		$root 		= Zend_Registry::get("root");
-		$path 		= $root . "/upload";
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$path = $config->path->upload;
+		} else {
+			$path = $root . "/upload";
+		}
 
 		$file		= $this->getFile($id);
 		$file_type	= $file->type;
@@ -165,6 +184,7 @@ class Files extends Stuffpress_Db_Table
 	}
 
 	public function processFile($path, $file, $description='') {
+
 		// Validate the uploaded file
 		$file_tmp	= $file['tmp_name'];
 		$file_name	= $file['name'];
@@ -174,9 +194,20 @@ class Files extends Stuffpress_Db_Table
 		// Assign a random name to the file
 		$key	  	= Stuffpress_Token::create(32);
 		$root 		= Zend_Registry::get("root");
-		$from_path 	= $root . "/temp/" . $path;
-		$to_path 	= $root . "/upload/" . $key;
-
+		$config		= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$to_path = $config->path->upload . "/$key";
+		} else {
+			$to_path 	= $root . "/upload/" . $key;
+		}
+		
+		if (isset($config) && isset($config->path->temp)) {
+			$from_path = $config->path->temp . "/$path";
+		} else {
+			$from_path 	= $root . "/temp/" . $path;
+		}
+		
 		// Move the file to the upload folder
 		if (!rename($from_path, $to_path)) {
 			throw new Stuffpress_Exception('Upload failed: could not proceed to upload.');
@@ -191,7 +222,13 @@ class Files extends Stuffpress_Db_Table
 	public function downloadFile($url, $description="") {
 		$key	  	= Stuffpress_Token::create(32);
 		$root 		= Zend_Registry::get("root");
-		$to_path 	= $root . "/upload/" . $key;
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$to_path = $config->path->upload . "/$key";
+		} else {
+			$to_path 	= $root . "/upload/" . $key;
+		}
 
 		$matches	= array();
 		if (preg_match("/.*(?<name>[\w|_|-]+)\.(?<ext>\w{3,4})$/", $url, $matches)) {
@@ -230,7 +267,13 @@ class Files extends Stuffpress_Db_Table
 	public function saveFile($content, $filename, $mime, $description="") {
 		$key	  	= Stuffpress_Token::create(32);
 		$root 		= Zend_Registry::get("root");
-		$to_path 	= $root . "/upload/" . $key;
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$to_path = $config->path->upload . "/$key";
+		} else {
+			$to_path 	= $root . "/upload/" . $key;
+		}
 
 		$matches	= array();
 		if (preg_match("/(?<name>.+)\.(?<ext>\w{3,4})$/", $filename, $matches)) {
@@ -260,7 +303,13 @@ class Files extends Stuffpress_Db_Table
 
 	public function readExif($id) {
 		$root 		= Zend_Registry::get("root");
-		$path 		= $root . "/upload";
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$path = $config->path->upload;
+		} else {
+			$path 	= $root . "/upload";
+		}
 
 		$file		= $this->getFile($id);
 		$file_key	= $file->key;

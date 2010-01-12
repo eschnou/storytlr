@@ -181,6 +181,13 @@ abstract class BaseController extends Stuffpress_Controller_Action
 
 		// Get the domain right
 		$domain = Zend_Registry::get("host");
+		
+		// Get the cache path for feeds
+		if (isset($config->path->feeds)) {
+			$path = $config->path->feeds;
+		} else {
+			$path = dirname($root)."/feeds/";
+		}
 
 		// Render the RSS feed
 		// Go ahead and display the page
@@ -189,7 +196,7 @@ abstract class BaseController extends Stuffpress_Controller_Action
 		
 		// Get the cached object
 		$rss_key = "RSS_" . $username . "_" . md5($key);
-		$rss->useCached("RSS2.0", dirname($root)."/feeds/$rss_key.xml", 300); // use cached version if age<10 minutes
+		$rss->useCached("RSS2.0", $path . "/$rss_key.xml", 300); // use cached version if age<10 minutes
 
 		// Get all the items and build rss
 		$rss->title 		= $title;
@@ -229,6 +236,6 @@ abstract class BaseController extends Stuffpress_Controller_Action
 			}
 		}
 
-		$rss->saveFeed("RSS2.0", dirname($root)."/feeds/$rss_key.xml");
+		$rss->saveFeed("RSS2.0", $path . "/$rss_key.xml");
 	}
 }
