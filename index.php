@@ -14,6 +14,7 @@ set_include_path(
     . $root . '/protected/application/widgets/models' . PATH_SEPARATOR
     . $root . '/protected/library' . PATH_SEPARATOR
     . $root . '/protected/library/Feedcreator' . PATH_SEPARATOR
+    . $root . '/protected/library/htmLawed' . PATH_SEPARATOR
     . get_include_path()
 );
 

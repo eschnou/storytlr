@@ -87,7 +87,7 @@ class GooglereaderModel extends SourceModel {
 
 	private function processItems($items) {
 		$result = array();
-		$tidy = new tidy();		
+
 		foreach ($items as $item) {
 			$data		= array();
 			$data['title']		= $item->title();
@@ -111,21 +111,13 @@ class GooglereaderModel extends SourceModel {
 			$crawl = (string) $item->getDom()->getAttribute("gr:crawl-timestamp-msec");
 			$timestamp = ($crawl != "") ? substr($crawl, 0, 10) : strtotime((string) $data['published']);
 			
-			// Tidy up the content
-			$config = array(
-	           'indent'         => true,
-	           'output-xhtml'   => true,
-	           'wrap'           => 200);
-	
-			$tidy->parseString((string) $content, $config, 'utf8');
-			$tidy->cleanRepair();
-			$data['content'] = $tidy;
+			$data['content'] = htmLawed::tidy( $content, array( 'safe' => 1, 'tidy' => '2s0n' ) );
 
 			$id = $this->addItem($data, $timestamp, SourceItem::LINK_TYPE, false, false, false, $data['title']);
 			if ($id) $result[] = $id;
 			unset($data);
 		}
-		unset($tidy);
+
 		return $result;
 	}
 	

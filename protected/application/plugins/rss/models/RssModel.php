@@ -109,11 +109,6 @@ class RssModel extends SourceModel {
 
 	private function processItems($items) {
 		$result = array();
-		$tidy = new tidy();		
-		$config = array(
-           'indent'         => true,
-           'output-xhtml'   => true,
-           'wrap'           => 200);
 
         foreach ($items as $item) {
 			$data		= array();
@@ -142,18 +137,15 @@ class RssModel extends SourceModel {
 			$content		 	= (string) $item->content;
 			$desc				= (string) $item->description;	
 			if (strlen($desc) > strlen($content)) $content = $desc;
-	
-			// Tidy !
-			$tidy->parseString($content, $config, 'utf8');
-			$tidy->cleanRepair();
-			$data['content'] = $tidy;	
-			
+
+			$data['content'] = htmLawed::tidy( $content, array( 'safe' => 1, 'tidy' => '2s0n' ) );
+
 			// Save the item in the database
 			$id = $this->addItem($data, $data['published'], SourceItem::BLOG_TYPE, false, false, false, $data['title']);
 			if ($id) $result[] = $id;	
 			if (count($result)> 100) break;
 		}
-		unset($tidy);
+
 		return $result;
 	}
 	
