@@ -45,9 +45,9 @@ function onRemovePage(id) {
 
 function onFormSubmit() {
 		tinyMCE.triggerSave(); 
-        form = new ValidateForm($('form_page'), "/admin/pages/save");
+        form = new ValidateForm($('form_page'), "admin/pages/save");
         form.errorElem = $('error_messages');
-		form.successCallback = function() {window.location = '/admin/pages'};
+		form.successCallback = function() {window.location = 'admin/pages'};
         return form.submit();
 }
 

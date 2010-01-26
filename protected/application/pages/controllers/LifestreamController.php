@@ -55,8 +55,8 @@ class Pages_LifestreamController extends Pages_BaseController {
 		$this->view->page		 = $page;
 		$this->view->hasprevious = ($page>0) ? true : false;
 		$this->view->hasnext 	 = (count($items) >= $count) ? true : false;
-		$this->view->nextlink 	  = "/home?tab=$tab&page=" . ($page + 1);
-		$this->view->previouslink = "/home?tab=$tab&page=" . ($page - 1);
+		$this->view->nextlink 	  = "home?tab=$tab&page=" . ($page + 1);
+		$this->view->previouslink = "home?tab=$tab&page=" . ($page - 1);
 				
 		// Set link to RSS of page
 		$rss_link = $this->getRssLink($sources, $types);

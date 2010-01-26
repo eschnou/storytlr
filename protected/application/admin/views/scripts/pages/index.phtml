@@ -15,7 +15,7 @@ Select a page and click add.
 	<?php foreach($this->pages as $p) : ?>
 		<li id="page_<?= $p['prefix'] ?>">
 			<div style="float:right;">
-				<a href="/admin/pages/add/type/<?= $p['prefix'] ?>">Add</a>
+				<a href="admin/pages/add/type/<?= $p['prefix'] ?>">Add</a>
 			</div>
 			<img src="images/i-<?= $p['prefix'] ?>.png"/> <span id="page_<?= $p['prefix'] ?>_desc"><?= $p['name'] ?></span><br/>
 			<p><?= $p['description'] ?></p>

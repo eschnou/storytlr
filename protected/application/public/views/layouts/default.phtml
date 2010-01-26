@@ -174,7 +174,7 @@
 						$page = $this->pages[$i];
 					?>
 						<td class="spacer">&nbsp;</td>
-						<td <? if ($this->page_id == $page['id']) {echo 'class="active"';} else {echo 'class="inactive"';} ?> onClick="document.location='/home?tab=<?= $i ?>';return false;"><a href="/home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></td>
+						<td <? if ($this->page_id == $page['id']) {echo 'class="active"';} else {echo 'class="inactive"';} ?> onClick="document.location='home?tab=<?= $i ?>';return false;"><a href="home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></td>
 					<?php } ?>
 					<?php if (count($this->pages) > $this->theme_data['tabs']) {
 					?>
@@ -185,7 +185,7 @@
 									<?php for ($i= $this->theme_data['tabs']; $i<count($this->pages); $i++) {
 										$page = $this->pages[$i];
 									?>
-										<li><a href="/home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></li>
+										<li><a href="home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></li>
 									<?php } ?>
 								</ul></div>
 							</div>

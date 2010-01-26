@@ -47,8 +47,8 @@ class Pages_StoriesController extends Pages_BaseController
 		$this->view->page		 	= $page;
 		$this->view->hasprevious 	= ($page>0) ? true : false;
 		$this->view->hasnext 	 	= (isset($items) && (count($items) >= $count)) ? true : false;
-		$this->view->nextlink 	  = "/home?tab=$tab&page=" . ($page + 1);
-		$this->view->previouslink = "/home?tab=$tab&page=" . ($page - 1);		
+		$this->view->nextlink 	  = "home?tab=$tab&page=" . ($page + 1);
+		$this->view->previouslink = "home?tab=$tab&page=" . ($page - 1);		
 		
 		// Prepare the common elements
 		$this->common();
