@@ -23,7 +23,7 @@ class IndexController extends Zend_Controller_Action
 			$this->_forward('index', 'home', 'public');
 		}
 		else {
-			$this->_redirect("/admin");
+			$this->_redirect("admin");
 		}
 	}
 }
