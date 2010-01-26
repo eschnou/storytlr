@@ -5,7 +5,7 @@
 <div class="thumbcontainer">
 	<?php foreach($this->items as $item) : ?>
 		<div class="imagethumb">
-			<a href="/slide/<?= $item->getSource() ?>/<?= $item->getID(); ?>/index.html" rel="shadowbox[set];width=640;height=480;title=<?= $item->getTitle(); ?>" title="<?= $item->getTitle(); ?>"><img src="<?= $item->getImageUrl('thumbnail'); ?>" width="75" height="75" /></a>
+			<a href="slide/<?= $item->getSource() ?>/<?= $item->getID(); ?>/index.html" rel="shadowbox[set];width=640;height=480;title=<?= $item->getTitle(); ?>" title="<?= $item->getTitle(); ?>"><img src="<?= $item->getImageUrl('thumbnail'); ?>" width="75" height="75" /></a>
 		</div>
 	<?php endforeach ?>
 	<br class="fix" />

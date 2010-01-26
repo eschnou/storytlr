@@ -2,7 +2,7 @@
 	$tweet  = $this->item->getStatus();
 	$tweet	= ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" rel="nofollow" target="_blank">\\1</a>',$tweet); // turn any URL’s into links
 	$tweet	= ereg_replace("@([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'@<a href="http://twitter.com/\\1" target="_blank">\\1</a>\\2',$tweet); // add “@username” links
-	$tweet	= ereg_replace("#([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'#<a href="/tag/\\1">\\1</a>\\2',$tweet); // add tag links	
+	$tweet	= ereg_replace("#([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'#<a href="tag/\\1">\\1</a>\\2',$tweet); // add tag links	
 ?>
 
 <div class="twitter">
