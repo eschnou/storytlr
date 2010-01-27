@@ -75,7 +75,7 @@
 <?php if($this->admin) : ?>
 <div id="adminbar">
 	<div id="logo">
-			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="../images/admin-logo.gif" title="To the administration environment"/></a>
+			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="images/admin-logo.gif" title="To the administration environment"/></a>
 	</div>
 	<div id="loginStatus">
 			<span class="signedin">Signed in as <strong><?= $this->application()->username() ?></strong></span> <a href='admin/auth/logout?target=<?= urlencode($this->base()->thisUrl())?>' 	title='Sign out' 	onfocus='this.blur()' <?php if ($this->section == "logout") {?> class="current" <?php }?>>Sign out</a>	
@@ -93,7 +93,7 @@
 <?php elseif ($this->application()->authenticated()) : ?>
 <div id="adminbar">
 	<div id="logo">
-			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="../images/admin-logo.gif" title="To the administration environment"/></a>
+			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="images/admin-logo.gif" title="To the administration environment"/></a>
 	</div>
 	<div id="loginStatus">
 			<span class="signedin">Signed in as <strong><?= $this->application()->username() ?></strong></span> <a href='admin/auth/logout?target=<?= urlencode($this->base()->thisUrl()) ?>' 	title='Sign out' 	onfocus='this.blur()' <?php if ($this->section == "logout") {?> class="current" <?php }?>>Sign out</a>	
@@ -107,7 +107,7 @@
 <?php else : ?>
 <div id="adminbar" style="display:none;">
 	<div id="logo">
-			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="../images/admin-logo.gif" title="To the administration environment"/></a>
+			<a href='<?= $this->base()->serviceUrl() ?>/admin/post/'><img src="images/admin-logo.gif" title="To the administration environment"/></a>
 	</div>
 	<div id="login">
 	<form id="formLogin" enctype="application/x-www-form-urlencoded" action="<?= $this->base()->serviceUrl() ?>/admin/auth/login" method="post">
