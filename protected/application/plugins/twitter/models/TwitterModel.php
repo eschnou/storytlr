@@ -1,6 +1,7 @@
 <?php
 /*
- *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2010 John Hobbs
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -298,6 +299,12 @@ class TwitterModel extends SourceModel {
 		elseif (preg_match("/phodroid.com\/(\w+)/i",$status,$matches)) {
 			$photo['key'] = $matches[1];
 			$photo['service'] = 'phodroid';
+			return $photo;
+		}
+		// Do we have brizzly?s
+		elseif (preg_match("/brizzly.com\/pic\/(\w+)/i",$status,$matches)) {
+			$photo['key'] = $matches[1];
+			$photo['service'] = 'brizzly';
 			return $photo;
 		} else {
 			return false;

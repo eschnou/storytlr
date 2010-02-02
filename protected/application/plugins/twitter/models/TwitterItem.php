@@ -1,6 +1,7 @@
 <?php
 /*
- *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2010 John Hobbs
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -105,6 +106,22 @@ class TwitterItem extends SourceItem {
 		elseif  ($this->_data['photo_service'] == 'phodroid') {	
 			return "http://s.phodroid.com/{$this->_data['photo_key']}.jpg";
 		}
+		elseif ( $this->_data['photo_service'] == 'brizzly' ) {
+			switch ($size) {
+				default:
+				case ImageItem::SIZE_THUMBNAIL:
+				case ImageItem::SIZE_SMALL:
+					return "http://pics.brizzly.com/thumb_sm_{$this->_data['photo_key']}.jpg";
+					break;
+				case ImageItem::SIZE_MEDIUM:
+				case ImageItem::SIZE_LARGE:
+					return "http://pics.brizzly.com/thumb_lg_{$this->_data['photo_key']}.jpg";
+					break;
+				case ImageItem::SIZE_ORIGINAL:
+					return "http://pics.brizzly.com/{$this->_data['photo_key']}.jpg";
+					break;
+			}
+		}
 		else {
 			return false;
 		}
@@ -116,7 +133,9 @@ class TwitterItem extends SourceItem {
 				return "http://twitpic.com/{$this->_data['photo_key']}";
 			} elseif  ($this->_data['photo_service'] == 'phodroid') {	
 				return "http://phodroid.com/{$this->_data['photo_key']}";
-			} 
+			} elseif  ($this->_data['photo_service'] == 'brizzly') {
+				return "http://brizzly.com/pic/{$this->_data['photo_key']}";
+			}
 		}
 		
 		$properties = new SourcesProperties(array(Stuffpress_Db_Properties::KEY => $this->_data['source_id']));
