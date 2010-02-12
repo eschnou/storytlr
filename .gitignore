@@ -1,0 +1,9 @@
+.buildpath
+.project
+.settings
+config.ini
+*.log
+protected/library/Zend
+protected/upload/**
+protected/temp/**
+protected/logs/**
