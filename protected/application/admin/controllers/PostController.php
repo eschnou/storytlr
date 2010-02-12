@@ -413,6 +413,9 @@ class Admin_PostController extends Admin_BaseController
 		$item_id 	= $source->addItem($data, $data['published'], $data['type'], $tags, false, false, $data['title']);
 		$source_id 	= $source->getID();
 		
+		// fetch the new item
+		$item   = $data_table->getItem($source_id, $item_id);
+		
 		// Get longitude if provided
 		if (!empty($exif['GPSLongitude']) && count($exif['GPSLongitude']) == 3 && !empty($exif['GPSLongitudeRef'])) {
             $longitude = ($exif['GPSLongitudeRef']== 'W' ? '-' : '') . Stuffpress_Exif::exif_gpsconvert( $exif['GPSLongitude'] );
@@ -441,8 +444,6 @@ class Admin_PostController extends Admin_BaseController
 		$this->ping();
 
 		// Redirect to the timeline
-		$data   = new Data();
-		$item   = $data->getItem($source_id, $item_id);
 		$username	= $this->_application->user->username;
 		$url	= $this->getUrl($username, "/entry/" . $item->getSlug());
 		
@@ -545,8 +546,6 @@ class Admin_PostController extends Admin_BaseController
 		}
 		
 		// Redirect to the timeline
-		$data   = new Data();
-		$item   = $data->getItem($source_id, $item_id);
 		$host	= $this->getHostname();
 		$username	= $this->_application->user->username;		
 		$url	= $this->getUrl($username, "/entry/" . $item->getSlug());
@@ -933,7 +932,6 @@ class Admin_PostController extends Admin_BaseController
 		$has_preamble   = $this->_properties->getProperty('preamble', true);		
 		
 		// Get item
-		$item		= $data->getItem($source_id, $item_id);
 		$preamble	= $has_preamble ? $item->getPreamble() : "";
 		$title		= $preamble . $item->getTitle();
 		

@@ -74,7 +74,7 @@ abstract class Stuffpress_Controller_Action extends Zend_Controller_Action
 		} 
 		// Multi user behavior
 		else {
-			$url .= $username.$domain;
+			$url .= $username. "." . $domain;
 		}
 		
 		// Add the rest
