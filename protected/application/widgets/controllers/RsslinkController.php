@@ -32,7 +32,7 @@ class Widgets_RsslinkController extends Stuffpress_Controller_Widget
 		}		
 		
 		// Get the basename
-		$host 		= trim(Zend_Registry::get("host"), '/');		 
+		$host 		= trim(Zend_Registry::get("host"), ' /');
 		
 		// Get the user
 		$users 	  = new Users();

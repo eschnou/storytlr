@@ -3,7 +3,7 @@
 	<table class="top_nav"><tr>
 		<td>
 			<?php if (!$this->embed) : ?>
-			<a href="/" onfocus="this.blur()">Back to home</a>
+			<a href="<?= $this->base()->thisUrl(); ?>" onfocus="this.blur()">Back to home</a>
 			<?php endif ?>
 		</td>
 		<td class="center">

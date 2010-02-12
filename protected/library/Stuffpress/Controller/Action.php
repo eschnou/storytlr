@@ -64,8 +64,8 @@ abstract class Stuffpress_Controller_Action extends Zend_Controller_Action
 	
 	protected function getUrl($username, $path) {
 		$config = Zend_Registry::get("configuration");
-		$domain	= $config->web->host;
-		$root	= "/";
+		$domain	= trim($config->web->host, " /");
+		$root   = trim($config->web->path, " /");
 		$url 	= "http://";
 		
 		// Single user behavior
@@ -78,7 +78,7 @@ abstract class Stuffpress_Controller_Action extends Zend_Controller_Action
 		}
 		
 		// Add the rest
-		$url .= $root . trim($path, " /");
+		$url .= "/" . $root . "/" . trim($path, " /");
 		
 		return $url;
 	}

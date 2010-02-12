@@ -10,7 +10,7 @@
 		
 		foreach($this->tags as $tag) {
 			$size = round((($tag['count'] - $min) / $range) * 80 + 70);
-			echo "<a href='/tag/{$tag['symbol']}' style='font-size: $size%'>{$tag['tag']}</a> ";
+			echo "<a href='tag/{$tag['symbol']}' style='font-size: $size%'>{$tag['tag']}</a> ";
 		}
 		?>
 	</div>
