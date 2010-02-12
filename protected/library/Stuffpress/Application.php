@@ -54,7 +54,9 @@ class Stuffpress_Application {
 		
 		// If a single user install and config user matches logged in one, we return the service URL
 		if ($config->app->user && ($config->app->user == $user->username)) {
-			return $config->web->host;
+			$host = trim($config->web->host, " /");
+			$path = trim($config->web->path, " /");
+			return "$host/$path/";
 		}
 		
 		// Otherwise, rebuild the URL
