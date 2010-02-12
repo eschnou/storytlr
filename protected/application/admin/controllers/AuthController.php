@@ -113,13 +113,14 @@ class Admin_AuthController extends Zend_Controller_Action
 		// If we have a special target
 		if ($values['target'] == 'user_page') {
 			$config = Zend_Registry::get('configuration');
-			$domain = $config->web->host;
+			$domain = trim($config->web->host, " /");
+			$path   = trim($config->web->path, " /");
 			
 			// If single user, we go back to the host
 			if (isset($config->app->user)) {
-				$url = "http://$domain";
+				$url = "http://$domain/$path";
 			} else {
-				$url	= "http://{$user->username}.$domain/";
+				$url	= "http://{$user->username}.$domain/$path";
 			};
 
 			return $this->_redirect($url);
