@@ -1,6 +1,7 @@
 <?php
 /*
- *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2010 John Hobbs
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -85,6 +86,7 @@ class Bootstrap
 
 	public static function prepare()
 	{
+		self::checkEnvironment();
 		self::setupEnvironment();
 		Zend_Loader::registerAutoload();
 		self::setupRegistry();
@@ -99,6 +101,15 @@ class Bootstrap
 		self::setupPlugins();
 		self::setupApplication();
 		self::setupAcl();
+	}
+
+	/**
+	 * Runs some basic checks to confirm that the environment contains everything
+	 * needed to run Storytlr. This is to prevent the "white screen of death" ;-)
+	 */
+	public static function checkEnvironment() {
+		if( ! function_exists( 'mcrypt_module_open' ) ) { die( 'Storytlr requires mcrypt, which can not be found.' ); }
+		if( ! class_exists( 'PDO', false ) ) { die( 'Storytlr requires PDO, which can not be found.' ); }
 	}
 
 	public static function setupEnvironment()
