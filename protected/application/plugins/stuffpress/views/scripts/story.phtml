@@ -13,7 +13,7 @@
 </div>
 <?php elseif ($this->item->getType() == SourceItem::STATUS_TYPE) : ?>
 <div class="storytlr_status">
-	<table cellspacing=0><tr><td style="background: url('../images/bg-storytlr.jpg') no-repeat">
+	<table cellspacing=0><tr><td style="background: url('images/bg-storytlr.jpg') no-repeat">
 	<?php $title = 	ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
 	 ?>
 	<div class="title"><span class="quote">&ldquo; </span><?= $title; ?><span class="quote"> &rdquo;</span></div>
@@ -25,7 +25,7 @@
 <div class="storytlr_link">
 	<table cellspacing=0>
 		<tr>
-			<td style="background: url('../images/bg-storytlrlink.jpg') no-repeat">
+			<td style="background: url('images/bg-storytlrlink.jpg') no-repeat">
 				<div class="title"><span class="label">Shared the link:</span><br/>  <a href="<?= $this->item->getLink() ?>" target="_blank"><?= $this->item->getTitle() ?></a></div>	
 			</td>
 		</tr>
@@ -35,7 +35,7 @@
 <div class="storytlr_blog">
 	<table cellspacing=0>
 		<tr>
-			<td style="background: url('../images/bg-storytlrblog.jpg') no-repeat">
+			<td style="background: url('images/bg-storytlrblog.jpg') no-repeat">
 				<div class="title"><span class="label">Blogged about:</span><br/><a href="<?= $this->item->getLink() ?>" target="_blank"><?= $this->item->getTitle() ?></a></div>	
 			</td>
 		</tr>
@@ -45,7 +45,7 @@
 <div class="storytlr_audio">
 	<table cellspacing=0>
 		<tr>
-			<td style="background: url('../images/bg-storytlraudio.jpg') no-repeat">
+			<td style="background: url('images/bg-storytlraudio.jpg') no-repeat">
 				<div class="title"><?= $this->item->getTitle(); ?><br/><br/>	
 				<object type="application/x-shockwave-flash" data="flash/player_mp3.swf" width="175" height="20">
 				     <param name="movie" value="flash/player_mp3.swf" />
