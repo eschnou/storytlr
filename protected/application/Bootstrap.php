@@ -146,7 +146,7 @@ class Bootstrap
 		if ($config->debug) {
 			ini_set('display_errors', true);
 			ini_set('log_errors', true);
-			ini_set('error_log', "/tmp/error.log");
+			ini_set('error_log', self::$root .'/logs/error.log');
 		}
 	}
 
