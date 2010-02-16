@@ -174,6 +174,13 @@ class Files extends Stuffpress_Db_Table
 
 		// Resize the image
 		imagecopyresampled($resized_img, $new_img, 0, 0, 0, 0, $n_width, $n_height, $o_width, $o_height);
+		
+		// Create folder if required
+		if (!file_exists("$path/$folder")) {
+			if (!mkdir("$path/$folder", 0777)) {
+				die ("Could not create picture folder $folder");
+			}
+		}
 
 		// Save the image
 		imagejpeg($resized_img,"$path/$folder/$file_key", 90);
