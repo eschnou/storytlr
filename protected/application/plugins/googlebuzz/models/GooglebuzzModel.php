@@ -98,7 +98,7 @@ class GooglebuzzModel extends SourceModel {
 			$data['content'] = $item->content;
 			$data['link'] = $item->link['href'];
 			$data['buzz_id'] = $item->id;
-			$id = $this->addItem( $data, $data['published'], SourceItem::LINK_TYPE, false, false, false, $data['title'] );
+			$id = $this->addItem( $data, $data['published'], SourceItem::STATUS_TYPE, false, false, false, $data['title'] );
 			if ($id) $result[] = $id;
 		}
 		return $result;
@@ -110,6 +110,7 @@ class GooglebuzzModel extends SourceModel {
 		// Add the username element
 		$element = $form->createElement('text', 'username', array('label' => 'Username', 'decorators' => $form->elementDecorators));
 		$element->setRequired(true);
+		$element->setDescription( '<div class="help">This is either your Google username, or a very long number. Depending if you have activated or not the pretty profile URL feature. In either case, just look <a href="http://www.google.com/profiles/me">here</a> and use the string appearing after the http://www.google.com/profiles/.' );
 		$form->addElement($element);
 
 		// Populate

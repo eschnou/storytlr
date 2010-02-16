@@ -28,7 +28,24 @@ class GooglebuzzItem extends SourceItem {
 
 	public function getLink() { return $this->_data['link']; }
 
-	public function getType() { return SourceItem::LINK_TYPE; }
+	public function getType() { return SourceItem::STATUS_TYPE; }
+	
+	public function getStatus() { return htmlspecialchars(strip_tags($this->_data['content'])); }
+	
+	public function setStatus($status) {
+		$db = Zend_Registry::get('database');
+		
+		$sql = "UPDATE `googlebuzz_data` SET `content`=:status "
+			 . "WHERE source_id = :source_id AND id = :item_id ";
+		
+		$data 		= array("source_id" 	=> $this->getSource(),
+							"item_id"		=> $this->getID(),
+							"status"		=> $status);
+							
+ 		$stmt 	= $db->query($sql, $data);
+
+ 		return;
+	}
 
 	public function getBackup() {
 		$item = array();
