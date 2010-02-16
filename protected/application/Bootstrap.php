@@ -215,7 +215,7 @@ class Bootstrap
 			//echo "<p>Page generated in $total_time seconds, memory peak of $peakUsage MB</p>\n";
 
 			// Output time spent data
-			$log = fopen("/tmp/trace.log", "a");
+			$log = fopen(self::$root .'/logs/trace.log', "a");
 			fwrite($log, "$host/$uri\r\n");
 			fwrite($log, "$total_time seconds, memory peak of $peakUsage MB\n\r");
 
