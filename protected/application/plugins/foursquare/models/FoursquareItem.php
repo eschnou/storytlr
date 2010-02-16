@@ -29,6 +29,25 @@ class FoursquareItem extends SourceItem {
 	public function getLink() { return $this->_data['link']; }
 
 	public function getType() { return SourceItem::STATUS_TYPE; }
+	
+	public function getStatus() { 
+		return "Checked-in at " . htmlspecialchars(strip_tags($this->_data['title'])); 
+	}
+	
+	public function setStatus($status) {
+		$db = Zend_Registry::get('database');
+		
+		$sql = "UPDATE `foursquare_data` SET `title`=:status "
+			 . "WHERE source_id = :source_id AND id = :item_id ";
+		
+		$data 		= array("source_id" 	=> $this->getSource(),
+							"item_id"		=> $this->getID(),
+							"status"		=> $status);
+							
+ 		$stmt 	= $db->query($sql, $data);
+
+ 		return;
+	}
 
 	public function getBackup() {
 		$item = array();
