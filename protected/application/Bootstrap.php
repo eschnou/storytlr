@@ -110,6 +110,7 @@ class Bootstrap
 	public static function checkEnvironment() {
 		if( ! function_exists( 'mcrypt_module_open' ) ) { die( 'Storytlr requires mcrypt, which can not be found.' ); }
 		if( ! class_exists( 'PDO', false ) ) { die( 'Storytlr requires PDO, which can not be found.' ); }
+		if( ! function_exists( 'curl_init' ) ) { die( 'Storytlr requires PHP Curl, which can not be found.' ); }
 	}
 
 	public static function setupEnvironment()
