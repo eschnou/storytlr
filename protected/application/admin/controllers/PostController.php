@@ -952,9 +952,7 @@ class Admin_PostController extends Admin_BaseController
 			$tweet = $title;
 		} else {
 			if (strlen($title) > 121) $title = substr($title, 0, 110) . "[..]";
-			$db_ShortUrls 	= new ShortUrls();
-			//$hash 	= $db_ShortUrls->addUrlForItem($this->_application->user->id, $source_id, $item_id);
-			$link 	= $this->getUrl($username, "/entry/" . $item->getSlug());
+			$link 	= $this->getUrl($this->_application->user->username, "/entry/" . $item->getSlug());
 			$tweet 	= "$title $link";
 		}
 		
