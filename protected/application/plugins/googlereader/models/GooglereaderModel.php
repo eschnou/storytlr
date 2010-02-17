@@ -59,12 +59,13 @@ class GooglereaderModel extends SourceModel {
 			$items = Zend_Feed::import($url);
 			$feed_url = $url;
 		} else {
-			$items = $feeds[0];
-			$feed_url = Zend_Feed::getHttpClient()->getUri(true);
+			$feeds_uri = array_keys($feeds);
+			$feed_url = $feeds_uri[0];
+			$items = $feeds[$feed_url];
 		}
 		
 		$this->setProperty('feed_url', $feed_url);
-		$items = $this->processItems($items, 'published');
+		$items = $this->processItems($items);
 		$this->setImported(true);
 		return $items;
 	}
@@ -73,7 +74,7 @@ class GooglereaderModel extends SourceModel {
 		$feed_url	= $this->getProperty('feed_url');		
 		Zend_Feed::registerNamespace('gr','http://www.google.com/schemas/reader/atom/');				
 		if (!($feed = new Zend_Feed_Atom($feed_url))) return 0;				
-		$result = $this->processItems($feed,'now');		
+		$result = $this->processItems($feed);		
 		
 		// Clear up to free memory
 		unset($feed);		
@@ -84,7 +85,7 @@ class GooglereaderModel extends SourceModel {
 		return $result;
 	}
 
-	private function processItems($items, $time) {
+	private function processItems($items) {
 		$result = array();
 		$tidy = new tidy();		
 		foreach ($items as $item) {
@@ -107,7 +108,8 @@ class GooglereaderModel extends SourceModel {
 			$data['published']	= $item->published();
 			$data['note']		= $item->{'gr:annotation'}->content;
 			
-			$timestamp = ($time == 'now') ? time() : strtotime((string) $data['published']);
+			$crawl = (string) $item->getDom()->getAttribute("gr:crawl-timestamp-msec");
+			$timestamp = ($crawl != "") ? substr($crawl, 0, 10) : strtotime((string) $data['published']);
 			
 			// Tidy up the content
 			$config = array(
