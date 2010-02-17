@@ -78,8 +78,9 @@ class RssModel extends SourceModel {
 			}
 			$feed_url = $url;
 		} else {
-			$items = $feeds[0];
-			$feed_url = Zend_Feed::getHttpClient()->getUri(true);
+			$feeds_uri = array_keys($feeds);
+			$feed_url = $feeds_uri[0];
+			$items = $feeds[$feed_url];
 		}
 		
 		$title = $items->title();
