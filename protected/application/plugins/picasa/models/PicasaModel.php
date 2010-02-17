@@ -122,7 +122,7 @@ class PicasaModel extends SourceModel {
 				$data['description']	= "";
 				$data['url']			= $ns_media[0]->content->attributes()->url;
 					
-				$timestamp = substr($taken_at, 0, strlen($taken_at) - 3);
+				$timestamp = strtotime($data['published']);
 
 				$id = $this->addItem($data, $timestamp, SourceItem::IMAGE_TYPE, $tags, false, false, $data['title']);
 				if ($id) $result[] = $id;	
