@@ -131,12 +131,18 @@ class Bootstrap
 	}
 
 	public static function setupConfiguration()
-	{
-		$config_path = self::$root . '/config/config.ini';
-		if (!file_exists($config_path)) {
+	{ 
+		if (file_exists('/etc/storytlr/config.ini')) {
+			$config_path = '/etc/storytlr/config.ini';
+		}
+		else if (file_exists(self::$root . '/config/config.ini')) {
+			$config_path = self::$root . '/config/config.ini';
+		}
+		
+		if (!isset($config_path)) {
 			die("Could not find the config.ini configuration file. Please verify your setup.");
 		}
-
+		
 		$config = new Zend_Config_Ini(
 		$config_path,
 		'general'
