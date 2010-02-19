@@ -1,12 +1,16 @@
 #!/usr/bin/php 
 <?php
 // Manage the command line
-if ($argc <2) {
-	die("Usage: update.php user\r\n");
-} else if ($argc <3) {
+if ( $argc < 2 ) {
+	die("Usage: {$argv[0]} user [source]\r\n");
+} else if ( $argc == 3 ) {
 	$cl_user = $argv[1];
+	$cl_source = $argv[2];
+} else if ( $argc < 3 ) {
+	$cl_user = $argv[1];
+	$cl_source = null;
 } else {
-	die("Usage: update.php user\r\n");
+	die("Usage: {$argv[0]} user [source]\r\n");
 }
 
 // Update after deployment for location of non-public files
@@ -71,7 +75,6 @@ $failure = 0;
 $total   = count($sources);
 
 foreach($sources as $source) {
-	echo "Memory: " . memory_get_usage() . "\r\n";
 	
 	if ($source['service'] == 'stuffpress') {
 		continue;
@@ -80,6 +83,12 @@ foreach($sources as $source) {
 	if (!$source['enabled']) {
 		continue;
 	}
+	
+	if( ! is_null( $cl_source ) && $source['service'] != $cl_source ) {
+		continue;
+	}
+	
+	echo "Memory: " . memory_get_usage() . "\r\n";
 	
 	$model 	 = SourceModel::newInstance($source['service'], $source);
 	
@@ -107,4 +116,4 @@ foreach($sources as $source) {
 $end_time = time();
 
 $total_time = $end_time - $start_time;
-echo "Updated $success out of $total sources in $total_time seconds.";
+echo "Updated $success out of $total sources in $total_time seconds.\r\n";
