@@ -157,4 +157,33 @@ class Users extends Stuffpress_Db_Table
 		$count  = $stmt->fetchColumn(0);
 		return  $count;
 	}
+	
+	public function getUrl($id, $path="", $cname=true) {
+		
+		$config = Zend_Registry::get("configuration");
+		
+		if (!($user = $this->getUser($id))) {
+			throw new Stuffpress_Exception("Invalid user requested in Users->getUrl();");
+		}
+		
+		// If CNAME on and user has CNAME.. use it
+		if ($cname && $user->domain) {
+			$domain = $user->domain;
+		}
+		
+		// If a single user install and config user matches requested one, we return the service URL
+		else if ($config->app->user && ($config->app->user == $user->username)) {
+			$host = trim($config->web->host, " /");
+			$path = trim($config->web->path, " /");
+			$domain = "$host/$path";
+		}
+		
+		// Otherwise, rebuild the URL
+		else {
+			$domain = $user->username . "." . $config->web->host;	
+		}
+		
+		// Build the final url
+		return "http://" . $domain . $path;
+	}
 }

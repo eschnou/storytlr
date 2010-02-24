@@ -315,14 +315,15 @@ abstract class SourceModel extends Stuffpress_Db_Table
 				if (($item->getType() == SourceItem::STATUS_TYPE ) && strlen($title) < 140) {
 					$tweet = $title;
 				} 
-				
 				else {
 					$preamble = $has_preamble ? $item->getPreamble() : "";
 					$tweet	  = $preamble . $title;
-					if (strlen($tweet) > 119) $tweet = substr($tweet, 0, 115) . "[..]";
-					$db_ShortUrls 	= new ShortUrls();
-					$hash 	= $db_ShortUrls->addUrlForItem($user->id, $source_id, $id);
-					$tweet 	= "$tweet http://st.tl/$hash";
+					$url = $users->getUrl($user->id, "/entry/" . $item->getSlug());
+					if (strlen($tweet) + strlen($url) > 140) {
+						$tweet = substr($tweet, 0, 140 - strlen($url) - 5) . "... $url"; 
+					} else {
+						$tweet 	= "$tweet $url";	
+					}
 				}
 				
 				try {
@@ -331,13 +332,7 @@ abstract class SourceModel extends Stuffpress_Db_Table
 				} catch (Exception $e) {}
 			}
 		} else {
-			$selection = array();
-			foreach($items as $i) {
-				$selection[] = array($source_id, $i);
- 			}
- 			$db_ShortUrls 	= new ShortUrls();
-			$hash 	= $db_ShortUrls->addUrlForSelection($user->id, serialize($selection));
-			$url    = "http://st.tl/$hash";
+			$url = $users->getUrl($user->id);
 			$tweet  = sprintf($this->_update_tweet, $count, $url);
 			try {
 				$twitter = new Stuffpress_Services_Twitter($username, $password);

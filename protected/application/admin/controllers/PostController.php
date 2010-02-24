@@ -951,9 +951,13 @@ class Admin_PostController extends Admin_BaseController
 		if (($item->getType() == SourceItem::STATUS_TYPE ) && strlen($title) < 140) {
 			$tweet = $title;
 		} else {
-			if (strlen($title) > 121) $title = substr($title, 0, 110) . "[..]";
-			$link 	= $this->getUrl($this->_application->user->username, "/entry/" . $item->getSlug());
-			$tweet 	= "$title $link";
+			$users  = new Users();
+			$url = $users->getUrl($this->_application->user->id, "/entry/" . $item->getSlug());
+			if (strlen($title) + strlen($url) > 140) {
+				$tweet = substr($title, 0, 140 - strlen($url) - 5) . "... $url"; 
+			} else {
+				$tweet 	= "$title $url";	
+			}
 		}
 		
 		try {

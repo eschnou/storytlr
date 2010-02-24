@@ -56,7 +56,7 @@ class Stuffpress_Application {
 		if ($config->app->user && ($config->app->user == $user->username)) {
 			$host = trim($config->web->host, " /");
 			$path = trim($config->web->path, " /");
-			return "$host/$path/";
+			return "$host/$path";
 		}
 		
 		// Otherwise, rebuild the URL
