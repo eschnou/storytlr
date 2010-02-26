@@ -30,16 +30,18 @@ set_include_path(
 // We want to track how long the update takes
 $start_time = time();
 
-require_once 'Bootstrap.php';
-
-Bootstrap::prepare();
-
 // We don't want to limit this script in time
 ini_set('max_execution_time', 0);
 
+// Prepare the environment
+require_once 'Bootstrap.php';
+Bootstrap::prepare();
+$config = Zend_Registry::get("configuration");
+
 // Setup a logger
 $logger = new Zend_Log();
-$logger->addWriter(new Zend_Log_Writer_Stream($root .'/logs/updates.log'));
+$log_root = isset($config->path->logs) ? $config->path->logs : $root .'/logs';
+$logger->addWriter(new Zend_Log_Writer_Stream($log_root . '/updates.log'));
 Zend_Registry::set('logger',$logger);
 
 // Prepare models we need to access
