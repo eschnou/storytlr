@@ -35,10 +35,7 @@ class RssItem extends SourceItem {
 	}
 	
 	public function getIcon() {
-		//! \todo This seems like a lot of work to get a Source property...
-		$sources = new Sources();
-		$source = SourceModel::newInstance( $this->_prefix, $sources->getSource( $this->getSource() ) );
-		return $source->getProperty( 'icon', 'images/rss.png' );
+		return SourceModel::getSourceModel($this->getSource())->getProperty( 'icon', 'images/rss.png' );
 	}
 	
 	public function getType() {
