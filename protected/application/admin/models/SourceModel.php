@@ -18,6 +18,8 @@
 
 abstract class SourceModel extends Stuffpress_Db_Table
 {
+	private static $_source_cache = array();
+	
 	protected $_source;
 
 	protected $_properties;
@@ -32,6 +34,17 @@ abstract class SourceModel extends Stuffpress_Db_Table
 	
 	private $_data_table;
 
+	public static function getSourceModel($source_id) {
+		if (!isset(SourceModel::$_source_cache[$source_id])) {
+				$sources	= new Sources();
+				$source		= $sources->getSource($source_id);
+				$model 		= SourceModel::newInstance($source['service'], $source);
+				SourceModel::$_source_cache[$source_id] = $model;
+		}
+		
+		return SourceModel::$_source_cache[$source_id];
+	}
+	
 	public static function newInstance($service, $source=null) {
 		$class = ucfirst($service)."Model";
 		$instance = new $class($source);
