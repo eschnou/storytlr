@@ -141,8 +141,6 @@ class RssModel extends SourceModel {
 
 			$data['content'] = htmLawed::tidy( $content, array( 'safe' => 1, 'tidy' => '2s0n' ) );
 
-			$data['icon'] = $this->getProperty('icon');
-
 			// Save the item in the database
 			$id = $this->addItem($data, $data['published'], SourceItem::BLOG_TYPE, false, false, false, $data['title']);
 			if ($id) $result[] = $id;	
