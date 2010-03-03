@@ -5,7 +5,7 @@
 	<div class='<?php if($this->item->isHidden()) : ?> hidden <?php else : ?> item <?php endif ?>' id='item_<?= $id ?>'>
 		<div class='item_left'>
 			<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>">
-				<img class="icon" src="images/<?= $this->item->getPrefix();?>.png" width='16' height='16' />
+				<img class="icon" src="<?= $this->item->getIcon();?>" width='16' height='16' />
 			</a>
 			<span id='item_time_<?= $id ?>' class='time' <?php if ($this->admin): ?> onclick='onEditDate(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>, <?= $this->item->getTimestamp() ?>);'<?php endif ?>>
 				<?= date("H:i", $this->item->getTimestamp()); ?>

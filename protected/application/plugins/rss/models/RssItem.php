@@ -1,6 +1,7 @@
 <?php
 /*
- *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ * Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ * Copyright 2010 John Hobbs
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -31,6 +32,13 @@ class RssItem extends SourceItem {
 	
 	public function getLink() {
 		return $this->_data['link'];
+	}
+	
+	public function getIcon() {
+		//! \todo This seems like a lot of work to get a Source property...
+		$sources = new Sources();
+		$source = SourceModel::newInstance( $this->_prefix, $sources->getSource( $this->getSource() ) );
+		return $source->getProperty( 'icon', 'images/rss.png' );
 	}
 	
 	public function getType() {

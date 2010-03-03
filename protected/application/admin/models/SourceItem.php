@@ -73,6 +73,10 @@ abstract class SourceItem
 		return $this->_prefix;
 	}
 	
+	public function getIcon() {
+		return 'images/' . $this->_prefix . '.png';
+	}
+	
 	public function getSlug() {
 		return $this->_attributes['slug'];
 	}
