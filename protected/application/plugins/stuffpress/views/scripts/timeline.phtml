@@ -40,7 +40,16 @@
 		<?= $this->item->getTitle(); ?> 
 	</div>
 	<div  class="content">
-		<?= $this->item->getContent(); ?>
+		<?php 
+			$content =  $this->item->getContent();
+			$textcontent = strip_tags($content);
+			if ($this->summary && strlen($textcontent) > 300) {
+				echo "<p>" . substr($textcontent, 0 , 300) . "...</p>";
+				echo '<p> <a class="more-link" href="' . $this->base()->thisUrl() . "/entry/" . $this->item->getSlug() . '">read more</a></p>';
+			} else {
+				echo $content;
+			}
+		?>
 	</div>
 </div>
 <?php elseif($type == 'status') : ?>	

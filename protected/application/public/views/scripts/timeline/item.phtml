@@ -13,7 +13,7 @@
 			<div class="waiter" id='item_wait_<?= $id ?>' style='display:none'></div>
 			<?php if ($this->disqus) : ?>
 				<div class='disqus'>
-					<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>#disqus_thread">Comments</a>	
+					<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>#disqus_thread">?</a>	
 				</div>
 			<?php endif ?>
 		</div>
@@ -46,7 +46,7 @@
 				
 				</div>
 				
-				<?= $this->partial("timeline.phtml", $this->item->getPrefix(), array('item' => $this->item, 'model' => $this->model)); ?>
+				<?= $this->partial("timeline.phtml", $this->item->getPrefix(), array('item' => $this->item, 'model' => $this->model, 'summary' => $this->summary)); ?>
 
 					<?php if ($this->item->getTagCount() > 0) : 
 								$tags = $this->item->getTags();
