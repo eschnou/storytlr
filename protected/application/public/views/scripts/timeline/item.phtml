@@ -11,6 +11,11 @@
 				<?= date("H:i", $this->item->getTimestamp()); ?>
 			</span>		
 			<div class="waiter" id='item_wait_<?= $id ?>' style='display:none'></div>
+			<?php if ($this->disqus) : ?>
+				<div class='disqus'>
+					<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>#disqus_thread">Comments</a>	
+				</div>
+			<?php endif ?>
 		</div>
 		<div class='item_right'>
 			<div class='item_content'>
@@ -43,14 +48,6 @@
 				
 				<?= $this->partial("timeline.phtml", $this->item->getPrefix(), array('item' => $this->item, 'model' => $this->model)); ?>
 
-
-				<div class="footnote">		
-					<span class="author">
-						Author: <a href="<?=$this->model->getServiceURL(); ?>"><?= $this->model->getAccountName() ?></a>&nbsp;
-						<?php if ($this->item->getTagCount() > 0) : ?>
-							|&nbsp;
-						<?php endif ?>
-					</span>										
 					<?php if ($this->item->getTagCount() > 0) : 
 								$tags = $this->item->getTags();
 	
@@ -59,16 +56,11 @@
 									$strings[] = "<a href='tag/" . urlencode($tag['symbol']) . "' rel='tag'>{$tag['tag']}</a>";
 								}
 					?>
-	
-					Tags: <?= implode(", ", $strings); ?>
+						<div class="footnote">	
+							Tags: <?= implode(", ", $strings); ?>
+						</div>
 					<?php endif ?>
-				</div>
-				
-				<?php if ($this->disqus) : ?>
-					<div class='footnote'>
-						<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>#disqus_thread">View Comments</a>	
-					</div>
-				<?php endif ?>	
+					
 			</div>
 		</div>
 	</div>
