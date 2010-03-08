@@ -21,7 +21,7 @@ security.cookie = dasuoidasud
 ;cache.path = /tmp/cache/
 
 ;Web deployment settings
-web.host=storytlr.com
+web.host=localhost
 web.path=/
 web.redirect = 1
 web.timezone=Europe/Brussels
