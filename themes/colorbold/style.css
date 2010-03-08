@@ -101,7 +101,7 @@ img {
 }
 
 #content {
-	margin-top: 0px;
+	margin-top: -70px;
 }
 
 #left-column-wrapper{
@@ -156,15 +156,16 @@ div.descriptionwrapper div.description {
 div.tabMenu {
 	width:960px;
 	height:47px;
-	position:absolute;
-	top: 100px;
-	left: 233px;
-	padding-top:13px;
+	position:relative;
+	top: -76px;
+	left: -25px;
+	margin-top: 9px;
 	padding-left: 10px;
 	text-transform: uppercase;
 }
 
 div.tabMenu table.tabMenu {
+	margin-top: 13px;
 	width: 100%;
 }
 
