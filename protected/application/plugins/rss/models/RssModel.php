@@ -29,7 +29,11 @@ class RssModel extends SourceModel {
 	public function getServiceName() {
 		return "RSS";
 	}
-	
+
+	public function getIcon() {
+		return $this->getProperty( 'icon', 'images/rss.png' );
+	}
+
 	public function isStoryElement() {
 		return true;
 	}
@@ -115,8 +119,8 @@ class RssModel extends SourceModel {
 			$data		= array();
 			
 			// Fetch the title
-			$data['title'] = (string) $item->title();
-			
+			$data['title'] = $this->getFirstFeedNode( $item->title() );
+
 			// Fetch the link
 			$link 			= $item->link;
 			if (is_array($link)) {
@@ -141,9 +145,17 @@ class RssModel extends SourceModel {
 
 			$data['content'] = htmLawed::tidy( $content, array( 'safe' => 1, 'tidy' => '2s0n' ) );
 
+			// Get the categories as tags, if we can
+			$tags = array();
+			try {
+				foreach( $item->category() as $category )
+					$tags[] = $category->nodeValue;
+			} catch ( Exception $e ) {}
+
+
 			// Save the item in the database
-			$id = $this->addItem($data, $data['published'], SourceItem::BLOG_TYPE, false, false, false, $data['title']);
-			if ($id) $result[] = $id;	
+			$id = $this->addItem($data, $data['published'], SourceItem::BLOG_TYPE, $tags, false, false, $data['title']);
+			if ($id) $result[] = $id;
 			if (count($result)> 100) break;
 		}
 
@@ -209,5 +221,29 @@ class RssModel extends SourceModel {
 		$this->_properties->setProperty('title', $values['title']);
 		$this->_properties->setProperty('icon', $values['icon']);
 		return $update;
+	}
+
+	// Code From: http://framework.zend.com/issues/browse/ZF-1863
+	// Copyright Markus Wolff
+	protected function getFirstFeedNode ( $nodeResult, $default='' ) {
+		if (is_array($nodeResult) && $nodeResult[0] instanceof DOMElement) {
+			// first run: check for non-empty default namespaced node
+			foreach($nodeResult as $node) {
+				if (!$node->prefix && !empty($node->nodeValue)) {
+					return (string)$node->nodeValue;
+				}
+			}
+			// second run: search for any non-empfy node in all namespaces
+			foreach($nodeResult as $node) {
+				if (!empty($node->nodeValue)) {
+					return (string)$node->nodeValue;
+				}
+			}
+		} elseif($nodeResult instanceof DOMElement && !empty($nodeResult->nodeValue)) {
+			return (string) $nodeResult->nodeValue;
+		} elseif (is_string($nodeResult) && !empty($nodeResult)) {
+			return $nodeResult;
+		}
+		return $default; // if all else fails
 	}
 }
