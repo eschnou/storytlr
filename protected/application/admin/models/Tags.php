@@ -1,6 +1,7 @@
 <?php
 /*
- *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
+ *  Copyright 2010 John Hobbs
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -42,7 +43,11 @@ class Tags extends Stuffpress_Db_Table
 	public function addTag($source_id, $item_id, $tag) {
 		$tag = strip_tags($tag);
 		$tag = trim($tag);
+
 		$symbol = preg_replace('/\W/', '', $tag);
+		//! \todo This is an iffy fix, because if you search for something with a mix of UTF-8 and roman chars, the symbol will be wrong.
+		if( empty( $symbol ) ) { $symbol = htmlspecialchars( $tag ); }
+
 		if (strlen($tag) == 0) return false;
 		
 		$sql = "INSERT IGNORE INTO `tags` (user_id, source_id, item_id, tag, symbol) VALUES (:user_id, :source_id, :item_id, :tag, :symbol)";
@@ -75,3 +80,4 @@ class Tags extends Stuffpress_Db_Table
 		$this->delete($where);
 	}
 }
+
