@@ -46,7 +46,7 @@
 <div class="storytlr_status">
 	<div  class="title">
 		<?php 
-			$title = 	ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
+			$title = 	preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
 			echo $title;
 		?>
 	</div>

@@ -1,4 +1,4 @@
-<?php $comment = ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" rel="nofollow">\\1</a>', $this->comment);  ?>
+<?php $comment = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" rel="nofollow">\\1</a>', $this->comment);  ?>
 <div class='comment' id='comment_<?= $this->id ?>'>
 	<div class='comment_actions'>
 	<?php if ($this->delete) : ?>

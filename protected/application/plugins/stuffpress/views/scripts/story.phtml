@@ -14,7 +14,7 @@
 <?php elseif ($this->item->getType() == SourceItem::STATUS_TYPE) : ?>
 <div class="storytlr_status">
 	<table cellspacing=0><tr><td style="background: url('images/bg-storytlr.jpg') no-repeat">
-	<?php $title = 	ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
+	<?php $title = 	preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
 	 ?>
 	<div class="title"><span class="quote">&ldquo; </span><?= $title; ?><span class="quote"> &rdquo;</span></div>
 	<div class="triangle"></div>

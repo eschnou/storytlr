@@ -106,9 +106,9 @@
 					<td class="title">
 					<?php
 						$status  = strip_tags($item->getStatus());
-						$status	 = ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])",'<a href="\\1" target="_blank">\\1</a>',$status); // turn any URL’s into links
-						$status	 = ereg_replace("@([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'@<a href="http://twitter.com/\\1" target="_blank">\\1</a>\\2',$status); // add “@username” links
-						$status	 = ereg_replace("#([a-zA-Z0-9_]+)([^a-zA-Z0-9_])",'#<a href="/tag/\\1">\\1</a>\\2',$status); // add tag links	
+						$status	 = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$status); // turn any URL’s into links
+						$status	 = preg_replace("|@([a-zA-Z0-9_]+)([^a-zA-Z0-9_])|",'@<a href="http://twitter.com/\\1" target="_blank">\\1</a>\\2',$status); // add “@username” links
+						$status	 = preg_replace("|#([a-zA-Z0-9_]+)([^a-zA-Z0-9_])|",'#<a href="/tag/\\1">\\1</a>\\2',$status); // add tag links	
 						echo $status;
 						?>
 					

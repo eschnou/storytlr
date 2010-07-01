@@ -143,7 +143,7 @@ class EmbedController extends BaseController
 
 			$content = "<div id='storytlr_widget' class='storytlr_widget'><table>";
 			foreach($items as $item) {
-				$title		   = ereg_replace("([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])","<a href='\\1'>\\1</a>", $this->escape(strip_tags($item->getTitle())));
+				$title		   = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|","<a href='\\1'>\\1</a>", $this->escape(strip_tags($item->getTitle())));
 				$item_content  = "<tr>";
 				$item_content .="<td class='icon'><a href='{$item->getLink()}'><img src='http://$host/images/{$item->getPrefix()}.png'></a></td>";
 				$item_content .= "<td class='title'>$title</td>";
