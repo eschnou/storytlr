@@ -90,7 +90,7 @@ class TwitterModel extends SourceModel {
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_USERPWD, "$user:$pwd"); 
+		//curl_setopt($curl, CURLOPT_USERPWD, "$user:$pwd"); 
 		curl_setopt($curl, CURLOPT_USERAGENT,'Storytlr/1.0');
 		
 		for($page=1; $page<= $pages; $page ++) {
