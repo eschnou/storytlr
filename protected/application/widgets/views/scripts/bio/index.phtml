@@ -1,13 +1,13 @@
 <div class="widget bio">
 	<h2 class="title"><?= $this->title ?></h2>
 	<div class="widget-content">
-		<div id="profile">
+		<div id="profile" class="vcard">
 			<div id="avatar">
 				<?php if ($this->avatar) : ?>
-				<img src="thumbnail/<?= $this->avatar ?>" alt="<?= $this->username ?>" width="72" height="72" />
+				<img src="thumbnail/<?= $this->avatar ?>" alt="<?= $this->username ?>" class="photo" width="72" height="72" />
 				<?php endif ?>
-				<div id="name"><?= $this->first_name?> <?= $this->last_name?></div>
-				<div id="location"><?= $this->location ?></div>
+				<div id="name" class="fn"><span class="given-name"><?= $this->first_name?></span> <span class="family-name"><?= $this->last_name?></span></div>
+				<div id="location" class="adr"><?= $this->location ?></div>
 			</div>
 			<div id="details">
 				<div id="bio"><?= $this->bio ?></div>
