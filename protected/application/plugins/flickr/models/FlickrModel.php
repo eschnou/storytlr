@@ -36,7 +36,10 @@ class FlickrModel extends SourceModel {
 	}
 
 	public function getServiceURL() {
-		if ($user_id = $this->getProperty('user_id')) {
+		if ($username = $this->getProperty('username')) {
+			return "http://www.flickr.com/photos/$username";
+		}
+		else if ($user_id = $this->getProperty('user_id')) {
 			return "http://www.flickr.com/photos/$user_id";
 		}
 		else {
