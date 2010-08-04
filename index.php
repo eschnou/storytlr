@@ -1,5 +1,5 @@
 <?php
-define("STORYTLR_VERSION","0.9.3.dev");
+define("STORYTLR_VERSION","0.9.3");
 
 // Update after deployment for location of non-public files
 $root = dirname(__FILE__);
