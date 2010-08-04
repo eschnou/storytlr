@@ -2,31 +2,50 @@
 
 class AtomProcessor {
 	
+	private $_user;
+	private $_domain;
+	private $_config;
+	
+	public function __construct($user=false, $domain=false) {
+		$this->_user = $user ? $user : Zend_Registry::get("user");
+		$this->_domain = $domain ? $domain : Stuffpress_Application::getDomain($this->_user, true);
+		$this->_config = Zend_Registry::get("configuration");
+	}
+	
 	#region buildActivitiesFeed
 	/**
 	 * @param array $items
 	 * @return AtomFeedAdapter
 	 */
-	public function buildActivitiesFeed($items) {
-		
-		$application = Stuffpress_Application::getInstance();
-		
+	public function buildActivitiesFeed($items, $url) {
+
 		$feed = new AtomFeedAdapter(null);
     	$feed->addNamespace(ActivityNS::PREFIX, ActivityNS::NS);
     	$feed->addNamespace(MediaNS::PREFIX, MediaNS::NS);
     	
-    	$feed->title		= $application->user->username . "'s activities";
-    	$feed->id			= $application->getPublicDomain() . "/api/activities"; // the id should be changed into an IRI - later
+    	// Feed id and other parameters
+    	$feed->title		= $this->_user->username . "'s activities";
+    	$feed->id			= $url;
     	$feed->updated		= toAtomDate(time());
+
+    	$feedLink  = $feed->addLink();
+    	$feedLink->rel      = 'self';
+    	$feedLink->href     = $url;
+    	
+    	$feedLink  = $feed->addLink();
+    	$feedLink->rel      = 'alternate';
+    	$feedLink->type		= 'text/html';
+    	$feedLink->href     = 'http://' . $this->_domain;
+    	
+    	if ($this->_config->push) {
+	    	$feedLink  = $feed->addLink();
+	    	$feedLink->rel      = 'hub';
+	    	$feedLink->href     = $this->_config->push->hub;
+    	}
     	
     	$feedAuthor = $feed->addAuthor();
-    	$feedAuthor->name	= $application->user->username;
-    	$feedAuthor->uri	= 'http://' . $application->getPublicDomain();
-    	$feedAuthor->email	= $application->user->email;
-    	
-    	$feedLink	= $feed->addLink();
-    	$feedLink->rel		= 'self';
-    	$feedLink->href		= 'http://' . $application->getPublicDomain() . "/api/activities?username=" . $application->user->username;
+    	$feedAuthor->name	= $this->_user->username;
+    	$feedAuthor->uri	= 'http://' . $this->_domain;
     	
 		foreach ($items as $item) {
 			$this->buildItemEntry($item, $feed->addEntry());
@@ -83,7 +102,7 @@ class AtomProcessor {
      */
     protected function buildStatusEntry($item, $entry=null) {
     	$this->_buildCommonItemEntryElement($entry, $item);
-    	$entry->content			= htmlentities($item->getStatus(), ENT_QUOTES);
+    	$entry->content			= $this->xmlentities($item->getStatus());
     	$entry->content->type	= AtomNS::TYPE_HTML;
     	
 		// build the activity entry
@@ -95,9 +114,9 @@ class AtomProcessor {
     	
     	$application = Stuffpress_Application::getInstance();
     	$objectAuthor = $activityObject->addAuthor();
-    	$objectAuthor->name	= $application->user->username;
-    	$objectAuthor->uri	= 'http://' . $application->getPublicDomain();
-    	$objectAuthor->email	= $application->user->email;
+    	$objectAuthor->name	= $this->_user->username;
+    	$objectAuthor->uri	= 'http://' . $this->_domain;
+    	//$objectAuthor->email	= $application->user->email;
     	
     	$status = ActivityProcessorFactory::getInstance()->getProcessor($activityObject, ActivityNS::STATUS_OBJECT_TYPE);/* @var $status IActivityStatus */
     	$this->_buildCommonItemActivityObject($status, $item);
@@ -115,7 +134,7 @@ class AtomProcessor {
      */
     protected function buildBlogEntry($item, $entry=null) {
     	$this->_buildCommonItemEntryElement($entry, $item);
-    	$entry->content			= htmlentities($item->getContent(), ENT_QUOTES);
+    	$entry->content			= $this->xmlentities(html_entity_decode($item->getContent()));
     	$entry->content->type	= AtomNS::TYPE_HTML;
     	
 		// build the activity entry    	
@@ -127,13 +146,13 @@ class AtomProcessor {
     	
     	$application = Stuffpress_Application::getInstance();
     	$objectAuthor = $activityObject->addAuthor();
-    	$objectAuthor->name	= $application->user->username;
-    	$objectAuthor->uri	= 'http://' . $application->getPublicDomain();
+    	$objectAuthor->name	= $this->_user->username;
+    	$objectAuthor->uri	= 'http://' . $this->_domain;
     	$objectAuthor->email	= $application->user->email;
     	
     	$article = ActivityProcessorFactory::getInstance()->getProcessor($activityObject, ActivityNS::ARTICLE_OBJECT_TYPE);/* @var $article IActivityArticle */
     	$this->_buildCommonItemActivityObject($article, $item);
-    	$article->setSummary(htmlentities(substr($item->getContent(), 0, 50) . "...", ENT_QUOTES));
+    	$article->setSummary($this->xmlentities(substr($item->getContent(), 0, 50) . "..."));
     	$article->setContent($entry->content->value);	
     
     	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
@@ -150,7 +169,7 @@ class AtomProcessor {
     	$this->_buildCommonItemEntryElement($entry, $item);
     	$entry->addNamespace(MediaNS::PREFIX, MediaNS::NS);
     	
-    	$entry->content			= htmlentities("<a href='" . $item->getLink() . "'>" . $item->getLink() . "</a><br/>" . $item->getDescription(), ENT_QUOTES);
+    	$entry->content			= $this->xmlentities("<a href='" . $item->getLink() . "'>" . $item->getLink() . "</a><br/>" . $item->getDescription());
 		$entry->content->type	= AtomNS::TYPE_HTML;
     	
 		// build the activity entry    	
@@ -162,15 +181,15 @@ class AtomProcessor {
     	
     	$application = Stuffpress_Application::getInstance();
     	$objectAuthor = $activityObject->addAuthor();
-    	$objectAuthor->name	= $application->user->username;
-    	$objectAuthor->uri	= 'http://' . $application->getPublicDomain();
+    	$objectAuthor->name	= $this->_user->username;
+    	$objectAuthor->uri	= 'http://' . $this->_domain;
     	$objectAuthor->email	= $application->user->email;
     	
     	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
     	$link = ActivityProcessorFactory::getInstance()->getProcessor($activityObject, ActivityNS::BOOKMARK_OBJECT_TYPE);/* @var $link IActivityBookmark */
     	$this->_buildCommonItemActivityObject($link, $item);
-    	$link->setDescription(htmlentities($item->getDescription(), ENT_QUOTES));
+    	$link->setDescription($this->xmlentities($item->getDescription()));
     	$link->setTargetUrl($item->getLink());
     	$link->setTargetTitle($item->getTitle());
     	$link->setThumbnail('not available yet', 'image/jpeg', 'unknown', 'unknown');
@@ -194,7 +213,7 @@ class AtomProcessor {
     		$this->_getEditMediaLink($entry->addLink(), $item, $entry->id->value);
     	}
     	
-		$entry->content			= htmlentities("<img src='" . $item->getImageUrl(ImageItem::SIZE_MEDIUM) . "'/><br/>" . $item->getDescription(), ENT_QUOTES);
+		$entry->content			= $this->xmlentities("<img src='" . $item->getImageUrl(ImageItem::SIZE_MEDIUM) . "'/><br/>" . $item->getDescription());
 		$entry->content->type	= AtomNS::TYPE_HTML;
 		    	
 		// build the activity entry    	
@@ -206,15 +225,15 @@ class AtomProcessor {
     	
     	$application = Stuffpress_Application::getInstance();
     	$objectAuthor = $activityObject->addAuthor();
-    	$objectAuthor->name	= $application->user->username;
-    	$objectAuthor->uri	= 'http://' . $application->getPublicDomain();
-    	$objectAuthor->email	= $application->user->email;
+    	$objectAuthor->name	= $this->_user->username;
+    	$objectAuthor->uri	= 'http://' . $this->_domain;
+    	//$objectAuthor->email	= $application->user->email;
     	
     	$image = ActivityProcessorFactory::getInstance()->getProcessor($activityObject, ActivityNS::PHOTO_OBJECT_TYPE);/* @var $image IActivityPhoto */
     	$this->_buildCommonItemActivityObject($image, $item);
     	$image->setThumbnail($item->getImageUrl(ImageItem::SIZE_THUMBNAIL), 'image/jpeg', 'unknown', 'unknown');
     	$image->setLargerImage($item->getImageUrl(ImageItem::SIZE_LARGE), 'image/jpeg', 'unknown', 'unknown');
-    	$image->setDescription(htmlentities($item->getDescription(), ENT_QUOTES));
+    	$image->setDescription($this->xmlentities($item->getDescription()));
     	$image->setContent($entry->content->value);
     	
     	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
@@ -257,8 +276,8 @@ class AtomProcessor {
     	
     	$application = Stuffpress_Application::getInstance();
     	$objectAuthor = $activityObject->addAuthor();
-    	$objectAuthor->name	= $application->user->username;
-    	$objectAuthor->uri	= 'http://' . $application->getPublicDomain();
+    	$objectAuthor->name	= $this->_user->username;
+    	$objectAuthor->uri	= 'http://' . $this->_domain;
     	$objectAuthor->email	= $application->user->email;
     	
     	$audio = ActivityProcessorFactory::getInstance()->getProcessor($activityObject, ActivityNS::AUDIO_OBJECT_TYPE);/* @var $audio IActivityAudio */
@@ -266,7 +285,7 @@ class AtomProcessor {
     	
     	$audio->setAudioStream($item->getAudioUrl(), 'audio/*', 'unknown');
     	$audio->setPlayerApplet('unknown', 'unknown', 'unknown', 'unknown');
-    	$audio->setDescription(htmlentities($item->getDescription(), ENT_QUOTES));
+    	$audio->setDescription($this->xmlentities($item->getDescription()));
     
     	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
@@ -286,7 +305,7 @@ class AtomProcessor {
     	$this->_buildCommonItemEntryElement($entry, $item);
     	$entry->addNamespace(MediaNS::PREFIX, MediaNS::NS);
      	
-     	$entry->content			= htmlentities($item->getEmbedCode(100, 100) . "<br/>" . $item->getDescription() . "<br/>If you don't see the video, watch it <a href='" . $item->getVideoUrl() . "'>here</a>", ENT_QUOTES);
+     	$entry->content			= $this->xmlentities($item->getEmbedCode(100, 100) . "<br/>" . $item->getDescription() . "<br/>If you don't see the video, watch it <a href='" . $item->getVideoUrl() . "'>here</a>");
      	$entry->content->type	= AtomNS::TYPE_HTML;
      	
 		// build the activity entry    	
@@ -298,9 +317,9 @@ class AtomProcessor {
     	
     	$application = Stuffpress_Application::getInstance();
     	$objectAuthor = $activityObject->addAuthor();
-    	$objectAuthor->name	= $application->user->username;
-    	$objectAuthor->uri	= 'http://' . $application->getPublicDomain();
-    	$objectAuthor->email	= $application->user->email;
+    	$objectAuthor->name	= $this->_user->username;
+    	$objectAuthor->uri	= 'http://' . $this->_domain;
+    	//$objectAuthor->email	= $application->user->email;
     	
     	$video = ActivityProcessorFactory::getInstance()->getProcessor($activityObject, ActivityNS::VIDEO_OBJECT_TYPE);/* @var $video IActivityVideo */
 		$this->_buildCommonItemActivityObject($video, $item);
@@ -308,8 +327,8 @@ class AtomProcessor {
     	$video->setThumbnail($item->getImageUrl(ImageItem::SIZE_THUMBNAIL), 'image/jpeg', 'unknown', 'unknown');
     	$video->setVideoStream($item->getVideoUrl(), 'videos/*', 'unknown');
     	//$video->setPlayerApplet('unknown', 'unknown', 'unknown', 'unknown');
-    	$video->setDescription(htmlentities($item->getDescription(), ENT_QUOTES));
-    	$video->setContent(htmlentities($item->getEmbedCode(100, 100) . "<br/>" . $item->getDescription() . "<br/>If you don't see the video, watch it <a href='" . $item->getVideoUrl() . "'>here</a>", ENT_QUOTES));
+    	$video->setDescription($this->xmlentities($item->getDescription()));
+    	$video->setContent($this->xmlentities($item->getEmbedCode(100, 100) . "<br/>" . $item->getDescription() . "<br/>If you don't see the video, watch it <a href='" . $item->getVideoUrl() . "'>here</a>"));
     
     	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
@@ -318,12 +337,12 @@ class AtomProcessor {
 	
 	protected function _buildCommonItemEntryElement(AtomEntryAdapter $entry, $item) {
     	
-    	$entry->id				= $this->_getObjectId($item);
+    	$entry->id				= 'http://' . $this->_domain . "/entry/" . $item->getSlug();
     	$entry->title			= $item->getPreamble() . " " . $item->getTitle();
 		$entry->updated			= toAtomDate($item->getTimestamp()); //actually this is published
 		
 		$this->_getAlternativeLink($item, $entry->addLink());
-		$this->_getEditLink($entry->addLink(), $item, $entry->id->value);
+		$this->_getEditLink($entry->addLink(), $item, $this->_getObjectId($item));
 	}
     
     protected function _buildCommonItemActivityObject(IActivityDefault $object, $item) {
@@ -549,7 +568,7 @@ class AtomProcessor {
     	$application = Stuffpress_Application::getInstance();
     	
 		// Get the url of the logged in user
-		$currentUrl = $application->getPublicDomain();
+		$currentUrl = $this->_domain;
     	
 		// Construct the alternative link
     	$href = 'http://' . $currentUrl . "/entry/" . $item->getSlug();
@@ -571,16 +590,16 @@ class AtomProcessor {
     	
     	$linkAdapter->rel	= AtomNS::REL_EDIT;
     	//$linkAdapter->href	= 'http://' . $application->getPublicDomain() . '/api/' . $item->getType() . '/' . $id . '?source=' . $item->getSource() . '&id=' . $item->getID(); 
-    	$linkAdapter->href	= 'http://' . $application->getPublicDomain() . '/api/activities/' . $id . '?username=' . $application->user->username;
+    	$linkAdapter->href	= 'http://' . $this->_domain . '/api/activities/' . $id;
     }
     	
     protected function _getEditMediaLink(AtomLinkAdapter $linkAdapter, $item, $id) {
     	
     	$application = Stuffpress_Application::getInstance();
     	
-    	$linkAdapter->rel	= AtomNS::REL_EDIT_MEDIA;
+    	//$linkAdapter->rel	= AtomNS::REL_EDIT_MEDIA;
     	//$linkAdapter->href	= 'http://' . $application->getPublicDomain() . '/api/' . $item->getType() . '/' . $id . '?source=' . $item->getSource() . '&id=' . $item->getID(); 
-    	$linkAdapter->href	= 'http://' . $application->getPublicDomain() . '/api/media/' . $id . '?username=' . $application->user->username;
+    	$linkAdapter->href	= 'http://' . $this->_domain . '/api/media/' . $id;
     }
     
     /**
@@ -598,12 +617,12 @@ class AtomProcessor {
     	$feed->addNamespace(ActivityNS::PREFIX, ActivityNS::NS);
     	
     	$feed->title		= "Comments of " . $this->_getObjectId($item) ;
-    	$feed->id			= $application->getPublicDomain() . "/api/comments"; // 
+    	$feed->id			= "http://" . $this->_domain . "/api/comments"; // 
     	$feed->updated		= toAtomDate(time());
     	
     	$feedLink	= $feed->addLink();
     	$feedLink->rel		= 'self';
-    	$feedLink->href		= 'http://' . $application->getPublicDomain() . "/api/comments/" . $this->_getObjectId($item);
+    	$feedLink->href		= 'http://' . $this->_domain . "/api/comments/" . $this->_getObjectId($item);
     	
 		foreach ($comments as $comment) {
 			$this->buildCommentEntry(new Comment($comment), $item, $feed->addEntry());
@@ -627,7 +646,7 @@ class AtomProcessor {
 		$entry->updated			= toAtomDate(strtotime($comment->getPublished())); //actually this is published
 		$entry->published		= toAtomDate(strtotime($comment->getPublished()));
     	
-    	$entry->content			= htmlentities($comment->getText(), ENT_QUOTES);
+    	$entry->content			= $this->xmlentities($comment->getText());
     	$entry->content->type	= AtomNS::TYPE_HTML;
     	
 		// build the activity entry
@@ -664,7 +683,7 @@ class AtomProcessor {
 		
 		
     	$application = Stuffpress_Application::getInstance();
-    	$href	= 'http://' . $application->getPublicDomain() . '/api/comments/' . $this->_getObjectId($item) . '/' . $this->_getCommentId($comment) . '?username=' . $application->user->username;
+    	$href	= 'http://' . $this->_domain . '/api/comments/' . $this->_getObjectId($item) . '/' . $this->_getCommentId($comment);
     
 		
 		// Set Edit Link
@@ -677,4 +696,9 @@ class AtomProcessor {
 	protected function _getCommentId($comment) { // the id should be changed into an IRI - later
     	return $comment->getItemSourceId() . "_" . $comment->getItemId() . "_" . $comment->getCommentId() . "_comment";
     }
+    
+	private function xmlentities($string)
+	{
+    	return str_replace ( array ( '&', '"', "'", '<', '>' ), array ( '&amp;' , '&quot;', '&apos;' , '&lt;' , '&gt;' ), $string );
+	}
 }

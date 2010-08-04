@@ -45,7 +45,7 @@ class Widgets_RsslinkController extends Stuffpress_Controller_Widget
 		$this->view->title = $title ? $title : "Subscribe to my lifestream";
 		
 		// RSS Link
-		$this->view->feed = "http://$host/rss/feed.xml";
+		$this->view->feed = "http://$host/updates.atom";
 	}
 	
 }

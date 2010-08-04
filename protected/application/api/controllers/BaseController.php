@@ -11,47 +11,39 @@ abstract class Api_BaseController extends Zend_Controller_Action {
 	
 	protected $_application;
 	
+	protected $_properties;
+	
+	protected $_user;
+	
+	protected $_domain;
+	
+	protected $_config;
+	
 	public function init()
     {
+    	// Set the user shard
+    	if (Zend_Registry::isRegistered("user")) {
+    		$this->_user = Zend_Registry::get("user");
+    	}
+        if (!Zend_Registry::isRegistered('shard')) {
+			Zend_Registry::set("shard", $this->_user->id);
+		}
+		
+		// Get the config
+		if (Zend_Registry::isRegistered("configuration")) $this->_config = Zend_Registry::get("configuration");
+		
+		// Set the domain
+		$this->_domain = Stuffpress_Application::getDomain($this->_user, true);
+		
+		// Get the user properties
+		$this->_properties 	= new Properties(array(Stuffpress_Db_Properties::KEY => $this->_user->id));
+		
     	// Prevent the layout to be rendered
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
             
     }
-    
-    protected function _authenticateUser($public=false) {
-    	
-        // Get username and password from the request
-        $username = $this->getRequest()->getParam('username');
-        $password = $this->getRequest()->getHeader('Password');
-    	
-    	if (!$username) {
-    		$this->_buildResponse(self::HTTP_FAILED, 'No username is provided!!!');
-    		return false;
-    	}
-    	
-    	// Login the user
-    	$users	= new Users();
-		if (!$user = $users->getUserFromUsername($username)) {
-    		$this->_buildResponse(self::HTTP_FAILED, 'No user with such username!!!');
-			return false;
-		}
-		
-		if (!$public) {
-	    	// Validate the password
-			if ($user->password != md5($password)) {
-				$this->_buildResponse(self::HTTP_FAILED, 'Wrong Password!!!');
-				return false;
-			}
-		}
-    	
-		// Everything ok, we can log in and assign role
-		$this->_application = Stuffpress_Application::getInstance();
-		$this->_application->user = $user;
-		$this->_application->role = 'member';
-		return true;
-    }
-    
+       
     protected function _buildResponse($responseCode, $body=null, $contentType=self::CONTENT_TYPE_TEXT) {
 		header("Content-Type: $contentType" , true, $responseCode);
 		echo $body;
@@ -98,7 +90,6 @@ abstract class Api_BaseController extends Zend_Controller_Action {
     	
     	// Gets the comment
     	$comments  	= new Comments();
-		$comments->setUser($this->_application->user);
 	    foreach($comments->getComments($source_id, $item_id) as $comment) {
 			if ($comment['id'] == $comment_id) {
 				return new Comment($comment);
@@ -157,7 +148,6 @@ abstract class Api_BaseController extends Zend_Controller_Action {
 		
 		if (strlen($file_key) >=0) {
 			$files = new Files();
-			$files->setUser($this->_application->user->username);
 			$files->deleteFile($file_key);
 		}
     }
@@ -203,7 +193,6 @@ abstract class Api_BaseController extends Zend_Controller_Action {
     
     protected function _saveFileToDb($type, $url, $file=null) {
     	$files = new Files();
-		$files->setUser($this->_application->user->username);
 
 		// the audio file should be handled as well
     	if ((($type == SourceItem::IMAGE_TYPE) || (($type == SourceItem::AUDIO_TYPE))) && (strlen($url) > 0)) {
@@ -242,7 +231,6 @@ abstract class Api_BaseController extends Zend_Controller_Action {
     
     protected function _deleteFileFromDb($key) {
     	$files = new Files();
-    	$files->setUser($this->_application->user->username);
 		$files->deleteFile($key);    	
     }
 }

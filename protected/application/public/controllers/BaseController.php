@@ -113,7 +113,7 @@ abstract class BaseController extends Stuffpress_Controller_Action
 		// CSS
 		$this->view->headLink()->appendStylesheet('style/toolbar.css');
 		$this->view->headLink()->appendStylesheet('themes/' . $this->_properties->getProperty('theme') . '/style.css');
-		
+				
 		// Colors
 		$colors		= $this->_properties->getProperties(array("color_title", "color_subtitle", "color_sidebar_border", "color_background", "color_link", "color_sidebar_text", "color_sidebar_header"));		
 		$this->view->colors				= $colors;

@@ -401,6 +401,11 @@ class Bootstrap
 		);
 		
 		$router->addRoute(
+		'atom',
+		new Zend_Controller_Router_Route('/updates.atom', array('module' => 'api', 'controller' => 'activities', 'action' => 'index'))
+		);
+		
+		$router->addRoute(
 		'comment4',
 		new Zend_Controller_Router_Route('/api/comments/*', array('module' => 'api', 'controller' => 'comments', 'action' => 'rest'))
 		);

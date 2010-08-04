@@ -12,11 +12,11 @@ class Stuffpress_Services_Uri {
 			foreach($query as $key => $value) {
 				$params[] = urlencode($key) . "=" . urlencode($value);
 			}
-			$args = implode("&", $params);
+			$args = "?" . implode("&", $params);
 		} else {
 			$args = "";
 		}
 		
-		return "http://$host/$path?$args"; 
+		return "http://$host/$path" . $args; 
 	}
 }

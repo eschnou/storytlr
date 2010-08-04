@@ -5,11 +5,8 @@ class Api_ActivitiesController extends Api_BaseController
 
 	// Returns an activity feed
     public function indexAction()
-    {    	    	        
-        if (!$this->_authenticateUser(true)) {
-        	return;	
-        }
-        
+    {    	    	      
+       	// Filter maxResult parameter
         $maxResult = $this->getRequest()->getParam('maxResult');
         if (!isset($maxResult)) {
         	$maxResult = 20;
@@ -20,8 +17,9 @@ class Api_ActivitiesController extends Api_BaseController
     	
     	// Build the Activities Feed from the latest items
     	$atomProcessor = new AtomProcessor();
-    	$feed = $atomProcessor->buildActivitiesFeed($items);
-
+    	$feed_url = "http://" . $this->_domain . "/updates.atom";
+    	$feed = $atomProcessor->buildActivitiesFeed($items, $feed_url);
+    	
     	// Set responses and response code 
     	$this->_buildResponse(Api_BaseController::HTTP_SUCCESS, $feed->getXml(), Api_BaseController::CONTENT_TYPE_ATOM);
     }
@@ -299,7 +297,6 @@ class Api_ActivitiesController extends Api_BaseController
     
     protected function _getLatestItems($latest) {
     	$data = new Data();
-    	$data->setUser($this->_application->user->id);
     	return $data->getLastItems($latest);
     }
 } 
