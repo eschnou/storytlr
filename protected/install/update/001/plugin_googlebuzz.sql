@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS `googlebuzz_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `googlebuzz_data` (

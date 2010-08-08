@@ -1,25 +1,7 @@
--- MySQL dump 10.11
+-- Initial database structure for Storytlr
 --
--- Host: localhost    Database: eschnou
--- ------------------------------------------------------
--- Server version	5.0.75-0ubuntu10.2
+-- Version: 1
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `comments`
---
-
-DROP TABLE IF EXISTS `comments`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `comments` (
@@ -38,19 +20,9 @@ CREATE TABLE `comments` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `comments`
---
-
-LOCK TABLES `comments` WRITE;
-/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `data`
 --
 
-DROP TABLE IF EXISTS `data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `data` (
@@ -75,19 +47,9 @@ CREATE TABLE `data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `data`
---
-
-LOCK TABLES `data` WRITE;
-/*!40000 ALTER TABLE `data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `delicious_data`
 --
 
-DROP TABLE IF EXISTS `delicious_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `delicious_data` (
@@ -105,19 +67,9 @@ CREATE TABLE `delicious_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `delicious_data`
---
-
-LOCK TABLES `delicious_data` WRITE;
-/*!40000 ALTER TABLE `delicious_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `delicious_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `digg_data`
 --
 
-DROP TABLE IF EXISTS `digg_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `digg_data` (
@@ -142,19 +94,9 @@ CREATE TABLE `digg_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `digg_data`
---
-
-LOCK TABLES `digg_data` WRITE;
-/*!40000 ALTER TABLE `digg_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `digg_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `files`
 --
 
-DROP TABLE IF EXISTS `files`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `files` (
@@ -170,19 +112,9 @@ CREATE TABLE `files` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `files`
---
-
-LOCK TABLES `files` WRITE;
-/*!40000 ALTER TABLE `files` DISABLE KEYS */;
-/*!40000 ALTER TABLE `files` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `flickr_data`
 --
 
-DROP TABLE IF EXISTS `flickr_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `flickr_data` (
@@ -203,19 +135,9 @@ CREATE TABLE `flickr_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `flickr_data`
---
-
-LOCK TABLES `flickr_data` WRITE;
-/*!40000 ALTER TABLE `flickr_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `flickr_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `googlereader_data`
 --
 
-DROP TABLE IF EXISTS `googlereader_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `googlereader_data` (
@@ -233,19 +155,9 @@ CREATE TABLE `googlereader_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `googlereader_data`
---
-
-LOCK TABLES `googlereader_data` WRITE;
-/*!40000 ALTER TABLE `googlereader_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `googlereader_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `laconica_data`
 --
 
-DROP TABLE IF EXISTS `laconica_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `laconica_data` (
@@ -268,19 +180,9 @@ CREATE TABLE `laconica_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `laconica_data`
---
-
-LOCK TABLES `laconica_data` WRITE;
-/*!40000 ALTER TABLE `laconica_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `laconica_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `lastfm_data`
 --
 
-DROP TABLE IF EXISTS `lastfm_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `lastfm_data` (
@@ -299,19 +201,9 @@ CREATE TABLE `lastfm_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `lastfm_data`
---
-
-LOCK TABLES `lastfm_data` WRITE;
-/*!40000 ALTER TABLE `lastfm_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lastfm_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `pages`
 --
 
-DROP TABLE IF EXISTS `pages`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `pages` (
@@ -338,7 +230,6 @@ UNLOCK TABLES;
 -- Table structure for table `pages_properties`
 --
 
-DROP TABLE IF EXISTS `pages_properties`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `pages_properties` (
@@ -350,19 +241,9 @@ CREATE TABLE `pages_properties` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `pages_properties`
---
-
-LOCK TABLES `pages_properties` WRITE;
-/*!40000 ALTER TABLE `pages_properties` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pages_properties` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `picasa_data`
 --
 
-DROP TABLE IF EXISTS `picasa_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `picasa_data` (
@@ -382,19 +263,9 @@ CREATE TABLE `picasa_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `picasa_data`
---
-
-LOCK TABLES `picasa_data` WRITE;
-/*!40000 ALTER TABLE `picasa_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `picasa_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `properties`
 --
 
-DROP TABLE IF EXISTS `properties`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `properties` (
@@ -419,7 +290,6 @@ UNLOCK TABLES;
 -- Table structure for table `qik_data`
 --
 
-DROP TABLE IF EXISTS `qik_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `qik_data` (
@@ -439,19 +309,9 @@ CREATE TABLE `qik_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `qik_data`
---
-
-LOCK TABLES `qik_data` WRITE;
-/*!40000 ALTER TABLE `qik_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `qik_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `rss_data`
 --
 
-DROP TABLE IF EXISTS `rss_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `rss_data` (
@@ -468,19 +328,9 @@ CREATE TABLE `rss_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `rss_data`
---
-
-LOCK TABLES `rss_data` WRITE;
-/*!40000 ALTER TABLE `rss_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rss_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `seesmic_data`
 --
 
-DROP TABLE IF EXISTS `seesmic_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `seesmic_data` (
@@ -501,19 +351,9 @@ CREATE TABLE `seesmic_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `seesmic_data`
---
-
-LOCK TABLES `seesmic_data` WRITE;
-/*!40000 ALTER TABLE `seesmic_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `seesmic_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `sources`
 --
 
-DROP TABLE IF EXISTS `sources`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `sources` (
@@ -542,7 +382,6 @@ UNLOCK TABLES;
 -- Table structure for table `sources_properties`
 --
 
-DROP TABLE IF EXISTS `sources_properties`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `sources_properties` (
@@ -554,19 +393,9 @@ CREATE TABLE `sources_properties` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `sources_properties`
---
-
-LOCK TABLES `sources_properties` WRITE;
-/*!40000 ALTER TABLE `sources_properties` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sources_properties` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `stories`
 --
 
-DROP TABLE IF EXISTS `stories`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `stories` (
@@ -586,19 +415,9 @@ CREATE TABLE `stories` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `stories`
---
-
-LOCK TABLES `stories` WRITE;
-/*!40000 ALTER TABLE `stories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `story_items`
 --
 
-DROP TABLE IF EXISTS `story_items`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `story_items` (
@@ -613,19 +432,9 @@ CREATE TABLE `story_items` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `story_items`
---
-
-LOCK TABLES `story_items` WRITE;
-/*!40000 ALTER TABLE `story_items` DISABLE KEYS */;
-/*!40000 ALTER TABLE `story_items` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `stuffpress_data`
 --
 
-DROP TABLE IF EXISTS `stuffpress_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `stuffpress_data` (
@@ -645,19 +454,9 @@ CREATE TABLE `stuffpress_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `stuffpress_data`
---
-
-LOCK TABLES `stuffpress_data` WRITE;
-/*!40000 ALTER TABLE `stuffpress_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stuffpress_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `stumble_data`
 --
 
-DROP TABLE IF EXISTS `stumble_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `stumble_data` (
@@ -675,19 +474,9 @@ CREATE TABLE `stumble_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `stumble_data`
---
-
-LOCK TABLES `stumble_data` WRITE;
-/*!40000 ALTER TABLE `stumble_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stumble_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tags`
 --
 
-DROP TABLE IF EXISTS `tags`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `tags` (
@@ -702,19 +491,9 @@ CREATE TABLE `tags` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `tags`
---
-
-LOCK TABLES `tags` WRITE;
-/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tumblr_data`
 --
 
-DROP TABLE IF EXISTS `tumblr_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `tumblr_data` (
@@ -750,19 +529,9 @@ CREATE TABLE `tumblr_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `tumblr_data`
---
-
-LOCK TABLES `tumblr_data` WRITE;
-/*!40000 ALTER TABLE `tumblr_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tumblr_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `twitter_data`
 --
 
-DROP TABLE IF EXISTS `twitter_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `twitter_data` (
@@ -785,19 +554,9 @@ CREATE TABLE `twitter_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `twitter_data`
---
-
-LOCK TABLES `twitter_data` WRITE;
-/*!40000 ALTER TABLE `twitter_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `twitter_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `users` (
@@ -835,7 +594,6 @@ UNLOCK TABLES;
 -- Table structure for table `vimeo_data`
 --
 
-DROP TABLE IF EXISTS `vimeo_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `vimeo_data` (
@@ -861,19 +619,9 @@ CREATE TABLE `vimeo_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `vimeo_data`
---
-
-LOCK TABLES `vimeo_data` WRITE;
-/*!40000 ALTER TABLE `vimeo_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vimeo_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `widgets`
 --
 
-DROP TABLE IF EXISTS `widgets`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `widgets` (
@@ -899,7 +647,6 @@ UNLOCK TABLES;
 -- Table structure for table `widgets_properties`
 --
 
-DROP TABLE IF EXISTS `widgets_properties`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `widgets_properties` (
@@ -911,19 +658,9 @@ CREATE TABLE `widgets_properties` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `widgets_properties`
---
-
-LOCK TABLES `widgets_properties` WRITE;
-/*!40000 ALTER TABLE `widgets_properties` DISABLE KEYS */;
-/*!40000 ALTER TABLE `widgets_properties` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `youtube_data`
 --
 
-DROP TABLE IF EXISTS `youtube_data`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `youtube_data` (
@@ -944,21 +681,105 @@ CREATE TABLE `youtube_data` (
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `youtube_data`
+-- Table structure for table `foursquare_data`
 --
 
-LOCK TABLES `youtube_data` WRITE;
-/*!40000 ALTER TABLE `youtube_data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `youtube_data` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `foursquare_data` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `source_id` int(10) unsigned NOT NULL,
+  `guid` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `content` text,
+  `link` varchar(255) NOT NULL,
+  `published` varchar(45) NOT NULL,
+  PRIMARY KEY  USING BTREE (`id`),
+  UNIQUE KEY `DUPLICATES` USING BTREE (`source_id`, `guid`),
+  FULLTEXT KEY `SEARCH` (`content`,`title`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+SET character_set_client = @saved_cs_client;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+--
+-- Table structure for table `github_data`
+--
 
--- Dump completed on 2009-12-03 22:20:43
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `github_data` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `source_id` int(10) unsigned NOT NULL,
+  `github_id` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `content` text,
+  `repository` text,
+  `link` varchar(255) NOT NULL,
+  `published` varchar(45) NOT NULL,
+  PRIMARY KEY  USING BTREE (`id`),
+  UNIQUE KEY `DUPLICATES` USING BTREE (`source_id`, `github_id`),
+  FULLTEXT KEY `SEARCH` (`content`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+
+--
+-- Table structure for table `gitorious_data`
+--
+
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `gitorious_data` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `source_id` int(10) unsigned NOT NULL,
+  `gitorious_id` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `content` text,
+  `repository` text,
+  `link` varchar(255) NOT NULL,
+  `published` varchar(45) NOT NULL,
+  PRIMARY KEY  USING BTREE (`id`),
+  UNIQUE KEY `DUPLICATES` USING BTREE (`source_id`, `gitorious_id`),
+  FULLTEXT KEY `SEARCH` (`content`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `goodreads_data`
+--
+
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `goodreads_data` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `source_id` int(10) unsigned NOT NULL,
+  `guid` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `content` text,
+  `link` varchar(255) NOT NULL,
+  `published` varchar(45) NOT NULL,
+  PRIMARY KEY  USING BTREE (`id`),
+  UNIQUE KEY `DUPLICATES` USING BTREE (`source_id`, `guid`),
+  FULLTEXT KEY `SEARCH` (`content`, `title`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `googlebuzz_data`
+--
+
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `googlebuzz_data` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `source_id` int(10) unsigned NOT NULL,
+  `buzz_id` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `content` text,
+  `link` varchar(255) NOT NULL,
+  `published` varchar(45) NOT NULL,
+  PRIMARY KEY  USING BTREE (`id`),
+  UNIQUE KEY `DUPLICATES` USING BTREE (`source_id`, `buzz_id`),
+  FULLTEXT KEY `SEARCH` (`content`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
