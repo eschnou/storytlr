@@ -139,9 +139,16 @@ class FileController extends Stuffpress_Controller_Action
 		
 		// Assign a random name to the file
 		$key	  	= Stuffpress_Token::create(32);
-		$root 		= Zend_Registry::get("root");
-		$uploaddir 	= $root . "/upload/";
-		$uploadfile = $uploaddir . '/'. $key;
+		$root = Zend_Registry::get("root");
+		$config	= Zend_Registry::get("configuration");
+		
+		if (isset($config) && isset($config->path->upload)) {
+			$upload = $config->path->upload ;
+		} else {
+			$upload = $root . "/upload/";
+		}
+		
+		$uploadfile = $upload . '/'. $key;
 
 		// Move the file to the upload folder
 		if (!move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
