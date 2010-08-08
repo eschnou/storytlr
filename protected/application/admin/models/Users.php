@@ -173,9 +173,13 @@ class Users extends Stuffpress_Db_Table
 		
 		// If a single user install and config user matches requested one, we return the service URL
 		else if ($config->app->user && ($config->app->user == $user->username)) {
-			$host = trim($config->web->host, " /");
-			$path = trim($config->web->path, " /");
-			$domain = "$host/$path";
+			$host 	= trim($config->web->host, " /");
+			$folder = trim($config->web->path, " /");
+			if (strlen($folder) > 0) {
+				$domain = $host . "/" . $folder;
+			} else {
+				$domain = $host;
+			}
 		}
 		
 		// Otherwise, rebuild the URL
@@ -184,6 +188,6 @@ class Users extends Stuffpress_Db_Table
 		}
 		
 		// Build the final url
-		return "http://" . $domain . $path;
+		return "http://" . $domain . "/" . $path;
 	}
 }

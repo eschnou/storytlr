@@ -357,8 +357,8 @@ class Bootstrap
 		);
 
 		$router->addRoute(
-		'surl',
-		new Zend_Controller_Router_Route('/surl/:hash', array('module' => 'public', 'controller' => 'shorturl', 'action' => 'index'))
+		's',
+		new Zend_Controller_Router_Route('/s/:token', array('module' => 'public', 'controller' => 'shorturl', 'action' => 'index'))
 		);
 			
 		$router->addRoute(

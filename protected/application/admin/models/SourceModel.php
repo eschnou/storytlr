@@ -299,6 +299,7 @@ abstract class SourceModel extends Stuffpress_Db_Table
 	protected function updateTwitter($items) {
 		// Get the user
 		$users = new Users();
+		$shortUrl = new ShortUrl(); 
 		$user  = $users->getUser($this->getUserID());
 		
 		// Get twitter credentials
@@ -331,7 +332,7 @@ abstract class SourceModel extends Stuffpress_Db_Table
 				else {
 					$preamble = $has_preamble ? $item->getPreamble() : "";
 					$tweet	  = $preamble . $title;
-					$url = $users->getUrl($user->id, "/entry/" . $item->getSlug());
+					$url = $users->getUrl($user->id, "s/" . $shortUrl->shorten($item->getSlug()));
 					if (strlen($tweet) + strlen($url) > 140) {
 						$tweet = substr($tweet, 0, 140 - strlen($url) - 5) . "... $url"; 
 					} else {

@@ -952,14 +952,15 @@ class Admin_PostController extends Admin_BaseController
 			$tweet = $title;
 		} else {
 			$users  = new Users();
-			$url = $users->getUrl($this->_application->user->id, "/entry/" . $item->getSlug());
+			$shortUrl = new ShortUrl(); 
+			$url = $users->getUrl($this->_application->user->id, "s/" . $shortUrl->shorten($item->getSlug()));
 			if (strlen($title) + strlen($url) > 140) {
 				$tweet = substr($title, 0, 140 - strlen($url) - 5) . "... $url"; 
 			} else {
 				$tweet 	= "$title $url";	
 			}
 		}
-		
+
 		try {
 			$twitter = new Stuffpress_Services_Twitter($username, $password);
 			$twitter->sendTweet($tweet);
