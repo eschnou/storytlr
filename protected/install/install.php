@@ -50,7 +50,7 @@
 				}
 				Check::good( '[' . date( 'H:i:s' ) .'] Connected to database.' );
 
-				$res = Database::RunFile( $root . '/protected/install/database/schema/core.sql' );
+				$res = Database::RunFolder($root . '/protected/install/database/schema/' );
 
 				if( true !== $res )
 					throw new Exception( 'Error loading database schema:<br/><div class="nested-error">' . $res . '</div>' );

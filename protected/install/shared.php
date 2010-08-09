@@ -170,6 +170,29 @@
 			return true;
 		}
 		
+		public static function RunFolder ($folder, $substitutions = array() ) {
+			if (!is_dir($folder)) {
+				return "Not a folder: $folder.";
+			}
+			
+			if (!$handle = opendir($folder)) {
+				return "Could not open folder $folder.";
+			}
+			
+		    while (false !== ($file = readdir($handle))) {
+		    	if ($file != "." && $file != "..") {
+        			$res = Database::RunFile($folder . "/" . $file, $substitutions);
+        			if (true !== $res) {
+        				return $res;
+        			}
+		    	}
+    		}
+
+    		closedir($handle);
+    		
+    		return true;
+		}
+		
 	} // Class Database
 	
 	class Config {
