@@ -1,11 +1,10 @@
 <?php
 define("STORYTLR_VERSION","0.9.4-dev");
+define("DATABASE_VERSION", "1");
 
 // Update after deployment for location of non-public files
 $root = dirname(__FILE__);
 
-// We're assuming the Zend Framework is already on the include_path
-// TODO this should be moved to the boostrap file
 set_include_path(
       $root . '/protected/application' . PATH_SEPARATOR
     . $root . '/protected/application/admin/models' . PATH_SEPARATOR    
@@ -17,6 +16,28 @@ set_include_path(
     . $root . '/protected/library/htmLawed' . PATH_SEPARATOR
     . get_include_path()
 );
+
+// Run the install stuff if configuration is missing
+if( ! file_exists( $root . '/protected/config/config.ini') &&
+	! file_exists( '/etc/storytlr/config.ini')) {
+	$template = array();
+	ob_start();
+	$template['title'] = require_once( $root . '/protected/install/install.php' );
+	$template['content'] = ob_get_contents();
+	ob_end_clean();
+	require_once( $root . '/protected/install/template.phtml' );
+	exit();
+}
+
+if( ! file_exists( $root . '/protected/install/database/version')
+	|| file_get_contents($root . '/protected/install/database/version') != DATABASE_VERSION) {
+	ob_start();
+	$template['title'] = require_once( $root . '/protected/install/upgrade.php' );
+	$template['content'] = ob_get_contents();
+	ob_end_clean();
+	require_once( $root . '/protected/install/template.phtml' );
+	exit();
+}
 
 require_once 'Bootstrap.php';
 

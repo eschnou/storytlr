@@ -1,0 +1,84 @@
+<?php global $template; ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>storytlr | <?= $template['title']; ?></title>
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="style/install.css" type="text/css" media="screen" />
+	</head>
+	<body>
+		<div id="pagewrapper" class="page_">
+
+			<div class='overlay_status_wrapper' id='overlay_status_wrapper' style="display:none;">
+				<div class='overlay_status'>
+					<h5>Importing your data</h5>
+					Depending on the number of items this can take a while.<br/><br/>
+					<div class="progress"><img class="wait" src="images/ajax-loader.gif" /> Importing...</div>
+				</div>
+			</div>
+		
+			<div id="header">
+				<div id="home"><a href="admin/home" onfocus="this.blur();" title="Homepage">&nbsp;</a></div>
+				<div id="headerimg"></div>
+			</div>
+
+			<div id="contentwrapper">
+				<div id="page">
+					<div id="status_messages"></div>
+					<div id="error_messages"></div>
+					<div id="content" class="narrowcolumn">
+						<h1><?= $template['title']; ?></h1>
+						<?= $template['content']; ?>
+						<br class="fix"/>
+					</div>
+				</div>
+			</div>
+
+			<br class="fix" />
+		
+			<div id="footer">
+				<div class="blockwrapper">
+					<div class="block">
+						<h2>Legal stuff</h2>
+						You are running storytlr version <?= STORYTLR_VERSION; ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+					</div>
+
+					<div class="block">
+						<h2>About us</h2>
+						Find out more about storytlr below. 
+						<ul>
+							<li><a href="http://storytlr.googlecode.com">The storytlr initiative</a></li>
+						</ul>
+					</div>
+
+					<div class="block">
+						<h2>Need help?</h2>
+						Got a question, a problem or a great idea: let us know!
+						<ul>
+							<li><a href="http://code.google.com/p/storytlr/wiki/GetStarted">Getting started!</a></li>
+							<li><a href="http://code.google.com/p/storytlr/wiki/WikiHome">Storytlr Wiki</a></li>
+							<li><a href="http://groups.google.com/group/storytlr-discuss">Mailing list</a></li>
+						</ul>
+					</div>
+				
+					<div class="block">
+						<h2>Contact us</h2>
+						Send us an email in case you want to learn more.
+						<ul>
+							<li><a href="mailto:info@storytlr.com">Email us</a></li>
+							<li><a href="http://twitter.com/storytlr">Follow us on twitter</a></li>
+						</ul>
+					</div>
+
+				</div>
+				<br class="fix" />
+				<div id="copyright">
+					<p>
+						Web site powered by <a href="http://storytlr.googlecode.com">storytlr</a>, version <?= STORYTLR_VERSION; ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

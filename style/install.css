@@ -1,0 +1,42 @@
+.good, .bad, .warn {
+	padding: 5px;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px #AAA;
+	color: #FFF;
+}
+.good {
+	background-color: #00BF00;
+}
+.bad {
+	background-color: #BF2C00;
+}
+.warn {
+	background-color: #BFB900;
+}
+label {
+	display: inline-block;
+	width: 150px;
+	text-align: right;
+}
+legend {
+	font-weight: bold;
+}
+input {
+	margin-bottom: 5px;
+}
+.install-error {
+	color: #000;
+	display: inline-block;
+	margin-left: 15px;
+	border: 1px solid #BF2C00;
+	padding: 0 3px;
+	background-color: #EACEC6;
+}
+
+div.nested-error {
+	font-family: monospace;
+	background: #CCC;
+	color: #000;
+	margin: 3px 10px;
+	padding: 2px 5px;
+}

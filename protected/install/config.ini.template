@@ -1,0 +1,71 @@
+[general]
+
+;Database connection settings
+db.adapter=PDO_MYSQL
+db.host=[:mysql_host]
+db.username=[:mysql_username]
+db.password=[:mysql_password]
+db.dbname=[:mysql_database]
+
+;Security
+security.cookie = [:security_cookie]
+
+;path.upload = /tmp/upload
+;path.logs = /tmp/logs
+;path.temp = /tmp/temp
+;path.feeds = /tmp/feeds
+
+;Caching
+;cache.content = 1
+;cache.metadata = 1
+;cache.path = /tmp/cache/
+
+;Web deployment settings
+web.host=[:host]
+web.path=[:path]
+web.redirect = 1
+web.timezone=Europe/Brussels
+
+;Global application settings
+app.closed=1							; Set to 0 to enable registration
+app.from_email=support@noreply.net
+app.admin_email=admin@noreply.net
+app.user=[:user]						; Comment this to switch to multi-user setup
+
+;Debug settings
+debug 	= 0
+profile = 0
+
+
+;; RSS settings
+rss.default.hide_content=1
+
+;; Flickr settings
+[:flickr_comment]flickr.api_key=[:flickr_key]
+
+;; Twitter settings
+;;twitter.username=
+;;twitter.password=
+;;twitter.default.hide_replies=1
+
+;; Seesmic settings
+seesmic.default.hide_replies=1
+
+;; Laconica settings
+laconica.default.hide_replies=1
+
+;; Youtube settings
+;youtube.client_id=
+;youtube.developer_key=
+
+;; Google map
+[:google_map_comment]gmap.key=[:google_map_key]
+
+;Default values for user settings
+default.theme=classic
+default.timezone=Europe/Brussels
+default.timezoneid=397
+default.on_comment=1
+default.on_news=1
+default.title=My Homepage
+default.subtitle=I'm still busy setting this page

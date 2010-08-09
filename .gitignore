@@ -7,3 +7,4 @@ protected/library/Zend
 protected/upload/**
 protected/temp/**
 protected/logs/**
+protected/install/database/version
