@@ -258,9 +258,14 @@ class Files extends Stuffpress_Db_Table
 		fclose($fp);
 
 		// Get the mime type
+		echo "hello";
 		if (extension_loaded('fileinfo')) {
+			echo "finfon";
 			if ($finfo = new finfo(FILEINFO_MIME)) {
 				$mimetype = $finfo->file($to_path);
+			 	if ($pos = strpos($mimetype,';')) {
+			 		$mimetype = trim(strstr($mimetype, ';', true));
+			 	}
 			}	
 		}
 
