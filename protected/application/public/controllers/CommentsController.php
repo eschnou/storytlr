@@ -131,7 +131,7 @@ class CommentsController extends BaseController
 		
 		// Validate the website URL
 		$matches = array();
-		if (!preg_match_all("/^http/", $website, $matches)) {
+		if ($website && !preg_match_all("/^http/", $website, $matches)) {
 			$website = "http://$website";
 		}
 
@@ -212,7 +212,7 @@ class CommentsController extends BaseController
 			// Create and configure username element:
 			$name = $form->createElement('text', 'name',  array('label' => 'Name:', 'decorators' => $form->elementDecorators));
 			$name->addFilter('StringToLower');
-			$name->addValidator('alnum');
+			$name->addFilter('StripTags');
 			$name->addValidator('stringLength', false, array(4, 20));
 			$name->setRequired(true);
 	
