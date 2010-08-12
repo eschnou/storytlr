@@ -1,5 +1,5 @@
 <?php
-define("STORYTLR_VERSION","0.9.4-dev");
+define("STORYTLR_VERSION","0.9.4-rc1");
 define("DATABASE_VERSION", "1");
 
 // Update after deployment for location of non-public files
