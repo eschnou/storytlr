@@ -154,7 +154,7 @@ class FoursquareModel extends SourceModel {
 		// Add the feed element
 		$element = $form->createElement( 'text', 'url', array('label' => 'RSS Feed URL', 'decorators' => $form->elementDecorators ) );
 		$element->setRequired(true);
-		$element->setDescription( '<div class="help">Your RSS Feed URL from <a href="http://foursquare.com/feeds">http://foursquare.com/feeds</a>.' );
+		$element->setDescription( '<div class="help">Your RSS Feed URL from <a href="http://foursquare.com/feeds" target="_blank">http://foursquare.com/feeds</a>.' );
 		$form->addElement($element);
 
 		// Populate
