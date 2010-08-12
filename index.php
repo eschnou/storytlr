@@ -30,7 +30,7 @@ if( ! file_exists( $root . '/protected/config/config.ini') &&
 }
 
 if( ! file_exists( $root . '/protected/install/database/version')
-	|| file_get_contents($root . '/protected/install/database/version') != DATABASE_VERSION) {
+	|| trim(file_get_contents($root . '/protected/install/database/version')) != DATABASE_VERSION) {
 	ob_start();
 	$template['title'] = require_once( $root . '/protected/install/upgrade.php' );
 	$template['content'] = ob_get_contents();

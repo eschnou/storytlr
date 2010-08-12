@@ -12,10 +12,10 @@ if (file_exists($root . '/protected/config/config.ini')) {
 $config = new Zend_Config_Ini($config_path,'general');
 
 // Check the version number
-if (!file_exists($root . '/protected/database/version')) {
+if (!file_exists($root . '/protected/install/database/version')) {
 	$current_version = 0;
 } else {
-	$current_version = (int) @file_get_contents($root . '/protected/database/version');
+	$current_version = (int) @file_get_contents($root . '/protected/install/database/version');
 }
 
 try {
