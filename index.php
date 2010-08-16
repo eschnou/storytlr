@@ -1,6 +1,8 @@
 <?php
 define("STORYTLR_VERSION","0.9.4-rc1");
 define("DATABASE_VERSION", "1");
+define("AUTO_INSTALL", true);
+define("AUTO_UPGRADE", true);
 
 // Update after deployment for location of non-public files
 $root = dirname(__FILE__);
@@ -18,7 +20,8 @@ set_include_path(
 );
 
 // Run the install stuff if configuration is missing
-if( ! file_exists( $root . '/protected/config/config.ini') &&
+if( AUTO_INSTALL &&
+	! file_exists( $root . '/protected/config/config.ini') &&
 	! file_exists( '/etc/storytlr/config.ini')) {
 	$template = array();
 	ob_start();
@@ -29,7 +32,8 @@ if( ! file_exists( $root . '/protected/config/config.ini') &&
 	exit();
 }
 
-if( ! file_exists( $root . '/protected/install/database/version')
+if( AUTO_UPGRADE &&
+	! file_exists( $root . '/protected/install/database/version')
 	|| trim(file_get_contents($root . '/protected/install/database/version')) != DATABASE_VERSION) {
 	ob_start();
 	$template['title'] = require_once( $root . '/protected/install/upgrade.php' );
