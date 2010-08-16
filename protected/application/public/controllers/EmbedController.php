@@ -65,7 +65,7 @@ class EmbedController extends BaseController
 		if (!$this->_cache || !($script = $this->_cache->load($cache_id))) {
 
 			// A few variable needed
-			$host	= $this->_config->web->host;
+			$base  = "http://" . Stuffpress_Application::getDomain($this->_user);
 
 			// Get the user properties
 			$username	= $this->_user->username;
@@ -86,17 +86,17 @@ class EmbedController extends BaseController
 					$date_to   = date("F j, Y", $item['date_to']);
 
 					$item_content  = "<table><tr>";
-					$item_content .="<td class='thumbnail'><a href='http://$username.$host/story/{$item['permalink']}'>";
+					$item_content .="<td class='thumbnail'><a href='$base/story/{$item['permalink']}'>";
 
 					if ($item['thumbnail']) {
-						$item_content .= "<img src='" . $this->getUrl($username, "/thumbnail/{$item['thumbnail']}") . "'>";
+						$item_content .= "<img src='$base/thumbnail/{$item['thumbnail']}'>";
 					} else {
-						$item_content .= "<img src='" . $this->getUrl($username, "/images/book50.jpg") . "'>";
+						$item_content .= "<img src='$base/images/book50.jpg'>";
 					}
 
 					$item_content .= "</a></td>";
 					$item_content .= "<td class='overview'>";
-					$item_content .= "<div class='title'><a href='" . $this->getUrl($username, "/story/{$item['permalink']}") . "'>" . $this->escape($item['title']) . "</a></div>";
+					$item_content .= "<div class='title'><a href='$base/story/{$item['permalink']}'>" . $this->escape($item['title']) . "</a></div>";
 					$item_content .= "<div class='subtitle'>" . $this->escape($item['subtitle']) . "</div>";
 					$item_content .= "<div class='date'>$date_from to $date_to</div>";
 					$item_content .= "</td>";
@@ -106,12 +106,12 @@ class EmbedController extends BaseController
 			}
 			$content .= "</div>";
 
-			$script = "document.write(\"<link href='http://$host/style/embed_stories.css' media='screen, projection' rel='stylesheet' type='text/css' />\");\r\n"
-			. "document.write('<script src=\'http://$host/js/controllers/embed_story.js\' type=\'text/javascript\' /></script>');\r\n"
+			$script = "document.write(\"<link href='$base/style/embed_stories.css' media='screen, projection' rel='stylesheet' type='text/css' />\");\r\n"
+			. "document.write('<script src=\'$base/js/controllers/embed_story.js\' type=\'text/javascript\' /></script>');\r\n"
 			. "document.write(\"<div id='storytlr'>\");\r\n"
 			. "document.write(\"<h1>". ucfirst($username) . "'s Stories</h1>\");\r\n"
 			. "document.write(\"". $content ."\");\r\n"
-			. "document.write(\"<div class='bar'><a href='http://$host'><img src='http://$host/images/powered2.png'></a></div>\");\r\n"
+			. "document.write(\"<div class='bar'><a href='$base'><img src='$base/images/powered2.png'></a></div>\");\r\n"
 			. "document.write(\"</div>\");";
 
 			if ($this->_cache) {
@@ -130,7 +130,9 @@ class EmbedController extends BaseController
 	{
 		$count = $this->getRequest()->getParam("count");
 		$count = $count ? $count : 5;
-		$host  = $this->_config->web->host;
+		$host  = trim($this->_config->web->host, " /");
+		$path  = trim($this->_config->web->path, " /");
+		$base  = (strlen($path) > 0) ? "http://$host/$path" : "http://$host";
 		
 		// Hit the cache
 		$cache_id = "embed_widget_{$this->_user->id}_{$count}";
@@ -145,20 +147,20 @@ class EmbedController extends BaseController
 			foreach($items as $item) {
 				$title		   = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|","<a href='\\1'>\\1</a>", $this->escape(strip_tags($item->getTitle())));
 				$item_content  = "<tr>";
-				$item_content .="<td class='icon'><a href='{$item->getLink()}'><img src='http://$host/images/{$item->getPrefix()}.png'></a></td>";
+				$item_content .="<td class='icon'><a href='{$item->getLink()}'><img src='$base/images/{$item->getPrefix()}.png'></a></td>";
 				$item_content .= "<td class='title'>$title</td>";
 				$item_content .= "</tr>";
 				$content .= $item_content;
 			}
 			$content .= "</table></div>";
 
-			$widget = "document.write(\"<link href='http://$host/style/embed_widget.css' media='screen, projection' rel='stylesheet' type='text/css' />\");\r\n"
+			$widget = "document.write(\"<link href='$base/style/embed_widget.css' media='screen, projection' rel='stylesheet' type='text/css' />\");\r\n"
 			. "document.write(\"<div id='storytlr'>\");\r\n"
 			. "document.write(\"<h1>". ucfirst($username) . "'s Lifestream</h1>\");\r\n"
 			. "document.write(\"<h2>Latest updates</h2>\");\r\n"
 			. "document.write(\"". $content ."\");\r\n"
 			. "document.write(\"<a href='" . $this->getUrl($username, "/") . "'>View all</a>\");\r\n"
-			. "document.write(\"<div class='bar'><a href='http://$host'><img src='http://$host/images/powered2.png'></a></div>\");\r\n"
+			. "document.write(\"<div class='bar'><a href='$base'><img src='$base/images/powered2.png'></a></div>\");\r\n"
 			. "document.write(\"</div>\");";
 
 			if ($this->_cache) {
