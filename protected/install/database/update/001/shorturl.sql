@@ -1,6 +1,6 @@
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-CREATE TABLE `shortUrl` (
+CREATE TABLE IF NOT EXISTS `shortUrl` (
   `user_id` int(11) NOT NULL,
   `token`   varchar(16) NOT NULL,
   `url`     varchar(256) NOT NULL,

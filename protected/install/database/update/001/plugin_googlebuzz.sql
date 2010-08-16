@@ -1,6 +1,6 @@
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-CREATE TABLE `googlebuzz_data` (
+CREATE TABLE IF NOT EXISTS `googlebuzz_data` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `source_id` int(10) unsigned NOT NULL,
   `buzz_id` varchar(255) NOT NULL,
