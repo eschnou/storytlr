@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:atom="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/">
+	<atom:id>http://localhost:8080/resources/timezones</atom:id>
+	<atom:title type="text">Time Zones</atom:title>
+	<atom:link href="http://localhost:8080/resources/timezones" rel="self" />
+	<atom:author>
+		<atom:name>sandra</atom:name>
+		<atom:uri>sandra.com</atom:uri>
+		<atom:email>sandra@sandra.com</atom:email>
+	</atom:author>
+	<atom:entry>
+		<atom:id>tag:versioncentral.example.org,2009:/commit/1643245</atom:id>
+		<atom:published>2009-06-01T12:54:00Z</atom:published>
+		<atom:title>Geraldine committed a change to yate</atom:title>
+		<atom:content type="html">Geraldine just committed a change to yate on VersionCentral</atom:content>
+		<atom:link rel="alternate" type="text/html" href="http://versioncentral.example.org/geraldine/yate/commit/1643245" />
+		<activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+		<activity:verb>http://versioncentral.example.org/activity/commit</activity:verb>
+		<activity:object>
+			<activity:object-type>http://versioncentral.example.org/activity/changeset</activity:object-type>
+			<atom:id>tag:versioncentral.example.org,2009:/change/1643245</atom:id>
+			<atom:title>Punctuation Changeset</atom:title>
+			<atom:summary>Fixing punctuation because it makes it more readable.</atom:summary>
+			<link rel="alternate" type="text/html" href="..." />
+		</activity:object>
+		<author>
+			<name>Geraldine</name>
+			<uri>http://example.com/geraldine</uri>
+			<id>tag:photopanic.example.com,2009:/Person/4859568</id>
+			<activity:object-type>
+	        	http://activitystrea.ms/schema/1.0/person
+			</activity:object-type>
+			<link rel="alternate" type="text/html" href="http://example.com/geraldine" />
+	    </author>
+	</atom:entry>
+</feed>

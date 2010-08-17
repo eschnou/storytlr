@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed>
+	<id></id>
+	<title></title>
+	<updated></updated>
+	<author>
+	</author>
+	<link rel="alternate" />	
+	<entry>
+		<id></id>
+		<title>Eko posted a new status update</title>
+		<verb>post</verb>
+		<object>
+			<id></id>
+			<title></title>
+			<object-type>status</object-type>
+			<content>status</content>
+			<link rel="alternate" type="text/html" />
+		</object>
+		<updated></updated>
+		<published></published>
+		<link rel="alternate" type="text/html" />
+		<link rel="edit" />	
+		<content>status</content>
+	</entry>
+	<entry>
+		<id></id>
+		<title>blog title</title>
+		<updated></updated>
+		<published></published>
+		<verb></verb>
+		<object>
+			<id></id>
+			<title></title>
+			<summary></summary>
+			<content></content>
+			<link rel="alternate" type="text/html"/>
+			<object-type></object-type>
+		</object>
+		<link rel="alternate" />
+		<link rel="edit" />	
+		<content type="html">blog content</content>
+	</entry>
+	<entry>
+		<id></id>
+		<title>link title</title>
+		<updated></updated>
+		<published></published>
+		<link rel="alternate" />
+		<link rel="edit" />	
+		<content type="html">blog content</content>
+	</entry>
+</feed>
