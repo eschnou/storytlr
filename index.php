@@ -1,5 +1,5 @@
 <?php
-define("STORYTLR_VERSION","0.9.4-rc1");
+define("STORYTLR_VERSION","1.0.0");
 define("DATABASE_VERSION", "1");
 define("AUTO_INSTALL", true);
 define("AUTO_UPGRADE", true);
