@@ -1,0 +1,121 @@
+/* CSS Document */
+
+a {
+	color:#0093CA;
+}
+
+h1 {
+	color:#0093CA;
+}
+
+h2 {
+	color:#333;
+}
+
+/* MAIN MENU */
+
+div.tabMenu {
+	background:url(../images/blue/bk_mainmenu.png) no-repeat;
+}
+
+div.tabMenu ul.sf-menu li {
+	border-right:1px solid #3B8FBB;
+}
+
+div.tabMenu ul.sf-menu li a {
+	color:#AED1E2;
+}
+
+
+div.tabMenu ul.sf-menu li a:hover {
+	color:#FFF;
+}
+
+div.tabMenu ul.sf-menu li li {
+	border-bottom:1px solid #42BDFF;
+	
+}
+
+div.tabMenu ul.sf-menu li li a {
+	color:#AEE2F9;
+}
+
+div.tabMenu ul.sf-menu li ul.children {
+	border-bottom:2px solid #008AD5;
+	background:#00A8FF;
+}
+
+div.tabMenu ul.sf-menu li ul.children li a:hover, div.tabMenu ul.sf-menu li.page_item ul li a:hover{
+	color:#fff;
+}
+
+div.tabMenu ul.sf-menu li ul.children li ul.children {
+	border-bottom:2px solid #008AD5;
+}
+
+/* COL LEFT ELEMENTS */
+
+#left-column div.item_left div.month {
+	background:url(../images/blue/bk_month.jpg) 50% 0 no-repeat;
+	color:#fff;
+}
+
+#left-column div.item_left div.disqus {
+	background:url(../images/blue/bk_comments.jpg) 50% 0 no-repeat;
+	color:#00B0F5;
+}
+
+#left-column a.more-link, a.start-link {
+	color:#FFF;
+	background:url(../images/blue/but_readmore.jpg) 0 0 no-repeat;
+}
+
+.navigation .alignleft a, .navigation .alignright a {
+	background:url(../images/blue/but_older.jpg) 0 0 no-repeat;
+	color:#333;
+}
+
+.navigation .alignleft a:hover, .navigation .alignright a:hover {
+	color:#0093CA;
+} 
+
+.navigation .alignright a {
+	background:url(../images/blue/but_newer.jpg) 0 0 no-repeat;
+}
+
+/* COL RIGHT ELEMENTS */
+
+#right_column h2 {
+	background:url(../images/blue/bk_h2_right.jpg) 0 0 no-repeat;
+	color:#E0EFF5;
+}
+
+#right_column ul li {
+	background:url(../images/blue/bk_list_right.png) 0 0 no-repeat;
+}
+
+#right_column ul li:hover a, #right_column ul li a:hover{
+	color:#0093CA;
+}
+
+/* FORMS BUTTONS */
+
+#contact input.submit {
+	background:url(../images/blue/but_send.jpg) 0 0 no-repeat;
+	color:#fff;
+}
+
+#commentform input#submit{
+	background:url(../images/blue/but_send.jpg) 0 0 no-repeat;
+	color:#fff;
+}
+
+/* COMMENTS */
+
+#left-column ul.commentlist li .commentRight strong {
+	background:#0093CA;
+}
+
+#left-column ul.commentlist li .commentRight strong, #left-column ul.commentlist li .commentRight strong a{
+	color:#fff;
+}
