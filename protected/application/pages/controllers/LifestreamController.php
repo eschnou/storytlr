@@ -57,11 +57,11 @@ class Pages_LifestreamController extends Pages_BaseController {
 		$this->view->hasnext 	 = (count($items) >= $count) ? true : false;
 		$this->view->nextlink 	  = "home?tab=$tab&page=" . ($page + 1);
 		$this->view->previouslink = "home?tab=$tab&page=" . ($page - 1);
-				
-		// Set link to RSS of page
-		$rss_link = $this->getRssLink($sources, $types);
-		$this->view->headLink()->appendAlternate($rss_link, "application/rss+xml", "RSS Stream");
-		
+
+		// Add atom link
+		$domain = Stuffpress_Application::getDomain($this->_user);
+		$this->view->headLink()->appendAlternate("http://$domain/updates.atom", "application/atom+xml", "Update stream in Atom");
+					
 		// Add specific styles and javascripts
 		$this->view->headScript()->appendFile('js/controllers/timeline.js');
 		if (!$this->_embed) $this->view->headLink()->appendStylesheet('style/lightbox.css');

@@ -44,6 +44,7 @@ require_once 'Stuffpress/Controller/Action.php';
 require_once('admin/controllers/BaseController.php');
 require_once('public/controllers/BaseController.php');
 require_once('pages/controllers/BaseController.php');
+require_once('api/controllers/BaseController.php');
 
 // Models frequently required
 require_once('Comments.php');
@@ -61,6 +62,12 @@ require_once('Themes.php');
 require_once('Users.php');
 require_once('Widgets.php');
 require_once('WidgetsProperties.php');
+
+// php-atom-lib includes
+require_once 'php-atom-lib/AtomDocumentAdapterFactory.php';
+require_once 'php-atom-lib/AtomFeedAdapter.php';
+require_once 'php-atom-lib/ActivityExtension/ActivityExtensionFactory.php';
+require_once 'php-atom-lib/MediaExtension/MediaExtensionFactory.php';
 
 // Bootsrap class
 class Bootstrap
@@ -100,6 +107,9 @@ class Bootstrap
 		self::setupPlugins();
 		self::setupApplication();
 		self::setupAcl();
+		
+		self::setupAtomExtensionManager();
+		self::setupActivityProcessorFactory();
 	}
 
 	/**
@@ -176,6 +186,7 @@ class Bootstrap
 			"pages" 	=> self::$root . '/application/pages/controllers',		
 			"widgets" 	=> self::$root . '/application/widgets/controllers',		
 			"dialogs" 	=> self::$root . '/application/dialogs/controllers',
+			"api" 		=> self::$root . '/application/api/controllers',
 			"admin"	  	=> self::$root . '/application/admin/controllers'));		
 		self::$frontController->setDefaultModule('public');
 		self::$frontController->setParam('registry', self::$registry);
@@ -381,6 +392,34 @@ class Bootstrap
 		'entry',
 		new Zend_Controller_Router_Route('/entry/:source/:item/*', array('module' => 'public', 'controller' => 'timeline', 'action' => 'view'))
 		);
+		
+		$frontController = Zend_Controller_Front::getInstance();
+		
+		$router->addRoute(
+		'api',
+		new Zend_Rest_Route($frontController, array(), array('api'))
+		);
+		
+		$router->addRoute(
+		'atom',
+		new Zend_Controller_Router_Route('/updates.atom', array('module' => 'api', 'controller' => 'activities', 'action' => 'index'))
+		);
+		
+		$router->addRoute(
+		'comment4',
+		new Zend_Controller_Router_Route('/api/comments/*', array('module' => 'api', 'controller' => 'comments', 'action' => 'rest'))
+		);
+		
+		$router->addRoute(
+		'comment3',
+		new Zend_Controller_Router_Route('/api/comments/:item/*', array('module' => 'api', 'controller' => 'comments', 'action' => 'rest'))
+		);	
+		
+		$router->addRoute(
+		'comment2',
+		new Zend_Controller_Router_Route('/api/comments/:item/:commentid/*', array('module' => 'api', 'controller' => 'comments', 'action' => 'rest'))
+		);
+		
 	}
 
 	public static function setupDatabase()
@@ -632,6 +671,13 @@ class Bootstrap
 		$acl->add(new Zend_Acl_Resource('dialogs'), 		  'root');
 		$acl->add(new Zend_Acl_Resource('dialogs:customrss'), 'dialogs');
 
+		/* Resources for api module */
+		$acl->add(new Zend_Acl_Resource('api')				, 'root');
+		$acl->add(new Zend_Acl_Resource('api:index')		, 'api');
+		$acl->add(new Zend_Acl_Resource('api:activities')	, 'api');
+		$acl->add(new Zend_Acl_Resource('api:media')		, 'api');
+		$acl->add(new Zend_Acl_Resource('api:comments')		, 'api');
+				
 		/* Deny everything to everyone*/
 		$acl->deny(null);
 
@@ -686,6 +732,11 @@ class Bootstrap
 		$acl->allow('guest',  'admin:page');
 		$acl->allow('guest',  'admin:register');
 		$acl->allow('guest',  'admin:recover');
+		
+		$acl->allow('guest',  'api:index');
+		$acl->allow('guest',  'api:activities');
+		$acl->allow('guest',  'api:media');
+		$acl->allow('guest',  'api:comments');
 
 		self::$frontController->registerPlugin(new Stuffpress_Controller_Plugin_Acl($acl, $application->role));
 	}
@@ -769,5 +820,22 @@ class Bootstrap
 		// Last chance
 		header("Location: http://$our_host");
 		exit;
+	}
+	
+	public static function setupAtomExtensionManager() {
+		$extensionManager = AtomExtensionManager::getInstance();
+		$extensionManager->registerExtensionAdapter(new ActivityExtensionFactory());
+		$extensionManager->registerExtensionAdapter(new MediaExtensionFactory());
+		}
+	
+	public static function setupActivityProcessorFactory() {
+		$activityProcessor = ActivityProcessorFactory::getInstance();
+		$activityProcessor->registerProcessor(ActivityNS::STATUS_OBJECT_TYPE	, 'StatusObjectProcessor'	, 0);
+		$activityProcessor->registerProcessor(ActivityNS::ARTICLE_OBJECT_TYPE	, 'ArticleObjectProcessor'	, 0);
+		$activityProcessor->registerProcessor(ActivityNS::AUDIO_OBJECT_TYPE		, 'AudioObjectProcessor'	, 0);
+		$activityProcessor->registerProcessor(ActivityNS::PHOTO_OBJECT_TYPE		, 'PhotoObjectProcessor'	, 0);
+		$activityProcessor->registerProcessor(ActivityNS::BOOKMARK_OBJECT_TYPE	, 'BookmarkObjectProcessor'	, 0);
+		$activityProcessor->registerProcessor(ActivityNS::VIDEO_OBJECT_TYPE		, 'VideoObjectProcessor'	, 0);
+		$activityProcessor->registerProcessor(ActivityNS::COMMENT_OBJECT_TYPE	, 'CommentObjectProcessor'	, 0);
 	}
 }
