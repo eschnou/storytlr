@@ -109,13 +109,14 @@ class Admin_AuthController extends Zend_Controller_Action
 		// Send the cookie with the authentication data
 		$cookie	= new Stuffpress_Cookie($user->id);
 		$cookie->set($remember);
-
+		
+		$config = Zend_Registry::get('configuration');
+		$domain = trim($config->web->host, " /");
+		$path   = trim($config->web->path, " /");
+		
+		
 		// If we have a special target
-		if ($values['target'] == 'user_page') {
-			$config = Zend_Registry::get('configuration');
-			$domain = trim($config->web->host, " /");
-			$path   = trim($config->web->path, " /");
-			
+		if ($values['target'] == 'user_page') {			
 			// If single user, we go back to the host
 			if (isset($config->app->user)) {
 				$url = "http://$domain/$path";
@@ -126,7 +127,8 @@ class Admin_AuthController extends Zend_Controller_Action
 			return $this->_redirect($url);
 		}
 		else if ($values['target']) {
-			return $this->_redirect($values['target']);
+			$target = trim($values['target'], " /");
+			return $this->_redirect("http://$domain/$target");
 		} 
 
 		// Otherwise we go back to the home page
