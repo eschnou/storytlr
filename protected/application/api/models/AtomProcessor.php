@@ -192,7 +192,7 @@ class AtomProcessor {
     	$link->setDescription($this->xmlentities($item->getDescription()));
     	$link->setTargetUrl($item->getLink());
     	$link->setTargetTitle($item->getTitle());
-    	$link->setThumbnail('not available yet', 'image/jpeg', 'unknown', 'unknown');
+    	//$link->setThumbnail('not available yet', 'image/jpeg', 'unknown', 'unknown');
     	$link->setContent($entry->content->value);
     
     	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
