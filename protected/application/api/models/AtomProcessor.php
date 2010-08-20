@@ -284,7 +284,7 @@ class AtomProcessor {
     	$this->_buildCommonItemActivityObject($audio, $item);
     	
     	$audio->setAudioStream($item->getAudioUrl(), 'audio/*', 'unknown');
-    	$audio->setPlayerApplet('unknown', 'unknown', 'unknown', 'unknown');
+    	//$audio->setPlayerApplet('unknown', 'unknown', 'unknown', 'unknown');
     	$audio->setDescription($this->xmlentities($item->getDescription()));
     
     	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
