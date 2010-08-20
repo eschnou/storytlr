@@ -253,13 +253,10 @@ class AtomProcessor {
     protected function buildAudioEntry($item, $entry=null) {
     	$this->_buildCommonItemEntryElement($entry, $item);
     	$entry->addNamespace(MediaNS::PREFIX, MediaNS::NS);
-    	if ($item->getPrefix() == 'stuffpress') {
-    		$this->_getEditMediaLink($entry->addLink(), $item, $entry->id->value);
-    	}
     	
    		$entryLink = $entry->addLink();
    		$entryLink->rel		= AtomNS::REL_ENCLOSURE;
-   		$entryLink->type	= 'audio/*';
+   		$entryLink->type	= 'audio/mp3';
    		$entryLink->href	= $item->getAudioUrl();
    		
    		$entry->content			= '';
@@ -283,15 +280,15 @@ class AtomProcessor {
     	$audio = ActivityProcessorFactory::getInstance()->getProcessor($activityObject, ActivityNS::AUDIO_OBJECT_TYPE);/* @var $audio IActivityAudio */
     	$this->_buildCommonItemActivityObject($audio, $item);
     	
-    	$audio->setAudioStream($item->getAudioUrl(), 'audio/*', 'unknown');
+    	$audio->setAudioStream($item->getAudioUrl(), 'audio/mp3', 'unknown');
     	//$audio->setPlayerApplet('unknown', 'unknown', 'unknown', 'unknown');
     	$audio->setDescription($this->xmlentities($item->getDescription()));
     
     	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
-    	if ($item->getPrefix() == 'stuffpress') {
-    		$this->_getEditMediaLink($activityObject->addLink(), $item, $entry->id->value);	
-    	}
+    	//if ($item->getPrefix() == 'stuffpress') {
+    	//	$this->_getEditMediaLink($activityObject->addLink(), $item, $entry->id->value);	
+    	//}
     	
     	return $entry;
     }
