@@ -122,7 +122,7 @@ class AtomProcessor {
     	$this->_buildCommonItemActivityObject($status, $item);
     	$status->setContent($entry->content->value);
     	
-    	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
+    	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
     	return $entry;
     }
@@ -155,7 +155,7 @@ class AtomProcessor {
     	$article->setSummary($this->xmlentities(substr($item->getContent(), 0, 50) . "..."));
     	$article->setContent($entry->content->value);	
     
-    	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
+    	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
     	return $entry;
     }
@@ -195,7 +195,7 @@ class AtomProcessor {
     	$link->setThumbnail('not available yet', 'image/jpeg', 'unknown', 'unknown');
     	$link->setContent($entry->content->value);
     
-    	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
+    	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
     	return $entry;
     }
@@ -236,7 +236,7 @@ class AtomProcessor {
     	$image->setDescription($this->xmlentities($item->getDescription()));
     	$image->setContent($entry->content->value);
     	
-    	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
+    	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
     	if ($item->getPrefix() == 'stuffpress') {
     		$this->_getEditMediaLink($activityObject->addLink(), $item, $entry->id->value);	
@@ -287,7 +287,7 @@ class AtomProcessor {
     	$audio->setPlayerApplet('unknown', 'unknown', 'unknown', 'unknown');
     	$audio->setDescription($this->xmlentities($item->getDescription()));
     
-    	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
+    	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
     	if ($item->getPrefix() == 'stuffpress') {
     		$this->_getEditMediaLink($activityObject->addLink(), $item, $entry->id->value);	
@@ -330,7 +330,7 @@ class AtomProcessor {
     	$video->setDescription($this->xmlentities($item->getDescription()));
     	$video->setContent($this->xmlentities($item->getEmbedCode(100, 100) . "<br/>" . $item->getDescription() . "<br/>If you don't see the video, watch it <a href='" . $item->getVideoUrl() . "'>here</a>"));
     
-    	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
+    	//$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
     	return $entry;
     }
@@ -338,17 +338,17 @@ class AtomProcessor {
 	protected function _buildCommonItemEntryElement(AtomEntryAdapter $entry, $item) {
     	
     	$entry->id				= 'http://' . $this->_domain . "/entry/" . $item->getSlug();
-    	$entry->title			= $item->getPreamble() . " " . $item->getTitle();
+    	$entry->title			= $this->xmlentities($item->getPreamble() . " " . $item->getTitle());
 		$entry->updated			= toAtomDate($item->getTimestamp()); //actually this is published
 		
 		$this->_getAlternativeLink($item, $entry->addLink());
-		$this->_getEditLink($entry->addLink(), $item, $this->_getObjectId($item));
+		//$this->_getEditLink($entry->addLink(), $item, $this->_getObjectId($item));
 	}
     
     protected function _buildCommonItemActivityObject(IActivityDefault $object, $item) {
-    	$object->id			= $this->_getObjectId($item);
-    	$object->title		= strip_tags($item->getTitle());
-    	$object->permalink	= $this->_getAlternativeLink($item);
+    	$object->id			= 'http://' . $this->_domain . "/object/" . $item->getSlug();
+    	$object->title		= $this->xmlentities(strip_tags($item->getTitle()));
+    	//$object->permalink	= $this->_getAlternativeLink($item);
     }	
     #endregion buildActivitiesFeed
 	
