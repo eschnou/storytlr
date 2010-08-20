@@ -699,6 +699,7 @@ class AtomProcessor {
     
 	private function xmlentities($string)
 	{
-    	return str_replace ( array ( '&', '"', "'", '<', '>' ), array ( '&amp;' , '&quot;', '&apos;' , '&lt;' , '&gt;' ), html_entity_decode($string));
+		$string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
+		return str_replace ( array ( '&', '"', "'", '<', '>' ), array ( '&amp;' , '&quot;', '&apos;' , '&lt;' , '&gt;' ), $string);
 	}
 }
