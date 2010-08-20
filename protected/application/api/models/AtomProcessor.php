@@ -134,7 +134,7 @@ class AtomProcessor {
      */
     protected function buildBlogEntry($item, $entry=null) {
     	$this->_buildCommonItemEntryElement($entry, $item);
-    	$entry->content			= $this->xmlentities(html_entity_decode($item->getContent()));
+    	$entry->content			= $this->xmlentities($item->getContent());
     	$entry->content->type	= AtomNS::TYPE_HTML;
     	
 		// build the activity entry    	
@@ -265,7 +265,7 @@ class AtomProcessor {
    		$entry->content			= '';
    		$entry->content->type	= 'audio/*';
    		$entry->content->src	= $item->getAudioUrl();
-   		$entry->summary			= strip_tags($item->getDescription());
+   		$entry->summary			= $this->xmlentities(strip_tags($item->getDescription()));
     	
 		// build the activity entry    	
     	$activityEntry = $entry->getExtension(ActivityNS::NS);/* @var $activityEntry ActivityEntryExtension */
@@ -699,6 +699,6 @@ class AtomProcessor {
     
 	private function xmlentities($string)
 	{
-    	return str_replace ( array ( '&', '"', "'", '<', '>' ), array ( '&amp;' , '&quot;', '&apos;' , '&lt;' , '&gt;' ), $string );
+    	return str_replace ( array ( '&', '"', "'", '<', '>' ), array ( '&amp;' , '&quot;', '&apos;' , '&lt;' , '&gt;' ), html_entity_decode($string));
 	}
 }
