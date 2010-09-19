@@ -302,12 +302,22 @@ abstract class SourceModel extends Stuffpress_Db_Table
 		$shortUrl = new ShortUrl(); 
 		$user  = $users->getUser($this->getUserID());
 		
+		// Get twitter consumer tokens and user secrets
+		$config = Zend_Registry::get("configuration");
+		$consumer_key = $config->twitter->consumer_key;
+		$consumer_secret = $config->twitter->consumer_secret;
+		
 		// Get twitter credentials
 		$properties = new Properties(array(Properties::KEY => $user->id));
 		$auth	    = $properties->getProperty('twitter_auth');
 		$services   = $properties->getProperty('twitter_services');
-		$username   = $properties->getProperty('twitter_username');
-		$password   = $properties->getProperty('twitter_password');
+		$oauth_token = $properties->getProperty('twitter_oauth_token');
+		$oauth_token_secret = $properties->getProperty('twitter_oauth_token_secret');
+		
+		if (!$consumer_key || !$consumer_secret || !$oauth_token || !$oauth_token_secret) {
+			return;
+		}
+		
 		$has_preamble   = $properties->getProperty('preamble', true);
 		
 		// Return if not all conditions are met
@@ -341,8 +351,8 @@ abstract class SourceModel extends Stuffpress_Db_Table
 				}
 				
 				try {
-					$twitter = new Stuffpress_Services_Twitter($username, $password);
-					$twitter->sendTweet($tweet);
+					$connection = new TwitterOAuth_Client($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
+					$response = $connection->post('statuses/update', array('status' => $tweet));	
 				} catch (Exception $e) {}
 			}
 		} else {

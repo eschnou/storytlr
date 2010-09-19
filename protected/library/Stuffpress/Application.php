@@ -69,6 +69,6 @@ class Stuffpress_Application {
 		// Otherwise, rebuild the URL
 		return $user->username . "." . $config->web->host;
     }
- 
+  
 }
 ?>

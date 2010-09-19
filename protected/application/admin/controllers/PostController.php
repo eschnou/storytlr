@@ -938,9 +938,17 @@ class Admin_PostController extends Admin_BaseController
 	}
 	
 	private function notifyTwitter($item) {		
-		// Get twitter credentials
-		$username   = $this->_properties->getProperty('twitter_username');
-		$password	= $this->_properties->getProperty('twitter_password');
+		// Get twitter consumer tokens and user secrets
+		$consumer_key = $this->_config->twitter->consumer_key;
+		$consumer_secret = $this->_config->twitter->consumer_secret;
+		$oauth_token = $this->_properties->getProperty('twitter_oauth_token');
+		$oauth_token_secret = $this->_properties->getProperty('twitter_oauth_token_secret');
+		
+		if (!$consumer_key || !$consumer_secret || !$oauth_token || !$oauth_token_secret) {
+			$this->addErrorMessage("Missing twitter OAuth credentials to continue");
+		}
+
+		// Should we append a text before the tweet ?
 		$has_preamble   = $this->_properties->getProperty('preamble', true);		
 		
 		// Get item
@@ -962,10 +970,13 @@ class Admin_PostController extends Admin_BaseController
 		}
 
 		try {
-			$twitter = new Stuffpress_Services_Twitter($username, $password);
-			$twitter->sendTweet($tweet);
+			$connection = new TwitterOAuth_Client($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
+			$response = $connection->post('statuses/update', array('status' => $tweet));
+			if (isset($response->error)) {
+				$this->addErrorMessage("Failed posting to Twitter with error " . $response->error);
+			}			
 		} catch (Exception $e) {
-			//
+			$this->addErrorMessage("Failed posting to Twitter with unknwon error");
 		}
 	}
 	

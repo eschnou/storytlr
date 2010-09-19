@@ -46,8 +46,8 @@ rss.default.hide_content=1
 ;;flickr.api_key=
 
 ;; Twitter settings
-;;twitter.username=
-;;twitter.password=
+;;twitter.consumer_key=
+;;twitter.consumer_secret=
 ;;twitter.default.hide_replies=1
 
 ;; Seesmic settings

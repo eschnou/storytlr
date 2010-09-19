@@ -21,28 +21,27 @@ class Admin_SnsController extends Admin_BaseController
 	protected $_section = 'config';
 	
 	public function indexAction() {
-		// Get the user properties
-		$values 	= $this->_properties->getProperties(array("twitter_auth", "twitter_username", "twitter_services"));
-		
+
 		// If not logged in, get the login form
-		if (!$values['twitter_auth']) {
+		if (!$this->_properties->getProperty('twitter_auth',false)) {
 			if (!$this->view->twitter_login_form) {
-				$this->view->twitter_login_form = $this->getTwitterLoginForm();
+				$this->view->twitter_login = true;
 			}
 		} 
 		// Else get the config form
 		else {
 			if (!$this->view->twitter_config_form) {
 				$form = $this->getTwitterConfigForm();
-				$form->twitter_services->setValue(unserialize($values['twitter_services']));
+				$form->twitter_services->setValue($this->_properties->getProperty('twitter_services'));
 				$this->view->twitter_config_form = $form;
 			}
+			
+			$this->view->twitter_username = $this->_properties->getProperty('twitter_username');
 		}
 		
 		// Prepare view
 		$this->common();
-		$this->view->twitter_auth 	 = $values['twitter_auth'];
-		$this->view->twitter_user 	 = $values['twitter_username'];
+		$this->view->twitter_auth = $this->_properties->getProperty('twitter_auth', false);
 		$this->view->status_messages = $this->getStatusMessages();
 		$this->view->error_messages	 = $this->getErrorMessages();		
 		$this->view->headScript()->appendFile('js/controllers/sns.js');
@@ -69,6 +68,98 @@ class Admin_SnsController extends Admin_BaseController
 		
 		// Ok
 		return $this->_helper->json->sendJson(false);
+	}
+	
+	public function connectAction() {
+		
+		if (! isset($this->_config->twitter->consumer_key) && !isset($this->_config->twitter->consumer_secret)) {
+			$this->addErrorMessage("Missing OAuth consumer key and secret");
+			$this->_forward('index');
+			return;
+		} 
+		
+		$consumer_key = $this->_config->twitter->consumer_key;
+		$consumer_secret = $this->_config->twitter->consumer_secret;
+		$oauth_callback = $this->getStaticUrl() . "/admin/sns/callback";
+		
+		/* Create a new twitter client */
+		$connection = new TwitterOAuth_Client($consumer_key, $consumer_secret);
+ 
+		/* Get temporary credentials. */
+		$request_token = $connection->getRequestToken($oauth_callback);
+		
+		/* Save temporary credentials to session. */
+		$oauth_token = $request_token['oauth_token'];
+		$oauth_token_secret = $request_token['oauth_token_secret'];
+		$this->_properties->setProperty("twitter_oauth_token", $oauth_token);
+		$this->_properties->setProperty("twitter_oauth_token_secret", $oauth_token_secret); 
+		
+		/* If last connection failed don't display authorization link. */
+		switch ($connection->http_code) {
+		  case 200:
+		    /* Build authorize URL and redirect user to Twitter. */
+		    $this->_redirect($connection->getAuthorizeURL($oauth_token));
+		    break;
+		  default:
+		    /* Show notification if something went wrong. */
+		    $this->addErrorMessage('Could not connect to Twitter. Refresh the page or try again later.');
+		}	
+		
+		$this->_forward('index');
+	}
+	
+	public function callbackAction() {
+		/* Get the saved tokens */
+		$oauth_token = $this->_properties->getProperty('twitter_oauth_token');
+		$oauth_token_secret = $this->_properties->getProperty('twitter_oauth_token_secret');
+		
+		if (!isset($oauth_token) && !isset($oauth_token_secret)) {
+			$this->addErrorMessage("Missing temporary OAuth tokens");
+			$this->_forward('index');
+			return;			
+		}
+		
+		/* Get the consumer key and secret from the config */
+		if (! isset($this->_config->twitter->consumer_key) && !isset($this->_config->twitter->consumer_secret)) {
+			$this->addErrorMessage("Missing OAuth consumer key and secret");
+			$this->_forward('index');
+			return;
+		} 
+		
+		$consumer_key = $this->_config->twitter->consumer_key;
+		$consumer_secret = $this->_config->twitter->consumer_secret;
+		$oauth_callback = $this->getStaticUrl() . "/admin/sns/callback";
+		
+		/* If the oauth_token is old redirect to the connect page. */
+		if (isset($_REQUEST['oauth_token'])) {
+			if ($oauth_token != $_REQUEST['oauth_token']) {
+				$this->_properties->deleteProperty("twitter_auth");
+				die("Session should be cleared");
+			}
+		}
+		
+		/* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
+		$connection = new TwitterOAuth_Client($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
+		
+		/* Request access tokens from twitter */
+		$access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);
+		
+		/* Save the access tokens. Normally these would be saved in a database for future use. */
+		$this->_properties->setProperty('twitter_oauth_token', $access_token['oauth_token']);
+		$this->_properties->setProperty('twitter_oauth_token_secret', $access_token['oauth_token_secret']);
+		$this->_properties->setProperty('twitter_user_id', $access_token['user_id']);
+		$this->_properties->setProperty('twitter_username', $access_token['screen_name']);
+		
+		/* If HTTP response is 200 continue otherwise send to connect page to retry */
+		if (200 == $connection->http_code) {
+		  /* The user has been verified and the access tokens can be saved for future use */
+		  $this->_properties->setProperty('twitter_auth', true);
+		} else {
+		  /* Save HTTP status for error dialog on connnect page.*/
+		  die("Error, We should clear the session.");
+		}
+		
+		$this->_forward('index');
 	}
 	
 	public function loginAction()
@@ -147,51 +238,7 @@ class Admin_SnsController extends Admin_BaseController
 
 		return $form;
 	}
-	
-	private function getTwitterLoginForm() {
-		$form = new Stuffpress_Form();
-			
-		// Add the form element details
-		$form->setMethod('post');
-		$form->setName('formTwitterLogin');
-		$form->setAction('admin/sns/login');
 		
-		// Twitter account
-		$e = $form->createElement('text', 'username',  array('size' => 12, 'label' => 'Username', 'decorators' => array('ViewHelper', 'Errors')));
-        $e->setRequired(true);
-        $form->addElement($e);
-
-        // Twitter account
-		$e = $form->createElement('password', 'password',  array('size' => 12, 'label' => 'Password', 'decorators' => array('ViewHelper', 'Errors')));
-        $e->setRequired(true);
-        $form->addElement($e);
-
-		// Save button
-		$form->addElement('submit', 'login', array('label' => 'Sign in', 'decorators' => $form->buttonDecorators));
-
-		return $form;
-	}
-	
-	private function validateTwitterAccount($username, $password) {
-		$url  = "http://twitter.com/account/verify_credentials.json";
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL,$url);  
-		curl_setopt($curl, CURLOPT_HEADER, false);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_USERPWD, "$username:$password"); 
-		curl_setopt($curl, CURLOPT_USERAGENT,'Storytlr/1.0');
-	
-		$response = curl_exec($curl);
-		$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-		curl_close ($curl);
-
-		if ($http_code != 200) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
 	private function getAvailableSources() {
 		$sourcesTable 	= new Sources();
 		$sources 		= $sourcesTable->getSources();

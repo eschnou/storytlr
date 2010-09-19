@@ -4,7 +4,7 @@
 db.adapter=PDO_MYSQL
 db.host=[:mysql_host]
 db.username=[:mysql_username]
-db.password=[:mysql_password]
+db.password="[:mysql_password]"
 db.dbname=[:mysql_database]
 
 ;Security
