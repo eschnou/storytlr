@@ -38,10 +38,12 @@ class Stuffpress_Application {
     }
     
     public function getPublicDomain($cname=true) {
-		$config = Zend_Registry::get("configuration");
-		
-		$user = $this->user;
-		
+		return Stuffpress_Application::getDomain($this->user, $cname);
+    }
+    
+    public static function getDomain($user, $cname=true) {
+    	$config = Zend_Registry::get("configuration");
+    	
 		// No user logged in... no url. We should not get here.
 		if (!$user) {
 			throw new Stuffpress_Exception("Unexpected request to base->myUrl()");
@@ -56,12 +58,17 @@ class Stuffpress_Application {
 		if ($config->app->user && ($config->app->user == $user->username)) {
 			$host = trim($config->web->host, " /");
 			$path = trim($config->web->path, " /");
-			return "$host/$path";
+			
+			if ($path) {
+				return "$host/$path";
+			} else {
+				return $host;
+			}
 		}
 		
 		// Otherwise, rebuild the URL
 		return $user->username . "." . $config->web->host;
     }
- 
+  
 }
 ?>
