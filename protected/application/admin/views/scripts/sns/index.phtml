@@ -21,19 +21,10 @@ something directly to Storytlr.
 			</td>
 			<td class='element'>
 				<?php if (!$this->twitter_auth) :?>
-					You must first login into Twitter.
-					<div id='twitter_login_form'>
-						<form id="<?= $this->escape($this->twitter_login_form->getName()) ?>"" action="<?= $this->escape($this->twitter_login_form->getAction()) ?>" method="<?= $this->escape($this->twitter_login_form->getMethod()) ?>">
-							<table>
-								<tr><td>Username:</td><td><?= $this->twitter_login_form->username ?></td></tr>
-								<tr><td>Password:</td><td><?= $this->twitter_login_form->password ?></td></tr>
-								<tr><td></td><td><?= $this->twitter_login_form->login ?></td></tr>
-							</table>
-						</form>
-					</div>
+					<a href="admin/sns/connect"><img src="images/twitter_login.png"/></a>
 				<?php else : ?>
 					<div id='twitter_account'>
-						You are logged in as <a href="http://twitter.com/<?= $this->twitter_user ?>"><?= $this->twitter_user ?></a> on Twitter (<a href="admin/sns/logout/service/twitter">logout</a>)
+						You are logged in as <a href="http://twitter.com/<?= $this->twitter_username ?>"><?= $this->twitter_username ?></a> on Twitter (<a href="admin/sns/logout/service/twitter">logout</a>)
 				<?php endif ?>
 			</td>
 		</tr>	
