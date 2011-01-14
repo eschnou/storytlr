@@ -35,7 +35,7 @@ class GithubModel extends SourceModel {
 	}
 
 	public function getServiceURL() {
-		return 'http://github.com/' . $this->getProperty('username');
+		return 'https://github.com/' . $this->getProperty('username');
 	}
 
 	public function getServiceDescription() {
@@ -62,7 +62,7 @@ class GithubModel extends SourceModel {
 	}
 
 	public function updateData() {
-		$url	= 'http://github.com/' . $this->getProperty('username') . '.atom';
+		$url	= 'https//github.com/' . $this->getProperty('username') . '.atom';
 
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);
