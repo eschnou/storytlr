@@ -73,7 +73,8 @@ class Admin_SnsController extends Admin_BaseController
 	public function connectAction() {
 		
 		if (! isset($this->_config->twitter->consumer_key) && !isset($this->_config->twitter->consumer_secret)) {
-			$this->addErrorMessage("Missing OAuth consumer key and secret");
+			$this->addErrorMessage("Missing OAuth consumer key and secret, these should be added to the Storytlr config.ini file.
+			More details <a href='http://github.com/storytlr/core/wiki/How-to-integrate-with-twitter'>here</a>.");
 			$this->_forward('index');
 			return;
 		} 

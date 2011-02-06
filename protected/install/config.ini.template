@@ -44,8 +44,12 @@ rss.default.hide_content=1
 [:flickr_comment]flickr.api_key=[:flickr_key]
 
 ;; Twitter settings
-;;twitter.username=
-;;twitter.password=
+;; In order to integrate storytlr with twitter, you need to obtain OAuth application keys 
+;; from Twitter directly (we are not allowed to redistribute keys). It is a simple process
+;; that you can follow here: http://dev.twitter.com/apps
+;;
+;;twitter.consumer_key=
+;;twitter.consumer_secret=
 ;;twitter.default.hide_replies=1
 
 ;; Seesmic settings
