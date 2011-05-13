@@ -167,6 +167,7 @@ class Bootstrap
 
 	public static function setupFrontController()
 	{
+                $config		= Zend_Registry::get('configuration');
 		self::$frontController = Zend_Controller_Front::getInstance();
 		self::$frontController->throwExceptions(false);
 		self::$frontController->returnResponse(true);
@@ -179,6 +180,9 @@ class Bootstrap
 			"admin"	  	=> self::$root . '/application/admin/controllers'));		
 		self::$frontController->setDefaultModule('public');
 		self::$frontController->setParam('registry', self::$registry);
+                if (isset($config->web->port)) {
+                        self::$frontController->setBaseUrl(':' . $config->web->$
+                }
 	}
 
 	public static function setupView()

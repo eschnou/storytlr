@@ -21,7 +21,11 @@ security.cookie = dasuoidasud
 ;cache.path = /tmp/cache/
 
 ;Web deployment settings
+;For running on a different port use the following:
+;web.host=localhost:8080
+;web.port=8080
 web.host=localhost
+;web.port=
 web.path=/
 web.redirect = 1
 web.timezone=Europe/Brussels
