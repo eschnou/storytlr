@@ -23,13 +23,7 @@ class GoogleplusItem extends SourceItem {
 	protected $_preamble = 'Goolge+ activity: ';
 
 	public function getContent() { 
-		$content = $this->_data['content'];
-		$content = str_replace("\\\"",   "\"", $content);
-		$content = str_replace("\u003c", "<", $content);
-		$content = str_replace("\u003d", "=", $content);
-		$content = str_replace("\u003e", ">", $content);
-		$content = str_replace("\u0026", "&", $content);
-		return $content; 
+		return $this->_data['content'];
 	}
 
 	public function getTitle () { return $this->_data['title']; }

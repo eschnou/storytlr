@@ -96,9 +96,17 @@ class GoogleplusModel extends SourceModel {
 		$result = array();
 		foreach ($items as $item) {
 			$data = array();
-			$data['title'] = $item[4];
+			
+			$content = $item[4];
+			$content = str_replace("\\\"",   "\"", $content);
+			$content = str_replace("\u003c", "<", $content);
+			$content = str_replace("\u003d", "=", $content);
+			$content = str_replace("\u003e", ">", $content);
+			$content = str_replace("\u0026", "&", $content);
+			
+			$data['title'] = $content;
 			$data['published'] = (int) substr($item[5], 0, 10);
-			$data['content'] = $item[4];
+			$data['content'] = $content;
 			$data['link'] = "http://plus.google.com/" . $item[6] . "/posts/" . $item[7];
 			$data['plus_id'] = $item[7];
 			$id = $this->addItem( $data, $data['published'], SourceItem::STATUS_TYPE, false, false, false, $data['title'] );
