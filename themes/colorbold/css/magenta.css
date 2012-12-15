@@ -1,0 +1,121 @@
+/* CSS Document */
+
+a {
+	color:#DE00A1;
+}
+
+h1, h1 a{
+	color:#333;
+}
+
+h2 {
+	color:#333;
+}
+
+/* MAIN MENU */
+
+#mainMenu {
+	background:url(../images/magenta/bk_mainmenu.png) no-repeat;
+}
+
+#mainMenu ul.sf-menu li {
+	border-right:1px solid #A84699;
+}
+
+#mainMenu ul.sf-menu li a {
+	color:#DFAFD1;
+}
+
+
+#mainMenu ul.sf-menu li a:hover {
+	color:#FFF;
+}
+
+#mainMenu ul.sf-menu li li {
+	border-bottom:1px solid #D85EB3;
+	
+}
+
+#mainMenu ul.sf-menu li li a {
+	color:#DFAFD1;
+}
+
+#mainMenu ul.sf-menu li ul.children {
+	border-bottom:2px solid #8A0064;
+	background:#C10087;
+}
+
+#mainMenu ul.sf-menu li ul.children li a:hover, #mainMenu ul.sf-menu li.page_item ul li a:hover{
+	color:#fff;
+}
+
+#mainMenu ul.sf-menu li ul.children li ul.children {
+	border-bottom:2px solid #8A0064;
+}
+
+/* COL LEFT ELEMENTS */
+
+#colLeft .blogPost .metaLeft .month {
+	background:url(../images/magenta/bk_month.jpg) 50% 0 no-repeat;
+	color:#fff;
+}
+
+#colLeft .blogPost .metaLeft .comments {
+	background:url(../images/magenta/bk_comments.jpg) 50% 0 no-repeat;
+	color:#00B0F5;
+}
+
+#colLeft .blogPost a.more-link {
+	color:#FFF;
+	background:url(../images/magenta/but_readmore.jpg) 0 0 no-repeat;
+}
+
+.navigation .alignleft a, .navigation .alignright a {
+	background:url(../images/magenta/but_older.jpg) 0 0 no-repeat;
+	color:#333;
+}
+
+.navigation .alignleft a:hover, .navigation .alignright a:hover {
+	color:#DE00A1;
+} 
+
+.navigation .alignright a {
+	background:url(../images/magenta/but_newer.jpg) 0 0 no-repeat;
+}
+
+/* COL RIGHT ELEMENTS */
+
+#colRight h2 {
+	background:url(../images/magenta/bk_h2_right.jpg) 0 0 no-repeat;
+	color:#FFF;
+}
+
+#colRight ul li {
+	background:url(../images/magenta/bk_list_right.png) 0 0 no-repeat;
+}
+
+#colRight ul li:hover a, #colRight ul li a:hover{
+	color:#DE00A1;
+}
+
+/* FORMS BUTTONS */
+
+#contact input.submit {
+	background:url(../images/magenta/but_send.jpg) 0 0 no-repeat;
+	color:#fff;
+}
+
+#commentform input#submit{
+	background:url(../images/magenta/but_send.jpg) 0 0 no-repeat;
+	color:#fff;
+}
+
+/* COMMENTS */
+
+#colLeft ul.commentlist li .commentRight strong {
+	background:#DE00A1;
+}
+
+#colLeft ul.commentlist li .commentRight strong, #colLeft ul.commentlist li .commentRight strong a{
+	color:#fff;
+}

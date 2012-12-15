@@ -10,6 +10,7 @@ $root = dirname(__FILE__);
 set_include_path(
       $root . '/protected/application' . PATH_SEPARATOR
     . $root . '/protected/application/admin/models' . PATH_SEPARATOR    
+    . $root . '/protected/application/api/models' . PATH_SEPARATOR
     . $root . '/protected/application/public/models' . PATH_SEPARATOR
     . $root . '/protected/application/pages/models' . PATH_SEPARATOR
     . $root . '/protected/application/widgets/models' . PATH_SEPARATOR

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/">
+	<id>http://localhost:8080/resources/timezones</id>
+	<title type="text">Time Zones</title>
+	<link href="http://localhost:8080/resources/timezones" rel="self" />
+	<author>
+		<name>sandra</name>
+		<uri>sandra.com</uri>
+		<email>sandra@sandra.com</email>
+	</author>
+	<category term="feed category1 term" scheme="feed category1 scheme" label="feed category1 label"/>
+	<category term="feed category2 term" scheme="feed category2 scheme" label="feed category2 label"/>
+	<entry>
+		<id>tag:versioncentral.example.org,2009:/commit/1643245</id>
+		<published>2009-06-01T12:54:00Z</published>
+		<title>Geraldine committed a change to yate</title>
+		<content type="html">Geraldine just committed a change to yate on VersionCentral</content>
+		<link rel="alternate" type="text/html" href="http://versioncentral.example.org/geraldine/yate/commit/1643245" />
+		<activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+		<activity:verb>http://versioncentral.example.org/activity/commit</activity:verb>
+		<activity:object>
+			<activity:object-type>http://versioncentral.example.org/activity/changeset</activity:object-type>
+			<id>tag:versioncentral.example.org,2009:/change/1643245</id>
+			<title>Punctuation Changeset</title>
+			<summary>Fixing punctuation because it makes it more readable.</summary>
+			<link rel="alternate" type="text/html" href="..." />
+		</activity:object>
+		<summary type="text">entry1 summary</summary>
+	</entry>
+	<entry>
+		<id>tag:photopanic.example.com,2009:/activity/4859568/PhotoAdd/2519358/2009171</id>
+		<title type="text">Geraldine added two new photos to the My Pets album.</title>
+		<author>
+			<name>Geraldine</name>
+			<uri>http://example.com/geraldine</uri>
+			<id>tag:photopanic.example.com,2009:/Person/4859568</id>
+			<activity:object-type>
+	        	http://activitystrea.ms/schema/1.0/person
+			</activity:object-type>
+			<link rel="alternate" type="text/html" href="http://example.com/geraldine" />
+	    </author>
+		<link rel="alternate" type="text/html" href="http://example.com/geraldine/activities/1234" />
+	    <content type="xhtml">...</content>
+		<activity:target>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo-album</activity:object-type>
+			<id>tag:photopanic.example.com,2009:/Photo_Album/2519358</id>
+			<title>My Pets</title>
+			<link rel="alternate" type="text/html" href="/geraldine/albums/pets" />
+		</activity:target>
+		<activity:object>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo</activity:object-type>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/image</activity:object-type>
+			<id>tag:photopanic.example.com,2009:/Photo/2519358/60764840</id>
+			<title>My Cat</title>
+			<link rel="alternate" type="text/html" href="/geraldine/photos/1643" />
+			<link rel="preview" type="image/jpeg" href="/geraldine/photos/1643/thumb.jpg" />
+			<link rel="enclosure" type="image/jpeg" href="/geraldine/photos/1643/full.jpg" />
+		</activity:object>
+		<activity:object>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/image</activity:object-type>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo</activity:object-type>
+			<id>tag:photopanic.example.com,2009:/Photo/2519358/60764844</id>
+			<title></title>
+			<link rel="alternate" type="text/html" href="/geraldine/photos/1634" />
+			<link rel="preview" type="image/jpeg" href="/geraldine/photos/1634/thumb.jpg" />
+			<link rel="enclosure" type="image/jpeg" href="/geraldine/photos/1634/full.jpg" />
+		</activity:object>
+	</entry>
+	<entry>
+		<id>tag:photopanic.example.com,2009:/activity/4859568/PhotoAdd/2519358/2009172</id>
+		<title type="text">Geraldine added two new photos to the Animal album.</title>
+		<published>2009-06-21T00:28:35Z</published>
+		<author>
+			<name>Geraldine</name>
+			<uri>http://example.com/geraldine</uri>
+			<id>tag:photopanic.example.com,2009:/Person/4859568</id>
+			<activity:object-type>
+				http://activitystrea.ms/schema/1.0/person
+			</activity:object-type>
+			<link rel="alternate" type="text/html" href="http://example.com/geraldine" />
+		</author>
+		<link rel="alternate" type="text/html" href="http://example.com/geraldine/activities/1234" />
+		<content type="xhtml">...</content>
+		<activity:target>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo-album</activity:object-type>
+			<id>tag:photopanic.example.com,2009:/Photo_Album/2519358</id>
+			<title>My Pets</title>
+			<link rel="alternate" type="text/html" href="/geraldine/albums/pets" />
+		</activity:target>
+		<activity:object>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo</activity:object-type>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/image</activity:object-type>
+			<id>tag:photopanic.example.com,2009:/Photo/2519358/60764840</id>
+			<title>My Cat</title>
+			<link rel="alternate" type="text/html" href="/geraldine/photos/1643" />
+			<link rel="preview" type="image/jpeg" href="/geraldine/photos/1643/thumb.jpg" />
+			<link rel="enclosure" type="image/jpeg" href="/geraldine/photos/1643/full.jpg" />
+		</activity:object>
+		<activity:object>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/image</activity:object-type>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo</activity:object-type>
+			<id>tag:photopanic.example.com,2009:/Photo/2519358/60764844</id>
+			<title></title>
+			<link rel="alternate" type="text/html" href="/geraldine/photos/1634" />
+			<link rel="preview" type="image/jpeg" href="/geraldine/photos/1634/thumb.jpg" />
+			<link rel="enclosure" type="image/jpeg" href="/geraldine/photos/1634/full.jpg" />
+		</activity:object>
+	</entry>
+	<entry xmlns:atom="http://www.w3.org/2005/Atom" >
+		<atom:id>tag:photopanic.example.com,2009:/activity/4859568/PhotoAdd/2519358/2009172</atom:id>
+		<atom:title type="text">atom with prefix</atom:title>
+		<atom:published>2009-06-21T00:28:35Z</atom:published>
+		<atom:author>
+			<atom:name>Geraldine</atom:name>
+			<atom:uri>http://example.com/geraldine</atom:uri>
+			<atom:id>tag:photopanic.example.com,2009:/Person/4859568</atom:id>
+			<atom:link rel="alternate" type="text/html" href="http://example.com/geraldine" />
+		</atom:author>
+		<atom:link rel="alternate" type="text/html" href="http://example.com/geraldine/activities/1234" />
+		<atom:content type="xhtml">...</atom:content>
+	</entry>
+</feed>

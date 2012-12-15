@@ -36,7 +36,7 @@ class Stuffpress_Application {
     {
         self::$_registry = null;
     }
-    
+
     public function getPublicDomain($cname=true) {
 		return Stuffpress_Application::getDomain($this->user, $cname);
     }

@@ -36,6 +36,8 @@ app.user=admin						; Comment this to switch to multi-user setup
 debug 	= 0
 profile = 0
 
+;; PubSubHubBub
+push.hub = http://pubsubhubbub.appspot.com
 
 ;; RSS settings
 rss.default.hide_content=1

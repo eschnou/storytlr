@@ -982,18 +982,26 @@ class Admin_PostController extends Admin_BaseController
 	
 	private function ping() {
 		// Ping google blog search
-		if ($this->_application->user->domain) {
-			$url = "http://{$this->_application->user->domain}";
-		} else {
-			$url = "http://{$this->_application->user->username}.storytlr.com";
-		}
-		
+		$logger		= Zend_Registry::get("logger");
+		$domain = $this->_application->getPublicDomain();		
 		$maintitle 	= $this->_properties->getProperty('title');
 		$subtitle 	= $this->_properties->getProperty('subtitle');
 		$separator	= $subtitle ? " | " : "";		
 		$title 		= $maintitle . $separator . $subtitle;
-		$rss	 	= "$url/rss/types/blog/nopre/1/feed.xml"; 
+		$rss	 	= "http://$domain/rss/types/blog/nopre/1/feed.xml"; 
 		
 		Stuffpress_Services_Blogsearch::ping($title, $url, $rss);
+		
+		// Ping PubSubHubBub
+		if ($this->_config->push) {
+			$hub = $this->_config->push->hub;
+			$p = new PushPublisher($hub);
+			$topic = "http://$domain/updates.atom";
+		    if ($p->publish_update($topic)) {
+		       $logger->log("Successfully pinged the PuSH hub $hub for topic $topic", Zend_Log::INFO);	
+		    } else {
+		       $logger->log("Failed PuSH notification (" . $p->last_response() . ")", Zend_Log::ERR);
+		    }
+		}
 	}
 }

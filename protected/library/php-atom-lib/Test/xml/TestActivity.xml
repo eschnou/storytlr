@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/">
+	<id>feed id</id>
+	<title type="feed title type">feed title</title>
+	<link href="feed link href" rel="feed link rel" type="feed link type" hreflang="feed link hreflang" title="feed link title" length="feed link length"/>
+	<author>
+		<name>feed author name</name>
+		<uri>feed author uri</uri>
+		<email>feed author email</email>
+	</author>
+	<updated>feed updated</updated>
+	<entry>
+		<id>entry1 id</id>
+		<title>entry1 title</title>
+		<published>entry1 published</published>
+		<link href="entry1 link1 href" rel="entry1 link1 ref" type="entry1 link1 type" hreflang="entry1 link1 hreflang" title="entry1 link1 title" length="entry1 link1 length" />
+		<link href="entry1 link2 href" rel="entry1 link2 ref" type="entry1 link2 type" hreflang="entry1 link2 hreflang" title="entry1 link2 title" length="entry1 link2 length" />
+		<updated>entry1 updated</updated>
+		<author>
+			<name>entry1 author name</name>
+			<uri>entry1 author uri</uri>
+			<email>entry1 author email</email>
+		</author>
+		<content type="entry1 content type" src="entry1 content src">entry1 content</content>
+	</entry>
+	<entry>
+		<id>entry2 id</id>
+		<title>entry2 title</title>
+		<published>entry2 published</published>
+		<link href="entry2 link1 href" rel="entry2 link1 ref" type="entry2 link1 type" hreflang="entry2 link1 hreflang" title="entry2 link1 title" length="entry2 link1 length" />
+		<link href="entry2 link2 href" rel="entry2 link2 ref" type="entry2 link2 type" hreflang="entry2 link2 hreflang" title="entry2 link2 title" length="entry2 link2 length" />
+		<updated>entry2 updated</updated>
+		<author>
+			<name>entry2 author name</name>
+			<uri>entry2 author uri</uri>
+			<email>entry2 author email</email>
+		</author>
+		<content type="entry2 content type" src="entry2 content src">entry2 content</content>
+	</entry>
+</feed>

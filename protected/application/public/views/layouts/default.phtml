@@ -152,95 +152,95 @@
 		</div>
 	</div>
 		
-	<?php if (count($this->widgets) > 0) : ?> 
-	<div id="right_column">
-		<div class='sidebar'>
-		<?php foreach ($this->widgets as $widget) {
-			echo $this->action('index', $widget['prefix'], 'widgets', array('id' => $widget['id']));
-		} ?>
-		</div>
-	</div>
-	<?php endif ?>
-	
-	<div id="left-column-wrapper">
-		<div id="left-column">
-	
-		<?php if(count($this->pages)>1) : ?>
-		<div class="tabMenu">
-			<table class="tabMenu" cellspacing="0">
-				<tr>
-
-					<?php for ($i=0; $i < min($this->theme_data['tabs'], count($this->pages)); $i++) {
-						$page = $this->pages[$i];
-					?>
-						<td class="spacer">&nbsp;</td>
-						<td <? if ($this->page_id == $page['id']) {echo 'class="active"';} else {echo 'class="inactive"';} ?> onClick="document.location='home?tab=<?= $i ?>';return false;"><a href="home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></td>
-					<?php } ?>
-					<?php if (count($this->pages) > $this->theme_data['tabs']) {
-					?>
-						<td class="spacer">&nbsp;</td>
-						<td class="arrow"><a href="#" onClick="$('popuptab').toggle();$('popuptab').toggleClassName('unselected');return false;" onfocus="this.blur()"><img src="images/arrow.png" /></a>
-							<div id='popuptab' style="display:none;">
-								<div><ul>
-									<?php for ($i= $this->theme_data['tabs']; $i<count($this->pages); $i++) {
-										$page = $this->pages[$i];
-									?>
-										<li><a href="home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></li>
-									<?php } ?>
-								</ul></div>
-							</div>
-						</td>
-					<?php } ?>
-					<td class="last">&nbsp;</td>
-				</tr>
-			</table>
+	<div id="content-wrapper">
+		<?php if (count($this->widgets) > 0) : ?> 
+		<div id="right_column">
+			<div class='sidebar'>
+			<?php foreach ($this->widgets as $widget) {
+				echo $this->action('index', $widget['prefix'], 'widgets', array('id' => $widget['id']));
+			} ?>
+			</div>
 		</div>
 		<?php endif ?>
+	
+		<div id="left-column-wrapper">
+			<div id="left-column">
+				<?php if(count($this->pages)>1) : ?>
+				<div class="tabMenu">
+					<table class="tabMenu" cellspacing="0">
+						<tr>
 		
-		<div id="status_messages">
-			<?php if ($this->status_messages) : ?>
-			<ul>
-				<?php foreach ($this->status_messages as $message) echo "<li>$message</li>\r\n" ?>
-			</ul>
-			<?php endif ?>
-		</div>
-		
-		<div id="error_messages">
-			<?php if ($this->error_messages) : ?>
-			<ul>
-				<?php foreach ($this->error_messages as $message) echo "<li>$message</li>\r\n" ?>
-			</ul>
-			<?php endif ?>
-		</div>		
-
-		<div id="content">
-		
-			<?php if ($this->tab >= $this->theme_data['tabs']) : ?>
-				<div id="breadcrumb">
-					<em><?= $this->page_title ?></em>
+							<?php for ($i=0; $i < min($this->theme_data['tabs'], count($this->pages)); $i++) {
+								$page = $this->pages[$i];
+							?>
+								<td class="spacer">&nbsp;</td>
+								<td <? if ($this->page_id == $page['id']) {echo 'class="active"';} else {echo 'class="inactive"';} ?> onClick="document.location='home?tab=<?= $i ?>';return false;"><a href="home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></td>
+							<?php } ?>
+							<?php if (count($this->pages) > $this->theme_data['tabs']) {
+							?>
+								<td class="spacer">&nbsp;</td>
+								<td class="arrow"><a href="#" onClick="$('popuptab').toggle();$('popuptab').toggleClassName('unselected');return false;" onfocus="this.blur()"><img src="images/arrow.png" /></a>
+									<div id='popuptab' style="display:none;">
+										<div><ul>
+											<?php for ($i= $this->theme_data['tabs']; $i<count($this->pages); $i++) {
+												$page = $this->pages[$i];
+											?>
+												<li><a href="home?tab=<?= $i ?>" onfocus="this.blur()"><?= $page['title'] ?></a></li>
+											<?php } ?>
+										</ul></div>
+									</div>
+								</td>
+							<?php } ?>
+							<td class="last">&nbsp;</td>
+						</tr>
+					</table>
 				</div>
-			<?php endif ?>
+				<?php endif ?>
+				
+				<div id="status_messages">
+					<?php if ($this->status_messages) : ?>
+					<ul>
+						<?php foreach ($this->status_messages as $message) echo "<li>$message</li>\r\n" ?>
+					</ul>
+					<?php endif ?>
+				</div>
+				
+				<div id="error_messages">
+					<?php if ($this->error_messages) : ?>
+					<ul>
+						<?php foreach ($this->error_messages as $message) echo "<li>$message</li>\r\n" ?>
+					</ul>
+					<?php endif ?>
+				</div>		
 		
-			<?= $this->layout()->content ?>
-		</div>
-		
-		<div class="bottom_nav">
-			<div class="pagination">
-					<?php if ($this->hasprevious) : ?>
-						<a class="section_links" rel="prev" href="<?= $this->base()->thisUrl()?>/<?= $this->previouslink ?>">&lt; Previous</a>
-					 <?php endif ?>
-					 <?php if ($this->hasnext) : ?>
-						<a class="section_links" rel="next" href="<?= $this->base()->thisUrl()?>/<?= $this->nextlink ?>">Next &gt;</a>
-					 <?php endif ?>
+				<div id="content">
+				
+					<?php if ($this->tab >= $this->theme_data['tabs']) : ?>
+						<div id="breadcrumb">
+							<em><?= $this->page_title ?></em>
+						</div>
+					<?php endif ?>
+				
+					<?= $this->layout()->content ?>
+				</div>
+				
+				<div class="bottom_nav">
+					<div class="pagination">
+							<?php if ($this->hasprevious) : ?>
+								<a class="section_links" rel="prev" href="<?= $this->base()->thisUrl()?>/<?= $this->previouslink ?>">&lt; Previous</a>
+							 <?php endif ?>
+							 <?php if ($this->hasnext) : ?>
+								<a class="section_links" rel="next" href="<?= $this->base()->thisUrl()?>/<?= $this->nextlink ?>">Next &gt;</a>
+							 <?php endif ?>
+					</div>
+				</div>
+			
+				<div id="footer-wrapper">
+					<div id="footer">
+						Web site powered by <a href="http://storytlr.org">storytlr</a>, version <?php echo STORYTLR_VERSION ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+					</div>
+				</div>
 			</div>
-		</div>
-		
-		<div id="footer-wrapper">
-			<div id="footer">
-				Web site powered by <a href="http://storytlr.org">storytlr</a>, version <?php echo STORYTLR_VERSION ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
-			</div>
-		</div>
-		
 		</div>
 	</div>
 	
