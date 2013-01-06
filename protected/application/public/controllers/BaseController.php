@@ -87,10 +87,6 @@ abstract class BaseController extends Stuffpress_Controller_Action
 			$w = new Widgets();
 			$this->view->widgets = $w->getWidgets($this->_user->id);
 		}
-
-		// User provided footer (e.g. tracker)
-		$user_footer					= $this->_properties->getProperty('footer');
-		$this->view->user_footer 		= $user_footer;
 		
 		// Javascript
 		$this->view->headScript()->appendFile('js/prototype/prototype.js');
@@ -143,11 +139,12 @@ abstract class BaseController extends Stuffpress_Controller_Action
 		$this->view->has_colors			= $this->_properties->getProperty('has_colors');
 		$this->view->css_enabled	 	= $this->_properties->getProperty('css_enabled');
 		$this->view->css_content	 	= $this->_properties->getProperty('css_content');
-		$this->view->title				= $this->_properties->getProperty('title');
+		$this->view->title			= $this->_properties->getProperty('title');
 		$this->view->subtitle			= $this->_properties->getProperty('subtitle');
-		$this->view->disqus				= $this->_properties->getProperty('disqus');
+		$this->view->disqus			= $this->_properties->getProperty('disqus');
 		$this->view->googlefc			= $this->_properties->getProperty('googlefc');
-		$this->view->footer				= $this->_properties->getProperty('footer');
+		$this->view->footer			= $this->_properties->getProperty('footer');
+		$this->view->header			= $this->_properties->getProperty('header');
 	}
 	
 	protected function getModels() {
