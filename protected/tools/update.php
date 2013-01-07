@@ -93,6 +93,10 @@ foreach($sources as $source) {
 	echo "Memory: " . memory_get_usage() . "\r\n";
 	
 	$model 	 = SourceModel::newInstance($source['service'], $source);
+	if (!$model->isActive()) {
+		echo "Skipping unactive source {$source['service']}.\r\n ";
+		continue;
+	}
 	
 	try {
 		if ($source['imported']) {
