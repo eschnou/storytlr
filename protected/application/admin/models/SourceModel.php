@@ -147,6 +147,13 @@ abstract class SourceModel extends Stuffpress_Db_Table
 	public function isEnabled() {
 		return $this->_source['enabled'];
 	}
+
+	// Is the source still active (and therefore proposed in the sources list).
+	// this is used to 'deprecate' old sources which are now broken but still enable
+	// the old content to be seen when browsing a stream.
+	public function isActive() {
+		return true;
+	}
 	
 	public function isStoryElement() {
 		return false;

@@ -46,6 +46,7 @@ class Admin_ServicesController extends Admin_BaseController
 		foreach (Sources::getAvailableSources() as $c) {
 			if ($c == 'stuffpress') continue;
 			$model = SourceModel::newInstance($c);
+			if (!$model->isActive()) continue;
 			$e['service'] = $c;
 			$e['name'] = $model->getServiceName();
 			$e['description'] = $model->getServiceDescription();
