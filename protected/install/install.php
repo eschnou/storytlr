@@ -119,6 +119,7 @@
 			warn( 'Zend Version 1.0.0 or newer is recommended' );
 
 	Check::FunctionExists( 'mcrypt_module_open', 'mcrypt' );
+	Check::FunctionExists( 'mb_internal_encoding', 'mbstring' );
 	Check::FunctionExists( 'curl_init', 'cURL' );
 	Check::ExtensionExists( 'PDO', 'PDO' );
 
