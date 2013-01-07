@@ -50,11 +50,27 @@
 				}
 				Check::good( '[' . date( 'H:i:s' ) .'] Connected to database.' );
 
+				// Run the initial schema
 				$res = Database::RunFolder($root . '/protected/install/database/schema/' );
-
 				if( true !== $res )
 					throw new Exception( 'Error loading database schema:<br/><div class="nested-error">' . $res . '</div>' );
 
+				// Process all updates
+				$current_version = 0;
+				while($current_version < DATABASE_VERSION) {
+					$next_version = $current_version + 1;
+					$folder = sprintf($root . '/protected/install/database/update/%03d/', $next_version);
+					$res = Database::RunFolder($folder);
+					if( true !== $res )
+						throw new Exception( 'Error running database upgrade script:<br/><div class="nested-error">' . $res . '</div>' );
+				
+					// Save the new version and move to the next one
+					@file_put_contents( $root . '/protected/install/database/version', $next_version);
+					Check::good("Applied upgrade script to version $next_version.");
+				
+					$current_version++;
+				}
+				
 				// Save the new version
 				@file_put_contents( $root . '/protected/install/database/version', DATABASE_VERSION);	
 					
