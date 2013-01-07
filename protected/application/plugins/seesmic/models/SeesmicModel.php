@@ -184,6 +184,10 @@ class SeesmicModel extends SourceModel {
 	public function processGnipItem($activity) {	
 		//
 	}
+	
+	public function isActive() {
+		return false;
+	}
 
 	private function processItems($items) {
 		$result = array();

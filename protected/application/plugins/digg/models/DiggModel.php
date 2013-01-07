@@ -93,6 +93,10 @@ class DiggModel extends SourceModel {
 	public function processGnipItem($activity) {	
 		//
 	}
+	
+	public function isActive() {
+		return false;
+	}
 
 	private function processItems($stories,$import=false) {
 		$result = array();

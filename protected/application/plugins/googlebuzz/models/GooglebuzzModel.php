@@ -133,4 +133,8 @@ class GooglebuzzModel extends SourceModel {
 
 		return $update;
 	}
+	
+	public function isActive() {
+		return false;
+	}
 }

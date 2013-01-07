@@ -81,6 +81,10 @@ class QikModel extends SourceModel {
 		return $this->processItems($items->channel->children());
 	}
 	
+	public function isActive() {
+		return false;
+	}
+	
 	private function processItems($items) {
 		$result = array();
 		foreach ($items as $k => $v) {
