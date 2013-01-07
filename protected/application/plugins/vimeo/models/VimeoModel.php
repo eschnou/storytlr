@@ -65,7 +65,7 @@ class VimeoModel extends SourceModel {
 
 	public function updateVideos($full=false) {
 		$username 	= $this->getProperty('username');
-		$uri  = "http://vimeo.com/api/$username/clips.php";
+		$uri  = "http://vimeo.com/api/v2/$username/videos.php";
 		$data = $this->fetchItems($uri);
 		if (!$data || count($data) == 0) return array();
 		return $this->addItems($data, 'video');
@@ -73,7 +73,7 @@ class VimeoModel extends SourceModel {
 
 	public function updateFavorites($full=false, $import=false) {
 		$username 	= $this->getProperty('username');
-		$uri  = "http://vimeo.com/api/$username/likes.php";
+		$uri  = "http://vimeo.com/api/v2/$username/likes.php";
 		$data = $this->fetchItems($uri);
 		if (!$data || count($data) == 0) return array();
 		return $this->addItems($data, 'favorite', $import ? 'published' : 'now');
@@ -85,9 +85,9 @@ class VimeoModel extends SourceModel {
 			$data = array();
 			$data['type'] 	  	= $type;
 			$data['title'] 	  	= $item['title'];
-			$data['caption']  	= ($type == 'video') ? $item['caption'] : '';
+			$data['caption']  	= ($type == 'video') ? $item['description'] : '';
 			$data['published']	= strtotime((string) $item['upload_date']) + 60 * 60 * 6;
-			$data['clip_id']	= $item['clip_id'];
+			$data['clip_id']	= $item['id'];
 			$data['url']		= $item['url'];
 			$data['user_name']  = $item['user_name'];
 			$data['user_url']	= $item['user_url'];
