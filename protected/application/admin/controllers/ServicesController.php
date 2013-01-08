@@ -178,7 +178,7 @@ class Admin_ServicesController extends Admin_BaseController
 				$this->addStatusMessage("Successfully imported $count entries.");
 			}
 			else if (isset($error)) {
-				$this->addErrorMessage("There was an error while importing the data. Please doublecheck your import configuration and try again later. Let us know if this problem persists.");
+				$this->addErrorMessage("There was an error while importing the data. Please doublecheck your import configuration and try again later. Let us know if this problem persists.<br/>Error was: ". $error . ".");
 				if ($create) {
 					$sources->deleteSource($id);
 				}

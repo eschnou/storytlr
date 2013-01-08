@@ -212,6 +212,8 @@ class Admin_SnsController extends Admin_BaseController
 		$this->_properties->setProperty('twitter_auth', false);	
 		$this->_properties->setProperty('twitter_username', '');	
 		$this->_properties->setProperty('twitter_password', '');	
+		$this->_properties->deleteProperty("twitter_oauth_token");
+		$this->_properties->deleteProperty("twitter_oauth_token_secret");
 		
 		// Ok
 		$this->addStatusMessage("You have been logged out from Twitter");
