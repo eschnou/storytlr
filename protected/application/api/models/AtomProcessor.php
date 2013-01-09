@@ -183,7 +183,7 @@ class AtomProcessor {
     	$objectAuthor = $activityObject->addAuthor();
     	$objectAuthor->name	= $this->_user->username;
     	$objectAuthor->uri	= 'http://' . $this->_domain;
-    	$objectAuthor->email	= $application->user->email;
+    	//$objectAuthor->email	= $application->user->email;
     	
     	$this->_getEditLink($activityObject->addLink(), $item, $entry->id->value);
     	
