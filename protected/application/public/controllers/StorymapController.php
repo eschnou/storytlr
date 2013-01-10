@@ -157,7 +157,7 @@ class StorymapController extends BaseController
 		// Page layout
 		$this->view->title				= $properties->getProperty('title');
 		$this->view->subtitle			= $properties->getProperty('subtitle');
-		$this->view->footer				= $properties->getProperty('footer');
+		$this->view->footer				= $properties->getProperty('user_footer');
 		$this->view->section			= "story";
 	}
 }

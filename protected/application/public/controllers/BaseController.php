@@ -143,8 +143,8 @@ abstract class BaseController extends Stuffpress_Controller_Action
 		$this->view->subtitle			= $this->_properties->getProperty('subtitle');
 		$this->view->disqus			= $this->_properties->getProperty('disqus');
 		$this->view->googlefc			= $this->_properties->getProperty('googlefc');
-		$this->view->footer			= $this->_properties->getProperty('footer');
-		$this->view->header			= $this->_properties->getProperty('header');
+		$this->view->footer			= $this->_properties->getProperty('user_footer');
+		$this->view->header			= $this->_properties->getProperty('user_header');
 	}
 	
 	protected function getModels() {

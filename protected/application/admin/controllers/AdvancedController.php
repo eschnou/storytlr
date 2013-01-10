@@ -21,7 +21,7 @@ class Admin_AdvancedController extends Admin_BaseController
     
 	public function indexAction() {		
 		// Get the required properties
-		$values 	= $this->_properties->getProperties(array(	"disqus"));
+		$values 	= $this->_properties->getProperties(array(	"disqus","user_header", "user_footer"));
 
 		// User CNAME setting
 		$values['cname'] = $this->_application->user->domain;
@@ -69,8 +69,12 @@ class Admin_AdvancedController extends Admin_BaseController
 		$cname		= $values['cname'];
 		$disqus		= $values['disqus'];
 		$googlefc   = $values['friendconnect'];
+		$header	    = $values['user_header'];
+		$footer     = $values['user_footer'];
 		
 		// Save the new values
+		$this->_properties->setProperty( 'user_header', $header);
+		$this->_properties->setProperty( 'user_footer', $footer);
 		$this->_properties->setProperty('disqus', 	$disqus);
 		$this->_properties->setProperty('googlefc', $googlefc);				
 		$users->setDomain($this->_application->user->id, $cname);
@@ -109,7 +113,20 @@ class Admin_AdvancedController extends Admin_BaseController
         $e->setRequired(false);
         $e->setDescription("Add Google Friend Connect to your site and make it social");
         $form->addElement($e);
-    
+
+        // Header
+        $e = $form->createElement( 'textarea', 'user_header',  array( 'rows' => 5, 'cols' => 37, 'label' => 'Header Code', 'decorators' => $form->elementDecorators ) );
+        $e->setRequired( false );
+        $e->setDescription( "Add code to the header of every page. Like OpenID delegation headers." );
+        $form->addElement( $e );
+        
+        
+        // Footer
+        $e = $form->createElement( 'textarea', 'user_footer',  array( 'rows' => 5, 'cols' => 37, 'label' => 'Footer Code', 'decorators' => $form->elementDecorators ) );
+        $e->setRequired( false );
+        $e->setDescription( "Add code to the bottom of every page. Good for analytics systems." );
+        $form->addElement( $e );
+        
         
         // Save button
 		$e = $form->createElement('button', 'save', array('label' => 'Save', 'onclick' => "submitFormAdvanced();", 'decorators' => $form->buttonDecorators));
