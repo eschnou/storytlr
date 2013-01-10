@@ -136,6 +136,7 @@
 
 	Check::FunctionExists( 'mcrypt_module_open', 'mcrypt' );
 	Check::FunctionExists( 'mb_internal_encoding', 'mbstring' );
+	Check::FunctionExists( 'imagecreatefrompng', 'GD' );
 	Check::FunctionExists( 'curl_init', 'cURL' );
 	Check::ExtensionExists( 'PDO', 'PDO' );
 
