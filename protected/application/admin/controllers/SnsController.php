@@ -31,8 +31,9 @@ class Admin_SnsController extends Admin_BaseController
 		// Else get the config form
 		else {
 			if (!$this->view->twitter_config_form) {
+				$services = $this->_properties->getProperty('twitter_services');
 				$form = $this->getTwitterConfigForm();
-				$form->twitter_services->setValue($this->_properties->getProperty('twitter_services'));
+				$form->twitter_services->setValue(unserialize($services));
 				$this->view->twitter_config_form = $form;
 			}
 			
