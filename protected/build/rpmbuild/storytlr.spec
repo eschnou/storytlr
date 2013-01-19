@@ -8,6 +8,7 @@ License:       Apache 2.0 License
 URL:           https://github.com/storytlr/storytlr
 Source0:       %{url}/tarball/storytlr-%{version}
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-tmp
+BuildArch:     noarch
 Provides:      storytlr
 Requires:      php,httpd,php-ZendFramework,php-mcrypt,php-mbstring,php-gd,php-mysql
 
