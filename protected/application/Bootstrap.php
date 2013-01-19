@@ -117,9 +117,10 @@ class Bootstrap
 	 * needed to run Storytlr. This is to prevent the "white screen of death" ;-)
 	 */
 	public static function checkEnvironment() {
-		if( ! function_exists( 'mcrypt_module_open' ) ) { die( 'Storytlr requires mcrypt, which can not be found.' ); }
+		if( ! function_exists( 'mcrypt_module_open' ) ) { die( 'Storytlr requires mcrypt, which can not be found (install php-mcrypt).' ); }
 		if( ! class_exists( 'PDO', false ) ) { die( 'Storytlr requires PDO, which can not be found.' ); }
 		if( ! function_exists( 'curl_init' ) ) { die( 'Storytlr requires PHP Curl, which can not be found.' ); }
+		if( ! ini_get('short_open_tag')) { die ('Storytlr requires PHP Short Open Tags to be enabled.'); }
 	}
 
 	public static function setupEnvironment()
@@ -147,6 +148,9 @@ class Bootstrap
 	{ 
 		if (file_exists('/etc/storytlr/config.ini')) {
 			$config_path = '/etc/storytlr/config.ini';
+		}
+		else if (file_exists('/etc/storytlr/storytlr.conf')) {
+			$config_path = '/etc/storytlr/storytlr.conf';
 		}
 		else if (file_exists(self::$root . '/config/config.ini')) {
 			$config_path = self::$root . '/config/config.ini';

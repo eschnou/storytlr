@@ -23,6 +23,7 @@ set_include_path(
 // Run the install stuff if configuration is missing
 if( AUTO_INSTALL &&
 	! file_exists( $root . '/protected/config/config.ini') &&
+	! file_exists( '/etc/storytlr/storytlr.conf') &&
 	! file_exists( '/etc/storytlr/config.ini')) {
 	$template = array();
 	ob_start();

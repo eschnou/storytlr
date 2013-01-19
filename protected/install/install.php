@@ -129,6 +129,7 @@
 <?php
 	Check::PHP( "5.0" );
 	Check::SettingValue( "magic_quotes_gpc", false );
+	Check::SettingValue( "short_open_tag", true );
 
 	if( Check::CanInclude( 'Zend/Version.php', 'Zend Framework' ) )
 		if( Zend_Version::compareVersion( '1.0.0' ) > 0 )

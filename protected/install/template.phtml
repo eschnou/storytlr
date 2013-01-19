@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<title>storytlr | <?= $template['title']; ?></title>
+		<title>storytlr | <?php echo $template['title']; ?></title>
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 		<link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="style/install.css" type="text/css" media="screen" />
@@ -28,8 +28,8 @@
 					<div id="status_messages"></div>
 					<div id="error_messages"></div>
 					<div id="content" class="narrowcolumn">
-						<h1><?= $template['title']; ?></h1>
-						<?= $template['content']; ?>
+						<h1><?php echo $template['title']; ?></h1>
+						<?php echo $template['content']; ?>
 						<br class="fix"/>
 					</div>
 				</div>
@@ -41,7 +41,7 @@
 				<div class="blockwrapper">
 					<div class="block">
 						<h2>Legal stuff</h2>
-						You are running storytlr version <?= STORYTLR_VERSION; ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+						You are running storytlr version <?php echo STORYTLR_VERSION; ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
 					</div>
 
 					<div class="block">
@@ -75,7 +75,7 @@
 				<br class="fix" />
 				<div id="copyright">
 					<p>
-						Web site powered by <a href="http://storytlr.org">storytlr</a>, version <?= STORYTLR_VERSION; ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
+						Web site powered by <a href="http://storytlr.org">storytlr</a>, version <?php echo STORYTLR_VERSION; ?>, available under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License version 2.0</a>.
 					</p>
 				</div>
 			</div>
