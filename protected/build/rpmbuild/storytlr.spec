@@ -35,6 +35,8 @@ Storytlr is an opensource lifestreaming and microblogging platform.
 %{__cp} storytlr*/protected/build/rpmbuild/etc/storytlr/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/storytlr/storytlr.conf
 %{__cp} storytlr*/protected/build/rpmbuild/etc/httpd/conf.d/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/storytlr.conf
 
+echo 0 -n > %{buildroot}/usr/share/storytlr/protected/database/version
+
 %post
 
 %postun
@@ -55,6 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_localstatedir}/lib/storytlr/temp
 %dir %{_localstatedir}/lib/storytlr/uploads
 %dir %{_localstatedir}/log/storytlr
+/usr/share/storytlr/protected/database/version
 
 %changelog
 * Sat Jan 18 2013 Laurent Eschenauer <laurent@eschenauer.be> - 1.2.0
