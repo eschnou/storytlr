@@ -48,6 +48,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/httpd/conf.d/storytlr.conf
 %dir /usr/share/storytlr
 /usr/share/storytlr/*
+/usr/share/storytlr/.htaccess
+/usr/share/storytlr/protected/.htaccess
 %defattr(0644,apache,apache,0755)
 %dir %{_localstatedir}/lib/storytlr/feeds
 %dir %{_localstatedir}/lib/storytlr/temp
