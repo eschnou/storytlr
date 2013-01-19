@@ -1,8 +1,11 @@
 <?php
 	require_once( 'shared.php' );
 
-	if( file_exists( $root . '/protected/config/config.ini' ) ) {
-		Check::bad( 'Storytlr appears to already be installed, protected/config/config.ini exists.<br/>Please remove or rename protected/install/install.php' );
+	if( file_exists( $root . '/protected/config/config.ini' ) 
+		|| file_exists( '/etc/storytr/storytlr.conf' ) 
+		|| file_exists( '/etc/storytr/storytlr.ini' )) 
+	{
+		Check::bad( 'Storytlr appears to already be installed, config file already exists.' );
 		return 'Installation';
 	}
 
