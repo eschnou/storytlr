@@ -162,7 +162,8 @@ class Bootstrap
 		
 		$config = new Zend_Config_Ini(
 		$config_path,
-		'general'
+		'general',
+		array('allowModifications' => true)
 		);
 		self::$registry->configuration = $config;
 		self::$registry->root = self::$root;
@@ -821,9 +822,18 @@ class Bootstrap
 			}
 		}
 
-		// Last chance
-		header("Location: http://$our_host");
-		exit;
+		// Last chance, we take a bet
+		self::$registry->host = $this_host;
+		$config->web->host = $this_host;
+
+		// Is a user specified in the config ?
+		if (isset($config->app->user)) {
+			if ($user = $users->getUserFromUsername($config->app->user)) {
+				self::$registry->user = $user;
+			}
+		}
+
+		return;
 	}
 	
 	public static function setupAtomExtensionManager() {
