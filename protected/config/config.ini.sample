@@ -10,10 +10,10 @@ db.dbname=storytlr
 ;Security
 security.cookie = dasuoidasud
 
-#path.upload = /tmp/upload
-#path.logs = /tmp/logs
-#path.temp = /tmp/temp
-#path.feeds = /tmp/feeds
+;path.upload = /tmp/upload
+;path.logs = /tmp/logs
+;path.temp = /tmp/temp
+;path.feeds = /tmp/feeds
 
 ;Caching
 ;cache.content = 1
