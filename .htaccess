@@ -8,3 +8,6 @@ deny from all
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule .* index.php 
+
+# Enable php short open tags
+php_flag short_open_tag on
