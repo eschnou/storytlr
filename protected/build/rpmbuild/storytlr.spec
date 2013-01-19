@@ -43,6 +43,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(0644,root,root,0755)
 %config(noreplace) %{_sysconfdir}/storytlr/storytlr.conf
+%config(noreplace) %{_sysconfdir}/httpd/conf.d/storytlr.conf
 %dir /usr/share/storytlr
 /usr/share/storytlr/*
 %defattr(0644,apache,apache,0755)
