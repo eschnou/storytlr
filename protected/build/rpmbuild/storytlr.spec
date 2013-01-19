@@ -10,7 +10,9 @@ Source0:       %{url}/tarball/storytlr-%{version}
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-tmp
 BuildArch:     noarch
 Provides:      storytlr
-Requires:      php,httpd,php-ZendFramework,php-mcrypt,php-mbstring,php-gd,php-mysql
+Requires:      httpd
+Requires:      php,php-mcrypt,php-mbstring,php-gd,php-mysql
+Requires:      php-ZendFramework,php-ZendFramework-Db-Adapter-Pdo-Mysql,php-ZendFramework-Feed,php-ZendFramework-Services
 
 %description
 Storytlr is an opensource lifestreaming and microblogging platform.
@@ -26,7 +28,7 @@ Storytlr is an opensource lifestreaming and microblogging platform.
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/storytlr
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/lib/storytlr/feeds
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/lib/storytlr/temp
-%{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/lib/storytlr/uploads
+%{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/lib/storytlr/upload
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/log/storytlr
 
 %{__cp} -r storytlr*/* %{buildroot}/usr/share/storytlr/
@@ -55,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(0644,apache,apache,0755)
 %dir %{_localstatedir}/lib/storytlr/feeds
 %dir %{_localstatedir}/lib/storytlr/temp
-%dir %{_localstatedir}/lib/storytlr/uploads
+%dir %{_localstatedir}/lib/storytlr/upload
 %dir %{_localstatedir}/log/storytlr
 /usr/share/storytlr/protected/install/database/version
 
