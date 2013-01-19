@@ -29,7 +29,7 @@ Storytlr is an opensource lifestreaming and microblogging platform.
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/lib/storytlr/uploads
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/log/storytlr
 
-%{__cp} -r storytlr*/* %{buildroot}/usr/share/storytlr/
+%{__cp} -r storytlr*/ %{buildroot}/usr/share/storytlr/
 %{__cp} storytlr*/protected/build/rpmbuild/etc/storytlr/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/storytlr/storytlr.conf
 %{__cp} storytlr*/protected/build/rpmbuild/etc/httpd/conf.d/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/storytlr.conf
 
