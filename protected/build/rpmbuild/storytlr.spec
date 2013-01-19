@@ -9,8 +9,7 @@ URL:           https://github.com/storytlr/storytlr
 Source0:       %{url}/tarball/storytlr-%{version}
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-tmp
 Provides:      storytlr
-Requires:      php
-Requires:      httpd
+Requires:      php,httpd,php-ZendFramework,php-mcrypt,php-mbstring,php-gd,php-mysql
 
 %description
 Storytlr is an opensource lifestreaming and microblogging platform.
