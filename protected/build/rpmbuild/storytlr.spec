@@ -1,12 +1,12 @@
 Name:          storytlr
-Version:       1.2.dev
+Version:       1.2.0
 Release:       1%{?dist}
 Summary:       Storytlr is an opensource lifestreaming and microblogging platform.
 Packager:      Laurent Eschenauer <laurent@eschenauer.be>
 Group:         Applications/Internet
 License:       Apache 2.0 License
 URL:           https://github.com/storytlr/storytlr
-Source0:       %{url}/tarball/storytlr-%{version}
+Source0:       %{url}/archive/storytlr-%{version}.tar.gz
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-tmp
 BuildArch:     noarch
 Provides:      storytlr
