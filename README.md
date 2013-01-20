@@ -2,7 +2,18 @@
 
 Storytlr is an open source lifestreaming and micro blogging platform. You can use it for a single user or it can act as a host for many people all from the same installation.
 
-[http://storytlr.org](http://storytlr.org)
+## Features
+
+**Features in a nutshell**
+- You can import from 18 popular sources, easily post your own updates, pick from a range of styles and create compelling stories from your content.
+- [OStatus](http://en.wikipedia.org/wiki/OStatus) support enable federation with other social sites.
+- [IndieWeb](http://indiewebcamp.com/Getting_Started) minded: can be used to implement a [POSSE](http://indiewebcamp.com/POSSE) approach.
+
+**See it in action** 
+- Have a look at [this storytlr site](http://eschnou.com) to see what Storytlr can offer you.
+
+**More details**
+- [http://storytlr.org](http://storytlr.org)
 
 ## Install
 
