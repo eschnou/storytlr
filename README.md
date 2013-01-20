@@ -19,7 +19,7 @@ Storytlr is an open source lifestreaming and micro blogging platform. You can us
 
 Two install options are available:
 
-* [Download the latest release](https://github.com/storytlr/storytlr/tarball/master).
+* [Download the latest stable release (1.2)](https://github.com/storytlr/storytlr/tarball/release-1.2).
 * Clone the repo: `git clone git://gtihub.com/storytlr/storytlr.git`
 
 You can then follow the following [install instructions](https://github.com/storytlr/storytlr/wiki/Install).
