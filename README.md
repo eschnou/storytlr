@@ -10,7 +10,10 @@ Storytlr is an open source lifestreaming and micro blogging platform. You can us
 - [IndieWeb](http://indiewebcamp.com/Getting_Started) minded: can be used to implement a [POSSE](http://indiewebcamp.com/POSSE) approach.
 
 **See it in action** 
-- Have a look at [this storytlr site](http://eschnou.com) to see what Storytlr can offer you.
+
+[![Example Storytlr site](http://storytlr.org/assets/eschnou.png)](http://eschnou.com)
+
+Have a look at [this storytlr site](http://eschnou.com) to see what Storytlr can offer you.
 
 **More details**
 - [http://storytlr.org](http://storytlr.org)
