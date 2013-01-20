@@ -104,7 +104,7 @@ class Admin_AdvancedController extends Admin_BaseController
 		$e = $form->createElement('text', 'disqus',  array('size' => 37, 'label' => 'Disqus commenting', 'decorators' => $form->elementDecorators));
         $e->setRequired(false);
         $e->addFilter('StringToLower');
-        $e->setDescription("Create a disqus web site for the url $url and fill-in its short-name (<a href='https://github.com/storytlr/core/wiki/Frequently-Asked-Questions'>help</a>)");
+        $e->setDescription("Create a disqus web site for the url $url and fill-in its short-name (<a href='https://github.com/storytlr/storytlr/wiki/Frequently-Asked-Questions'>help</a>)");
         $form->addElement($e);
 
         
