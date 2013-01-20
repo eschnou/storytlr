@@ -2,6 +2,8 @@
 
 Storytlr is an open source lifestreaming and micro blogging platform. You can use it for a single user or it can act as a host for many people all from the same installation.
 
+[http://storytlr.org](http://storytlr.org)
+
 ## Install
 
 Two install options are available:
