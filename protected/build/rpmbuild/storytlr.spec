@@ -1,5 +1,5 @@
 Name:          storytlr
-Version:       1.2.dev
+Version:       1.3.dev
 Release:       1%{?dist}
 Summary:       Storytlr is an opensource lifestreaming and microblogging platform.
 Packager:      Laurent Eschenauer <laurent@eschenauer.be>
