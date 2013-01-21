@@ -6,7 +6,7 @@
 ?>
 
 <div class="twitter">
-	<div class="title entry-title"><?= $tweet ?></div>
+	<div class="title entry-title p-name"><?= $tweet ?></div>
 	<?php if ($this->item->getType() == SourceItem::IMAGE_TYPE) :?>
 	<a href="<?= $this->item->getLink()?>" target="_blank"><img src='<?= $this->item->getImageUrl(ImageItem::SIZE_LARGE) ?>' width='350'/></a>
 	<?php endif ?>

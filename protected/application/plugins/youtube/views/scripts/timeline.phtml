@@ -10,8 +10,8 @@
 	$jsid = "youtube_video_{$item['id']}";
 ?>
 <div class="youtube">
-	<div  class="title entry-title"><?= $title ?></div>
-	<div  class="entry-content">
+	<div  class="title entry-title p-name"><?= $title ?></div>
+	<div  class="entry-content e-content">
 		<div  class="video" id="<?= $jsid ?>">
 			<object width="350" height="250">
 				<param name="movie" value="http://www.youtube-nocookie.com/v/<?= $item['video_id'] ?>&fs=1&rel=0&showinfo=0"></param>
