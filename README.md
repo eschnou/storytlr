@@ -22,7 +22,7 @@ Have a look at [this storytlr site](http://eschnou.com) to see what Storytlr can
 
 Three install options are available:
 
-* Install from the RPM package: `yum install http://repo.storytlr.org/epel/6/storytlr-1.2.0-1.noarch.rpm`
+* Install from the RPM package: `yum install http://repo.storytlr.org/epel/6/x86_64/storytlr-1.2.0-1.el6.noarch.rpm`
 * Download the latest release: [storytlr-1.2.0.tar.gz](https://github.com/storytlr/storytlr/archive/storytlr-1.2.0.tar.gz)
 * Clone the repo: `git clone git://gtihub.com/storytlr/storytlr.git`
 
