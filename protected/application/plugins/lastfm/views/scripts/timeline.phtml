@@ -1,7 +1,7 @@
 <div class="lastfm">
-	<div class="title entry-title">Liked the song <a href="<?= $this->item->getLink() ?>" target="_blank"><?= $this->item->getTitle() ?></a></div>
+	<div class="title entry-title p-name">Liked the song <a href="<?= $this->item->getLink() ?>" target="_blank"><?= $this->item->getTitle() ?></a></div>
 	<?php if ($this->item->getDescription()) : ?>
-		<div class="note entry-content">
+		<div class="note entry-content e-content">
 			<?= $this->item->getDescription(); ?>
 		</div>
 	<?php endif ?>

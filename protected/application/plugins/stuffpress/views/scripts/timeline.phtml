@@ -3,10 +3,10 @@
 
 <?php if($type == 'image') : ?>
 <div class="storytlr_image">
-	<div  class="title entry-title">
+	<div  class="title entry-title p-name">
 		<?= $this->item->getTitle();?>
 	</div>
-	<div class="entry-content">
+	<div class="entry-content e-content">
 		<div class="content">
 			<a href="<?= $this->item->getImageUrl('large'); ?>" title="<?= $this->item->getTitle(); ?>" target="_blank"><img src="<?= $this->item->getImageUrl('medium'); ?>" width="350"></a>
 		</div>
@@ -19,10 +19,10 @@
 </div>
 <?php elseif($type == 'audio') : ?>
 <div class="storytlr_audio">
-	<div  class="title entry-title">
+	<div  class="title entry-title p-name">
 		<?= $this->item->getTitle(); ?>
 	</div>
-	<div class="entry-content">
+	<div class="entry-content e-content">
 		<div class="content">
 			<object type="application/x-shockwave-flash" data="flash/player_mp3.swf" width="200" height="20">
 			     <param name="movie" value="flash/player_mp3.swf" />
@@ -40,10 +40,10 @@
 <?php elseif($type == 'blog') : ?>
 <div class="storytlr_blog">
 	<div class="titbullet"></div>
-	<div  class="title entry-title">
+	<div  class="title entry-title p-name">
 		<?= $this->item->getTitle(); ?> 
 	</div>
-	<div class="content entry-content">
+	<div class="content entry-content e-content">
 		<?php 
 			$content =  $this->item->getContent();
 			$textcontent = strip_tags($content);
@@ -58,7 +58,7 @@
 </div>
 <?php elseif($type == 'status') : ?>	
 <div class="storytlr_status">
-	<div  class="title entry-title">
+	<div  class="title entry-title p-name">
 		<?php 
 			$title = 	preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
 			echo $title;
@@ -67,21 +67,21 @@
 </div>	
 <?php elseif($type == 'link') : ?>	
 <div class="storytlr_link">
-	<div  class="title entry-title">
+	<div  class="title entry-title p-name">
 		Shared the link <a href="<?= $this->item->getLink(); ?>"><?= $this->item->getTitle(); ?></a>
 	</div>
 	<?php if ($this->item->getDescription()) : ?>
-		<div class="note entry-content">
+		<div class="note entry-content e-content">
 			<?= $this->item->getDescription(); ?>
 		</div>
 	<?php endif ?>
 </div>
 <?php elseif($type == 'video') : ?>
 <div class="storytlr_video">
-	<div  class="title entry-title">
+	<div  class="title entry-title p-name">
 		<?= $this->item->getTitle(); ?>
 	</div>
-	<div class="entry-content">
+	<div class="entry-content e-content">
 		<div class="content">
 			<?= $this->item->getVideoPlayer(350, 250); ?>
 		</div>

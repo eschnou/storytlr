@@ -2,12 +2,12 @@
 
 <div class='item_wrapper' id='item_wrapper_<?= $id ?>'>
 	
-	<div class='hentry entry <?php if($this->item->isHidden()) : ?> hidden <?php else : ?> item <?php endif ?>' id='item_<?= $id ?>'>
+	<div class='hentry h-entry entry <?php if($this->item->isHidden()) : ?> hidden <?php else : ?> item <?php endif ?>' id='item_<?= $id ?>'>
 		<div class='item_left'>
 			<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>" rel="bookmark">
 				<img class="icon" src="<?= $this->item->getIcon();?>" width='16' height='16' />
 			</a>
-			<abbr class="published" title="<?= date("c", $this->item->getTimestamp()); ?>">
+			<abbr class="published dt-published" title="<?= date("c", $this->item->getTimestamp()); ?>">
 			<span id='item_time_<?= $id ?>' class='time' <?php if ($this->admin): ?> onclick='onEditDate(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>, <?= $this->item->getTimestamp() ?>);'<?php endif ?>>
 				<?= date("H:i", $this->item->getTimestamp()); ?>
 			</span>

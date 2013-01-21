@@ -3,38 +3,38 @@
 <div class="tumblr">
 <?php if ($item['type'] == 'regular') :?>
 <div class="regular">
-	<div  class="title entry-title"><?= $this->item->getTitle(); ?></div>
-	<div  class="content entry-content"><?= $item['regular_body'] ?></div>
+	<div  class="title entry-title p-name"><?= $this->item->getTitle(); ?></div>
+	<div  class="content entry-content e-content"><?= $item['regular_body'] ?></div>
 </div>
 <?php elseif ($item['type'] == 'quote') :?>
 <div class="quote">
-	<div  class="title entry-title"><?= $this->item->getTitle(); ?></div>
-	<div  class="content entry-content"><?= $item['quote_source'] ?></div>
+	<div  class="title entry-title p-name"><?= $this->item->getTitle(); ?></div>
+	<div  class="content entry-content e-content"><?= $item['quote_source'] ?></div>
 </div>
 <?php elseif ($item['type'] == 'link') :?>
 <div class="link">
-	<div  class="title entry-title">Shared the link <a href="<?= $item['link_url'] ?>"><?= $this->item->getTitle(); ?></a></div>
+	<div  class="title entry-title p-name">Shared the link <a href="<?= $item['link_url'] ?>"><?= $this->item->getTitle(); ?></a></div>
 	<?php if ($item['link_description']) : ?>
-		<div  class="note entry-content"><?= $item['link_description'] ?></div>
+		<div  class="note entry-content e-content"><?= $item['link_description'] ?></div>
 	<?php endif ?>
 </div>
 <?php elseif ($item['type'] == 'conversation') :?>
 <div class="conversation">
-	<div  class="title entry-title"><?= $this->item->getTitle(); ?></div>
-	<div  class="content entry-content"><?= $item['conversation_text'] ?></div>
+	<div  class="title entry-title p-name"><?= $this->item->getTitle(); ?></div>
+	<div  class="content entry-content e-content"><?= $item['conversation_text'] ?></div>
 </div>
 <?php elseif ($item['type'] == 'photo') :?>
 <div class="photo">
-	<div  class="title entry-title"><?= $this->item->getTitle(); ?></div>
+	<div  class="title entry-title p-name"><?= $this->item->getTitle(); ?></div>
 	<div  class="content"><a href="<?= $item['photo_url']; ?>" title="<?= $this->item->getTitle(); ?>" rel="lightbox[set]" ><img src='<?= $item['photo_url'] ?>'  width='350'></a></div>
 	<?php if ($item['photo_note']) : ?>
-		<div  class="note entry-content"><?= $item['photo_note'] ?></div>
+		<div  class="note entry-content e-content"><?= $item['photo_note'] ?></div>
 	<?php endif ?>
 </div>					
 <?php elseif ($item['type'] == 'video') :?>
 <div class="video">
-	<div  class="title entry-title"><?= $this->item->getTitle();?></div>
-	<div  class="entry-content">
+	<div  class="title entry-title p-name"><?= $this->item->getTitle();?></div>
+	<div  class="entry-content e-content">
 		<div  class="content"><?= $this->item->getVideoPlayer(350, 300); ?></div>
 		<?php if ($item['video_note']) : ?>
 			<div  class="note"><?= $item['video_note'] ?></div>
@@ -43,8 +43,8 @@
 </div>	
 <?php elseif ($item['type'] == 'audio') :?>
 <div class="audio">
-	<div  class="title entry-title"><?= $this->item->getTitle(); ?></div>
-	<div  class="entry-content">
+	<div  class="title entry-title p-name"><?= $this->item->getTitle(); ?></div>
+	<div  class="entry-content e-content">
 		<div  class="content"><?= $this->item->getAudioPlayer(200); ?></div>
 		<?php if ($item['audio_note']) : ?>
 			<div  class="description"><?= $item['audio_note'] ?></div>
