@@ -2,7 +2,7 @@
 
 <div class='item_wrapper' id='item_wrapper_<?= $id ?>'>
 	
-	<div class='hentry h-entry entry <?php if($this->item->isHidden()) : ?> hidden <?php else : ?> item <?php endif ?>' id='item_<?= $id ?>'>
+	<div class="hentry h-entry entry <?php if($this->item->isHidden()) : ?> hidden <?php else : ?> item <?php endif ?>" id='item_<?= $id ?>'>
 		<div class='item_left'>
 			<a href="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>" rel="bookmark">
 				<img class="icon" src="<?= $this->item->getIcon();?>" width='16' height='16' />
@@ -55,7 +55,7 @@
 	
 								$strings = array();
 								foreach($tags as $tag) {
-									$strings[] = "<a href='tag/" . urlencode($tag['symbol']) . "' rel='tag'>{$tag['tag']}</a>";
+									$strings[] = "<a href='tag/" . urlencode($tag['symbol']) . "' rel=\"tag\">{$tag['tag']}</a>";
 								}
 					?>
 						<div class="tags footnote">	
