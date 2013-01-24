@@ -1,6 +1,10 @@
 #Storytlr
 
-Storytlr is an open source lifestreaming and micro blogging platform. You can use it for a single user or it can act as a host for many people all from the same installation.
+Storytlr is an open source lifestreaming and micro blogging platform. You can use it for 
+a single user or it can act as a host for many people all from the same installation.
+
+Note: The default branch is the development branch, if you need a stable version, see 
+the release-XX branches, tags, or downloads.
 
 ## Features
 
