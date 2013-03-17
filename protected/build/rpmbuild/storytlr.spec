@@ -11,7 +11,7 @@ BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-tmp
 BuildArch:     noarch
 Provides:      storytlr
 Requires:      httpd
-Requires:      php,php-mcrypt,php-mbstring,php-gd,php-mysql
+Requires:      php,php-mcrypt,php-mbstring,php-gd,php-mysql,php-xmlrpc
 Requires:      php-ZendFramework,php-ZendFramework-Db-Adapter-Pdo-Mysql,php-ZendFramework-Feed,php-ZendFramework-Services
 
 %description

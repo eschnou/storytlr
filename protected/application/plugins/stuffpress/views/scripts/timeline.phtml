@@ -59,8 +59,12 @@
 <?php elseif($type == 'status') : ?>	
 <div class="storytlr_status">
 	<div  class="title entry-title p-name">
-		<?php 
-			$title = 	preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$this->item->getTitle());
+		<?php
+		    $title = $this->item->getTitle(); 
+			$title = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$title);
+			$title = preg_replace("|@([a-zA-Z0-9\-\.]+)|",'<a href="http://\\1" target="_blank">@\\1</a>\\2',$title); // add “@username” links
+			$title = preg_replace("|#([a-zA-Z0-9_]+)|",'<a href="tag/\\1">#\\1</a>\\2',$title); // add tag links
+					
 			echo $title;
 		?>
 	</div>

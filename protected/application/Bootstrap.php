@@ -69,6 +69,9 @@ require_once 'php-atom-lib/AtomFeedAdapter.php';
 require_once 'php-atom-lib/ActivityExtension/ActivityExtensionFactory.php';
 require_once 'php-atom-lib/MediaExtension/MediaExtensionFactory.php';
 
+// php-mf2 includes
+require_once 'mf2/Parser.php';
+
 // Bootsrap class
 class Bootstrap
 {
@@ -330,6 +333,11 @@ class Bootstrap
 		new Zend_Controller_Router_Route('/search', array('module' => 'public', 'controller' => 'timeline', 'action' => 'search'))
 		);
 
+		$router->addRoute(
+		'pingback',
+		new Zend_Controller_Router_Route('/pingback', array('module' => 'public', 'controller' => 'pingback', 'action' => 'ping'))
+		);
+		
 		$router->addRoute(
 		'slide',
 		new Zend_Controller_Router_Route('/slide/:source/:item/index.html', array('module' => 'public', 'controller' => 'timeline', 'action' => 'slide'))
@@ -616,7 +624,8 @@ class Bootstrap
 		$acl->add(new Zend_Acl_Resource('public:storymap'), 'public');
 		$acl->add(new Zend_Acl_Resource('public:mappage'),  'public');
 		$acl->add(new Zend_Acl_Resource('public:timeline'), 'public');
-
+		$acl->add(new Zend_Acl_Resource('public:pingback'),	'public');
+		
 		/* Resources for consolemodule */
 		$acl->add(new Zend_Acl_Resource('console'), 		'root');
 		$acl->add(new Zend_Acl_Resource('console:stats'), 	'console');
@@ -700,6 +709,7 @@ class Bootstrap
 		$acl->allow('guest',  'public:embed');
 		$acl->allow('guest',  'public:error');
 		$acl->allow('guest',  'public:file');
+		$acl->allow('guest',  'public:pingback', array('ping'));
 		$acl->allow('guest',  'public:home');
 		$acl->allow('guest',  'public:index');
 		$acl->allow('guest',  'public:shorturl');
