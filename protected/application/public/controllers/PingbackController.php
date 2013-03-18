@@ -18,15 +18,13 @@
 
 use mf2\Parser;
 
-class PingbackController extends Stuffpress_Controller_Action 
+class PingbackController extends BaseController 
 {
-	protected $_application;
-	
+		
 	protected $_logger;
 	
     public function preDispatch()
     {
-		$this->_application = Stuffpress_Application::getInstance();
 		$this->_logger = Zend_Registry::get("logger");
     }
 	
@@ -80,9 +78,135 @@ class PingbackController extends Stuffpress_Controller_Action
 			return;
 		}
 		
+		// Parse the source page for microformats content
 		$parser = new Parser($response);
 		$output = $parser->parse();
-		$this->_logger->log("Parsed output: " . var_export($output), Zend_Log::DEBUG);
+		$this->_logger->log("Parsed output: " . var_export($output, true), Zend_Log::DEBUG);
+		
+		// Extract relevant data
+		$timestamp	= time();
+		$has_author = false;
+		$has_entry = false;
+		foreach ($output["items"] as $item) {
+		$this->_logger->log("Item: " . var_export($item, true), Zend_Log::DEBUG);
+			if (in_array("h-card", $item["type"])) {
+				if (!$has_author) {
+					$props = @$item["properties"];
+					$author_name = @$props["name"][0];
+					$author_adr = @$props["adr"][0];
+					$author_bio = @$props["note"][0];
+					$author_url = @$props["url"][0];
+					$author_avatar = @$props["photo"][0];
+					$has_author = true;
+				}
+			} else if (in_array("h-entry", $item["type"])) {
+				if (!$has_entry) {
+					$props = @$item["properties"];
+					$entry = @$props["name"][0];
+					$published = @$props["published"][0];
+					$has_entry = true;
+				}
+			}
+		}
+
+		// Lookup if existing entry
+		preg_match('/(?P<source>\d+)\-(?P<item>\d+)$/', $target, $matches);
+		$this->_logger->log("Matches: " . var_export($matches, true), Zend_Log::DEBUG);
+		$source_id = $matches["source"];
+		$item_id = $ùatches["item"];
+		
+		// Get the source and the user owning it
+		$data		= new Data();
+		$sources    = new Sources();
+		$users      = new Users();
+		
+		// Does it relate to an item ?
+		if ($source_id && $item_id) {
+			$source = $sources->getSource($source_id);
+			$item = $data->getItem($source_id, $item_id);
+			if ($source && $item) {
+				$user = $users->getUser($source['user_id']);
+			}
+		}
+		
+		// Otherwise, can we relate to a user ?
+		if (!$user) {
+			$user = $this->lookupUser($target);
+		}
+		
+		// No user ? We have to giveup
+		if (!$user) {
+			throw new Exception('Failed to find corresponding storytlr user.'); 
+		}
+		
+		// Add the mention to the database
+		$mentions  	= new Mentions();
+		$mentions->addMention($source_id, $item_id, $source, $entry, $author_name, $author_url, "", $author_avatar, $timestamp);
+		
+		// Send an email alert to owner
+		try {
+			$on_comment		= $this->_properties->getProperty('on_comment');
+			if ($on_comment) {
+				Stuffpress_Emails::sendCommentEmail($user->email, $user->username, $author_name, $author_url, $entry, $source);
+			}				
+		} catch (Exception $e) {
+			$logger	= Zend_Registry::get("logger");
+			$logger->log("Sending comment notification exception: " . $e->getMessage(), Zend_Log::ERR);
+		}
+	}
+	
+	private function lookupUser($url) {
+		$config		= Zend_Registry::get('configuration');
+		$our_host	= $config->web->host;
+		$this_host	= $url;
+	
+		$this_host  = str_replace("http://", "", $this_host);
+		$this_host  = trim($this_host, " /");
+		
+		$users  = new Users();
+		
+		// Do we hit our main domain ?
+		if (($our_host == $this_host)) {
+	
+			// Is a user specified in the config ?
+			if (isset($config->app->user)) {
+				if ($user = $users->getUserFromUsername($config->app->user)) {
+					return $user;
+				}
+			}
+	
+			return;
+		}
+	
+		// A user storytlr page
+		if (preg_match("/(?<user>[a-zA-Z0-9]+).{$our_host}$/", $this_host, $matches)) {
+			$username = $matches['user'];
+			if ($user = $users->getUserFromUsername($username)) {
+				return $user;
+			}
+		}
+	
+		// A or CNAME ?
+		if ($user = $users->getUserFromDomain($this_host)) {
+			return $user;
+		}
+	
+		// Maybe we should strip the www in front ?
+		$matches = array();
+		if (preg_match("/www.(.*)/", $this_host, $matches)) {
+			if ($user = $users->getUserFromDomain($matches[1])) {
+				return $user;
+			}
+		}
+		
+		// Is a user specified in the config ?
+		if (isset($config->app->user)) {
+			if ($user = $users->getUserFromUsername($config->app->user)) {
+				return $user;
+			}
+		}
+	
+		return;
 	}
 	
 }
