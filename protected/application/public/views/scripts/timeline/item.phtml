@@ -37,7 +37,9 @@
 					<?php elseif ($this->disqus) : ?>
 					
 					<?php else : ?>
-					<a class="comment" href='javascript:toggle_add_comment(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>);' class="item_add_comment" title="Add comment"><img src="images/28.png" /></a>
+					<action do="reply" with="<?= $this->base()->thisUrl()?>/entry/<?= $this->item->getSlug() ?>'">
+					  <a class="comment" href='javascript:toggle_add_comment(<?= $this->item->getSource() ?>, <?= $this->item->getID() ?>);' class="item_add_comment" title="Add comment"><img src="images/28.png" /></a>
+					</action>
 					<?php endif ?>
 					
                                         <!-- AddThis Button BEGIN -->
