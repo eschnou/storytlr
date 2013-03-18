@@ -647,14 +647,14 @@ div.overlay_frame_content {
    ---------------------------------
 */
 
-.web-action-hero-toolbelt-button {
+.toolbelt-web-action {
 	border: none !important;
 	background: none !important;
 	box-shadow: none !important;
 	vertical-align: text-top;
 }
 
-.web-action-hero-toolbelt-button button {
+.toolbelt-web-action-button {
 	background: none;
 	border: none;
 	cursor: pointer;
@@ -662,6 +662,6 @@ div.overlay_frame_content {
 	margin-top: -8px;
 }
 
-.web-action-hero-toolbelt-button button:hover {
+.toolbelt-web-action-button:hover {
 	color: #CCC;
 }
