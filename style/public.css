@@ -642,3 +642,26 @@ div.overlay_frame_content {
 	font-size: .9em;
 	margin: 10px 0;
 }
+
+/* Web Action
+   ---------------------------------
+*/
+
+.web-action-hero-toolbelt-button {
+	border: none !important;
+	background: none !important;
+	box-shadow: none !important;
+	vertical-align: text-top;
+}
+
+.web-action-hero-toolbelt-button button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #53ABD5;
+	margin-top: -8px;
+}
+
+.web-action-hero-toolbelt-button button:hover {
+	color: #CCC;
+}
