@@ -1,0 +1,14 @@
+<?php $comment = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" rel="nofollow">\\1</a>', $this->mention);  ?>
+<div class='mention' id='mention_<?= $this->id ?>'>
+	<div class='mention_actions'>
+	<?php if ($this->delete) : ?>
+		<a class='delete' href='javascript:delete_mention(<?= $this->id ?>, <?= $this->source_id ?>, <?= $this->item_id ?>);' title="Delete mention"><img src="images/01.png" /></a>
+	<?php endif ?>
+	</div>
+	<div class='mention_top'>
+	Mentioned by <?= $this->author_name; ?> (<a href="<?= $this->author_url; ?>"><?= $this->author_url; ?></a>)	<a href="<?= $this->url?>"><?= Stuffpress_Date::ago($this->timestamp, "j M y \\a\\t G:i T"); ?></a>					
+	</div>
+	<div class='mention_content'>
+	<?= $this->entry ?>
+	</div>
+</div>

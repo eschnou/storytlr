@@ -110,10 +110,10 @@ class PingbackController extends BaseController
 		}
 
 		// Lookup if existing entry
-		preg_match('/(?P<source>\d+)\-(?P<item>\d+)$/', $target, $matches);
+		preg_match('/(?P<source>\d+)\-(?P<item>\d+)\.html$/', $target, $matches);
 		$this->_logger->log("Matches: " . var_export($matches, true), Zend_Log::DEBUG);
 		$source_id = $matches["source"];
-		$item_id = $ùatches["item"];
+		$item_id = $matches["item"];
 		
 		// Get the source and the user owning it
 		$data		= new Data();
@@ -122,10 +122,10 @@ class PingbackController extends BaseController
 		
 		// Does it relate to an item ?
 		if ($source_id && $item_id) {
-			$source = $sources->getSource($source_id);
-			$item = $data->getItem($source_id, $item_id);
-			if ($source && $item) {
-				$user = $users->getUser($source['user_id']);
+			$s = $sources->getSource($source_id);
+			$i = $data->getItem($source_id, $item_id);
+			if ($s && $i) {
+				$user = $users->getUser($s['user_id']);
 			}
 		}
 		
@@ -141,17 +141,17 @@ class PingbackController extends BaseController
 		
 		// Add the mention to the database
 		$mentions  	= new Mentions();
-		$mentions->addMention($source_id, $item_id, $source, $entry, $author_name, $author_url, "", $author_avatar, $timestamp);
+		$mentions->addMention($source_id, $item_id, $user->id, $source, $entry, $author_name, $author_url, "", $author_avatar, $timestamp);
 		
 		// Send an email alert to owner
 		try {
 			$on_comment		= $this->_properties->getProperty('on_comment');
 			if ($on_comment) {
-				Stuffpress_Emails::sendCommentEmail($user->email, $user->username, $author_name, $author_url, $entry, $source);
+				Stuffpress_Emails::sendMentionEmail($user->email, $user->username, $author_name, $author_url, $entry, $source, $target);
 			}				
 		} catch (Exception $e) {
 			$logger	= Zend_Registry::get("logger");
-			$logger->log("Sending comment notification exception: " . $e->getMessage(), Zend_Log::ERR);
+			$logger->log("Sending mention notification exception: " . $e->getMessage(), Zend_Log::ERR);
 		}
 	}
 	

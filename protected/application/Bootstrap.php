@@ -109,6 +109,7 @@ class Bootstrap
 		self::setupRouter();
 		self::setupPlugins();
 		self::setupApplication();
+		self::setupEmail();
 		self::setupAcl();
 		
 		self::setupAtomExtensionManager();
@@ -679,7 +680,8 @@ class Bootstrap
 		$acl->add(new Zend_Acl_Resource('pages:pictures'),   'pages');
 		$acl->add(new Zend_Acl_Resource('pages:stories'),    'pages');
 		$acl->add(new Zend_Acl_Resource('pages:videos'),     'pages');
-		$acl->add(new Zend_Acl_Resource('pages:map'),     	'pages');
+		$acl->add(new Zend_Acl_Resource('pages:map'),     	 'pages');
+		$acl->add(new Zend_Acl_Resource('pages:mentions'), 	 'pages');
 
 		/* Resources for dialogs */
 		$acl->add(new Zend_Acl_Resource('dialogs'), 		  'root');
@@ -727,6 +729,7 @@ class Bootstrap
 		$acl->allow('guest',  'pages:stories',	 array('index'));
 		$acl->allow('guest',  'pages:videos',	 array('index'));
 		$acl->allow('guest',  'pages:map',	 	 array('index'));
+		$acl->allow('guest',  'pages:mentions',	 array('index'));
 
 
 		$acl->allow('guest',  'widgets:archives',     array('index'));
@@ -861,5 +864,24 @@ class Bootstrap
 		$activityProcessor->registerProcessor(ActivityNS::BOOKMARK_OBJECT_TYPE	, 'BookmarkObjectProcessor'	, 0);
 		$activityProcessor->registerProcessor(ActivityNS::VIDEO_OBJECT_TYPE		, 'VideoObjectProcessor'	, 0);
 		$activityProcessor->registerProcessor(ActivityNS::COMMENT_OBJECT_TYPE	, 'CommentObjectProcessor'	, 0);
+	}
+	
+	public static function setupEmail() {
+		$config		= Zend_Registry::get('configuration');
+		$logger		= Zend_Registry::get("logger");
+		
+		if (isset ($config->email->host)) {
+			$email = array();
+			if (isset ($config->email->username)) $email['username'] = $config->email->username;
+			if (isset ($config->email->password)) $email['password'] = $config->email->password;
+			if (isset ($config->email->ssl)) $email['ssl'] = $config->email->ssl;
+			if (isset ($config->email->port)) $email['port'] = $config->email->port;
+			if (isset ($config->email->auth)) $email['auth'] = $config->email->auth;
+			
+			$logger->log("Email configurartion: " . var_export($email, true), Zend_Log::DEBUG);
+			
+			$transport = new Zend_Mail_Transport_Smtp($config->email->host, $email);
+			Zend_Mail::setDefaultTransport($transport);
+		}	
 	}
 }

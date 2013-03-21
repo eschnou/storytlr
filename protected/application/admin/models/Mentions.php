@@ -29,7 +29,7 @@ class Mentions extends Stuffpress_Db_Table
 	}
 
 	public function getMentions($source_id, $item_id) {
-		$sql = "SELECT * FROM `mentions` "
+		$sql = "SELECT *, UNIX_TIMESTAMP(timestamp) as timestamp FROM `mentions` "
 		. "WHERE source_id = :source_id AND item_id = :item_id "
 		. "ORDER BY timestamp ";
 
@@ -41,12 +41,12 @@ class Mentions extends Stuffpress_Db_Table
 		return $result;
 	}
 
-	public function getLastMentions($show_hidden=0) {
-		$sql = "SELECT c.* FROM `mentions` c JOIN `data` d ON (d.id = c.item_id AND d.source_id = c.source_id) "
-		. "WHERE c.user_id = :user_id "
+	public function getLastMentions($count=10, $offset=0, $show_hidden=0) {
+		$sql = "SELECT m.*, UNIX_TIMESTAMP(m.timestamp) as timestamp FROM `mentions` m LEFT JOIN `data` d ON (d.id = m.item_id AND d.source_id = m.source_id) "
+		. "WHERE m.user_id = :user_id "
 		. ((!$show_hidden) ? "AND d.is_hidden = 0 " : " ")
-		. "ORDER BY c.timestamp DESC "
-		. "LIMIT 5";
+		. "ORDER BY m.timestamp DESC "
+		. "LIMIT $count OFFSET $offset ";
 
 		$data 		= array("user_id" 	=> $this->_user);
 
@@ -56,13 +56,14 @@ class Mentions extends Stuffpress_Db_Table
 		return $result;
 	}
 
-	public function addMention($source_id, $item_id, $url, $entry, $author_name, $author_url, $author_bio, $author_avatar, $timestamp) {
-		$sql = "INSERT INTO `mentions` (source_id, item_id, url, entry, author_name, author_url, author_bio, author_avatar, timestamp) "
-		. "VALUES (:source_id, :item_id, :url, :entry, :author_name, :author_url, :author_bio, :author_avatar, FROM_UNIXTIME(:timestamp))";
+	public function addMention($source_id, $item_id, $user_id, $url, $entry, $author_name, $author_url, $author_bio, $author_avatar, $timestamp) {
+		$sql = "INSERT INTO `mentions` (source_id, item_id, user_id, url, entry, author_name, author_url, author_bio, author_avatar, timestamp) "
+		. "VALUES (:source_id, :item_id, :user_id, :url, :entry, :author_name, :author_url, :author_bio, :author_avatar, FROM_UNIXTIME(:timestamp))";
 
 
 		$data 		= array("source_id" 	=> $source_id,
 							"item_id"		=> $item_id,
+							"user_id"		=> $user_id,
 							"url"			=> $url,
 							"entry"			=> $entry,
 							"author_name"	=> $author_name,
@@ -74,8 +75,10 @@ class Mentions extends Stuffpress_Db_Table
 		$statement = $this->_db->query($sql, $data);
 		$id = $this->_db->lastInsertId();
 
-//		$data = new Data();
-//		$data->increaseMentions($source_id, $item_id);
+		if ($source_id && $item_id) {
+			$data = new Data();
+			$data->increaseMentions($source_id, $item_id);
+		}
 
 		return $id;
 	}

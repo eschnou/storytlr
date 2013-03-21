@@ -1,0 +1,41 @@
+<?php 
+
+if (!$this->items || count($this->items) == 0) {
+	echo "We are sorry, " . $this->username . " has not received any mentions yet.";
+} else {
+	$date  = "";
+	foreach($this->items as $item) { 
+	
+		$item_date = date("F j, Y", $item['timestamp']);
+		
+		if ($date != $item_date) {
+			$date = $item_date;
+			echo "<div class='date' id='".date("YMj", $item['timestamp'])."'>$date</div>";
+		}
+?>		
+
+<div class="storytlr_mention">
+	<div class="avatar">
+		<img src="<?= $item["author_avatar"]; ?>" />
+	</div>
+	<div class="author">
+	<?= $item["author_name"]?> (<a href="<?= $item["author_url"]?>"><?= $item["author_url"]?></a>)
+	</div>
+	<div class="when">
+	<a href="<?= $item['url']; ?>"><?= Stuffpress_Date::ago($item['timestamp'], "j M y \\a\\t G:i T"); ?></a>
+	</div>
+	<div  class="title">
+		<?php
+		    $title = $item['entry']; 
+			$title = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$title);
+			$title = preg_replace("|@([a-zA-Z0-9\-\.]+)|",'<a href="http://\\1" target="_blank">@\\1</a>\\2',$title); // add “@username” links
+			$title = preg_replace("|#([a-zA-Z0-9_]+)|",'<a href="tag/\\1">#\\1</a>\\2',$title); // add tag links
+					
+			echo $title;
+		?>
+	</div>
+</div>	
+
+<?php 
+	}
+}

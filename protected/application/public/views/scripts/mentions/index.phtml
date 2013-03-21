@@ -1,0 +1,12 @@
+<?php 
+
+if (count($this->mentions)>0) { 
+	echo $this->partialLoop('mentions/mention.phtml', $this->mentions);
+}
+else { ?>
+
+<div class='mention'>
+	There is no mentions for this article.
+</div>
+
+<?php	} ?>

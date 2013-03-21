@@ -1036,6 +1036,19 @@ class Admin_PostController extends Admin_BaseController
 				$logger->log("Pingback response for " . $mention[1] . ": " . $response, Zend_Log::DEBUG);
 			}
 		}
-
+		
+		// Search for link to ping
+		preg_match_all('/href="(https?:\/\/[^\"]*)/', $item->getContent(), $links, PREG_SET_ORDER);
+		
+		// Ping each link
+		foreach ($links as $link) {
+			$link = $link[1];
+			$url = Pingback_Utility::getPingbackServerURL($link);
+			if ($url) {
+				$logger->log("Pingback server for " . $link . ": " . $url, Zend_Log::DEBUG);
+				$response = Pingback_Utility::sendPingback($source, $link, $url);
+				$logger->log("Pingback response for " . $link . ": " . $response, Zend_Log::DEBUG);
+			}
+		}
 	}
 }

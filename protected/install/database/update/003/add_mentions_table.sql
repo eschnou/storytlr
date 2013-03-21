@@ -5,6 +5,7 @@ CREATE TABLE `mentions` (
   `id` int(11) NOT NULL auto_increment,
   `source_id` int(11),
   `item_id` int(11),
+  `user_id` int(11) NOT NULL default '0',  
   `url` varchar(256) default NULL,
   `entry` text,
   `author_name` varchar(128) default NULL,
@@ -14,3 +15,5 @@ CREATE TABLE `mentions` (
   `timestamp` datetime NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE data ADD `mention_count` int(11) NOT NULL default '0';
