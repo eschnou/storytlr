@@ -28,5 +28,5 @@ sed "s/#VERSION#/${VERSION}/g" build/rpmbuild/${NAME}.spec.template > build/rpmb
 sed -i "s/#RELEASE#/${RELEASE}/g" build/rpmbuild/${NAME}.spec
 sed -i "s/#COMMIT#/${COMMIT}/g" build/rpmbuild/${NAME}.spec
 
-tar -cvzf $HOME/rpmbuild/SOURCES/${NAME}-${VERSION}-${RELEASE}.tar.gz --exclude .git --exclude scripts .
+tar -cvzf $HOME/rpmbuild/SOURCES/${NAME}-${VERSION}-${RELEASE}.tar.gz --exclude .git --exclude ./scripts .
 rpmbuild -ba build/rpmbuild/${NAME}.spec
