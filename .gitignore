@@ -4,6 +4,7 @@
 .settings
 config.ini
 *.log
+*.spec
 protected/library/Zend
 protected/install/database/version
 protected/library/php-atom-lib
