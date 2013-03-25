@@ -1,13 +1,13 @@
 Name:          storytlr
-Version:       1.2.0
-Release:       1%{?dist}
+Version:       #VERSION#
+Release:       #RELEASE#
 Summary:       Storytlr is an opensource lifestreaming and microblogging platform.
 Packager:      Laurent Eschenauer <laurent@eschenauer.be>
 Group:         Applications/Internet
 License:       Apache 2.0 License
 URL:           https://github.com/storytlr/storytlr
-Source0:       %{url}/archive/storytlr-%{version}.tar.gz
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-tmp
+Source0:       %{name}-%{version}-#RELEASE#.tar.gz
+BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:     noarch
 Provides:      storytlr
 Requires:      httpd
@@ -31,11 +31,11 @@ Storytlr is an opensource lifestreaming and microblogging platform.
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/lib/storytlr/upload
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/log/storytlr
 
-%{__cp} -r storytlr*/* %{buildroot}/usr/share/storytlr/
-%{__cp} -r storytlr*/.htaccess %{buildroot}/usr/share/storytlr/.htaccess
-%{__cp} -r storytlr*/protected/.htaccess %{buildroot}/usr/share/storytlr/protected/.htaccess
-%{__cp} storytlr*/protected/build/rpmbuild/etc/storytlr/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/storytlr/storytlr.conf
-%{__cp} storytlr*/protected/build/rpmbuild/etc/httpd/conf.d/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/storytlr.conf
+%{__cp} -r * %{buildroot}/usr/share/storytlr/
+%{__cp} -r .htaccess %{buildroot}/usr/share/storytlr/.htaccess
+%{__cp} -r protected/.htaccess %{buildroot}/usr/share/storytlr/protected/.htaccess
+%{__cp} build/rpmbuild/etc/storytlr/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/storytlr/storytlr.conf
+%{__cp} build/rpmbuild/etc/httpd/conf.d/storytlr.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/storytlr.conf
 
 echo 0 -n > %{buildroot}/usr/share/storytlr/protected/install/database/version
 
