@@ -42,9 +42,9 @@ class Mentions extends Stuffpress_Db_Table
 	}
 
 	public function getLastMentions($count=10, $offset=0, $show_hidden=0) {
-		$sql = "SELECT m.*, UNIX_TIMESTAMP(m.timestamp) as timestamp FROM `mentions` m LEFT JOIN `data` d ON (d.id = m.item_id AND d.source_id = m.source_id) "
+		$sql = "SELECT m.*, d.*, UNIX_TIMESTAMP(m.timestamp) as timestamp FROM `mentions` m LEFT JOIN `data` d ON (d.id = m.item_id AND d.source_id = m.source_id) "
 		. "WHERE m.user_id = :user_id "
-		. ((!$show_hidden) ? "AND d.is_hidden = 0 " : " ")
+		. ((!$show_hidden) ? "AND (d.is_hidden = 0 OR d.is_hidden IS NULL) " : " ")
 		. "ORDER BY m.timestamp DESC "
 		. "LIMIT $count OFFSET $offset ";
 

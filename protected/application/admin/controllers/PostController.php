@@ -1038,11 +1038,21 @@ class Admin_PostController extends Admin_BaseController
 		}
 		
 		// Search for link to ping
-		preg_match_all('/href="(https?:\/\/[^\"]*)/', $item->getContent(), $links, PREG_SET_ORDER);
+		preg_match_all('/href="(https?:\/\/[^\"]*)/', $item->getContent(), $matches, PREG_SET_ORDER);
+
+		// If a link item, add the link to the list
+		$links = array();
+		if ($item->getLink()) {
+			array_push($links, $item->getLink());
+		}
+		
+		// Collect links
+		foreach ($matches as $link) {
+			array_push($links, $link[1]);
+		}
 		
 		// Ping each link
 		foreach ($links as $link) {
-			$link = $link[1];
 			$url = Pingback_Utility::getPingbackServerURL($link);
 			if ($url) {
 				$logger->log("Pingback server for " . $link . ": " . $url, Zend_Log::DEBUG);

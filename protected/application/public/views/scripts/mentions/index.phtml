@@ -1,12 +1,8 @@
-<?php 
+<?php if (count($this->mentions)>0): ?>
+<div class='mentions'>
+<h2>Mentions from the Open Web</h2>
 
-if (count($this->mentions)>0) { 
-	echo $this->partialLoop('mentions/mention.phtml', $this->mentions);
-}
-else { ?>
+<?php echo $this->partialLoop('mentions/mention.phtml', $this->mentions); ?>
 
-<div class='mention'>
-	There is no mentions for this article.
 </div>
-
-<?php	} ?>
+<?php endif ?>

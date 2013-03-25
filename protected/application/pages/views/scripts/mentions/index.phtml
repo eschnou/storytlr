@@ -14,15 +14,17 @@ if (!$this->items || count($this->items) == 0) {
 		}
 ?>		
 
-<div class="storytlr_mention">
+<div class="mention">
 	<div class="avatar">
 		<img src="<?= $item["author_avatar"]; ?>" />
 	</div>
-	<div class="author">
-	<?= $item["author_name"]?> (<a href="<?= $item["author_url"]?>"><?= $item["author_url"]?></a>)
-	</div>
-	<div class="when">
-	<a href="<?= $item['url']; ?>"><?= Stuffpress_Date::ago($item['timestamp'], "j M y \\a\\t G:i T"); ?></a>
+	<div class="header">
+		<div class="author">
+			<a href="<?= $item["author_url"]?>"><?= $item["author_name"]?></a>
+		</div>
+		<div class="when">
+			<a href="<?= $item['url']; ?>"><?= Stuffpress_Date::ago($item['timestamp'], "j M y \\a\\t G:i T"); ?></a>
+		</div>
 	</div>
 	<div  class="title">
 		<?php
@@ -34,6 +36,11 @@ if (!$this->items || count($this->items) == 0) {
 			echo $title;
 		?>
 	</div>
+	<?php if ($item['source_id'] && $item['item_id']): ?>
+	<div class="reply">
+		in reply to <a href="<?= $this->base()->thisUrl()?>/entry/<?= $item['slug']?>"><?= substr($item['slug'], 0, 50) ?>...</a>
+	</div>
+	<?php endif ?>
 </div>	
 
 <?php 
