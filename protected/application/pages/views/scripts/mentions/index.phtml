@@ -16,7 +16,7 @@ if (!$this->items || count($this->items) == 0) {
 
 <div class="mention" id='mention_<?= $item['id'] ?>'>
 	<div class='actions'>
-	<?php if ($item["user_id"] == $this->user_id) : ?>
+	<?php if ($this->admin) : ?>
 		<a class='delete' href='javascript:delete_mention(<?= $item['id'] ?>);' title="Delete mention"><img src="images/01.png" /></a>
 	<?php endif ?>
 	</div>
