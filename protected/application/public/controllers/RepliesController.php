@@ -15,7 +15,7 @@
  *  limitations under the License.
  *  
  */
-class MentionsController extends BaseController
+class RepliesController extends BaseController
 {
 	
 	public function indexAction() {	
