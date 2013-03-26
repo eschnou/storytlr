@@ -69,7 +69,7 @@ class Data extends Stuffpress_Db_Table
 			$t = implode(',', $t);
 		}
 
-		$sql = "SELECT id, source_id, service, UNIX_TIMESTAMP(timestamp) as timestamp, is_hidden, user_id, comment_count, tag_count, slug, latitude, longitude, elevation, has_location "
+		$sql = "SELECT id, source_id, service, UNIX_TIMESTAMP(timestamp) as timestamp, is_hidden, user_id, comment_count, mention_count, tag_count, slug, latitude, longitude, elevation, has_location "
 		. "FROM data d "
 		. "WHERE d.user_id = :user_id AND source_id IN ($sources) "
 		. ((!$show_hidden) ? "AND is_hidden = 0 " : " ")
