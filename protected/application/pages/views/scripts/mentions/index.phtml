@@ -1,0 +1,53 @@
+<?php 
+
+if (!$this->items || count($this->items) == 0) {
+	echo "We are sorry, " . $this->username . " has not received any mentions yet.";
+} else {
+	$date  = "";
+	foreach($this->items as $item) { 
+	
+		$item_date = date("F j, Y", $item['timestamp']);
+		
+		if ($date != $item_date) {
+			$date = $item_date;
+			echo "<div class='date' id='".date("YMj", $item['timestamp'])."'>$date</div>";
+		}
+?>		
+
+<div class="mention" id='mention_<?= $item['id'] ?>'>
+	<div class='actions'>
+	<?php if ($item["user_id"] == $this->user_id) : ?>
+		<a class='delete' href='javascript:delete_mention(<?= $item['id'] ?>);' title="Delete mention"><img src="images/01.png" /></a>
+	<?php endif ?>
+	</div>
+	<div class="avatar">
+		<img src="<?= $item["author_avatar"]; ?>" />
+	</div>
+	<div class="header">
+		<div class="author">
+			<a href="<?= $item["author_url"]?>"><?= $item["author_name"]?></a>
+		</div>
+		<div class="when">
+			<a href="<?= $item['url']; ?>"><?= Stuffpress_Date::ago($item['timestamp'], "j M y \\a\\t G:i T"); ?></a>
+		</div>
+	</div>
+	<div  class="title">
+		<?php
+		    $title = $item['entry']; 
+			$title = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$title);
+			$title = preg_replace("|@([a-zA-Z0-9\-\.]+)|",'<a href="http://\\1" target="_blank">@\\1</a>\\2',$title); // add “@username” links
+			$title = preg_replace("|#([a-zA-Z0-9_]+)|",'<a href="tag/\\1">#\\1</a>\\2',$title); // add tag links
+					
+			echo $title;
+		?>
+	</div>
+	<?php if ($item['source_id'] && $item['item_id']): ?>
+	<div class="reply">
+		in reply to <a href="<?= $this->base()->thisUrl()?>/entry/<?= $item['slug']?>"><?= substr($item['slug'], 0, 50) ?>...</a>
+	</div>
+	<?php endif ?>
+</div>	
+
+<?php 
+	}
+}

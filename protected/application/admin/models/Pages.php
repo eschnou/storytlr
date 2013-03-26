@@ -24,7 +24,7 @@ class Pages extends Stuffpress_Db_Table
 	protected $_primary = 'id';
 
 	public static function getAvailablePages() {
-		return array('dashboard', 'lifestream', 'stories', 'pictures', 'videos', 'map', 'custom', 'link'); 
+		return array('dashboard', 'lifestream', 'stories', 'pictures', 'videos', 'map', 'custom', 'link', 'mentions'); 
 	}
 	
 	public static function getSchemas() {

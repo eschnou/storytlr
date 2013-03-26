@@ -77,8 +77,13 @@ abstract class Stuffpress_Controller_Action extends Zend_Controller_Action
 			$url .= $username. "." . $domain;
 		}
 		
+		// Add the root if exist
+		if ($root != "") {
+			$url .= "/" . $root;
+		}
+		
 		// Add the rest
-		$url .= "/" . $root . "/" . trim($path, " /");
+		$url .= "/" . trim($path, " /");
 		
 		return $url;
 	}

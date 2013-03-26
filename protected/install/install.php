@@ -142,6 +142,7 @@
 	Check::FunctionExists( 'mb_internal_encoding', 'mbstring' );
 	Check::FunctionExists( 'imagecreatefrompng', 'GD' );
 	Check::FunctionExists( 'curl_init', 'cURL' );
+	Check::FunctionExists( 'xmlrpc_encode_request', 'xmlrpc' );
 	Check::ExtensionExists( 'PDO', 'PDO' );
 
 	Check::PathWritable( 'protected/temp/' );

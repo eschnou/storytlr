@@ -35,10 +35,19 @@ foreach($this->items as $item) {
 	}
 
  	echo $this->partial('timeline/item.phtml', 'public', array('item' => $item, 'admin' => $this->admin, 'model' => $this->models[$item->getSource()], 'disqus' => $this->disqus, 'googlefc' => $this->googlefc, 'summary' => true)); 
-	if (!$this->disqus && !$this->googlefc) : ?>
+?>
+
+			<div class='item_mentions' id='mentions_<?= $item->getSource() . '_' . $item->getID() ?>' 	<?php if ($item->getMentionCount() == 0) : ?>style='display:none'<?php endif ?>>
+				<?php if ($item->getMentionCount() > 0) : ?>
+					<?= $this->action('index', 'replies', 'public', array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
+				<?php endif ?>	
+			</div>	
+
+<?php
+ 	if (!$this->disqus && !$this->googlefc) : ?>
 			<div class='item_comments' id='comments_<?= $item->getSource() . '_' . $item->getID() ?>' 	<?php if ($item->getCommentCount() == 0) : ?>style='display:none'<?php endif ?>>
 				<?php if ($item->getCommentCount() > 0) : ?>
-					<?= $this->action('index', 'comments', null, array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
+					<?= $this->action('index', 'comments', 'public', array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
 				<?php endif ?>	
 			</div>			
 			<div class='item_add_comment' id='add_comment_<?= $item->getSource() . '_' . $item->getID() ?>' style='display: none;'>

@@ -57,6 +57,23 @@ class Stuffpress_Emails {
 		$mail->send();
 	}
 	
+	public static function sendMentionEmail($email, $username, $from_name, $from_url, $mention, $source, $target) {
+		$base = self::getBaseURL();
+		$text =	 "$from_name ($from_url) mentionned you in a post:\r\n"
+		."$mention\r\n\r\n"
+		."Source: $source\r\n\r\n"
+		."Target: $target\r\n\r\n"
+		."Thank you, \r\n\r\n"
+		."- The storytlr team";
+		 
+		$mail = new Zend_Mail('utf-8');
+		$mail->setBodyText($text);
+		$mail->setFrom(self::getFrom(), 'storytlr notification');
+		$mail->addTo($email, $username);
+		$mail->setSubject("$from_name mentionned you in a post");
+		$mail->send();
+	}
+	
 	public static function sendCommentNotifyEmail($email, $username, $from_name, $comment, $source, $item) {
 		$base = self::getBaseURL();
 		$text =	 "$from_name also commented on this item:\r\n"

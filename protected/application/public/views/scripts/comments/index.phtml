@@ -1,12 +1,9 @@
-<?php 
+<?php if (count($this->comments)>0) : ?>
+<div class='comments'>
+<h2>Comments</h2>
 
-if (count($this->comments)>0) { 
-	echo $this->partialLoop('comments/comment.phtml', $this->comments);
-}
-else { ?>
+<?php echo $this->partialLoop('comments/comment.phtml', $this->comments); ?>
 
-<div class='comment'>
-	There is no comment for this article.
 </div>
 
-<?php	} ?>
+<?php endif ?>

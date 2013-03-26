@@ -130,6 +130,10 @@ abstract class SourceItem
 		return $this->_attributes['comment_count'];
 	}
 
+	public function getMentionCount() {
+		return $this->_attributes['mention_count'];
+	}
+	
 	public function getTagCount() {
 		return $this->_attributes['tag_count'];
 	}

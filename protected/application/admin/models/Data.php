@@ -34,7 +34,7 @@ class Data extends Stuffpress_Db_Table
 
 	public function getItem($source, $id) {
 
-		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.tag_count, d.slug, d.latitude, d.longitude, d.elevation, d.has_location, s.enabled, s.public, s.imported "
+		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.mention_count, d.tag_count, d.slug, d.latitude, d.longitude, d.elevation, d.has_location, s.enabled, s.public, s.imported "
 		. "FROM data d LEFT JOIN sources s ON (d.source_id = s.id) "
 		. "WHERE d.id = :id AND d.source_id = :source "
 		. "ORDER BY timestamp DESC "
@@ -69,7 +69,7 @@ class Data extends Stuffpress_Db_Table
 			$t = implode(',', $t);
 		}
 
-		$sql = "SELECT id, source_id, service, UNIX_TIMESTAMP(timestamp) as timestamp, is_hidden, user_id, comment_count, tag_count, slug, latitude, longitude, elevation, has_location "
+		$sql = "SELECT id, source_id, service, UNIX_TIMESTAMP(timestamp) as timestamp, is_hidden, user_id, comment_count, mention_count, tag_count, slug, latitude, longitude, elevation, has_location "
 		. "FROM data d "
 		. "WHERE d.user_id = :user_id AND source_id IN ($sources) "
 		. ((!$show_hidden) ? "AND is_hidden = 0 " : " ")
@@ -94,7 +94,7 @@ class Data extends Stuffpress_Db_Table
 		}
 		$sources = implode(',', $sources);
 
-		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.tag_count, d.slug "
+		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.mention_count, d.tag_count, d.slug "
 		. "FROM data d "
 		. "WHERE d.user_id = :user_id AND source_id IN ($sources) "
 		. ((!$show_hidden) ? "AND is_hidden = 0 " : " ")
@@ -133,7 +133,7 @@ class Data extends Stuffpress_Db_Table
 		$sources = implode(',', $sources);
 		
 		
-		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.tag_count, d.slug, t.tag "
+		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.mention_count, d.tag_count, d.slug, t.tag "
 		. "FROM data d LEFT JOIN tags t ON d.source_id = t.source_id AND d.id = t.item_id "
 		. "WHERE d.user_id = :user_id AND d.source_id IN ($sources) AND symbol IN ($tags) "
 		. ((!$show_hidden) ? "AND is_hidden = 0 " : " ")
@@ -179,7 +179,7 @@ class Data extends Stuffpress_Db_Table
 		}
 		$sources = implode(',', $sources);
 
-		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.tag_count, d.slug "
+		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.mention_count, d.tag_count, d.slug "
 		. "FROM data d "
 		. "WHERE d.user_id = :user_id AND source_id IN ($sources) "
 		. ((!$show_hidden) ? "AND is_hidden = 0 " : " ")
@@ -214,7 +214,7 @@ class Data extends Stuffpress_Db_Table
 
 	public function getAllItems($source_id) {
 
-		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.tag_count, d.slug "
+		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.mention_count, d.tag_count, d.slug "
 		. "FROM data d "
 		. "WHERE d.source_id = $source_id "
 		. "ORDER BY timestamp DESC ";
@@ -230,7 +230,7 @@ class Data extends Stuffpress_Db_Table
 
 	public function search($source_id, $service, $index, $term, $show_hidden=0) {
 
-		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.tag_count, d.slug "
+		$sql = "SELECT d.id, d.source_id, d.service, UNIX_TIMESTAMP(d.timestamp) as timestamp, d.is_hidden, d.user_id, d.comment_count, d.mention_count, d.tag_count, d.slug "
 		. "FROM {$service}_data t LEFT JOIN data d ON (t.id = d.id AND t.source_id = d.source_id) "
 		. "WHERE MATCH($index) AGAINST(:term) AND t.source_id= :source_id "
 		. ((!$show_hidden) ? "AND is_hidden = 0 " : " ")
@@ -416,6 +416,32 @@ class Data extends Stuffpress_Db_Table
 
 		$stmt 	= $this->_db->query($sql, $data);
 
+		return;
+	}
+	
+	public function increaseMentions($source_id, $item_id) {
+		$sql = "UPDATE `data` SET mention_count = mention_count + 1 "
+				. "WHERE `source_id`=:source_id AND `id`=:item_id";
+	
+	
+		$data = array(":source_id" 	=> $source_id,
+				":item_id"	=> $item_id);
+	
+		$stmt 	= $this->_db->query($sql, $data);
+	
+		return;
+	}
+	
+	public function decreaseMentions($source_id, $item_id) {
+		$sql = "UPDATE `data` SET mention_count = mention_count - 1 "
+				. "WHERE `source_id`=:source_id AND `id`=:item_id";
+	
+	
+		$data = array(":source_id" 	=> $source_id,
+				":item_id"	=> $item_id);
+	
+		$stmt 	= $this->_db->query($sql, $data);
+	
 		return;
 	}
 

@@ -1,0 +1,8 @@
+<?php if (count($this->mentions)>0): ?>
+<div class='mentions'>
+<h2>Mentions from the Open Web</h2>
+
+<?php echo $this->partialLoop('replies/reply.phtml', 'public', $this->mentions); ?>
+
+</div>
+<?php endif ?>

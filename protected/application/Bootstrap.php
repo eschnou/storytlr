@@ -69,6 +69,9 @@ require_once 'php-atom-lib/AtomFeedAdapter.php';
 require_once 'php-atom-lib/ActivityExtension/ActivityExtensionFactory.php';
 require_once 'php-atom-lib/MediaExtension/MediaExtensionFactory.php';
 
+// php-mf2 includes
+require_once 'mf2/Parser.php';
+
 // Bootsrap class
 class Bootstrap
 {
@@ -106,6 +109,7 @@ class Bootstrap
 		self::setupRouter();
 		self::setupPlugins();
 		self::setupApplication();
+		self::setupEmail();
 		self::setupAcl();
 		
 		self::setupAtomExtensionManager();
@@ -330,6 +334,11 @@ class Bootstrap
 		new Zend_Controller_Router_Route('/search', array('module' => 'public', 'controller' => 'timeline', 'action' => 'search'))
 		);
 
+		$router->addRoute(
+		'pingback',
+		new Zend_Controller_Router_Route('/pingback', array('module' => 'public', 'controller' => 'pingback', 'action' => 'ping'))
+		);
+		
 		$router->addRoute(
 		'slide',
 		new Zend_Controller_Router_Route('/slide/:source/:item/index.html', array('module' => 'public', 'controller' => 'timeline', 'action' => 'slide'))
@@ -606,6 +615,7 @@ class Bootstrap
 		/* Resources for public module */
 		$acl->add(new Zend_Acl_Resource('public'), 			'root');
 		$acl->add(new Zend_Acl_Resource('public:comments'), 'public');
+		$acl->add(new Zend_Acl_Resource('public:replies'),  'public');
 		$acl->add(new Zend_Acl_Resource('public:embed'), 	'public');
 		$acl->add(new Zend_Acl_Resource('public:error'), 	'public');
 		$acl->add(new Zend_Acl_Resource('public:file'), 	'public');
@@ -616,7 +626,8 @@ class Bootstrap
 		$acl->add(new Zend_Acl_Resource('public:storymap'), 'public');
 		$acl->add(new Zend_Acl_Resource('public:mappage'),  'public');
 		$acl->add(new Zend_Acl_Resource('public:timeline'), 'public');
-
+		$acl->add(new Zend_Acl_Resource('public:pingback'),	'public');
+		
 		/* Resources for consolemodule */
 		$acl->add(new Zend_Acl_Resource('console'), 		'root');
 		$acl->add(new Zend_Acl_Resource('console:stats'), 	'console');
@@ -670,7 +681,8 @@ class Bootstrap
 		$acl->add(new Zend_Acl_Resource('pages:pictures'),   'pages');
 		$acl->add(new Zend_Acl_Resource('pages:stories'),    'pages');
 		$acl->add(new Zend_Acl_Resource('pages:videos'),     'pages');
-		$acl->add(new Zend_Acl_Resource('pages:map'),     	'pages');
+		$acl->add(new Zend_Acl_Resource('pages:map'),     	 'pages');
+		$acl->add(new Zend_Acl_Resource('pages:mentions'), 	 'pages');
 
 		/* Resources for dialogs */
 		$acl->add(new Zend_Acl_Resource('dialogs'), 		  'root');
@@ -697,9 +709,11 @@ class Bootstrap
 
 		/* Permissions for guests */
 		$acl->allow('guest',  'public:comments', array('index', 'form', 'add'));
+		$acl->allow('guest',  'public:replies', array('index'));
 		$acl->allow('guest',  'public:embed');
 		$acl->allow('guest',  'public:error');
 		$acl->allow('guest',  'public:file');
+		$acl->allow('guest',  'public:pingback', array('ping'));
 		$acl->allow('guest',  'public:home');
 		$acl->allow('guest',  'public:index');
 		$acl->allow('guest',  'public:shorturl');
@@ -717,6 +731,7 @@ class Bootstrap
 		$acl->allow('guest',  'pages:stories',	 array('index'));
 		$acl->allow('guest',  'pages:videos',	 array('index'));
 		$acl->allow('guest',  'pages:map',	 	 array('index'));
+		$acl->allow('guest',  'pages:mentions',	 array('index'));
 
 
 		$acl->allow('guest',  'widgets:archives',     array('index'));
@@ -851,5 +866,24 @@ class Bootstrap
 		$activityProcessor->registerProcessor(ActivityNS::BOOKMARK_OBJECT_TYPE	, 'BookmarkObjectProcessor'	, 0);
 		$activityProcessor->registerProcessor(ActivityNS::VIDEO_OBJECT_TYPE		, 'VideoObjectProcessor'	, 0);
 		$activityProcessor->registerProcessor(ActivityNS::COMMENT_OBJECT_TYPE	, 'CommentObjectProcessor'	, 0);
+	}
+	
+	public static function setupEmail() {
+		$config		= Zend_Registry::get('configuration');
+		$logger		= Zend_Registry::get("logger");
+		
+		if (isset ($config->email->host)) {
+			$email = array();
+			if (isset ($config->email->username)) $email['username'] = $config->email->username;
+			if (isset ($config->email->password)) $email['password'] = $config->email->password;
+			if (isset ($config->email->ssl)) $email['ssl'] = $config->email->ssl;
+			if (isset ($config->email->port)) $email['port'] = $config->email->port;
+			if (isset ($config->email->auth)) $email['auth'] = $config->email->auth;
+			
+			$logger->log("Email configurartion: " . var_export($email, true), Zend_Log::DEBUG);
+			
+			$transport = new Zend_Mail_Transport_Smtp($config->email->host, $email);
+			Zend_Mail::setDefaultTransport($transport);
+		}	
 	}
 }

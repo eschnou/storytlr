@@ -1,46 +1,46 @@
 <?php
 /*
  *    Copyright 2008-2009 Laurent Eschenauer and Alard Weisscher
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *  
- */
+*
+*  Licensed under the Apache License, Version 2.0 (the "License");
+*  you may not use this file except in compliance with the License.
+*  You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+*  Unless required by applicable law or agreed to in writing, software
+*  distributed under the License is distributed on an "AS IS" BASIS,
+*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*  See the License for the specific language governing permissions and
+*  limitations under the License.
+*
+*/
 
-class Admin_PostController extends Admin_BaseController 
+class Admin_PostController extends Admin_BaseController
 {
 
 	protected $_bookmarklet;
-	
+
 	protected $_bkpage;
-	
+
 	protected $_bkurl;
-	
+
 	protected $_bktitle;
-	
+
 	protected $_bktext;
-	
+
 	public function init() {
 		// Run the parent init to initialize all variables
 		parent::init();
-		
+
 		// If request is Ajax, we disable the layout
 		if ($this->_request->isXmlHttpRequest()) {
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNoRender();
 		}
-		
+
 		// If request is from a bookmarklet, we use another layout
-		if ($this->_getParam('bookmarklet')) { 
+		if ($this->_getParam('bookmarklet')) {
 			$this->_helper->layout->setlayout('bookmarklet');
 			$this->_bookmarklet 	 = 1;
 			$this->_bktitle = strip_tags($this->_getParam('t'));
@@ -75,23 +75,23 @@ class Admin_PostController extends Admin_BaseController
 				case SourceItem::VIDEO_TYPE:
 					$this->_forward('video');
 					break;
-			}					
+			}
 		} else {
 			$this->_forward('status');
 		}
 	}
-	
+
 	public function doneAction() {
 		$this->common();
 	}
 
 	public function statusAction() {
 		$this->common();
-		
+
 		if (isset($this->view->form)) {
 			return;
 		}
-		
+
 		if ($this->_bookmarklet) {
 			$status = "{$this->_bktitle} ({$this->_bkurl})";
 			$source		= StuffpressModel::forUser($this->_application->user->id);
@@ -100,7 +100,7 @@ class Admin_PostController extends Admin_BaseController
 			$this->view->form = $this->getForm('status');
 		}
 	}
-	
+
 	public function linkAction() {
 		$this->common();
 		$this->tinyMCE();
@@ -108,7 +108,7 @@ class Admin_PostController extends Admin_BaseController
 		if (isset($this->view->form)) {
 			return;
 		}
-		
+
 		if ($this->_bookmarklet) {
 			$source		= StuffpressModel::forUser($this->_application->user->id);
 			$this->view->form = $this->getFormLink($source->getID(), 0, $this->_bkurl, $this->_bktitle, $this->_bktext, false);
@@ -120,11 +120,11 @@ class Admin_PostController extends Admin_BaseController
 	public function blogAction() {
 		$this->common();
 		$this->tinyMCE();
-		
+
 		if (isset($this->view->form)) {
 			return;
 		}
-		
+
 		if ($this->_bookmarklet) {
 			$source		= StuffpressModel::forUser($this->_application->user->id);
 			$post   = ($this->_bktext) ? "<p>{$this->_bktext}</p>" : "";
@@ -134,7 +134,7 @@ class Admin_PostController extends Admin_BaseController
 			$this->view->form = $this->getForm('blog');
 		}
 	}
-	
+
 	public function imageAction() {
 		$this->common();
 		$this->tinyMCE();
@@ -142,7 +142,7 @@ class Admin_PostController extends Admin_BaseController
 		if (isset($this->view->form)) {
 			return;
 		}
-		
+
 		if ($this->_bookmarklet) {
 			$source		= StuffpressModel::forUser($this->_application->user->id);
 			$this->view->images = Stuffpress_Services_Webparse::getImages($this->_bkurl);
@@ -151,15 +151,15 @@ class Admin_PostController extends Admin_BaseController
 			$this->view->form = $this->getForm('image');
 		}
 	}
-	
+
 	public function audioAction() {
 		$this->common();
 		$this->tinyMCE();
-				
+
 		if (isset($this->view->form)) {
 			return;
 		}
-		
+
 		if ($this->_bookmarklet) {
 			$source		= StuffpressModel::forUser($this->_application->user->id);
 			$this->view->form = $this->getFormAudio($source->getID(), 0, $this->_bktitle, $this->_bktext, false, false);
@@ -167,15 +167,15 @@ class Admin_PostController extends Admin_BaseController
 			$this->view->form = $this->getForm('audio');
 		}
 	}
-	
+
 	public function videoAction() {
 		$this->common();
 		$this->tinyMCE();
-		
+
 		if (isset($this->view->form)) {
 			return;
 		}
-		
+
 		if ($this->_bookmarklet) {
 			$source	= StuffpressModel::forUser($this->_application->user->id);
 			$embed 	= Stuffpress_Services_Webparse::getEmbedFromLink($this->_bkurl, 160, 100);
@@ -190,7 +190,7 @@ class Admin_PostController extends Admin_BaseController
 		// Get the item to edit from the parameters
 		$item_id   = $this->_getParam('item');
 		$source_id = $this->_getParam('source');
-		
+
 		//Verify if the requested item exist
 		$data		= new Data();
 		if (!($item	= $data->getItem($source_id, $item_id))) {
@@ -206,7 +206,7 @@ class Admin_PostController extends Admin_BaseController
 		if ($this->_application->user->id != $user->id) {
 			throw new Stuffpress_NotFoundException("Not the owner");
 		}
-		
+
 		// Get the source to provide visual feedback
 		$model = SourceModel::newInstance($item->getPrefix());
 		$this->view->service = $model->getServiceName();
@@ -215,18 +215,18 @@ class Admin_PostController extends Admin_BaseController
 		$form = $this->getForm($item->getType(), true, $item);
 		$this->view->form   = $form;
 		$this->view->edit	= true;
-		
+
 		// If it is an image, we display it
 		if ($item->getType() == 'image') {
 			$this->view->image_url = $item->getImageUrl(ImageItem::SIZE_THUMBNAIL);
 		}
-		
+
 		// If it already has location, tell it
 		if ($item->hasLocation()) {
 			$this->view->has_location = true;
 			$this->view->location = "Lat: " . $item->getLatitude() . " - Lng: " . $item->getLongitude();
 		}
-		
+
 		// forward to the appropriate action
 		$this->_forward($item->getType());
 	}
@@ -234,36 +234,36 @@ class Admin_PostController extends Admin_BaseController
 	public function deleteAction() {
 		// Get, check and setup the parameters
 		$item_id = $this->getRequest()->getParam("id");
-		
+
 		// Get the source
 		$source_id	= $this->_properties->getProperty('stuffpress_source');
-		
+
 		//Verify if the requested item exist
 		$data		= new Data();
 		if (!($item	= $data->getItem($source_id, $item_id))) {
 			throw new Stuffpress_NotFoundException("This item does not exist.");
 		}
-		
+
 		// Get the user
 		$users 			= new Users();
 		$attributes		= $item->getAttributes();
 		$user			= $users->getUser($attributes['user_id']);
-		
+
 		// Check if we are the owner
 		if ($this->_application->user->id != $user->id) {
 			throw new Stuffpress_NotFoundException("Not the owner");
 		}
-				
+
 		// Create the source
 		$source		= StuffpressModel::forUser($user->id);
-		
+
 		// If an image or audio file, delete the files
 		$file = $item->getFile();
 		if ($file) {
 			$files = new Files();
 			$files->deleteFile($file);
 		}
-		
+
 		// All checks ok, we can delete !
 		$data->deleteItem($source_id, $item_id);
 		$source->deleteItem($item_id);
@@ -285,13 +285,13 @@ class Admin_PostController extends Admin_BaseController
 		$type	= $this->_getParam('type');
 		$mode	= $this->_getParam('mode');
 		$edit	= ($mode == 'edit');
-		
+
 		if (!in_array($type, array('status', 'blog', 'link', 'image', 'audio', 'video'))) {
 			$this->_helper->json->sendJson(true);
 		}
 
 		$form = $this->getForm($type, $edit);
-		
+
 		if (!$form->isValid($_POST)) {
 			$elements = $form->getMessages();
 			$errors   = array();
@@ -311,7 +311,7 @@ class Admin_PostController extends Admin_BaseController
 
 
 	public function submitAction() {
-		
+
 		// Is this a post request ?
 		if (!$this->getRequest()->isPost()) {
 			throw new Stuffpress_Exception("Action can only be triggered by POST");
@@ -322,39 +322,39 @@ class Admin_PostController extends Admin_BaseController
 		if (!in_array($type, array('status', 'blog', 'link', 'image', 'audio', 'video'))) {
 			throw new Stuffpress_Exception("Not a valid item type $type.");
 		}
-		
-		// Check if it is a new item or an edit 
+
+		// Check if it is a new item or an edit
 		$mode	= $this->_getParam('mode');
 		$edit	= ($mode == 'edit');
 
 		// Is the form valid ?
-		$form = $this->getForm($type, $edit);		
+		$form = $this->getForm($type, $edit);
 		if (!$form->isValid($_POST)) {
 			$this->view->form = $form;
 			return $this->_forward($type);
 		}
-		
+
 		$values = $form->getValues();
-		
+
 		// Process the item differently if it is new or old
 		if (($values['item']==0)) {
 			$this->newItem($values);
 		} else {
-			$this->editItem($values['source'], $values['item'], $values);	
+			$this->editItem($values['source'], $values['item'], $values);
 		}
 	}
 
 	private function newItem($values) {
 		// Local variables
 		$files = new Files();
-				
+
 		// If an image and the URL was given, we download the image and store it
 		if ((@$values['type'] == 'image') && ($url = @$values['url']) && (strlen($url) > 0)) {
 			$file_id = $files->downloadFile($url, "download");
 			$file = $files->getFile($file_id);
 			$key = $file->key;
 		}
-		
+
 		// If a file was uploaded, we process it
 		else if (@$_FILES['file']['tmp_name']) {
 			try {
@@ -367,7 +367,7 @@ class Admin_PostController extends Admin_BaseController
 				return $this->_forward(@$values['type']);
 			}
 		}
-		
+
 		// If an image and file available, resize
 		if ((@$values['type'] == 'image') && ($file_id > 0)) {
 			$files->fitWidth($file_id, 240,  'small');
@@ -376,12 +376,12 @@ class Admin_PostController extends Admin_BaseController
 			$files->fitSquare($file_id, 75,  'thumbnails');
 			$exif = $files->readExif($file_id);
 		}
-		
-		// Process the date if available		
+
+		// Process the date if available
 		$date_type = @$values['date_type'];
 		if ($date_type == 'other') {
 			$timestamp = Stuffpress_Date::strToTimezone($values['date'], $this->_properties->getProperty('timezone'));
-		} 
+		}
 		else if  ($date_type == 'taken' && $exif) {
 			if (isset($exif['DateTimeOriginal'])) {
 				$timestamp = Stuffpress_Date::strToTimezone($exif['DateTimeOriginal'], $this->_properties->getProperty('timezone'));
@@ -393,9 +393,6 @@ class Admin_PostController extends Admin_BaseController
 			$timestamp = time();
 		}
 		
-		// Process the tags if available
-		$tags	= @explode(',', $values['tags']);
-		
 		// Prepare the values for the database
 		$data = array();
 		$data['published']  = @$timestamp;
@@ -404,42 +401,56 @@ class Admin_PostController extends Admin_BaseController
 		$data['url']	    = @$values['url'];
 		$data['title'] 		= @$values['title'];
 		$data['link']  		= @$values['link'];
-		$data['embed']  	= @$values['embed'];		
+		$data['embed']  	= @$values['embed'];
 		$data['text']  		= @$values['text'];
+
+		// Process the tags if available
+		$tags	= @explode(',', $values['tags']);
 		
+		// Fetch tag from the title if provided
+		preg_match_all("/#(\w+)/",$values['title'],$matches,PREG_SET_ORDER);
+		foreach ($matches as $match) {
+			if (!in_array($match[1], $tags)) { 
+				array_push($tags, $match[1]);
+			}
+		}
+			
 		// Add or update the item
 		$source		= StuffpressModel::forUser($this->_application->user->id);
 		$data_table = new Data();
 		$item_id 	= $source->addItem($data, $data['published'], $data['type'], $tags, false, false, $data['title']);
 		$source_id 	= $source->getID();
-		
+
 		// fetch the new item
 		$item   = $data_table->getItem($source_id, $item_id);
-		
+
 		// Get longitude if provided
 		if (!empty($exif['GPSLongitude']) && count($exif['GPSLongitude']) == 3 && !empty($exif['GPSLongitudeRef'])) {
-            $longitude = ($exif['GPSLongitudeRef']== 'W' ? '-' : '') . Stuffpress_Exif::exif_gpsconvert( $exif['GPSLongitude'] );
+			$longitude = ($exif['GPSLongitudeRef']== 'W' ? '-' : '') . Stuffpress_Exif::exif_gpsconvert( $exif['GPSLongitude'] );
 		} else {
-			$longitude = @$values['longitude'];	
+			$longitude = @$values['longitude'];
 		}
-		
+
 		// Get latitude
-        if (!empty($exif['GPSLatitude']) && count($exif['GPSLatitude']) == 3 && !empty($exif['GPSLatitudeRef'])) {
-            $latitude = ($exif['GPSLatitudeRef']== 'S' ? '-' : '') . Stuffpress_Exif::exif_gpsconvert( $exif['GPSLatitude'] );
-        } else {
- 			$latitude  = @$values['latitude'];       	
-        }
+		if (!empty($exif['GPSLatitude']) && count($exif['GPSLatitude']) == 3 && !empty($exif['GPSLatitudeRef'])) {
+			$latitude = ($exif['GPSLatitudeRef']== 'S' ? '-' : '') . Stuffpress_Exif::exif_gpsconvert( $exif['GPSLatitude'] );
+		} else {
+			$latitude  = @$values['latitude'];
+		}
 
 		// Set it
 		if ($latitude && $longitude) {
 			$data_table->setLocation($source_id, $item_id, $latitude, $longitude, 0);
 		}
-		
+
 		// Send notification if twitter post is enabled
 		if ($this->_properties->getProperty('twitter_auth') && $values['twitter_notify']) {
 			$this->notifyTwitter($item);
 		}
-		
+
+		// Send pingback
+		$this->pingback($item);
+
 		// Ping blog search engines
 		$this->ping();
 
@@ -452,10 +463,10 @@ class Admin_PostController extends Admin_BaseController
 			$this->view->user_url = $url;
 			return $this->_forward('done');
 		}
-		
-		return $this->_redirect($url);		
+
+		return $this->_redirect($url);
 	}
-	
+
 	private function editItem($source_id, $item_id, $values) {
 		//Verify if the requested item exist
 		$data		= new Data();
@@ -472,43 +483,43 @@ class Admin_PostController extends Admin_BaseController
 		if ($this->_application->user->id != $user->id) {
 			throw new Stuffpress_NotFoundException("Not the owner");
 		}
-		
+
 		// Process the date if available
 		if (@$values['date_type'] == 'other') {
 			$timestamp = Stuffpress_Date::strToTimezone($values['date'], $this->_properties->getProperty('timezone'));
-		} 
+		}
 		else {
 			$timestamp = time();
 		}
-		
+
 		// Process the tags if available
 		$tag_input	= @$values['tags'];
 		$tags		= explode(',',$tag_input);
 		$data->setTags($source_id, $item_id, $tags);
-		
+
 		// Process the location if available
 		$latitude 	= 		@$values['latitude'];
 		$longitude 	= 		@$values['longitude'];
 		if ($latitude && $longitude) {
 			$data->setLocation($source_id, $item_id, $latitude, $longitude, 0);
 		}
-		
+
 		// Update the item data
 		$data->setTimestamp($source_id, $item_id, $timestamp);
-	
+
 		switch ($item->getType()) {
 			case SourceItem::STATUS_TYPE:
 				$status = html_entity_decode(@$values['title']);
 				$item->setStatus($status);
 				break;
-			
+					
 			case SourceItem::BLOG_TYPE:
 				$title = @$values['title'];
 				$text  = @$values['text'];
 				$item->setTitle($title);
 				$item->setContent($text);
 				break;
-				
+
 			case SourceItem::LINK_TYPE:
 				$title = @$values['title'];
 				$link  = @$values['link'];
@@ -517,64 +528,64 @@ class Admin_PostController extends Admin_BaseController
 				$item->setLink($link);
 				$item->setDescription($desc);
 				break;
-				
-		case SourceItem::IMAGE_TYPE:
+
+			case SourceItem::IMAGE_TYPE:
 				$title = @$values['title'];
 				$desc  = @$values['text'];
 				$item->setTitle($title);
 				$item->setDescription($desc);
 				break;
-				
-		case SourceItem::AUDIO_TYPE:
-				$title = @$values['title'];
-				$desc  = @$values['text'];
-				$item->setTitle($title);
-				$item->setDescription($desc);
-				break;			
 
-		case SourceItem::VIDEO_TYPE:
+			case SourceItem::AUDIO_TYPE:
 				$title = @$values['title'];
 				$desc  = @$values['text'];
 				$item->setTitle($title);
 				$item->setDescription($desc);
-				break;	
+				break;
+
+			case SourceItem::VIDEO_TYPE:
+				$title = @$values['title'];
+				$desc  = @$values['text'];
+				$item->setTitle($title);
+				$item->setDescription($desc);
+				break;
 		}
-		
+
 		// Send notification if twitter post is enabled
 		if ($this->_properties->getProperty('twitter_auth') && $values['twitter_notify']) {
 			$this->notifyTwitter($item);
 		}
-		
+
 		// Redirect to the timeline
 		$host	= $this->getHostname();
-		$username	= $this->_application->user->username;		
+		$username	= $this->_application->user->username;
 		$url	= $this->getUrl($username, "/entry/" . $item->getSlug());
 		return $this->_redirect($url);
 	}
-	
+
 	private function getForm($type='blog', $edit=false, $item=false) {
 		$source		= StuffpressModel::forUser($this->_application->user->id);
 		$item_id   = $item ? $item->getID() : 0;
 		$source_id = $item ? $item->getSource() : $source->getID();
 		$date      = $item ? $item->getTimestamp() : false;
-		
+
 		// Crappy code !! TODO
 		$lat  	  	= $item ? $item->getLatitude() : false;
 		$lon  	  	= $item ? $item->getLongitude() : false;
-		
+
 		// get the tags if any
 		if ($item && $item->getTagCount()>0) {
 			$tags_table = new Tags();
 			$tags 		= $tags_table->getTags($source_id, $item_id);
 			$strings 	= array();
 			foreach($tags as $tag) {
-				$strings[] = $tag['tag']; 
+				$strings[] = $tag['tag'];
 			}
 			$tags = implode(', ', $strings);
 		} else {
 			$tags = false;
 		}
-		
+
 		if ($type == SourceItem::STATUS_TYPE) {
 			$status = $item ? $item->getStatus() : '';
 			$form = $this->getFormStatus($source_id,$item_id, $status, $date, $edit, $tags, $lat, $lon);
@@ -598,15 +609,15 @@ class Admin_PostController extends Admin_BaseController
 		} elseif ($type == SourceItem::VIDEO_TYPE) {
 			$title = $item ? $item->getTitle() : '';
 			$desc  = $item ? $item->getDescription() : '';
-			$embed = $item ? $item->getEmbedCode() : '';			
+			$embed = $item ? $item->getEmbedCode() : '';
 			$form = $this->getFormVideo($source_id, $item_id, $title, $desc, $embed, $date, $edit, $tags, $lat, $lon);
 		}
-		
+
 		return $form;
 	}
-	
+
 	private function getFormStatus($source_id, $item_id, $status, $date=false, $edit=false,$tags=false, $lat=false, $lon=false) {
-		// Get a basic form 
+		// Get a basic form
 		$form = $this->getFormCommon($source_id, $item_id, 'status', $date, $edit,$tags,$lat,$lon);
 
 		// Create and configure comment element:
@@ -615,22 +626,22 @@ class Admin_PostController extends Admin_BaseController
 		$content->setValue($status);
 		$content->setRequired(true);
 		$form->addElement($content);
-				
+
 		return $form;
 	}
-	
+
 	private function getFormText($source_id,$item_id, $title, $text, $date=false, $edit=false,$tags=false, $lat=false, $lon=false) {
 
-		// Get a basic form 
+		// Get a basic form
 		$form = $this->getFormCommon($source_id, $item_id, 'blog', $date, $edit,$tags,$lat,$lon);
-		
+
 		// Create and configure title element:
 		$element = $form->createElement('text', 'title',  array('label' => 'Title:', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->addValidator('stringLength', false, array(0, 256));
 		$element->setValue($title);
 		$element->setRequired(true);
 		$form->addElement($element);
-		
+
 		// Create and configure comment element:
 		$element = $form->createElement('textarea', 'text',  array('label' => 'Content:', 'rows'=> 15, 'cols' => 60, 'class' => 'mceEditor', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->setRequired(false);
@@ -639,13 +650,13 @@ class Admin_PostController extends Admin_BaseController
 
 		return $form;
 	}
-	
-	
+
+
 	private function getFormLink($source_id, $item_id, $link, $title, $description, $date=false, $edit=false,$tags=false, $lat=false, $lon=false) {
 
-		// Get a basic form 
+		// Get a basic form
 		$form = $this->getFormCommon($source_id, $item_id, 'link', $date, $edit,$tags,$lat,$lon);
-		
+
 		// Create and configure title element:
 		$element = $form->createElement('text', 'title',  array('label' => 'Title:', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->addValidator('stringLength', false, array(0, 256));
@@ -653,14 +664,14 @@ class Admin_PostController extends Admin_BaseController
 		$element->setRequired(true);
 		$element->setValue($title);
 		$form->addElement($element);
-		
+
 		// Create and configure link element:
 		$element = $form->createElement('text', 'link',  array('label' => 'Link:', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->addValidator('stringLength', false, array(0, 256));
 		$element->setRequired(true);
 		$element->setValue($link);
 		$form->addElement($element);
-		
+
 		// Create and configure description element:
 		$element = $form->createElement('textarea', 'text',  array('label' => 'Note:', 'rows'=> 3, 'cols' => 60,  'class' => 'mceEditor',  'class' => 'mceEditor', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->setValue($description);
@@ -669,10 +680,10 @@ class Admin_PostController extends Admin_BaseController
 
 		return $form;
 	}
-	
+
 	private function getFormImage($source_id, $item_id, $title='', $description='', $date=false, $edit=false,$tags=false, $lat=false, $lon=false) {
 
-		// Get a basic form 
+		// Get a basic form
 		$form = $this->getFormCommon($source_id, $item_id, 'image', $date, $edit,$tags,$lat,$lon);
 		$form->setAttrib('enctype', 'multipart/form-data');
 
@@ -681,20 +692,20 @@ class Admin_PostController extends Admin_BaseController
 		} else {
 			$path = $this->_root . '/temp';
 		}
-		
+
 		// Create and configure title element:
 		if (!$edit) {
 			$element = new Zend_Form_Element_File('file');
 			$element->setLabel('Upload an image:')
-					->setRequired(false)
-					->setDecorators(array(array('File'), array('Errors'))) 
-			        ->setDestination($path)
-			        ->addValidator('Count', false, 1)     // ensure only 1 file
-			        ->addValidator('Size', false, 4000000) // limit to 2M
-			        ->addValidator('Extension', false, 'jpg,png,gif'); // only JPEG, PNG, and GIFs
+			->setRequired(false)
+			->setDecorators(array(array('File'), array('Errors')))
+			->setDestination($path)
+			->addValidator('Count', false, 1)     // ensure only 1 file
+			->addValidator('Size', false, 4000000) // limit to 2M
+			->addValidator('Extension', false, 'jpg,png,gif'); // only JPEG, PNG, and GIFs
 			$form->addElement($element, 'file');
-			
-						
+				
+
 			// Create and configure url element:
 			$element = $form->createElement('text', 'url',  array('label' => 'Url:', 'decorators' => array('ViewHelper', 'Errors')));
 			$element->addValidator('stringLength', false, array(0, 256));
@@ -702,35 +713,35 @@ class Admin_PostController extends Admin_BaseController
 			$element->setRequired(false);
 			$form->addElement($element);
 		}
-		
+
 		// Create and configure title element:
 		$element = $form->createElement('text', 'title',  array('label' => 'Title:'));
 		$element->setRequired(false)
-			    ->addValidator('stringLength', false, array(0, 256))
-		        ->addFilter('StripTags')
-		        ->setValue($title)
-		        ->setDecorators(array('ViewHelper', 'Errors'));
+		->addValidator('stringLength', false, array(0, 256))
+		->addFilter('StripTags')
+		->setValue($title)
+		->setDecorators(array('ViewHelper', 'Errors'));
 		$form->addElement($element);
-		
+
 		// Create and configure description element:
 		$element = $form->createElement('textarea', 'text',  array('label' => 'Note:', 'rows'=> 3, 'cols' => 60, 'class' => 'mceEditor', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->setValue($description);
 		$element->setRequired(false);
 		$form->addElement($element);
-		
+
 		// Add the 'time taken' option because it is an image
-		$element = $form->getElement('date_type');		
+		$element = $form->getElement('date_type');
 		if (!$date) {
 			$element->setValue('taken');
 			$this->view->date_text = "When the picture was taken";
-		}		
-				
+		}
+
 		return $form;
 	}
-	
+
 	private function getFormAudio($source_id, $item_id, $title, $description, $date=false, $edit=false, $tags=false, $lat=false, $lon=false) {
 
-		// Get a basic form 
+		// Get a basic form
 		$form = $this->getFormCommon($source_id, $item_id, 'audio', $date, $edit,$tags,$lat,$lon);
 		$form->setAttrib('enctype', 'multipart/form-data');
 
@@ -739,19 +750,19 @@ class Admin_PostController extends Admin_BaseController
 		} else {
 			$path = $this->_root . '/temp';
 		}
-		
+
 		// Create and configure title element:
 		if (!$edit) {
 			$element = new Zend_Form_Element_File('file');
 			$element->setLabel('Upload an mp3 file:')
-					->setDecorators(array(array('File'), array('Errors'))) 
-					->setRequired(false)
-			        ->setDestination($path)
-			        ->addValidator('Count', false, 1)     // ensure only 1 file
-			        ->addValidator('Size', false, 12000000) // limit to 2M
-			        ->addValidator('Extension', false, 'mp3'); // only JPEG, PNG, and GIFs
+			->setDecorators(array(array('File'), array('Errors')))
+			->setRequired(false)
+			->setDestination($path)
+			->addValidator('Count', false, 1)     // ensure only 1 file
+			->addValidator('Size', false, 12000000) // limit to 2M
+			->addValidator('Extension', false, 'mp3'); // only JPEG, PNG, and GIFs
 			$form->addElement($element, 'file');
-			
+				
 			// Create and configure url element:
 			$element = $form->createElement('text', 'url',  array('label' => 'Url:', 'decorators' => array('ViewHelper', 'Errors')));
 			$element->addValidator('stringLength', false, array(0, 256));
@@ -767,7 +778,7 @@ class Admin_PostController extends Admin_BaseController
 		$element->setRequired(false);
 		$element->setValue($title);
 		$form->addElement($element);
-		
+
 		// Create and configure description element:
 		$element = $form->createElement('textarea', 'text',  array('label' => 'Note:', 'rows'=> 3, 'cols' => 60,  'class' => 'mceEditor', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->setValue($description);
@@ -776,10 +787,10 @@ class Admin_PostController extends Admin_BaseController
 
 		return $form;
 	}
-	
+
 	private function getFormVideo($source_id, $item_id, $title, $description, $embed=false, $date=false, $edit=false, $tags=false, $lat=false, $lon=false) {
 
-		// Get a basic form 
+		// Get a basic form
 		$form = $this->getFormCommon($source_id, $item_id, 'video', $date, $edit, $tags,$lat,$lon);
 		$form->setAttrib('enctype', 'multipart/form-data');
 
@@ -796,7 +807,7 @@ class Admin_PostController extends Admin_BaseController
 		$element->setValue($title);
 		$element->setRequired(false);
 		$form->addElement($element);
-		
+
 		// Create and configure description element:
 		$element = $form->createElement('textarea', 'text',  array('label' => 'Note:', 'rows'=> 3, 'cols' => 60,  'class' => 'mceEditor', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->setValue($description);
@@ -805,16 +816,16 @@ class Admin_PostController extends Admin_BaseController
 
 		return $form;
 	}
-	
+
 	private function getFormCommon($source_id = 0, $item_id=0, $type='text', $date=false, $edit=false, $tags=false, $lat=false, $long=false, $elev=false) {
-		// Create the basic form		
+		// Create the basic form
 		$form = new Stuffpress_Form();
 
 		// Add the form element details
 		$form->setAction('admin/post/submit');
 		$form->setMethod('post');
 		$form->setName("formPost");
-		
+
 		// Create and configure tags element:
 		$element = $form->createElement('text', 'tags',  array('label' => 'Tags:', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->addValidator('stringLength', false, array(0, 256));
@@ -822,7 +833,7 @@ class Admin_PostController extends Admin_BaseController
 		$element->setValue($tags);
 		$element->setRequired(false);
 		$form->addElement($element);
-		
+
 		// Create and configure latitude element:
 		$element = $form->createElement('hidden', 'latitude',  array('label' => 'Latitude:', 'decorators' => array('ViewHelper', 'Errors')));
 		$element->addValidator('between', false, array(-180.0, 180.0));
@@ -836,13 +847,13 @@ class Admin_PostController extends Admin_BaseController
 		$element->setValue($long);
 		$element->setRequired(false);
 		$form->addElement($element);
-		
+
 		// Add a radio button element for the date_type
 		$element = $form->createElement('hidden', 'date_type');
 		$element->setRequired(false);
 		$element->setDecorators(array('ViewHelper'));
 		$form->addElement($element);
-				
+
 		if ($date) {
 			$timestamp = $date;
 			$this->view->date_text = Stuffpress_Date::date("F d, Y h:i A", $timestamp, $this->_properties->getProperty('timezone'));
@@ -851,26 +862,26 @@ class Admin_PostController extends Admin_BaseController
 			$timestamp = time();
 			$this->view->date_text = "Now";
 			$element->setValue('now');
-		}		
-				
+		}
+
 		$form->addElement($element);
-		
+
 		// Create and configure date element:
 		$element = $form->createElement('hidden', 'date');
 		$element->setRequired(false);
 		$element->setDecorators(array('ViewHelper'));
 		$element->setValue(Stuffpress_Date::date("F d, Y h:i A", $timestamp, $this->_properties->getProperty('timezone')));
 		$form->addElement($element);
-		
+
 		// Add a twitter element if required
 		if ($this->_properties->getProperty('twitter_auth')) {
 			$checked = (!$item_id && in_array($source_id, unserialize($this->_properties->getProperty('twitter_services')))) ? true : false;
 			$element = $form->createElement('checkbox', 'twitter_notify',  array('label' => 'Twitter:', 'decorators' => array('ViewHelper', 'Errors'), 'class' => 'css'));
 			$element->setValue($checked);
 			$element->setRequired(true);
-			$form->addElement($element);		
+			$form->addElement($element);
 		}
-		
+
 		// Add a hidden element with the item id
 		$element = $form->createElement('hidden', 'item');
 		$element->setDecorators(array(array('ViewHelper')));
@@ -881,20 +892,20 @@ class Admin_PostController extends Admin_BaseController
 		$element = $form->createElement('hidden', 'source');
 		$element->setDecorators(array(array('ViewHelper')));
 		$element->setValue($source_id);
-		$form->addElement($element);		
-		
+		$form->addElement($element);
+
 		// Add a hidden element with the type
 		$element = $form->createElement('hidden', 'type');
 		$element->setDecorators(array(array('ViewHelper')));
 		$element->setValue($type);
 		$form->addElement($element);
-		
+
 		// If a bookmarklet, we also need to remember it
 		$element = $form->createElement('hidden', 'bookmarklet');
 		$element->setDecorators(array(array('ViewHelper')));
 		$element->setValue($this->_bookmarklet);
 		$form->addElement($element);
-		
+
 		// Add a hidden element with action
 		$element = $form->createElement('hidden', 'mode');
 		$element->setDecorators(array(array('ViewHelper')));
@@ -910,25 +921,25 @@ class Admin_PostController extends Admin_BaseController
 	protected function common() {
 		// Run the parent
 		parent::common();
-		
+
 		// And now we can customize
 		$this->view->section	= 'post';
 		$this->view->gmap_key   = isset($this->_config->gmap->key) ? $this->_config->gmap->key : false;
-		
+
 		// Add required javascript files
-		$this->view->headScript()->appendFile('js/calendar_date_select/calendar_date_select.js');				
+		$this->view->headScript()->appendFile('js/calendar_date_select/calendar_date_select.js');
 		$this->view->headScript()->appendFile('js/storytlr/validateForm.js');
 		$this->view->headScript()->appendFile('js/controllers/post.js');
-		
+
 		// Add required css files
-		$this->view->headLink()->appendStylesheet('style/calendar.css');	
-		$this->view->headLink()->appendStylesheet('style/calendar_date_select/blue.css');		
+		$this->view->headLink()->appendStylesheet('style/calendar.css');
+		$this->view->headLink()->appendStylesheet('style/calendar_date_select/blue.css');
 	}
-	
+
 	private function tinyMCE() {
 		Stuffpress_TinyMCE::append($this->view);
 	}
-	
+
 	private function createArray($from, $to) {
 		$result = array();
 		for ($i=$from; $i < $to; $i++) {
@@ -936,36 +947,36 @@ class Admin_PostController extends Admin_BaseController
 		}
 		return $result;
 	}
-	
-	private function notifyTwitter($item) {		
+
+	private function notifyTwitter($item) {
 		// Get twitter consumer tokens and user secrets
 		$consumer_key = $this->_config->twitter->consumer_key;
 		$consumer_secret = $this->_config->twitter->consumer_secret;
 		$oauth_token = $this->_properties->getProperty('twitter_oauth_token');
 		$oauth_token_secret = $this->_properties->getProperty('twitter_oauth_token_secret');
-		
+
 		if (!$consumer_key || !$consumer_secret || !$oauth_token || !$oauth_token_secret) {
 			$this->addErrorMessage("Missing twitter OAuth credentials to continue");
 		}
 
 		// Should we append a text before the tweet ?
-		$has_preamble   = $this->_properties->getProperty('preamble', true);		
-		
+		$has_preamble   = $this->_properties->getProperty('preamble', true);
+
 		// Get item
 		$preamble	= $has_preamble ? $item->getPreamble() : "";
 		$title		= $preamble . $item->getTitle();
-		
+
 		// Assemble tweet depending on type
 		if (($item->getType() == SourceItem::STATUS_TYPE ) && strlen($title) < 140) {
 			$tweet = $title;
 		} else {
 			$users  = new Users();
-			$shortUrl = new ShortUrl(); 
+			$shortUrl = new ShortUrl();
 			$url = $users->getUrl($this->_application->user->id, "s/" . $shortUrl->shorten($item->getSlug()));
 			if (strlen($title) + strlen($url) > 140) {
-				$tweet = substr($title, 0, 140 - strlen($url) - 5) . "... $url"; 
+				$tweet = substr($title, 0, 140 - strlen($url) - 5) . "... $url";
 			} else {
-				$tweet 	= "$title $url";	
+				$tweet 	= "$title $url";
 			}
 		}
 
@@ -974,34 +985,80 @@ class Admin_PostController extends Admin_BaseController
 			$response = $connection->post('statuses/update', array('status' => $tweet));
 			if (isset($response->error)) {
 				$this->addErrorMessage("Failed posting to Twitter with error " . $response->error);
-			}			
+			}
 		} catch (Exception $e) {
 			$this->addErrorMessage("Failed posting to Twitter with unknwon error");
 		}
 	}
-	
+
 	private function ping() {
 		// Ping google blog search
 		$logger		= Zend_Registry::get("logger");
-		$domain = $this->_application->getPublicDomain();		
+		$domain     = $this->_application->getPublicDomain();
 		$maintitle 	= $this->_properties->getProperty('title');
 		$subtitle 	= $this->_properties->getProperty('subtitle');
-		$separator	= $subtitle ? " | " : "";		
+		$separator	= $subtitle ? " | " : "";
 		$title 		= $maintitle . $separator . $subtitle;
-		$rss	 	= "http://$domain/rss/types/blog/nopre/1/feed.xml"; 
-		
+		$rss	 	= "http://$domain/rss/types/blog/nopre/1/feed.xml";
+
 		Stuffpress_Services_Blogsearch::ping($title, $url, $rss);
-		
+
 		// Ping PubSubHubBub
 		if ($this->_config->push) {
 			$hub = $this->_config->push->hub;
 			$p = new PushPublisher($hub);
 			$topic = "http://$domain/updates.atom";
-		    if ($p->publish_update($topic)) {
-		       $logger->log("Successfully pinged the PuSH hub $hub for topic $topic", Zend_Log::INFO);	
-		    } else {
-		       $logger->log("Failed PuSH notification (" . $p->last_response() . ")", Zend_Log::ERR);
-		    }
+			if ($p->publish_update($topic)) {
+				$logger->log("Successfully pinged the PuSH hub $hub for topic $topic", Zend_Log::INFO);
+			} else {
+				$logger->log("Failed PuSH notification (" . $p->last_response() . ")", Zend_Log::ERR);
+			}
+		}
+	}
+
+	private function pingback($item) {
+		$logger		= Zend_Registry::get("logger");
+		$username	= $this->_application->user->username;
+		$source	    = $this->getUrl($username, "entry/" . $item->getSlug());
+				
+		$logger->log("Pingback source: " . $source, Zend_Log::DEBUG);
+		
+		// Search for user to ping
+		preg_match_all('/@([a-zA-Z0-9\-\.]+)/', $item->getTitle(), $mentions, PREG_SET_ORDER);
+		
+		// Ping each user
+		foreach ($mentions as $mention) {
+			$target = "http://" . $mention[1];
+			$url = Pingback_Utility::getPingbackServerURL($target);
+			if ($url) {
+				$logger->log("Pingback server for " . $mention[1] . ": " . $url, Zend_Log::DEBUG);
+				$response = Pingback_Utility::sendPingback($source, $target, $url);
+				$logger->log("Pingback response for " . $mention[1] . ": " . $response, Zend_Log::DEBUG);
+			}
+		}
+		
+		// Search for link to ping
+		preg_match_all('/href="(https?:\/\/[^\"]*)/', $item->getContent(), $matches, PREG_SET_ORDER);
+
+		// If a link item, add the link to the list
+		$links = array();
+		if ($item->getLink()) {
+			array_push($links, $item->getLink());
+		}
+		
+		// Collect links
+		foreach ($matches as $link) {
+			array_push($links, $link[1]);
+		}
+		
+		// Ping each link
+		foreach ($links as $link) {
+			$url = Pingback_Utility::getPingbackServerURL($link);
+			if ($url) {
+				$logger->log("Pingback server for " . $link . ": " . $url, Zend_Log::DEBUG);
+				$response = Pingback_Utility::sendPingback($source, $link, $url);
+				$logger->log("Pingback response for " . $link . ": " . $response, Zend_Log::DEBUG);
+			}
 		}
 	}
 }

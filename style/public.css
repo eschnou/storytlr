@@ -265,6 +265,11 @@ div.item_comments{
 	zoom: 1;
 }
 
+div.item_mentions{
+	margin: 5px 0px 0 75px;
+	zoom: 1;
+}
+
 div.item_content div.footnote {
 	font-size: 11px;
 	color: #999;
@@ -665,3 +670,47 @@ div.overlay_frame_content {
 .toolbelt-web-action-button:hover {
 	color: #CCC;
 }
+
+/* Pingback
+   -------------------------------------
+*/
+   
+.mention {
+	position: relative;
+	margin-bottom: 20px;
+}  
+ 
+.mention .avatar {
+	float: left;
+} 
+ 
+.mention .avatar img {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	max-width: 50px;
+	max-height: 50px;
+	margin-right: 10px;
+}
+
+.mention .header {
+	font-size: 0.9em;
+	margin-bottom: 5px;
+}
+.mention .when {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.mention .reply {
+	color: #bbb;
+	font-size: 0.8em;
+}
+
+.mention .actions {
+	position: absolute;
+	left: -25px;
+}
+   
