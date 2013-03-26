@@ -42,7 +42,7 @@ class Mentions extends Stuffpress_Db_Table
 	}
 
 	public function getLastMentions($count=10, $offset=0, $show_hidden=0) {
-		$sql = "SELECT m.*, d.*, UNIX_TIMESTAMP(m.timestamp) as timestamp FROM `mentions` m LEFT JOIN `data` d ON (d.id = m.item_id AND d.source_id = m.source_id) "
+		$sql = "SELECT m.*, d.is_hidden, d.slug, UNIX_TIMESTAMP(m.timestamp) as timestamp FROM `mentions` m LEFT JOIN `data` d ON (d.id = m.item_id AND d.source_id = m.source_id) "
 		. "WHERE m.user_id = :user_id "
 		. ((!$show_hidden) ? "AND (d.is_hidden = 0 OR d.is_hidden IS NULL) " : " ")
 		. "ORDER BY m.timestamp DESC "
@@ -84,28 +84,22 @@ class Mentions extends Stuffpress_Db_Table
 	}
 
 
-	public function deleteComment($id) {
-		if (!($comment = $this->getComment($id))) return;
+	public function deleteMention($id) {
+		if (!($mention = $this->getMention($id))) return;
 
 		// Decrease the counter
 		$data    = new Data();
-		$data->decreaseComments($comment->source_id, $comment->item_id);
+		$data->decreaseMentions($comment->source_id, $comment->item_id);
 
 		// Delete the comment
 		$where = $this->getAdapter()->quoteInto('id = ?', $id);
 		$this->delete($where);
 	}
 
-	public function deleteComments($source_id, $item_id=0) {
+	public function deleteMentions($source_id, $item_id=0) {
 		$where = array();
 		$where[] = $this->getAdapter()->quoteInto('source_id = ?', $source_id);
 		if ($item_id) $where[] = $this->getAdapter()->quoteInto('item_id = ?', $item_id);
 		$this->delete($where);
-	}
-
-	public function setNotify($comment_id, $email, $notify) {
-		$w1 = $this->getAdapter()->quoteInto('comment_id = ?', $comment_id);
-		$w2 = $this->getAdapter()->quoteInto('email = ?', $email);
-		$this->update(array('notify' => $notify), array($w1, $w2));
 	}
 }

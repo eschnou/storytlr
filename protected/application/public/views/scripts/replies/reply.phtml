@@ -1,8 +1,8 @@
 <?php $mention = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" rel="nofollow">\\1</a>', $this->mention);  ?>
 <div class='mention' id='mention_<?= $this->id ?>'>
-	<div class='mention_actions'>
+	<div class='actions'>
 	<?php if ($this->delete) : ?>
-		<a class='delete' href='javascript:delete_mention(<?= $this->id ?>, <?= $this->source_id ?>, <?= $this->item_id ?>);' title="Delete mention"><img src="images/01.png" /></a>
+		<a class='delete' href='javascript:delete_mention(<?= $this->id ?>);' title="Delete mention"><img src="images/01.png" /></a>
 	<?php endif ?>
 	</div>
 	<div class='avatar'>

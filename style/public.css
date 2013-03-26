@@ -708,4 +708,9 @@ div.overlay_frame_content {
 	color: #bbb;
 	font-size: 0.8em;
 }
+
+.mention .actions {
+	position: absolute;
+	left: -25px;
+}
    

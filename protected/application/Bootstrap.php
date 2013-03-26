@@ -615,6 +615,7 @@ class Bootstrap
 		/* Resources for public module */
 		$acl->add(new Zend_Acl_Resource('public'), 			'root');
 		$acl->add(new Zend_Acl_Resource('public:comments'), 'public');
+		$acl->add(new Zend_Acl_Resource('public:replies'),  'public');
 		$acl->add(new Zend_Acl_Resource('public:embed'), 	'public');
 		$acl->add(new Zend_Acl_Resource('public:error'), 	'public');
 		$acl->add(new Zend_Acl_Resource('public:file'), 	'public');
@@ -708,6 +709,7 @@ class Bootstrap
 
 		/* Permissions for guests */
 		$acl->allow('guest',  'public:comments', array('index', 'form', 'add'));
+		$acl->allow('guest',  'public:replies', array('index'));
 		$acl->allow('guest',  'public:embed');
 		$acl->allow('guest',  'public:error');
 		$acl->allow('guest',  'public:file');

@@ -11,7 +11,7 @@ echo $this->partial('timeline/item.phtml', array('item' => $item, 'admin' => $th
 ?>
 <div class='item_mentions' id='mentions_<?= $item->getSource() . '_' . $item->getID() ?>' 	<?php if ($item->getMentionCount() == 0) : ?>style='display:none'<?php endif ?>>
 	<?php if ($item->getMentionCount() > 0) : ?>
-		<?= $this->action('index', 'mentions', null, array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
+		<?= $this->action('index', 'replies', null, array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
 	<?php endif ?>	
 </div>	
 

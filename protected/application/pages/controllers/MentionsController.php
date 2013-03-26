@@ -40,6 +40,9 @@ class Pages_MentionsController extends Pages_BaseController {
 		// Prepare the common elements
 		$this->common();
 		
+		// Add js controler
+		$this->view->headScript()->appendFile('js/controllers/timeline.js');
+		
 		// Add paging
 		$this->view->count		 = $count; 
 		$this->view->page		 = $page;

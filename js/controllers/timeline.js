@@ -128,6 +128,15 @@ function delete_comment(id, source, item) {
 	$('comment_' + id).hide();
 }
 
+function delete_mention(id, source, item) {
+	new Ajax.Request('replies/delete', {
+  					method: 'post',
+  					parameters: {id: id}
+  	});
+ 	
+	$('mention_' + id).hide();
+}
+
 function delete_item(source, item) {
 	new Ajax.Request('admin/post/delete', {
   					method: 'post',
