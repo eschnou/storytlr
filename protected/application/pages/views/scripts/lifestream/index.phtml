@@ -39,7 +39,7 @@ foreach($this->items as $item) {
 
 			<div class='item_mentions' id='mentions_<?= $item->getSource() . '_' . $item->getID() ?>' 	<?php if ($item->getMentionCount() == 0) : ?>style='display:none'<?php endif ?>>
 				<?php if ($item->getMentionCount() > 0) : ?>
-					<?= $this->action('index', 'mentions', null, array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
+					<?= $this->action('index', 'mentions', 'default', array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
 				<?php endif ?>	
 			</div>	
 
@@ -47,7 +47,7 @@ foreach($this->items as $item) {
  	if (!$this->disqus && !$this->googlefc) : ?>
 			<div class='item_comments' id='comments_<?= $item->getSource() . '_' . $item->getID() ?>' 	<?php if ($item->getCommentCount() == 0) : ?>style='display:none'<?php endif ?>>
 				<?php if ($item->getCommentCount() > 0) : ?>
-					<?= $this->action('index', 'comments', null, array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
+					<?= $this->action('index', 'comments', 'default', array('source' => $item->getSource(), 'item' => $item->getID())); ?>	
 				<?php endif ?>	
 			</div>			
 			<div class='item_add_comment' id='add_comment_<?= $item->getSource() . '_' . $item->getID() ?>' style='display: none;'>
