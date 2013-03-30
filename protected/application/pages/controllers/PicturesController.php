@@ -38,7 +38,7 @@ class Pages_PicturesController extends Pages_BaseController
 		} else {
 			$sources 	= false;
 		}
-
+		
 		// Get all the items; if we are an admin, we also get the hidden one
 		$data   = new Data();
 		$items  = $data->getLastItems($count, $page * $count, $this->_admin, $sources, array (SourceItem::IMAGE_TYPE));
@@ -63,6 +63,11 @@ class Pages_PicturesController extends Pages_BaseController
 		// Special
 		if (!$this->_page) {
 			$this->view->page_title = "All pictures";
+		}
+		
+		// Add description
+		if ($description = $this->_page_properties->getProperty('description')) {
+			$this->view->description = $description;
 		}
 				
 		// Add specific styles and javascripts

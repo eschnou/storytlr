@@ -43,6 +43,11 @@ class Pages_MentionsController extends Pages_BaseController {
 		// Add js controler
 		$this->view->headScript()->appendFile('js/controllers/timeline.js');
 		
+		// Add description
+		if ($description = $this->_page_properties->getProperty('description')) {
+			$this->view->description = $description;
+		}
+		
 		// Add paging
 		$this->view->count		 = $count; 
 		$this->view->page		 = $page;

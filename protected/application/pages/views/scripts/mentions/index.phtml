@@ -1,3 +1,9 @@
+<?php if ($this->description) :?>
+<div class="description">
+<?= $this->description?>
+</div>
+<?php endif ?>
+
 <?php 
 
 if (!$this->items || count($this->items) == 0) {

@@ -19,6 +19,7 @@ abstract class Stuffpress_PageModel
 	public function getDefaultValues() {
 		$values = array();
 		$values['title'] = 'My page';
+		$values['top'] = '';
 		return $values;
 	}
 	
@@ -29,7 +30,8 @@ abstract class Stuffpress_PageModel
 	}
 	
 	public function processForm($page_id, $values) {
-		return;
+		$properties = new PagesProperties(array(PagesProperties::KEY => $page_id));
+		$properties->setProperty('description', $values['description']);
 	}
 	
 	public function getForm() {
@@ -44,6 +46,11 @@ abstract class Stuffpress_PageModel
 		$e = $form->createElement('text', 'title',  array('label' => 'Title:', 'class' => 'width1', 'decorators' => $form->noDecorators));
 		$e->addFilter('StripTags');
 		$form->addElement($e);
+
+		// Create and configure description element:
+		$element = $form->createElement('textarea', 'description',  array('label' => 'Description:', 'rows'=> 15, 'cols' => 60, 'class' => 'mceEditor', 'decorators' => array('ViewHelper', 'Errors')));
+		$form->addElement($element);
+		
 		
 		// Add a hidden element with the page id
 		$e = $form->createElement('hidden', 'id');

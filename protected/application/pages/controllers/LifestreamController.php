@@ -50,6 +50,11 @@ class Pages_LifestreamController extends Pages_BaseController {
 		// Prepare the common elements
 		$this->common();
 		
+		// Add description
+		if ($description = $this->_page_properties->getProperty('description')) {
+			$this->view->description = $description;
+		}
+		
 		// Add paging
 		$this->view->count		 = $count; 
 		$this->view->page		 = $page;

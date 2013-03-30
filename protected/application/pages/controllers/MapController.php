@@ -26,5 +26,10 @@ class Pages_MapController extends Pages_BaseController
 								
 		// Prepare the common elements
 		$this->common();
+		
+		// Add description
+		if ($description = $this->_page_properties->getProperty('description')) {
+			$this->view->description = $description;
+		}
 	}
 }

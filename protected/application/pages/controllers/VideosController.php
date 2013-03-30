@@ -64,6 +64,11 @@ class Pages_VideosController extends Pages_BaseController
 		if (!$this->_page) {
 			$this->view->page_title = "All videos";
 		}
+
+		// Add description
+		if ($description = $this->_page_properties->getProperty('description')) {
+			$this->view->description = $description;
+		}
 		
 		// Add specific styles and javascripts
 		$this->view->headScript()->appendFile('js/shadowbox/adapter/shadowbox-prototype.js');

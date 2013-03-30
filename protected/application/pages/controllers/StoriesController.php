@@ -53,6 +53,11 @@ class Pages_StoriesController extends Pages_BaseController
 		// Prepare the common elements
 		$this->common();
 		
+		// Add description
+		if ($description = $this->_page_properties->getProperty('description')) {
+			$this->view->description = $description;
+		}
+		
 		// Add page specific elements
 		$this->view->headScript()->appendFile('js/controllers/stories.js');		
 	}

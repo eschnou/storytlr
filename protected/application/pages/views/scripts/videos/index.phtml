@@ -2,6 +2,12 @@
 	We are sorry, <?= $this->username?> has not posted or shared any video yet.
 <?php else : ?>
 
+<?php if ($this->description) :?>
+<div class="description">
+<?= $this->description?>
+</div>
+<?php endif ?>
+
 <div class="thumbcontainer">
 	<?php foreach($this->items as $item) : ?>
 		<div class="imagethumb">
