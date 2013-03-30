@@ -62,8 +62,9 @@
 		<?php
 		    $title = $this->item->getTitle(); 
 			$title = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$title);
-			$title = preg_replace("|@([a-zA-Z0-9\-\.]+)|",'<a href="http://\\1" target="_blank">@\\1</a>\\2',$title); // add “@username” links
-			$title = preg_replace("|#([a-zA-Z0-9_]+)|",'<a href="tag/\\1">#\\1</a>\\2',$title); // add tag links
+			$title = preg_replace("|@([a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+)|",'<a href="http://\\1" target="_blank">@\\1</a>',$title); 
+			$title = preg_replace("|@([a-zA-Z0-9\-]+)|",'<a href="http://twitter.com/\\1" target="_blank">@\\1</a>',$title); 
+			$title = preg_replace("|#([a-zA-Z0-9_]+)|",'<a href="tag/\\1">#\\1</a>',$title); // add tag links
 					
 			echo $title;
 		?>
