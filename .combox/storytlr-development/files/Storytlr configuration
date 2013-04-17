@@ -1,0 +1,74 @@
+[general]
+
+;Database connection settings
+db.adapter=PDO_MYSQL
+db.host=${db_host}
+db.username=${db_user}
+db.password=${db_password}
+db.dbname=${db_name}
+
+;Security
+security.cookie = dasuoidasud
+
+path.upload = /var/lib/storytlr/upload
+path.logs = /var/log/storytlr
+path.temp = /var/lib/storytlr/temp
+path.feeds = /var/lib/storytlr/feeds
+
+;Caching
+;cache.content = 1
+;cache.metadata = 1
+;cache.path = /tmp/cache/
+
+;Web deployment settings
+web.host=localhost:8080
+web.path=/
+web.redirect = 1
+web.timezone=Europe/Brussels
+
+;Global application settings
+app.closed=1 ; Set to 0 to enable registration
+app.from_email=support@noreply.net
+app.admin_email=admin@noreply.net
+app.user=${storytlr_login} ; Comment this to switch to multi-user setup
+
+;Debug settings
+debug 	= <#if debug_mode>1<#else>0</#if>
+profile = 0
+
+
+;; RSS settings
+rss.default.hide_content=1
+
+;; Flickr settings
+;;flickr.api_key=
+
+;; Twitter settings
+;; In order to integrate storytlr with twitter, you need to obtain OAuth application keys 
+;; from Twitter directly (we are not allowed to redistribute keys). It is a simple process
+;; that you can follow here: http://dev.twitter.com/apps
+;;twitter.consumer_key=
+;;twitter.consumer_secret=
+;;twitter.default.hide_replies=1
+
+;; Seesmic settings
+seesmic.default.hide_replies=1
+
+;; Laconica settings
+laconica.default.hide_replies=1
+
+;; Youtube settings
+;youtube.client_id=
+;youtube.developer_key=
+
+;; Google map
+;gmap.key=
+
+;Default values for user settings
+default.theme=stumblepeach
+default.timezone=Europe/Brussels
+default.timezoneid=397
+default.on_comment=1
+default.on_news=1
+default.title=My Homepage
+default.subtitle=I'm still busy setting this page

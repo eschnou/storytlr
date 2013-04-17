@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+	DocumentRoot /usr/share/storytlr
+
+	<Directory /usr/share/storytlr>
+		Options FollowSymLinks
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ErrorLog /var/log/httpd/storytlr_error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/httpd/storytlr_access.log combined
+	ServerSignature On
+</VirtualHost>

@@ -1,0 +1,265 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Deploying a development environment for Storytlr.", 
+    "directories": [
+        {
+            "group": "apache", 
+            "mode": "755", 
+            "name": "feeds", 
+            "owner": "apache", 
+            "path": "/var/lib/storytlr/feeds"
+        }, 
+        {
+            "group": "apache", 
+            "mode": "755", 
+            "name": "logs", 
+            "owner": "apache", 
+            "path": "/var/log/storytlr"
+        }, 
+        {
+            "group": "apache", 
+            "mode": "755", 
+            "name": "temp", 
+            "owner": "apache", 
+            "path": "/var/lib/storytlr/temp"
+        }, 
+        {
+            "group": "apache", 
+            "mode": "755", 
+            "name": "upload", 
+            "owner": "apache", 
+            "path": "/var/lib/storytlr/upload"
+        }
+    ], 
+    "documentation": "Storytlr is an open source lifestreaming and micro blogging platform.", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "Install script", 
+            "owner": "root", 
+            "path": "/tmp/storytlr/install.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "Install script"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "Php Configuration", 
+            "owner": "root", 
+            "path": "/etc/php.ini", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "Php Configuration"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "Storytlr configuration", 
+            "owner": "root", 
+            "path": "/etc/storytlr/storytlr.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "Storytlr configuration"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "Virtual Host configuration", 
+            "owner": "root", 
+            "path": "/etc/httpd/conf.d/storytlr.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "Virtual Host configuration"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://Php Configuration"
+                }, 
+                {
+                    "action": "update", 
+                    "resource": "file://Storytlr configuration"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://httpd"
+                }
+            ], 
+            "on": [
+                "debug_mode"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://Install script"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "license": "Copyright (c) 2013 Laurent Eschenauer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.", 
+    "name": "storytlr-development", 
+    "packages": [
+        {
+            "name": "php-ZendFramework-Feed"
+        }, 
+        {
+            "name": "php-mysql"
+        }, 
+        {
+            "name": "httpd"
+        }, 
+        {
+            "name": "php-ZendFramework-Services"
+        }, 
+        {
+            "name": "mysql-server"
+        }, 
+        {
+            "name": "php"
+        }, 
+        {
+            "name": "php-mcrypt"
+        }, 
+        {
+            "name": "php-ZendFramework-Db-Adapter-Pdo-Mysql"
+        }, 
+        {
+            "name": "php-mbstring"
+        }, 
+        {
+            "name": "php-ZendFramework"
+        }, 
+        {
+            "name": "php-xmlrpc"
+        }, 
+        {
+            "name": "php-gd"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "The password of the first storytlr user", 
+            "key": "storytlr_password", 
+            "name": "Storytlr Password", 
+            "schema": {
+                "final": true, 
+                "required": true, 
+                "secret": true, 
+                "type": "string"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "The username of the first storytlr user", 
+            "key": "storytlr_login", 
+            "name": "Storytlr Username", 
+            "schema": {
+                "final": true, 
+                "type": "string"
+            }, 
+            "value": "admin", 
+            "version": 1
+        }, 
+        {
+            "description": "The password to connect to the database.", 
+            "key": "db_password", 
+            "name": "Database Password", 
+            "schema": {
+                "advanced": true, 
+                "final": true, 
+                "type": "string"
+            }, 
+            "value": "secret", 
+            "version": 1
+        }, 
+        {
+            "description": "The database server", 
+            "key": "db_host", 
+            "name": "Database Host", 
+            "schema": {
+                "advanced": true, 
+                "final": true, 
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
+        }, 
+        {
+            "description": "The name of the database.", 
+            "key": "db_name", 
+            "name": "Database Name", 
+            "schema": {
+                "advanced": true, 
+                "final": true, 
+                "type": "string"
+            }, 
+            "value": "storytlr", 
+            "version": 1
+        }, 
+        {
+            "description": "The user account to connect to the database.", 
+            "key": "db_user", 
+            "name": "Database User", 
+            "schema": {
+                "advanced": true, 
+                "final": true, 
+                "type": "string"
+            }, 
+            "value": "storytlr", 
+            "version": 1
+        }, 
+        {
+            "description": "Run Storytlr in Debug mode", 
+            "key": "debug_mode", 
+            "name": "Debug Mode", 
+            "schema": {
+                "advanced": true, 
+                "type": "boolean"
+            }, 
+            "value": false, 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "httpd"
+        }, 
+        {
+            "enabled": true, 
+            "name": "mysqld"
+        }
+    ], 
+    "url": "http://storytlr.org", 
+    "users": [] 
+}

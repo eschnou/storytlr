@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Configure database access rights
+/etc/init.d/mysqld start
+mysql -e "create database ${db_name};"
+mysql -e "grant all privileges on  ${db_name}.* to '${db_user}'@'localhost' identified by '${db_password}';"
+
+# Populate the database
+mysql -D ${db_name} < /usr/share/storytlr/protected/install/database/schema/core.sql
+
+# Process the upgrades
+for sql in `find /usr/share/storytlr/protected/install/database/update/ -name *.sql | sort`; do mysql -D ${db_name} < $sql; done
+
+# Add the first user
+mysql -D ${db_name} -e "INSERT INTO pages VALUES (1,1,'lifestream','Stream',0),(2,1,'stories','Stories',0);"
+mysql -D ${db_name} -e "INSERT INTO properties VALUES (1,'theme','stumblepeach'),(1,'title','Welcome'),(1,'subtitle','to the online me'),(1,'stuffpress_source','1');"
+mysql -D ${db_name} -e "INSERT INTO sources VALUES (1,1,'stuffpress',1,1,1,'2009-12-03 22:19:18');"
+mysql -D ${db_name} -e "INSERT INTO users VALUES (1,'${storytlr_login}','${_hash(storytlr_password,"MD5")}','',1,'-----','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00',0,'0000-00-00 00:00:00',NULL,0,'0000-00-00 00:00:00','0000-00-00 00:00:00');"
+mysql -D ${db_name} -e "INSERT INTO widgets VALUES (1,1,'search',0),(2,1,'rsslink',0),(3,1,'links',0),(4,1,'lastcomments',0),(5,1,'archives',0),(6,1,'logo',0);"
+
+# Write the version number
+grep 'define("DATABASE_VERSION"' /usr/share/storytlr/index.php | sed -rn 's/.*([[:digit:]]+).*/\1/p' > /usr/share/storytlr/protected/install/database/version
