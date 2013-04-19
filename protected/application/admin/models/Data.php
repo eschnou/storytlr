@@ -157,7 +157,7 @@ class Data extends Stuffpress_Db_Table
 		}
 		$sources = implode(',', $sources);
 
-		$sql = "SELECT count(d.id) as c, year(d.timestamp) as year, month(d.timestamp) as month "
+		$sql = "SELECT count(d.id) as c, year(d.timestamp) as year, month(d.timestamp) as month, d.comment_count, d.mention_count "
 		. "FROM data d "
 		. "WHERE d.user_id = :user_id AND source_id IN ($sources) "
 		. (($show_hidden) ? "AND is_hidden = 0 " : " ")

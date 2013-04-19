@@ -1022,6 +1022,8 @@ class Admin_PostController extends Admin_BaseController
 		$source	    = $this->getUrl($username, "entry/" . $item->getSlug());
 				
 		$logger->log("Pingback source: " . $source, Zend_Log::DEBUG);
+		$logger->log("Item title: " . $item->getTitle(), Zend_Log::DEBUG);
+		$logger->log("Item content: " . $item->getContent(), Zend_Log::DEBUG);
 		
 		// Search for user to ping
 		preg_match_all('/@([a-zA-Z0-9\-\.]+)/', $item->getTitle(), $mentions, PREG_SET_ORDER);
@@ -1042,7 +1044,7 @@ class Admin_PostController extends Admin_BaseController
 
 		// If a link item, add the link to the list
 		$links = array();
-		if ($item->getLink()) {
+		if ($item->getType() == SourceItem::LINK_TYPE) {
 			array_push($links, $item->getLink());
 		}
 		

@@ -84,31 +84,11 @@ class PingbackController extends BaseController
 		$this->_logger->log("Parsed output: " . var_export($output, true), Zend_Log::DEBUG);
 		
 		// Extract relevant data
+		$content = $this->processItems($output["items"]);
 		$timestamp	= time();
-		$has_author = false;
-		$has_entry = false;
-		foreach ($output["items"] as $item) {
-		$this->_logger->log("Item: " . var_export($item, true), Zend_Log::DEBUG);
-			if (in_array("h-card", $item["type"])) {
-				if (!$has_author) {
-					$props = @$item["properties"];
-					$author_name = @$props["name"][0];
-					$author_adr = @$props["adr"][0];
-					$author_bio = @$props["note"][0];
-					$author_url = @$props["url"][0];
-					$author_avatar = @$props["photo"][0];
-					$has_author = true;
-				}
-			} else if (in_array("h-entry", $item["type"])) {
-				if (!$has_entry) {
-					$props = @$item["properties"];
-					$entry = @$props["name"][0];
-					$published = @$props["published"][0];
-					$has_entry = true;
-				}
-			}
-		}
-
+	
+		$this->_logger->log("Extracted data: " . var_export($content, true), Zend_Log::DEBUG);
+		
 		// Lookup if existing entry
 		preg_match('/(?P<source>\d+)\-(?P<item>\d+)\.html$/', $target, $matches);
 		$this->_logger->log("Matches: " . var_export($matches, true), Zend_Log::DEBUG);
@@ -139,15 +119,28 @@ class PingbackController extends BaseController
 			throw new Exception('Failed to find corresponding storytlr user.'); 
 		}
 		
+		// Lookup author
+		if (count ($content["hcard"]) > 0) {
+			$hcard = $content["hcard"][0];
+		}
+		
+		// Lookup entry
+		if (count ($content["hentry"]) > 0) {
+			$hentry = $content["hentry"][0];
+			if (!$hcard && count($hentry["hcard"])>0) {
+				$hcard = $hentry["hcard"][0];
+			}
+		}
+		
 		// Add the mention to the database
 		$mentions  	= new Mentions();
-		$mentions->addMention($source_id, $item_id, $user->id, $source, $entry, $author_name, $author_url, "", $author_avatar, $timestamp);
+		$mentions->addMention($source_id, $item_id, $user->id, $source, $hentry["title"], $hcard["name"], $hcard["url"], "", $hcard["avatar"], $timestamp);
 		
 		// Send an email alert to owner
 		try {
 			$on_comment		= $this->_properties->getProperty('on_comment');
 			if ($on_comment) {
-				Stuffpress_Emails::sendMentionEmail($user->email, $user->username, $author_name, $author_url, $entry, $source, $target);
+				Stuffpress_Emails::sendMentionEmail($user->email, $user->username, $hcard["name"], $hcard["url"], $hentry["title"], $source, $target);
 			}				
 		} catch (Exception $e) {
 			$logger	= Zend_Registry::get("logger");
@@ -209,4 +202,52 @@ class PingbackController extends BaseController
 		return;
 	}
 	
+	private function processItems($items) {
+		$result = array();
+		$result["hcard"] = array();
+		$result["hentry"] = array();
+		foreach ($items as $item) {
+			$this->_logger->log("Item: " . var_export($item, true), Zend_Log::DEBUG);
+			if (in_array("h-card", $item["type"])) {  
+				array_push($result["hcard"], $this->processHCard($item));
+			} else if (in_array("h-entry", $item["type"])) {
+				array_push($result["hentry"], $this->processHEntry($item));
+			}
+		}
+		
+		return $result;
+	}
+	
+	private function processHcard($item) {
+		$this->_logger->log("Process hcard: " . var_export($item, true), Zend_Log::DEBUG);
+		$hcard = array();
+		$props = @$item["properties"];
+		$hcard["name"] = @$props["name"][0];
+		$hcard["adr"] = @$props["adr"][0];
+		$hcard["bio"] = @$props["note"][0];
+		$hcard["url"] = @$props["url"][0];
+		$hcard["avatar"] = @$props["photo"][0];		
+		return $hcard;
+	}
+	
+	private function processHentry($item) {
+		$this->_logger->log("Process hentry: " . var_export($item, true), Zend_Log::DEBUG);
+		$hentry = array();
+		$hentry["hcard"] = array();
+		$props = @$item["properties"];
+		$content = @$props["content"][0];
+		$name = @$props["name"][0];
+		$hentry["title"] = $content ? $content : $name;
+		$hentry["published"] = @$props["published"][0];
+
+		if ($item["children"] && count($item["children"]) > 0) {
+			foreach ($item["children"] as $item) {
+				if (in_array("h-card", $item["type"])) {
+					array_push($hentry["hcard"], $this->processHCard($item));
+				}
+			}
+		}
+		
+		return $hentry;
+	}
 }
