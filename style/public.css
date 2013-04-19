@@ -689,8 +689,8 @@ div.overlay_frame_content {
 	-moz-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	-webkit-border-radius: 10px;
-	max-width: 50px;
-	max-height: 50px;
+	max-width: 3em;
+	max-height: 3em;
 	margin-right: 10px;
 }
 
@@ -752,4 +752,16 @@ div.overlay_frame_content {
   background-color: #e8e8eb; 
   border: 1px solid #d2d2d9;
 }
+
+.lifestream .mentions {
+  margin-left: 50px;
+  background-color: #EEE;
+  padding: 1px 20px 1px;
+  font-size: 12px;
+}
+
+.lifestream .mentions h2{
+  text-transform: none;
+}
+
    
