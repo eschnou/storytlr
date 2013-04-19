@@ -759,7 +759,8 @@ div.overlay_frame_content {
 
 .lifestream .mentions {
   margin-left: 50px;
-  background-color: #EEE;
+  background-color: #F6F6F6;
+  border-left: 5px solid #CCC;
   padding: 1px 20px 1px;
   font-size: 12px;
 }
