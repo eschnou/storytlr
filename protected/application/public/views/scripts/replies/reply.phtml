@@ -1,4 +1,3 @@
-<?php $mention = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" rel="nofollow">\\1</a>', $this->entry);  ?>
 <div class='mention' id='mention_<?= $this->id ?>'>
 	<div class='actions'>
 	<?php if ($this->delete) : ?>
@@ -17,6 +16,6 @@
 		</div>
 	</div>
 	<div class='title'>
-		<?= $mention ?>
+		<?= $this->entry ?>
 	</div>
 </div>
