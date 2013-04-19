@@ -684,6 +684,10 @@ div.overlay_frame_content {
 	float: left;
 } 
  
+.mention .title {
+	margin-left: 4em;
+} 
+ 
 .mention .avatar img {
 	border-radius: 10px;
 	-moz-border-radius: 10px;
