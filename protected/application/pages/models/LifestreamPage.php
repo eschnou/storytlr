@@ -61,6 +61,7 @@ class LifestreamPage extends Stuffpress_PageModel {
 		$properties->setProperty('sources', serialize($values['sources']));
 		$properties->setProperty('types', serialize($values['types']));		
 		$properties->setProperty('sources_filter', $values['sources_filter']);
+		$properties->setProperty('description', $values['description']);
 	}
 	
 	public function getForm() {
@@ -78,6 +79,10 @@ class LifestreamPage extends Stuffpress_PageModel {
 		$e->addFilter('StripTags');		
 		$e->addFilter('StripTags');
 		$form->addElement($e);
+		
+		// Create and configure description element:
+		$element = $form->createElement('textarea', 'description',  array('label' => 'Description:', 'rows'=> 15, 'cols' => 60, 'class' => 'mceEditor', 'decorators' => array('ViewHelper', 'Errors')));
+		$form->addElement($element);
 		
 		// Checkbox sources_filter
 		$e = $form->createElement('hidden', 'sources_filter',  array('label' => 'Sources filter:', 'decorators' => array('ViewHelper', 'Errors')));
