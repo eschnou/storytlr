@@ -1,0 +1,20 @@
+<?php 
+	$item = $this->item->toArray();
+	$title = "{$item['title']}";
+	$jsid = "soundcloud_{$item['id']}";
+?>
+
+<div class="soundcloud">
+	<div  class="title entry-title p-name"><?= $title ?></div>
+	<div  class="entry-content e-content">
+		<div  class="embed" id="<?= $jsid ?>">
+		 <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F<?= $item["track_id"] ?>&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true">
+		 </iframe>
+		</div>		
+		<?php if (strlen(trim($this->item->getDescription())) > 0) : ?>
+			<div class="note">
+				<?= $this->item->getDescription(); ?>
+			</div>
+		<?php endif ?>
+	</div>
+</div>
