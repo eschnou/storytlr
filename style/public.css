@@ -327,7 +327,7 @@ div.pagination {
 	-------------------------------
 */
 
-.comments {
+.item_comments {
   margin-left: 50px;
   background-color: #F6F6F6;
   border-left: 5px solid #CCC;
@@ -335,7 +335,7 @@ div.pagination {
   font-size: 12px;
 }
 
-.comments h2{
+.item_comments h2{
   text-transform: none;
 }
 
@@ -700,7 +700,7 @@ div.overlay_frame_content {
    -------------------------------------
 */
 
-.mentions {
+.item_mentions {
   margin-left: 50px;
   background-color: #F6F6F6;
   border-left: 5px solid #CCC;
@@ -708,7 +708,7 @@ div.overlay_frame_content {
   font-size: 12px;
 }
 
-.mentions h2{
+.item_mentions h2{
   text-transform: none;
 }
 
