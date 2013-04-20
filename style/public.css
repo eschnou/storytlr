@@ -209,13 +209,6 @@ div.item_right {
 	padding: 2px;
 }
 
-div.comment_actions {
-	margin-left: 0px;
-	font-size: 0.9em;
-	color: #999;
-	height: 20px;
-}
-
 div.item_actions {
 	float: right;
 	margin: 0px 6px 0 0;
@@ -334,29 +327,49 @@ div.pagination {
 	-------------------------------
 */
 
-div.comment {
-	padding: 10px 8px 7px 10px;
-	text-align: justify;
-	border: 1px #bbb dotted;
-	background-color:#fbfbfb;
-	margin: 10px 0;
-	color: #333;
+.comment {
+	position: relative;
+	margin-bottom: 20px;
+}  
+ 
+.comment .avatar {
+	float: left;
+} 
+ 
+.comment .title {
+	margin-left: 4em;
+} 
+ 
+.comment .avatar img {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	max-width: 3em;
+	max-height: 3em;
+	margin-right: 10px;
 }
 
-div.comment_actions {
-	float: right;
-	}
-
-div.comment_top {
-	color: #666;
+.comment .header {
 	font-size: 0.9em;
-	margin-bottom: 10px;
-	}
-
-div.comment_content {
-	min-height: 25px;
-	line-height:140%;
+	margin-bottom: 5px;
 }
+.comment .when {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.comment .reply {
+	color: #bbb;
+	font-size: 0.8em;
+}
+
+.comment .actions {
+	position: absolute;
+	left: -25px;
+}
+
 
 /*  Actions
 	-------------------------------
@@ -757,6 +770,10 @@ div.overlay_frame_content {
   border: 1px solid #d2d2d9;
 }
 
+/* 
+ * Lifestream specific styling 
+*/
+
 .lifestream .mentions {
   margin-left: 50px;
   background-color: #F6F6F6;
@@ -766,6 +783,18 @@ div.overlay_frame_content {
 }
 
 .lifestream .mentions h2{
+  text-transform: none;
+}
+
+.lifestream .comments {
+  margin-left: 50px;
+  background-color: #F6F6F6;
+  border-left: 5px solid #CCC;
+  padding: 1px 20px 1px;
+  font-size: 12px;
+}
+
+.lifestream .comments h2{
   text-transform: none;
 }
 
