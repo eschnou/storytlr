@@ -216,7 +216,6 @@ class CommentsController extends BaseController
 		else {
 			// Create and configure username element:
 			$name = $form->createElement('text', 'name',  array('label' => 'Name:', 'decorators' => $form->elementDecorators));
-			$name->addFilter('StringToLower');
 			$name->addFilter('StripTags');
 			$name->addValidator('stringLength', false, array(4, 20));
 			$name->setRequired(true);
