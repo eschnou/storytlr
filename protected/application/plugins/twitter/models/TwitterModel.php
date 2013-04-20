@@ -32,10 +32,10 @@ class TwitterModel extends SourceModel {
 
 	public function getServiceURL() {
 		if ($username = $this->getProperty('username')) {
-			return "http://twitter.com/$username";
+			return "https://twitter.com/$username";
 		}
 		else {
-			return "http://twitter.com/";
+			return "https://twitter.com/";
 		}
 	}
 
