@@ -327,6 +327,18 @@ div.pagination {
 	-------------------------------
 */
 
+.comments {
+  margin-left: 50px;
+  background-color: #F6F6F6;
+  border-left: 5px solid #CCC;
+  padding: 1px 20px 1px;
+  font-size: 12px;
+}
+
+.comments h2{
+  text-transform: none;
+}
+
 .comment {
 	position: relative;
 	margin-bottom: 20px;
@@ -687,7 +699,19 @@ div.overlay_frame_content {
 /* Pingback
    -------------------------------------
 */
-   
+
+.mentions {
+  margin-left: 50px;
+  background-color: #F6F6F6;
+  border-left: 5px solid #CCC;
+  padding: 1px 20px 1px;
+  font-size: 12px;
+}
+
+.mentions h2{
+  text-transform: none;
+}
+
 .mention {
 	position: relative;
 	margin-bottom: 20px;
@@ -770,32 +794,6 @@ div.overlay_frame_content {
   border: 1px solid #d2d2d9;
 }
 
-/* 
- * Lifestream specific styling 
-*/
 
-.lifestream .mentions {
-  margin-left: 50px;
-  background-color: #F6F6F6;
-  border-left: 5px solid #CCC;
-  padding: 1px 20px 1px;
-  font-size: 12px;
-}
-
-.lifestream .mentions h2{
-  text-transform: none;
-}
-
-.lifestream .comments {
-  margin-left: 50px;
-  background-color: #F6F6F6;
-  border-left: 5px solid #CCC;
-  padding: 1px 20px 1px;
-  font-size: 12px;
-}
-
-.lifestream .comments h2{
-  text-transform: none;
-}
 
    
