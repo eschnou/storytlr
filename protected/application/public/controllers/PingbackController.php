@@ -74,7 +74,7 @@ class PingbackController extends BaseController
 		curl_close ($curl);
 		
 		if ($http_code != 200) {
-			$this->_logger->log("Failed to get content for $target", Zend_Log::DEBUG);
+			$this->_logger->log("Failed to get content for $source", Zend_Log::DEBUG);
 			return;
 		}
 		
@@ -216,7 +216,7 @@ class PingbackController extends BaseController
 				if ($item["children"] && count($item["children"]) > 0) {
 					foreach ($item["children"] as $item) {
 						if (in_array("h-card", $item["type"])) {
-							array_push($hentry["hcard"], $this->processHCard($item));
+							array_push($result["hcard"], $this->processHCard($item));
 						}
 					}
 				}			
