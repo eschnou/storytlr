@@ -84,10 +84,13 @@ class PingbackController extends BaseController
 		$this->_logger->log("Parsed output: " . var_export($output, true), Zend_Log::DEBUG);
 		
 		// Extract relevant data
-		$content = $this->processItems($output["items"]);
+		$hcards = array();
+		$hentries = array();
+		$this->processItems($output["items"], $hacrds, $hentries);
 		$timestamp	= time();
 	
-		$this->_logger->log("Extracted data: " . var_export($content, true), Zend_Log::DEBUG);
+		$this->_logger->log("Extracted hcards: " . var_export($hcards, true), Zend_Log::DEBUG);
+		$this->_logger->log("Extracted hentries: " . var_export($hentries, true), Zend_Log::DEBUG);
 		
 		// Lookup if existing entry
 		preg_match('/(?P<source>\d+)\-(?P<item>\d+)\.html$/', $target, $matches);
@@ -120,13 +123,13 @@ class PingbackController extends BaseController
 		}
 		
 		// Lookup author
-		if (count ($content["hcard"]) > 0) {
-			$hcard = $content["hcard"][0];
+		if (count ($hcards) > 0) {
+			$hcard = $hcards[0];
 		}
 		
 		// Lookup entry
-		if (count ($content["hentry"]) > 0) {
-			$hentry = $content["hentry"][0];
+		if (count ($hentries) > 0) {
+			$hentry = $hentries[0];
 			if (!$hcard && count($hentry["hcard"])>0) {
 				$hcard = $hentry["hcard"][0];
 			}
@@ -202,28 +205,21 @@ class PingbackController extends BaseController
 		return;
 	}
 	
-	private function processItems($items) {
-		$result = array();
-		$result["hcard"] = array();
-		$result["hentry"] = array();
+	private function processItems($items, $hcards, $hentries) {
 		foreach ($items as $item) {
 			$this->_logger->log("Item: " . var_export($item, true), Zend_Log::DEBUG);
 			if (in_array("h-card", $item["type"])) {  
-				array_push($result["hcard"], $this->processHCard($item));
+				array_push($hcards, $this->processHCard($item));
 			} else if (in_array("h-entry", $item["type"])) {
-				array_push($result["hentry"], $this->processHEntry($item));
+				array_push($hentries, $this->processHEntry($item));
 			} else if (in_array("h-feed", $item["type"])) {
 				if ($item["children"] && count($item["children"]) > 0) {
 					foreach ($item["children"] as $item) {
-						if (in_array("h-card", $item["type"])) {
-							array_push($result["hcard"], $this->processHCard($item));
-						}
+						$this->processItems($item["children"], $hcards, $hentries);
 					}
 				}			
 			}
 		}
-		
-		return $result;
 	}
 	
 	private function processHcard($item) {
