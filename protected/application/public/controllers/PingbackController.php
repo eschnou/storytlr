@@ -213,9 +213,7 @@ class PingbackController extends BaseController
 				array_push($hentries, $this->processHEntry($item));
 			} else if (in_array("h-feed", $item["type"])) {
 				if ($item["children"] && count($item["children"]) > 0) {
-					foreach ($item["children"] as $item) {
-						$this->processItems($item["children"], $hcards, $hentries);
-					}
+					$this->processItems($item["children"], $hcards, $hentries);
 				}			
 			}
 		}
