@@ -1,0 +1,1 @@
+ALTER TABLE data ADD `mention_count` int(11) NOT NULL default '0';

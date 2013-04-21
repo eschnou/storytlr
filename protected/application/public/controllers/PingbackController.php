@@ -136,8 +136,13 @@ class PingbackController extends BaseController
 		}
 		
 		// Add the mention to the database
-		$mentions  	= new Mentions();
-		$mentions->addMention($source_id, $item_id, $user->id, $source, $hentry["title"], $hcard["name"], $hcard["url"], "", $hcard["avatar"], $timestamp);
+		try {
+			$mentions  	= new Mentions();
+			$mentions->addMention($source_id, $item_id, $user->id, $source, $hentry["title"], $hcard["name"], $hcard["url"], "", $hcard["avatar"], $timestamp);
+		} catch (Exception $e) {
+			$logger->log("Exception when storing mention: " . $e->getMessage(), Zend_Log::ERR);
+			return;
+		}
 		
 		// Send an email alert to owner
 		try {
