@@ -238,7 +238,7 @@ class PingbackController extends BaseController
 		$props = @$item["properties"];
 		$content = @$props["content"][0];
 		$name = @$props["name"][0];
-		$hentry["title"] = $content ? $content : $name;
+		$hentry["title"] = $name ? $name : $content;
 		$hentry["published"] = @$props["published"][0];
 
 		if ($item["children"] && count($item["children"]) > 0) {
