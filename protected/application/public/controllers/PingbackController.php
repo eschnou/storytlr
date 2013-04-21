@@ -86,12 +86,9 @@ class PingbackController extends BaseController
 		// Extract relevant data
 		$hcards = array();
 		$hentries = array();
-		$this->processItems($output["items"], $hacrds, $hentries);
+		$this->processItems($output["items"], $hcards, $hentries);
 		$timestamp	= time();
-	
-		$this->_logger->log("Extracted hcards: " . var_export($hcards, true), Zend_Log::DEBUG);
-		$this->_logger->log("Extracted hentries: " . var_export($hentries, true), Zend_Log::DEBUG);
-		
+			
 		// Lookup if existing entry
 		preg_match('/(?P<source>\d+)\-(?P<item>\d+)\.html$/', $target, $matches);
 		$this->_logger->log("Matches: " . var_export($matches, true), Zend_Log::DEBUG);
@@ -205,9 +202,8 @@ class PingbackController extends BaseController
 		return;
 	}
 	
-	private function processItems($items, $hcards, $hentries) {
+	private function processItems($items, & $hcards, & $hentries) {
 		foreach ($items as $item) {
-			$this->_logger->log("Item: " . var_export($item, true), Zend_Log::DEBUG);
 			if (in_array("h-card", $item["type"])) {  
 				array_push($hcards, $this->processHCard($item));
 			} else if (in_array("h-entry", $item["type"])) {
