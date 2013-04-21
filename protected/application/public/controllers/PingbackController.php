@@ -88,7 +88,10 @@ class PingbackController extends BaseController
 		$hentries = array();
 		$this->processItems($output["items"], $hcards, $hentries);
 		$timestamp	= time();
-			
+	
+		$this->_logger->log("Extracted hcards: " . var_export($hcards, true), Zend_Log::DEBUG);
+		$this->_logger->log("Extracted hentries: " . var_export($hentries, true), Zend_Log::DEBUG);
+		
 		// Lookup if existing entry
 		preg_match('/(?P<source>\d+)\-(?P<item>\d+)\.html$/', $target, $matches);
 		$this->_logger->log("Matches: " . var_export($matches, true), Zend_Log::DEBUG);
