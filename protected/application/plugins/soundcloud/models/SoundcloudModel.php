@@ -21,7 +21,7 @@ class SoundcloudModel extends SourceModel {
 
 	protected $_prefix = 'soundcloud';
 
-	protected $_search  = 'title';
+	protected $_search  = 'title, description';
 
 	protected $_update_tweet = "%d tracks added from Soundcloud %s";
 
