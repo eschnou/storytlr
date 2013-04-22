@@ -41,13 +41,24 @@ class CommentsController extends BaseController
 		$server_timezone 	= $config->web->timezone;
 		date_default_timezone_set($server_timezone);
 
+		// Get the mentions
+		$m			= new Mentions();
+		$mentions	= $m->getMentions($source_id, $item_id);
+
+		foreach ($mentions as &$mention) {
+			$mention['when'] 	= $mention['timestamp'];
+			$mention['delete'] 	= $owner;
+			$mention['type'] 	= "mention";
+ 		}
+		
 		// Get the comments
 		$c			= new Comments();
 		$comments	= $c->getComments($source_id, $item_id);
-
+		
 		foreach ($comments as &$comment) {
 			$comment['when'] 	= strtotime($comment['timestamp']);
 			$comment['comment'] = str_replace("\n", " <br />", $comment['comment']);
+			$comment['type']    = "comment";
 			$comment['delete'] 	= $owner;
 		}
 		
@@ -55,8 +66,14 @@ class CommentsController extends BaseController
 		$timezone =  $this->_properties->getProperty('timezone');
 		date_default_timezone_set($timezone);
 		
+		// Merged items
+		$all = array_merge($mentions, $comments);
+		usort($all, 'cmp');
+		
 		// Prepare the view
+		$this->view->mentions = $mentions;
 		$this->view->comments = $comments;
+		$this->view->all = $all;
 	}
 
 	public function deleteAction() {
@@ -273,4 +290,9 @@ class CommentsController extends BaseController
 			
 		return $form;
 	}
+}
+
+// Comparison function
+function cmp($a, $b) {
+	return ($a["when"] < $b["when"]) ? -1 : 1;
 }

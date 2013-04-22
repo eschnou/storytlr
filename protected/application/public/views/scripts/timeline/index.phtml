@@ -46,7 +46,7 @@ foreach($this->items as $item) {
 		
 <?php if (!$this->disqus && !$this->googlefc) : ?>
 	<div class='item_comments' id='comments_<?= $item->getSource() . '_' . $item->getID() ?>' 	<?php if ($item->getCommentCount() == 0) : ?>style='display:none'<?php endif ?>>
-	<?php if ($item->getCommentCount() > 0) : ?>
+	<?php if ($item->getCommentCount() > 0 || $item->getMentionCount() > 0) : ?>
 		<?= $this->action('index', 'comments', 'default', array('source' => $item->getSource(), 'item' => $item->getID())); ?>
 	<?php endif ?>	
 	</div>	

@@ -18,46 +18,6 @@
 class RepliesController extends BaseController
 {
 	
-	public function indexAction() {	
-		// Get, check and setup the parameters
-		$source_id 		= $this->getRequest()->getParam("source");
-		$item_id		= $this->getRequest()->getParam("item");
-
-		//Verify if the requested item exist
-		$data			= new Data();
-		if (!($item		= $data->getItem($source_id, $item_id))) {
-			return;
-		}
-
-		// Get the source
-		$sources = new Sources();
-		$source  = $sources->getSource($source_id);
-		
-		// Are we the owner of these mentions ?
-		$owner = ($this->_application->user && ($source['user_id'] == $this->_application->user->id)) ? true : false;
-		
-		// Reset to the system timezone; just in case
-		$config 			= Zend_Registry::get("configuration");
-		$server_timezone 	= $config->web->timezone;
-		date_default_timezone_set($server_timezone);
-
-		// Get the mentions
-		$m			= new Mentions();
-		$mentions	= $m->getMentions($source_id, $item_id);
-
-		foreach ($mentions as &$mention) {
-			$mention['when'] 	= strtotime($mention['timestamp']);
-			$mention['delete'] 	= $owner;
-		}
-		
-		// Set the timezone to the user timezone
-		$timezone =  $this->_properties->getProperty('timezone');
-		date_default_timezone_set($timezone);
-		
-		// Prepare the view
-		$this->view->mentions = $mentions;
-	}
-
 	public function deleteAction() {
 		// Get, check and setup the parameters
 		$mention_id = $this->getRequest()->getParam("id");

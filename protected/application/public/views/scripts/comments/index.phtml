@@ -1,9 +1,14 @@
-<?php if (count($this->comments)>0) : ?>
+<?php if (count($this->all)>0): ?>
 <div class='comments'>
 <h2>Comments</h2>
 
-<?php echo $this->partialLoop('comments/comment.phtml', $this->comments); ?>
-
+<?php foreach ($this->all as &$item) {
+	if ($item['type'] == 'comment') {
+		echo $this->partial('comments/comment.phtml', $item);
+	} else if ($item['type'] == 'mention') {
+		echo $this->partial('comments/reply.phtml', $item);
+	}
+} 
+?>
 </div>
-
 <?php endif ?>
