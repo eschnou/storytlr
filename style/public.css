@@ -719,9 +719,12 @@ div.overlay_frame_content {
  
 .mention .avatar {
 	float: left;
-	margin-left: 4em;
-} 
- 
+}
+
+.mention .author {
+    margin-left: 4em;
+}
+
 .mention .title {
 	margin-left: 4em;
 } 
