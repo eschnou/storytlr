@@ -154,7 +154,7 @@ class CommentsController extends BaseController
 
 		// Add the comment to the database
 		$comments  	= new Comments();
-		$comments->addComment($source_id, $item_id, $comment, $name, $email, $website, $timestamp, $notify);
+		$comment_id = $comments->addComment($source_id, $item_id, $comment, $name, $email, $website, $timestamp, $notify);
 
 		// Send an email alert to owner
 		try {
@@ -175,6 +175,10 @@ class CommentsController extends BaseController
 			$logger	= Zend_Registry::get("logger");
 			$logger->log("Sending comment notification exception: " . $e->getMessage(), Zend_Log::ERR);
 		}
+		
+		// Pingback here
+		$source	    = $this->getUrl($user->username, "entry/" . $item->getSlug() . "#comment_" . $comment_id);
+		$this->pingback($comment, $source);
 		
 		// Ok send the result
 		return $this->_helper->json->sendJson(false);
@@ -290,6 +294,29 @@ class CommentsController extends BaseController
 			
 		return $form;
 	}
+	
+	private function pingback($comment, $source) {
+		$logger		= Zend_Registry::get("logger");
+	
+		$logger->log("Pingback source: " . $source, Zend_Log::DEBUG);
+		$logger->log("Comment: " . $comment, Zend_Log::DEBUG);
+	
+		// Search for user to ping
+		preg_match_all('/@([a-zA-Z0-9\-\.]+)/', $comment, $mentions, PREG_SET_ORDER);
+	
+		// Ping each user
+		foreach ($mentions as $mention) {
+			$logger->log("Attemptint pingback for " . $mention[1], Zend_Log::DEBUG);
+			$target = "http://" . $mention[1];
+			$url = Pingback_Utility::getPingbackServerURL($target);
+			if ($url) {
+				$logger->log("Pingback server for " . $mention[1] . ": " . $url, Zend_Log::DEBUG);
+				$response = Pingback_Utility::sendPingback($source, $target, $url);
+				$logger->log("Pingback response for " . $mention[1] . ": " . $response, Zend_Log::DEBUG);
+			}
+		}
+	}
+	
 }
 
 // Comparison function
