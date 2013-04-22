@@ -5,7 +5,11 @@
 	<?php endif ?>
 	</div>
 	<div class='avatar'>
+                <?php if ($this->author_avatar != "") : ?>
 		<img src='<?= $this->author_avatar; ?>' />
+                <?php else : ?>
+                <img src='images/book50.jpg' title='User has no avatar' />
+                <?php endif ?>
 	</div>
 	<div class='header'>
 		<div class='author'>

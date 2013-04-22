@@ -27,7 +27,11 @@ if (!$this->items || count($this->items) == 0) {
 	<?php endif ?>
 	</div>
 	<div class="avatar">
-		<img src="<?= $item["author_avatar"]; ?>" />
+                <?php if ($item["author_avatar"] != "") : ?>
+		<img src='<?= $item["author_avatar"]; ?>' />
+                <?php else : ?>
+                <img src='images/book50.jpg' title='User has no avatar' />
+                <?php endif ?>
 	</div>
 	<div class="header">
 		<div class="author">
