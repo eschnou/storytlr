@@ -13,8 +13,8 @@ CREATE TABLE `mentions` (
   `author_bio` text default NULL,
   `author_avatar` varchar(256),
   `timestamp` datetime NOT NULL,
+  `type` varchar(128) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `item` USING BTREE (`source_id`, `item_id`, `url`),
-  UNIQUE KEY `user` USING BTREE (`user_id`, `url`),
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

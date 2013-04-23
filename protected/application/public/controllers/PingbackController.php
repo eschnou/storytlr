@@ -140,7 +140,7 @@ class PingbackController extends BaseController
 			$mentions  	= new Mentions();
 			$mentions->addMention($source_id, $item_id, $user->id, $source, $hentry["title"], $hcard["name"], $hcard["url"], "", $hcard["avatar"], $timestamp);
 		} catch (Exception $e) {
-			$logger->log("Exception when storing mention: " . $e->getMessage(), Zend_Log::ERR);
+			$this->_logger->log("Exception when storing mention: " . $e->getMessage(), Zend_Log::ERR);
 			return;
 		}
 		
@@ -151,8 +151,7 @@ class PingbackController extends BaseController
 				Stuffpress_Emails::sendMentionEmail($user->email, $user->username, $hcard["name"], $hcard["url"], $hentry["title"], $source, $target);
 			}				
 		} catch (Exception $e) {
-			$logger	= Zend_Registry::get("logger");
-			$logger->log("Sending mention notification exception: " . $e->getMessage(), Zend_Log::ERR);
+			$this->_logger->log("Sending mention notification exception: " . $e->getMessage(), Zend_Log::ERR);
 		}
 	}
 	

@@ -49,10 +49,14 @@ class Users extends Stuffpress_Db_Table
 		return $result;
 	}
 	
-	public function getAllUsers() {
+	public function getAllUsers($asObjects=false) {
 		$sql = "SELECT * FROM `users`";			
 		$stmt = $this->_db->query($sql);
-		$result   = $stmt->fetchAll();
+		if ($asObjects) {
+			$result   = $stmt->fetchAll(PDO::FETCH_CLASS, 'stdClass');
+		} else {
+			$result   = $stmt->fetchAll();
+		}
 		return $result;		
 	}
 	
