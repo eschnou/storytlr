@@ -148,8 +148,12 @@ class RssModel extends SourceModel {
 			// Get the categories as tags, if we can
 			$tags = array();
 			try {
-				foreach( $item->category() as $category )
-					$tags[] = $category->nodeValue;
+				$categories = $item->category();
+				if ($categories && count($categories) > 0) { 
+					foreach($categories  as $category ) {
+						$tags[] = $category->nodeValue;
+					}
+				}
 			} catch ( Exception $e ) {}
 
 
