@@ -3,7 +3,7 @@
 
 <?php if($type == 'image') : ?>
 <div class="storytlr_image">
-	<div  class="title entry-title p-name">
+	<div  class="title entry-title p-name p-summary">
 		<?= $this->item->getTitle();?>
 	</div>
 	<div class="entry-content e-content">
@@ -19,7 +19,7 @@
 </div>
 <?php elseif($type == 'audio') : ?>
 <div class="storytlr_audio">
-	<div  class="title entry-title p-name">
+	<div  class="title entry-title p-name p-summary">
 		<?= $this->item->getTitle(); ?>
 	</div>
 	<div class="entry-content e-content">
@@ -40,7 +40,7 @@
 <?php elseif($type == 'blog') : ?>
 <div class="storytlr_blog">
 	<div class="titbullet"></div>
-	<div  class="title entry-title p-name">
+	<div  class="title entry-title p-name p-summary">
 		<?= $this->item->getTitle(); ?> 
 	</div>
 	<div class="content entry-content e-content">
@@ -58,7 +58,7 @@
 </div>
 <?php elseif($type == 'status') : ?>	
 <div class="storytlr_status">
-	<div  class="title entry-title p-name">
+	<div  class="title entry-title p-name p-summary e-content">
 		<?php
 		    $title = $this->item->getTitle(); 
 			$title = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" target="_blank">\\1</a>',$title);
@@ -72,7 +72,7 @@
 </div>	
 <?php elseif($type == 'link') : ?>	
 <div class="storytlr_link">
-	<div  class="title entry-title p-name">
+	<div  class="title entry-title p-name p-summary">
 		Shared the link <a href="<?= $this->item->getLink(); ?>"><?= $this->item->getTitle(); ?></a>
 	</div>
 	<?php if ($this->item->getDescription()) : ?>
@@ -83,7 +83,7 @@
 </div>
 <?php elseif($type == 'video') : ?>
 <div class="storytlr_video">
-	<div  class="title entry-title p-name">
+	<div  class="title entry-title p-name p-summary">
 		<?= $this->item->getTitle(); ?>
 	</div>
 	<div class="entry-content e-content">
