@@ -715,6 +715,7 @@ div.overlay_frame_content {
 .mention {
 	position: relative;
 	margin-bottom: 20px;
+	min-height: 25px;
 }  
  
 .mention .avatar {
