@@ -1,7 +1,7 @@
 <?php 
 	$comment = preg_replace("|([[:alpha:]]+://[^[:space:]]+[[:alnum:]/])|",'<a href="\\1" rel="nofollow">\\1</a>', $this->comment);  
-	$comment = preg_replace("|@([a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+)|",'@<a href="http://\\1" target="_blank">\\1</a>',$comment);
-	$comment = preg_replace("|@([a-zA-Z0-9\-\_]+)|",'@<a href="http://twitter.com/\\1" target="_blank">\\1</a>',$comment);
+	$comment = preg_replace("|@([a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+)|",'<a class="h-card" href="http://\\1" target="_blank">@<span class="p-name p-nickname">\\1</span></a>',$comment);
+	$comment = preg_replace("|@([a-zA-Z0-9\-\_]+)|",'<a href="http://twitter.com/\\1" target="_blank">@<span class="p-name p-nickname">\\1</a></a>',$comment);
 	$comment = preg_replace("|#([a-zA-Z0-9_]+)|",'<a href="tag/\\1">#\\1</a>',$comment); // add tag links	
 ?>
 <div class='comment' id='comment_<?= $this->id ?>'>
