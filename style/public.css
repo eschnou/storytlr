@@ -299,6 +299,12 @@ div.story_embed input {
 	margin-top: 4px;	
 }
 
+div.item footer {
+	margin-top: 10px;
+	font-size: 0.8em;
+	color: #999;
+}
+
 /*  Pagination
 	-------------------------------
 */

@@ -597,6 +597,10 @@ form input#tags {
 	width: 475px;	
 }
 
+form input#reply {
+	width: 475px;	
+}
+
 table td {
 	vertical-align: top;
 	padding: 4px 20px 0px 0px;	

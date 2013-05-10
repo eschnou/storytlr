@@ -69,6 +69,11 @@
 			echo $title;
 		?>
 	</div>
+	<?php if ($this->item->isReply()) :?>
+	<footer>
+		<p>In reply to <a href="<?= $this->item->getReplyTo() ?>" class="u-in-reply-to"><?= Stuffpress_Services_Webparse::getHost($this->item->getReplyTo()) ?></a></p>
+	</footer>
+	<?php endif ?>
 </div>	
 <?php elseif($type == 'link') : ?>	
 <div class="storytlr_link">

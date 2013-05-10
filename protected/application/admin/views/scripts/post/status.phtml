@@ -32,7 +32,17 @@ feel free to be more philosophical and go off the beaten track!
 					<?= $this->form->tags ?>
 					<p class="hint">A comma separated list of tags</p>
 				</td>
-			</tr>				
+			</tr>
+			<?php if ($this->reply) : ?>
+			<tr>
+				<td class='label'>
+					Reply To:
+				</td>
+				<td class='element'>
+					<?= $this->form->reply ?>
+				</td>
+			</tr>
+			<?php endif ?>					
 			<tr>
 				<td class='label'>
 					Date:

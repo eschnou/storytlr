@@ -1,0 +1,1 @@
+ALTER TABLE stuffpress_data ADD `reply` varchar(256);

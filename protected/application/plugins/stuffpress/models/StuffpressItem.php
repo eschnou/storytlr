@@ -240,5 +240,13 @@ class StuffpressItem extends SourceItem {
 	public function getFile() {
 		return $this->_data['file'];
 	}
+	
+	public function isReply() {
+		return $this->_data['reply'] ? true:false;
+	}
+	
+	public function getReplyTo() {
+		return $this->_data['reply'];
+	}
 
 }
