@@ -204,7 +204,7 @@ class TwitterModel extends SourceModel {
 			
 			if ($is_repost) continue;
 
-			$id = $this->addItem($data, strtotime($data['created_at']), $type, $tags, false, $is_hidden, $data['text']);
+			$id = $this->addItem($data, strtotime($data['created_at']), $type, $tags, false, $is_hidden, $data['text'], $is_reply);
 			
 			if ($id) $result[] = $id;	
 			unset($data);

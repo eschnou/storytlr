@@ -122,6 +122,10 @@ abstract class SourceItem
 		return $this->_attributes['is_hidden'];
 	}
 	
+	public function isReply() {
+		return $this->_attributes['is_reply'];
+	}
+	
 	public function getAttributes() {
 		return $this->_attributes;
 	}

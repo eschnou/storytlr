@@ -49,7 +49,7 @@ class Data extends Stuffpress_Db_Table
 		return $result;
 	}
 
-	public function getLastItems($count=10, $offset=0, $show_hidden=0, $sources=false, $types=false, $location_only=false) {
+	public function getLastItems($count=10, $offset=0, $show_hidden=0, $sources=false, $types=false, $location_only=false, $show_reply=0) {
 
 		if (!$sources) {
 			$sources = 	$this->getSources();
@@ -73,6 +73,7 @@ class Data extends Stuffpress_Db_Table
 		. "FROM data d "
 		. "WHERE d.user_id = :user_id AND source_id IN ($sources) "
 		. ((!$show_hidden) ? "AND is_hidden = 0 " : " ")
+		. ((!$show_reply) ? "AND is_reply = 0 " : " ")
 		. (($types) ? "AND type IN ($t) " : " ")
 		. (($location_only) ? "AND has_location = true " : " ")
 		. "ORDER BY timestamp DESC "
@@ -245,12 +246,12 @@ class Data extends Stuffpress_Db_Table
 		return $result;
 	}
 
-	public function addItem($id, $source_id, $user_id, $service, $type, $timestamp, $is_hidden=0) {
+	public function addItem($id, $source_id, $user_id, $service, $type, $timestamp, $is_hidden=0, $is_reply=0) {
 		
 		$is_hidden = $is_hidden ? 1 : 0;
 		
-		$sql = "INSERT INTO `data` (id, source_id, user_id, service, type, timestamp, is_hidden) "
-		. "VALUES (:id, :source_id, :user_id, :service, :type, FROM_UNIXTIME(:timestamp), :is_hidden)";
+		$sql = "INSERT INTO `data` (id, source_id, user_id, service, type, timestamp, is_hidden, is_reply) "
+		. "VALUES (:id, :source_id, :user_id, :service, :type, FROM_UNIXTIME(:timestamp), :is_hidden, :is_reply)";
 
 		$data = array(":id" => $id,
 					  ":source_id" 	=> $source_id,
@@ -258,6 +259,7 @@ class Data extends Stuffpress_Db_Table
 					  ":service" 	=> $service,
 					  ":type" 		=> $type,
 					  ":is_hidden"	=> $is_hidden,
+				      ":is_reply"	=> $is_reply,
 					  ":timestamp" 	=> $timestamp);
 
 		$statement = $this->_db->query($sql, $data);

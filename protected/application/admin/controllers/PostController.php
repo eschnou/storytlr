@@ -50,6 +50,13 @@ class Admin_PostController extends Admin_BaseController
 			$this->view->url 	 = $this->_bkurl;
 			$this->view->title	 = $this->_bktitle;
 			$this->view->selection = $this->_bktext;
+		} else if ($this->_getParam('reply')) {
+			$this->_helper->layout->setlayout('bookmarklet');
+			$this->_bkurl   = $this->_getParam('url');
+			$this->_reply   = true;
+			$this->view->bookmarklet = true;
+			$this->view->url 	 = $this->_bkurl;
+			$this->view->reply = true;
 		}
 	}
 
@@ -96,7 +103,13 @@ class Admin_PostController extends Admin_BaseController
 			$status = "{$this->_bktitle} ({$this->_bkurl})";
 			$source		= StuffpressModel::forUser($this->_application->user->id);
 			$this->view->form = $this->getFormStatus($source->getID(), 0, $status, false, false);
-		} else {
+		} else if ($this->_reply) {
+			$domain = Stuffpress_Services_Webparse::getHost($this->_bkurl);
+			$status = "@{$domain} ";
+			$source		= StuffpressModel::forUser($this->_application->user->id);
+			$this->view->form = $this->getFormStatus($source->getID(), 0, $status, false, false, false, false, false, $this->_bkurl);
+		}
+		else {
 			$this->view->form = $this->getForm('status');
 		}
 	}
@@ -282,7 +295,7 @@ class Admin_PostController extends Admin_BaseController
 			$this->_helper->json->sendJson(true);
 		}
 
-		$type	= $this->_getParam('type');
+		$type	= $this->_getParam('type');	
 		$mode	= $this->_getParam('mode');
 		$edit	= ($mode == 'edit');
 
@@ -403,6 +416,7 @@ class Admin_PostController extends Admin_BaseController
 		$data['link']  		= @$values['link'];
 		$data['embed']  	= @$values['embed'];
 		$data['text']  		= @$values['text'];
+		$data['reply_to_url'] = @$values['reply'];
 
 		// Process the tags if available
 		$tags	= @explode(',', $values['tags']);
@@ -414,14 +428,17 @@ class Admin_PostController extends Admin_BaseController
 				array_push($tags, $match[1]);
 			}
 		}
-			
+		
+		// Is this a reply ?
+		$is_reply = $data['reply_to_url'] ? true: (substr($data['title'], 0, 1) === '@');
+					
 		// Add or update the item
 		$source		= StuffpressModel::forUser($this->_application->user->id);
 		$data_table = new Data();
-		$item_id 	= $source->addItem($data, $data['published'], $data['type'], $tags, false, false, $data['title']);
+		$item_id 	= $source->addItem($data, $data['published'], $data['type'], $tags, false, false, $data['title'], $is_reply);
 		$source_id 	= $source->getID();
 
-		// fetch the new item
+		// Fetch the new item
 		$item   = $data_table->getItem($source_id, $item_id);
 
 		// Get longitude if provided
@@ -616,7 +633,7 @@ class Admin_PostController extends Admin_BaseController
 		return $form;
 	}
 
-	private function getFormStatus($source_id, $item_id, $status, $date=false, $edit=false,$tags=false, $lat=false, $lon=false) {
+	private function getFormStatus($source_id, $item_id, $status, $date=false, $edit=false,$tags=false, $lat=false, $lon=false, $reply=false) {
 		// Get a basic form
 		$form = $this->getFormCommon($source_id, $item_id, 'status', $date, $edit,$tags,$lat,$lon);
 
@@ -626,7 +643,14 @@ class Admin_PostController extends Admin_BaseController
 		$content->setValue($status);
 		$content->setRequired(true);
 		$form->addElement($content);
-
+		
+		// Create and configure reply element:
+		$element = $form->createElement('text', 'reply',  array('label' => 'Reply to:', 'decorators' => array('ViewHelper', 'Errors')));
+		$element->addValidator('stringLength', false, array(0, 256));
+		$element->addFilter('StripTags');
+		$element->setValue($reply);
+		$form->addElement($element);
+		
 		return $form;
 	}
 
@@ -1046,6 +1070,11 @@ class Admin_PostController extends Admin_BaseController
 		$links = array();
 		if ($item->getType() == SourceItem::LINK_TYPE) {
 			array_push($links, $item->getLink());
+		}
+		
+		// If a reply, add the reply_to_url to the list
+		if ($item->isreply()) {
+			array_push($links, $item->getReplyTo());
 		}
 		
 		// Collect links
