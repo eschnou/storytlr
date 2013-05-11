@@ -416,7 +416,7 @@ class Admin_PostController extends Admin_BaseController
 		$data['link']  		= @$values['link'];
 		$data['embed']  	= @$values['embed'];
 		$data['text']  		= @$values['text'];
-		$data['reply']  	= @$values['reply'];
+		$data['reply_to_url'] = @$values['reply'];
 
 		// Process the tags if available
 		$tags	= @explode(',', $values['tags']);
@@ -428,14 +428,17 @@ class Admin_PostController extends Admin_BaseController
 				array_push($tags, $match[1]);
 			}
 		}
+		
+		// Is this a reply ?
+		$is_reply = $data['reply_to_url'] ? true: (substr($data['title'], 0, 1) === '@');
 					
 		// Add or update the item
 		$source		= StuffpressModel::forUser($this->_application->user->id);
 		$data_table = new Data();
-		$item_id 	= $source->addItem($data, $data['published'], $data['type'], $tags, false, false, $data['title']);
+		$item_id 	= $source->addItem($data, $data['published'], $data['type'], $tags, false, false, $data['title'], $is_reply);
 		$source_id 	= $source->getID();
 
-		// fetch the new item
+		// Fetch the new item
 		$item   = $data_table->getItem($source_id, $item_id);
 
 		// Get longitude if provided
@@ -1067,6 +1070,11 @@ class Admin_PostController extends Admin_BaseController
 		$links = array();
 		if ($item->getType() == SourceItem::LINK_TYPE) {
 			array_push($links, $item->getLink());
+		}
+		
+		// If a reply, add the reply_to_url to the list
+		if ($item->isreply()) {
+			array_push($links, $item->getReplyTo());
 		}
 		
 		// Collect links

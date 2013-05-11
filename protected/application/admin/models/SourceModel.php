@@ -185,7 +185,7 @@ abstract class SourceModel extends Stuffpress_Db_Table
 		$this->delete($where);
 	}
 	
-	public function addItem($data, $timestamp, $type, $tags=false, $location=false, $hidden=false, $title=false) {
+	public function addItem($data, $timestamp, $type, $tags=false, $location=false, $hidden=false, $title=false, $reply=false) {
 		$data['source_id'] 	= $this->_source['id'];
 		$columns   			= array();
 		$keys      			= array();
@@ -209,7 +209,7 @@ abstract class SourceModel extends Stuffpress_Db_Table
 		}
 		
 		$data_table = $this->getDataTable();
-		$data_table->addItem($id, $this->_source['id'], $this->_source['user_id'], $this->_prefix, $type, $timestamp, $hidden);
+		$data_table->addItem($id, $this->_source['id'], $this->_source['user_id'], $this->_prefix, $type, $timestamp, $hidden, $reply);
 		$data_table->setTags($this->_source['id'], $id, $tags);
 		$data_table->setSlug($this->_source['id'], $id, Stuffpress_Permalink::entry($this->_source['id'], $id, $title));
 		

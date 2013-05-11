@@ -242,11 +242,11 @@ class StuffpressItem extends SourceItem {
 	}
 	
 	public function isReply() {
-		return $this->_data['reply'] ? true:false;
+		return $this->_data['reply_to_url'] ? true:false;
 	}
 	
 	public function getReplyTo() {
-		return $this->_data['reply'];
+		return $this->_data['reply_to_url'];
 	}
 
 }
