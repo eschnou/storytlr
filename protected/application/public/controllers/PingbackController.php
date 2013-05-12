@@ -87,7 +87,6 @@ class PingbackController extends BaseController
 		$hcards = array();
 		$hentries = array();
 		$this->processItems($output["items"], $hcards, $hentries);
-		$timestamp	= time();
 	
 		$this->_logger->log("Extracted hcards: " . var_export($hcards, true), Zend_Log::DEBUG);
 		$this->_logger->log("Extracted hentries: " . var_export($hentries, true), Zend_Log::DEBUG);
@@ -137,6 +136,16 @@ class PingbackController extends BaseController
 			$hcard = $hcards[0];
 		}
 		
+                // Find the published date
+                if ($hentry && $hentry["published"]) {
+                	$timestamp = strtotime($hentry["published"]);
+		}
+
+                // If no timestamp, we fallback to now
+                if (!$timestamp) {
+			$timestamp = time();
+                }
+
 		// Add the mention to the database
 		try {
 			$mentions  	= new Mentions();
@@ -241,14 +250,16 @@ class PingbackController extends BaseController
 		$this->_logger->log("Process hentry: " . var_export($item, true), Zend_Log::DEBUG);
 		$hentry = array();
 		$hentry["hcard"] = array();
+                $hentry["author"] = array();
 		$props = @$item["properties"];
 		$content = @$props["content"][0];
 		$name = @$props["name"][0];
 		$hentry["title"] = $name ? $name : $content;
 		$hentry["published"] = @$props["published"][0];
+                $hentry["in-reply-to"] = @$props["in-reply-to"][0];
 
-		if ($item["author"] && count($item["author"]) > 0) {
-			foreach ($item["author"] as $item) {
+		if (@$props["author"] && count($props["author"]) > 0) {
+			foreach ($props["author"] as $item) {
 				if (in_array("h-card", $item["type"])) {
 					array_push($hentry["author"], $this->processHCard($item));
 				}
