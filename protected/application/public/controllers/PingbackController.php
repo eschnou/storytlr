@@ -87,7 +87,6 @@ class PingbackController extends BaseController
 		$hcards = array();
 		$hentries = array();
 		$this->processItems($output["items"], $hcards, $hentries);
-		$timestamp	= time();
 	
 		$this->_logger->log("Extracted hcards: " . var_export($hcards, true), Zend_Log::DEBUG);
 		$this->_logger->log("Extracted hentries: " . var_export($hentries, true), Zend_Log::DEBUG);
@@ -121,20 +120,32 @@ class PingbackController extends BaseController
 		if (!$user) {
 			throw new Exception('Failed to find corresponding storytlr user.'); 
 		}
-		
-		// Lookup author
-		if (count ($hcards) > 0) {
-			$hcard = $hcards[0];
-		}
-		
-		// Lookup entry
-		if (count ($hentries) > 0) {
+
+		// Is this a h-entry ?
+		if (count ($hentries) > 0) { 
 			$hentry = $hentries[0];
-			if (!$hcard && count($hentry["hcard"])>0) {
+			if (count($hentry["author"])>0) {
+				$hcard = $hentry["author"][0];
+			} else if (count($hentry["hcard"])>0) {
 				$hcard = $hentry["hcard"][0];
 			}
 		}
 		
+		// If no hcard yet (maybe there was no h-entry, we grab the top-level one
+		if (!$hcard && count ($hcards) > 0) {
+			$hcard = $hcards[0];
+		}
+		
+                // Find the published date
+                if ($hentry && $hentry["published"]) {
+                	$timestamp = strtotime($hentry["published"]);
+		}
+
+                // If no timestamp, we fallback to now
+                if (!$timestamp) {
+			$timestamp = time();
+                }
+
 		// Add the mention to the database
 		try {
 			$mentions  	= new Mentions();
@@ -239,12 +250,22 @@ class PingbackController extends BaseController
 		$this->_logger->log("Process hentry: " . var_export($item, true), Zend_Log::DEBUG);
 		$hentry = array();
 		$hentry["hcard"] = array();
+                $hentry["author"] = array();
 		$props = @$item["properties"];
 		$content = @$props["content"][0];
 		$name = @$props["name"][0];
 		$hentry["title"] = $name ? $name : $content;
 		$hentry["published"] = @$props["published"][0];
+                $hentry["in-reply-to"] = @$props["in-reply-to"][0];
 
+		if (@$props["author"] && count($props["author"]) > 0) {
+			foreach ($props["author"] as $item) {
+				if (in_array("h-card", $item["type"])) {
+					array_push($hentry["author"], $this->processHCard($item));
+				}
+			}
+		} 
+		
 		if ($item["children"] && count($item["children"]) > 0) {
 			foreach ($item["children"] as $item) {
 				if (in_array("h-card", $item["type"])) {
