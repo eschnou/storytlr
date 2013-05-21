@@ -65,6 +65,7 @@
 			$title = preg_replace("|@([a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+)|",'<a class="h-card" href="http://\\1" target="_blank">@<span class="p-name p-nickname">\\1</span></a>',$title);
 			$title = preg_replace("|@([a-zA-Z0-9\-\_]+)|",'<a class="h-card" href="http://twitter.com/\\1" target="_blank">@<span class="p-name p-nickname">\\1</span></a>',$title);			 
 			$title = preg_replace("|#([a-zA-Z0-9_]+)|",'<a href="tag/\\1">#\\1</a>',$title); // add tag links
+                        $title = nl2br($title);
 					
 			echo $title;
 		?>
