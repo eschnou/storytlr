@@ -15,6 +15,6 @@ CREATE TABLE `mentions` (
   `timestamp` datetime NOT NULL,
   `type` varchar(128) default NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `item` USING BTREE (`source_id`, `item_id`, `url`),
+  UNIQUE KEY `item` USING BTREE (`source_id`, `item_id`, `url`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
