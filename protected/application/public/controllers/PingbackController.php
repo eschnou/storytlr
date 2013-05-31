@@ -68,7 +68,8 @@ class PingbackController extends BaseController
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_USERAGENT,'Storytlr/1.0');
-		
+		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
+
 		$response = curl_exec($curl);
 		$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		curl_close ($curl);
@@ -98,7 +99,7 @@ class PingbackController extends BaseController
 		$item_id = $matches["item"];
 		
 		// Get the source and the user owning it
-		$data		= new Data();
+		$data       = new Data();
 		$sources    = new Sources();
 		$users      = new Users();
 		
@@ -126,8 +127,6 @@ class PingbackController extends BaseController
 			$hentry = $hentries[0];
 			if (count($hentry["author"])>0) {
 				$hcard = $hentry["author"][0];
-			} else if (count($hentry["hcard"])>0) {
-				$hcard = $hentry["hcard"][0];
 			}
 		}
 		
