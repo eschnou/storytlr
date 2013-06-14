@@ -91,6 +91,7 @@ class TwitterModel extends SourceModel {
 		// Fetch the data from twitter
 		$result = array();
 		$connection = new TwitterOAuth_Client($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
+		$connection->host = "https://api.twitter.com/1.1/";
 		$max_id = false;
 		$params = array('screen_name' => $username, 'count' => $count);
 		

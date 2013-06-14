@@ -1006,6 +1006,7 @@ class Admin_PostController extends Admin_BaseController
 
 		try {
 			$connection = new TwitterOAuth_Client($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
+			$connection->host = "https://api.twitter.com/1.1/";
 			$response = $connection->post('statuses/update', array('status' => $tweet));
 			if (isset($response->error)) {
 				$this->addErrorMessage("Failed posting to Twitter with error " . $response->error);
