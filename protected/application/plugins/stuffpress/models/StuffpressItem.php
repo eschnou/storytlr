@@ -161,6 +161,11 @@ class StuffpressItem extends SourceItem {
 		
 		return $player;
 	}
+
+        public function getVideoUrl() {
+		return $this->getLink();
+	}
+
 	
 	public function getStatus() {
 		return $this->getTitle();
