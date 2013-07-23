@@ -24,8 +24,10 @@ class Stuffpress_View_Helper_Base
                 $host	= Zend_Controller_Front::getInstance()->getRequest()->get('SERVER_NAME');
                 $port   = Zend_Controller_Front::getInstance()->getRequest()->get('SERVER_PORT');
                 $base	= Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
+                $secure = Zend_Controller_Front::getInstance()->getRequest()->isSecure();
+                $proto  = $secure ? "https" : "http";
                 if ($port != 80) $host = "$host:$port";
-		return trim("http://{$host}{$base}", '/');
+                return trim("${proto}://{$host}{$base}", '/');
 	}
 	
 	// Returns the domain name of the public page of the user being logged in. If CNAME=false, then do not

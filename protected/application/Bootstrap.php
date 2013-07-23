@@ -778,12 +778,15 @@ class Bootstrap
 		$our_host	= $config->web->host;
 		$this_host	= @$_SERVER['HTTP_HOST'];
 		$uri		= @$_SERVER['REQUEST_URI'];
+		$secure         = isset($_SERVER['HTTPS']);
 		$application = Stuffpress_Application::getInstance();
-
 		$users  = new Users();
 
 		// Save the uri for debug purposes
 		self::$registry->uri = $uri;
+
+		// Keep track of secure connection
+		self::$registry->secure = $secure;
 
 		// Do we hit our main domain ?
 		if (($our_host == $this_host)) {
