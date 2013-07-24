@@ -26,7 +26,7 @@ class Stuffpress_View_Helper_Base
                 $base	= Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
                 $secure = Zend_Controller_Front::getInstance()->getRequest()->isSecure();
                 $proto  = $secure ? "https" : "http";
-                if ($port != 80) $host = "$host:$port";
+                if ($port != 80 && $port != 443) $host = "$host:$port";
                 return trim("${proto}://{$host}{$base}", '/');
 	}
 	
