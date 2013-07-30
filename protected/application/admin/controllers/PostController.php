@@ -1042,9 +1042,11 @@ class Admin_PostController extends Admin_BaseController
 	}
 
 	private function pingback($item) {
-		$logger		= Zend_Registry::get("logger");
-		$username	= $this->_application->user->username;
-		$source	    = $this->getUrl($username, "entry/" . $item->getSlug());
+                $users          = new Users();
+                $logger		= Zend_Registry::get("logger");
+                $username	= $this->_application->user->username;
+                $userid         = $this->_application->user->id;
+                $source	        = $users->getUrl($userid, "entry/" . $item->getSlug());
 				
 		$logger->log("Pingback source: " . $source, Zend_Log::DEBUG);
 		$logger->log("Item title: " . $item->getTitle(), Zend_Log::DEBUG);
