@@ -46,7 +46,7 @@ class Stuffpress_Cookie {
 	public function set($remember=false) {
 		// Attempt to fetch the path and host from the config
 		$config = Zend_Registry::get("configuration");
-		$host	= $config->web->host;
+		$host	= $this->_gethost($config->web->host);
 		$expire = $remember ? time()+60*60*24*15 : 0;
 		
 		// Send the cookie
@@ -57,7 +57,7 @@ class Stuffpress_Cookie {
 	public function logout() {
 		//	Attempt to fetch the path and host from the config
 		$config = Zend_Registry::get("configuration");
-		$host	= $config->web->host;
+		$host	= $this->_gethost($config->web->host);
 		$path	= $config->web->path;
 		setcookie($this->cookiename, null, 0, "/", ".$host");
 	}
@@ -116,5 +116,10 @@ class Stuffpress_Cookie {
 	
 	private function _reissue() {
 		$this->created = time();
+	}
+
+	private function _gethost($str) {
+		$parsedurl = parse_url($str);
+		return isset($parsedurl['host']) && isset($parsedurl['port']) ? $parsedurl['host'] : $str;
 	}
 }
