@@ -101,22 +101,39 @@ class SoundcloudModel extends SourceModel {
 		$result = array();
 		
 		foreach ($items as $item) {
-			$timestamp	= time();
-			
 			$data       	= array();
-			$data["track_id"]		= @$item->id;				
+			$data["track_id"]		= @$item->id;
+			$data["created_at"]		= @$item->created_at;
 			$data["title"]			= @$item->title;
 			$data["artwork_url"]	= @$item->artwork_url;
 			$data["permalink_url"]	= @$item->permalink_url;
 			$data["stream_url"]		= @$item->stream_url;
-			$data["uri"]			= @$item->uri;			
+			$data["uri"]			= @$item->uri;
+
+			$tags = $this->getTags((string) $item->tag_list);
 			
-			$id = $this->addItem($data, $timestamp, SourceItem::AUDIO_TYPE, array(), false, false, $data['title']);
+			$id = $this->addItem($data, strtotime($data["created_at"]), SourceItem::AUDIO_TYPE, $tags, false, false, $data['title']);
 	
 			if ($id) $result[] = $id;
 		}
 	
 		return $result;
+	}
+
+	private function getTags($tag_list) {
+		$matches = array();
+
+		// Get the words grouped between quotes (ex: "Manu Chao")
+		preg_match_all('~(["\'])([^"\']+)\1~', $tag_list, $quoted);
+
+		// Get the others
+		$unescaped = trim(str_replace($quoted[0], "", $tag_list));
+		$unescaped = preg_replace('/(\s)+/', ' ', $unescaped);
+
+		$matches = array_merge((array)$quoted[2], (array)explode( ' ', $unescaped ));
+
+		unset($quoted, $unescaped);
+		return count($matches) > 0 ? $matches : array();
 	}
 	
 	
