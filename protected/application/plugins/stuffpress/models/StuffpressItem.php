@@ -88,9 +88,11 @@ class StuffpressItem extends SourceItem {
 		
 		// Get the root url
 		$config = Zend_Registry::get("configuration");
+		$secure = Zend_Registry::get("secure");
 		$host	= $config->web->host;
 		$path	= $config->web->path;
-		$url    = trim("http://{$host}{$path}", '/');
+		$proto  = $secure ? "https" : "http";
+		$url    = trim("${proto}://{$host}{$path}", '/');
 		
 		switch ($size) {
 			case ImageItem::SIZE_THUMBNAIL:
