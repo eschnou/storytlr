@@ -1,6 +1,6 @@
 <?php
 define("STORYTLR_VERSION","1.3.dev");
-define("DATABASE_VERSION", "6");
+define("DATABASE_VERSION", "5");
 define("AUTO_INSTALL", true);
 define("AUTO_UPGRADE", true);
 
