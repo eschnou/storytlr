@@ -109,9 +109,11 @@ class SoundcloudModel extends SourceModel {
 			$data["artwork_url"]	= @$item->artwork_url;
 			$data["permalink_url"]	= @$item->permalink_url;
 			$data["stream_url"]		= @$item->stream_url;
-			$data["uri"]			= @$item->uri;			
+			$data["uri"]			= @$item->uri;
+
+			$tags = $this->getTags((string) $item->tag_list);
 			
-			$id = $this->addItem($data, $timestamp, SourceItem::AUDIO_TYPE, array(), false, false, $data['title']);
+			$id = $this->addItem($data, strtotime($timestamp, SourceItem::AUDIO_TYPE, $tags, false, false, $data['title']);
 	
 			if ($id) $result[] = $id;
 		}
